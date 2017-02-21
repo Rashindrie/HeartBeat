@@ -1,0 +1,2 @@
+class ViewPatientDetailsController < ApplicationController
+end
