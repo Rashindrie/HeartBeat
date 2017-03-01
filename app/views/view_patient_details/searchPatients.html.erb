@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+          $('select').material_select();
+          $('.modal').modal();
+
+
+          $('.date_picker').pickadate({
+
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 15 // Creates a dropdown of 15 years to control year
+          });
+
+
+
+          $('input.autocomplete').autocomplete({
+              data: {
+                  "Apple": null,
+                  "Microsoft": null,
+                  "Google": 'http://placehold.it/250x250'
+              },
+              limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+          });
+
+
+
+      });
+
+
+  </script>
+
+  <style>
+    main, footer {
+      padding-left: 240px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      main, footer {
+        padding-left: 0;
+      }
+    }
+
+  </style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+
+
+
+<body>
+<header>
+  <div class="navbar-fixed">
+    <nav class="teal darken-3 white-text">
+      <div class="nav-wrapper teal darken-3 white-text" style="font-family: Trajan Pro">
+        <ul class="left " style="height: 80px; width: 170px; padding-top: 5px">
+          <img class="responsive-img"
+               <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
+          />
+        </ul>
+        <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
+        <ul class="right hide-on-med-and-down">
+          <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
+          <li class="active"><a href="logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+<div class="side-nav fixed" style="width:250px; margin-top:65px; padding-bottom:0">
+  <ul id= "nav-mobile"  >
+    <li style="height: 150px">
+
+      <div class="background" >
+        <img class="responsive-img"
+        <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>/>
+
+      </div>
+
+    </li>
+    <li><div class="divider"></div></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Home</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">My Profile</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Vitals</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Previous Visits</a></li>
+
+  </ul>
+</div>
+
+<main>
+  <div class="container " style="width: 85%">
+    <div class="row">
+      <form class="col s12 m12 l12" >
+        <h4>Search Patients</h4>
+
+
+        <div class="divider"></div><br>
+
+
+
+        <div class="row">
+          <div class="col s3">
+            <div class="input-field" id="searchField">
+              <select>
+
+                <option value="1">Last name</option>
+                <option value="3">First Name</option>
+                <option value="2">ID</option>
+                <option value="3">NIC</option>
+              </select>
+              <label>Search</label>
+            </div>
+          </div>
+          <div class="input-field col s6">
+            <label for="searchOn"></label>
+            <input type="text" id="searchOn" class="autocomplete" >
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col s12">
+
+            <table class="bordered highlight responsive-table">
+              <thead>
+              <tr>
+                <th data-field="id">ID</th>
+                <th data-field="first_name">First Name</th>
+                <th data-field="last_name">Last Name</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+                <td>1234</td>
+
+                <td>John</td>
+                <td>Doe</td>
+                <td><a href="#">View Details</a></td>
+
+              </tr>
+              <tr>
+                <td>3456</td>
+                <td>Mary</td>
+                <td>Ann</td>
+
+              </tr>
+              <tr>
+                <td>6578</td>
+                <td>July</td>
+                <td>Roberts</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </form>
+
+
+    </div>
+  </div>
+</main>
+
+<footer class="page-footer teal darken-3 white-text" style="position: fixed;
+    bottom: 0px; width: 100%; ">
+
+  <div class="footer-copyright">
+    <div class="container left aligned">
+      Doctor Patient Management System
+
+    </div></div>
+</footer>
+
+</body>
+
+</html>
+
+

@@ -8,19 +8,20 @@
           $('.modal').modal();
 
           $('.datepicker').pickadate({
-              min: new Date(),
+
               selectMonths: true, // Creates a dropdown to control month
               selectYears: 1, // Creates a dropdown of 15 years to control year
+
+
+
               closeOnSelect: true,
               closeOnClear: true
           });
 
-
-          $('.timepicker').pickatime({
-              autoclose: false,
-              twelvehour: true
-              
-
+          $('.sticky').pushpin({
+              top: 50,
+              bottom: 1500,
+              offset: 0,
 
           });
       });
@@ -112,14 +113,6 @@
             </div>
 
             <div class="row">
-              <div class="input-field col s12">
-
-                <input id="timepicker" class="timepicker" type="time">
-                <label for="timepicker">Time</label>
-              </div>
-            </div>
-
-            <div class="row">
               <div class="col s6">
                 <p for="doctor">Doctor</p>
               </div>
@@ -179,29 +172,16 @@
 
             <div class="row">
               <div class="col s12">
-
-                <p class="left-align"> <button class="btn waves-effect waves-light btn tooltipped" data-target="save" data-position="bottom" data-delay="50" data-tooltip="Add new visit" id="save" type="button" name="action">Save</button></p>
+                <p class="left-align"><button class="btn waves-effect waves-light" style="background-color: darkorange" type="button" name="action">Save</button></p>
               </div>
             </div>
           </div>
         </form>
-
-        <div id="save" class="modal">
-          <div class="modal-content">
-            <h4>Add new visit</h4>
-            <p>Are you sure you want to save?</p>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Yes</a>
-          </div>
-        </div>
       </div>
-
-
       <div class="col s4">
 
 
-        <div id="profile-card" class="card  z-depth-4" style=" ">
+        <div id="profile-card" class="card sticky z-depth-4" style="top: 50px;">
           <div class="card-image waves-effect waves-block waves-light">
             <br>
             <img class="responsive-img activator card-profile-image"
@@ -230,9 +210,18 @@
 
 
 
+      <div id="save" class="modal">
+        <div class="modal-content">
+          <h4>Add Appointment</h4>
+          <p>Are you sure you want to save?</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Yes</a>
+        </div>
+      </div>
 
 
-    </div></div>
+    </div>
 </main>
 
 

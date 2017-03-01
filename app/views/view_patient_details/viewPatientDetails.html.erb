@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+      var d = new Date();
+      d.setFullYear( d.getFullYear() - 100 );
+
+
+      $(document).ready(function(){
+          $('.scrollspy').scrollSpy();
+          $('.datepicker').pickadate(
+              {
+                  selectMonths: true,
+                  selectYears: 100,
+                  closeOnSelect: true,
+                  max: new Date()
+              });
+      });
+
+  </script>
+
+  <style>
+    main, footer {
+      padding-left: 240px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      main, footer {
+        padding-left: 0;
+      }
+    }
+
+
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+    ::-moz-selection { background: #ffa726; color: #fff; }
+    ::selection { background: #ffa726; color: #fff; }
+  </style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+
+
+
+<body>
+<header>
+  <div class="navbar-fixed">
+    <nav class="teal darken-3 white-text">
+      <div class="nav-wrapper teal darken-3 white-text" style="font-family: Trajan Pro">
+        <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
+        <ul class="right hide-on-med-and-down">
+          <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
+          <li class="active"><a href="signIn"><i class="material-icons left">account_circle</i>Sign In</a></li>
+          <li class="active"><a href="logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">Schedule Appointment</a></li>
+    <li><a href="#!">View Appointment</a></li>
+    <li class="divider">Request Appointment</li>
+    <li><a href="#!">Availability of Doctors</a></li>
+  </ul>
+
+  <ul id='dropdown2' class='dropdown-content'>
+    <li><a href="#!">Personal Details</a></li>
+    <li><a href="#!">Medical History</a></li>
+    <li><a href="#!">Recent Visits</a></li>
+  </ul>
+
+  <ul id='dropdown3' class='dropdown-content'>
+    <li><a href="#!">Personal Details</a></li>
+  </ul>
+
+  <ul id='dropdown4' class='dropdown-content'>
+    <li><a href="#!">Organ donor</a></li>
+    <li><a href="#!">Organ Request</a></li>
+    <li><a href="#!">View Donors</a></li>
+
+  </ul>
+
+
+</header>
+
+<div class="side-nav fixed" style="width:250px; margin-top:65px; padding-bottom:100px">
+  <ul id= "nav-mobile"  >
+    <li style="height: 150px">
+
+      <div class="background" style="height: 150px">
+        <img class="responsive-img" src="http://hd.wallpaperswide.com/thumbs/heart_beat-t2.jpg">
+
+      </div>
+    </li>
+    <li><div class="divider"></div></li>
+    <li><a class="waves-effect waves-teal" href="#!">HeartBeat</a></li>
+  </ul>
+</div>
+<!a href="#" data-activates="slide-out" class="button-collapse"><!i class="material-icons"><!/i><!/a>
+<!main /*style=" position:absolute; /* bottom:30px; */  width:85%; /*overflow-y:scroll;*"/>
+<main>
+  <div class="container left-align" style="width: 85%">
+    <div class="row">
+      <form class="col s12 m9 l10" >
+        <h4>Sign Up</h4>
+        <div class="section">
+
+          <div id="personal"  class="section scrollspy">
+            <div class="row">
+
+              <div class="input-field col s12 m6 l4">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+              </div>
+
+              <div class="input-field col s12 m6 l4">
+                <input id="middle_name" type="text" class="validate">
+                <label for="middle_name">Middle Name</label>
+              </div>
+
+              <div class="input-field col s12 m6 l4">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col s12">
+                <i class="material-icons prefix">wc</i>
+                <div class="col s12">
+                  <div class="col s6 left aligned">
+                    <input name="gender" type="radio" id="male" />
+                    <label for="male">Male</label>
+                  </div>
+                  <div class="col s6 left aligned">
+                    <input name="gender" type="radio" id="female" />
+                    <label for="female">Female</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br>
+
+
+            <div class="row">
+
+              <div class="input-field col s4">
+                <i class="material-icons prefix">today</i>
+
+                <input id="dob" value="" type="date" name="dob" class="datepicker">
+                <label class="active" for="dob">Date of Birth</label>
+              </div>
+            </div>
+
+
+            <div class="row">
+
+              <div class="input-field col s4">
+                <i class="material-icons prefix">perm_identity</i>
+                <input id="nic" type="text" class="validate">
+                <label for="nic">NIC</label>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div id="contact"  class="section scrollspy">
+            <div class="row">
+              <div class="input-field col s12 l4">
+                <i class="material-icons prefix">phone</i>
+                <input id="telephone" type="tel" class="validate">
+                <label for="telephone">Telephone</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s5">
+                <i class="material-icons prefix">email</i>
+                <input id="email" type="email" class="validate">
+                <label for="email" data-error="wrong" data-success="right">Email</label>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+
+
+          <div id="pwd" class="section scrollspy">
+            <div class="row">
+              <div class="input-field col s4">
+                <i class="material-icons prefix">lock</i>
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div id="submit" class="section scrollspy">
+          <div class="row">
+            <div class="col m12">
+              <p class="right-align"><button class="btn btn-large waves-effect waves-light" type="button" name="action"><i class="material-icons prefix">favorite</i>Sign Up</button></p>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="col hide-on-small-only m3 l2" style="width: 16.6666666667%">
+
+        <div class="toc-wrapper pin-top" style="top: 0px;  position:relative;">
+          <div style="height: 1px;">
+            <ul class="section table-of-contents">
+              <li><a href="#personal">Personal Details</a></li>
+              <li><a href="#contact">Contact Details</a></li>
+              <li><a href="#pwd">Security</a></li>
+              <li><a href="#submit">Submit</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+</main>
+
+<footer class="page-footer teal darken-3 white-text">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">HeartBeat</h5>
+        <p class="grey-text text-lighten-4">Web based Doctor Patient Management System</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      © 2017 Copyright Text
+
+    </div>
+  </div>
+</footer>
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+<ul id='dropdown1' class='dropdown-content'>
+  <li><a href="#!">Schedule Appointment</a></li>
+  <li><a href="#!">View Appointment</a></li>
+  <li class="divider">Request Appointment</li>
+  <li><a href="#!">Availability of Doctors</a></li>
+</ul>
+
+<ul id='dropdown2' class='dropdown-content'>
+  <li><a href="#!">Personal Details</a></li>
+  <li><a href="#!">Medical History</a></li>
+  <li><a href="#!">Recent Visits</a></li>
+</ul>
+
+<ul id='dropdown3' class='dropdown-content'>
+  <li><a href="#!">Personal Details</a></li>
+</ul>
+
+<ul id='dropdown4' class='dropdown-content'>
+  <li><a href="#!">Organ donor</a></li>
+  <li><a href="#!">Organ Request</a></li>
+  <li><a href="#!">View Donors</a></li>
+
+</ul>
+
+
+
+</body>
+
+
+</html>

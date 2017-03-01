@@ -1,0 +1,28 @@
+{
+  "name": "heartbeat",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "angular-materializecss-datepicker": "^0.1.2",
+    "materialize-autocomplete": "^1.0.7",
+    "materialize-clockpicker": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rashindrie/HeartBeat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rashindrie/HeartBeat/issues"
+  },
+  "homepage": "https://github.com/Rashindrie/HeartBeat#readme"
+}
