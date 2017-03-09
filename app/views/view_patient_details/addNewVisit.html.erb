@@ -103,11 +103,23 @@
             <div class="row">
 
               <div class="col s6">
-                <p for="date_time">Visit Date & Time</p>
+                <p for="date">Visit Date</p>
               </div>
               <div class="input-field col s6">
 
-                <input id="date_time" value="" type="date" name="date_time" class="datepicker">
+                <input id="date" value="" type="date" name="date" class="datepicker">
+
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col s6">
+                <p for="time">Time</p>
+              </div>
+              <div class="input-field col s6">
+
+                <input id="time" value="" type="time" name="time"  class="datepicker">
 
               </div>
             </div>
@@ -116,7 +128,7 @@
               <div class="col s6">
                 <p for="doctor">Doctor</p>
               </div>
-              <div class="col s6">
+              <div class="input-field col s6">
 
                 <input id="doctor" type="text" class="validate">
 
@@ -127,9 +139,9 @@
               <div class="col s6">
                 <p for="problem">Problems and Complaints</p>
               </div>
-              <div class="col s6">
-
-                <input id="problem" type="text" class="validate">
+              <div class="input-field col s6">
+                <textarea id="problem" class="materialize-textarea"></textarea>
+                <label for="problem">Textarea</label>
 
               </div>
             </div>
@@ -138,9 +150,9 @@
               <div class="col s6">
                 <p for="diagnosis">Diagnosis</p>
               </div>
-              <div class="col s6">
-
-                <input id="diagnosis" type="text" class="validate">
+              <div class="input-field col s6">
+                <textarea id="diagnosis" class="materialize-textarea"></textarea>
+                <label for="diagnosis">Textarea</label>
 
               </div>
             </div>
@@ -149,9 +161,9 @@
               <div class="col s6">
                 <p for="drug">Prescribed Drugs</p>
               </div>
-              <div class="col s6">
-
-                <input id="drug" type="text" class="validate">
+              <div class="input-field col s6">
+                <textarea id="drug" class="materialize-textarea"></textarea>
+                <label for="drug">Textarea</label>
 
               </div>
             </div>
@@ -160,10 +172,10 @@
               <div class="col s6">
                 <p for="remark">Remarks</p>
               </div>
-              <div class="col s6">
+              <div class="input-field col s6">
 
-                <input id="remark" type="text" class="validate">
-
+                <textarea id="remark" class="materialize-textarea"></textarea>
+                <label for="remark">Textarea</label>
               </div>
 
 
@@ -171,8 +183,11 @@
 
 
             <div class="row">
-              <div class="col s12">
-                <p class="left-align"><button class="btn waves-effect waves-light" style="background-color: darkorange" type="button" name="action">Save</button></p>
+              <div class="col s3">
+                <p class="left-align"><button class="btn waves-effect waves-light" data-target="save" style="background-color: darkorange" type="button" name="action">Save</button></p>
+              </div>
+              <div class="col s3">
+                <p class="left-align"><button class="btn waves-effect waves-light" style="background-color: darkorange" type="button" name="action">Back</button></p>
               </div>
             </div>
           </div>
@@ -184,7 +199,7 @@
         <div id="profile-card" class="card sticky z-depth-4" style="top: 50px;">
           <div class="card-image waves-effect waves-block waves-light">
             <br>
-            <img class="responsive-img activator card-profile-image"
+
             <%= image_tag("Heart_Beat.png", :alt => "user background") %>
           </div>
 
@@ -212,7 +227,7 @@
 
       <div id="save" class="modal">
         <div class="modal-content">
-          <h4>Add Appointment</h4>
+          <h4>Add new visit</h4>
           <p>Are you sure you want to save?</p>
         </div>
         <div class="modal-footer">
@@ -220,8 +235,8 @@
         </div>
       </div>
 
-
     </div>
+  </div>
 </main>
 
 

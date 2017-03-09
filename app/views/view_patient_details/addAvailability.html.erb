@@ -99,7 +99,7 @@
 <main>
   <div class="container " style="width: 85%">
 
-    <h4>View Availability</h4>
+    <h4>Update Availability</h4>
     <div class="divider"></div><br>
 
 
@@ -110,37 +110,47 @@
           <div class="card-content ">
 
             <div class="row">
-              <div class="col s3">
-                <div class="input-field" id="searchField">
-                  <select>
 
-                    <option value="1">Date</option>
-                    <option value="3">Type</option>
-                    <option value="2">Doctor</option>
-                  </select>
-                  <label>Search</label>
-                </div>
-              </div>
               <div class="input-field col s6">
-                <label for="searchOn"></label>
-                <%= Time.now %>
+                <i class="material-icons prefix">person_pin</i>
+                <label for="searchOn">Name of Doctor</label>
                 <input type="text" id="searchOn" class="autocomplete" >
               </div>
             </div>
 
-
-
-
-
             <div class="row">
-              <div class="col s3">
-                <p class="left-align"><button class="btn waves-effect waves-light" style="background-color: darkorange" type="button" name="action">Search</button></p>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">date_range</i>
+                <label class="active" for="date_from">From Date</label>
+                <input id="date_from" value="" type="date" name="date_from" class="datepicker">
+              </div>
+
+              <div class="input-field col s6">
+                <label class="active" for="app_date_to">To Date</label>
+                <input id="date_to" value="" type="date" name="date_to" class="datepicker">
               </div>
             </div>
 
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">schedule</i>
+                <label class="active" for="date_from">From Time</label>
+                <input id="date_from" value="" type="date" name="date_from" class="datepicker">
+              </div>
+
+              <div class="input-field col s6">
+                <label class="active" for="app_date_to">To Time</label>
+                <input id="date_to" value="" type="date" name="date_to" class="datepicker">
+              </div>
+            </div>
+
+
             <div class="divider"></div><br>
-
-
+            <div class="row">
+              <div class="col s3">
+                <p class="left-align"><button class="btn waves-effect waves-light" style="background-color: darkorange" type="button" name="action">Save</button></p>
+              </div>
+            </div>
           </div>
         </form>
       </div>

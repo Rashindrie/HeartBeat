@@ -52,6 +52,7 @@
     }
 
   </style>
+  <%= csrf_meta_tags %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -76,7 +77,7 @@
         <ul class="right hide-on-med-and-down">
           <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
 
-          <li class="active"><a href="#"><i class="material-icons left">power_settings_new</i>Sign Up</a></li>
+          <li class="active"><a href="/signup/patient"><i class="material-icons left">power_settings_new</i>Sign Up</a></li>
 
         </ul>
       </div>
@@ -95,7 +96,7 @@
       <div class="container">
         <div class="row">
           <div class="col s12 m6 offset-m3">
-            <form class="card z-depth-4" action="" method="post" style=" ">
+            <form class="card z-depth-4" action="/users" method="post" style=" ">
 
               <div class="card-image col s3" style="width: 450px">
                 <br>
@@ -108,7 +109,7 @@
 
                   <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="user_name" type="text" class="validate">
+                    <input id="user_name" name="user[user_name]" type="text" class="validate">
                     <label for="user_name">Username</label>
                   </div>
                 </div>
@@ -116,7 +117,7 @@
                 <div class="row margin">
                   <div class="input-field col s12">
                     <i class="material-icons prefix">email</i>
-                    <input id="email" type="email" class="validate">
+                    <input id="email" type="email" name="user[email]" class="validate">
                     <label for="email" >Email</label>
                   </div>
                 </div>
@@ -124,7 +125,7 @@
                 <div class="row margin">
                   <div class="input-field col s12">
                     <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" class="validate">
+                    <input id="password" type="password" name="user[password]" class="validate">
                     <label for="password">Password</label>
                   </div>
                 </div>
@@ -133,7 +134,7 @@
 
                   <div class="input-field col s12">
                     <i class="material-icons prefix">person</i>
-                    <select id="userType">
+                    <select id="role" name="user[role]">
                       <option value="1">Patient</option>
                       <option value="2">Doctor</option>
                       <option value="3">Clinical</option>
@@ -151,7 +152,7 @@
 
                   <div class="input-field col s6 m6 l6">
                     <span> Not a user? </span> <br>
-                    <p class="margin medium-small"><a href="#">Register Now!</a></p>
+                    <p class="margin medium-small"><a href="/signup/patient">Register Now!</a></p>
                   </div>
                   <div class="input-field col s6 m6 l6">
                   </div>

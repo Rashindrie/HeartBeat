@@ -8,8 +8,7 @@
   },
   "dependencies": {
     "angular-materializecss-datepicker": "^0.1.2",
-    "materialize-autocomplete": "^1.0.7",
-    "materialize-clockpicker": "^1.0.1"
+    "materialize-autocomplete": "^1.0.7"
   },
   "devDependencies": {},
   "scripts": {
