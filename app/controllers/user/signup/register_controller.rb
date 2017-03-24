@@ -1,5 +1,6 @@
 class User::Signup::RegisterController < ApplicationController
   protect_from_forgery
+  layout 'application'
   #before_action :require_user, only: [:logout, :show]
   #before_action :require_user, only: [:show, :edit, :update, :destroy]
 
@@ -41,10 +42,10 @@ class User::Signup::RegisterController < ApplicationController
               @user.patient_id = @patient.id
               if @user.save
                 session[:user_id] = @user.id
-                redirect_to 'patient/home'
+                redirect_to controller: '/patient/home', action: 'show', :id => @user.patient_id
               end
           else
-            redirect_to 'users/registerPatient'
+            redirect_to '/signup/patient'
          end
 
     end
@@ -66,10 +67,10 @@ class User::Signup::RegisterController < ApplicationController
           if @user.save
 
             session[:user_id] = @user.id
-            redirect_to 'doctor/home'
+            redirect_to controller: '/doctor/home', action: 'show', :id => @user.doctor_id
           end
         else
-          redirect_to 'users/registerEmp'
+          redirect_to '/signup/emp'
         end
 
     end
@@ -89,10 +90,10 @@ class User::Signup::RegisterController < ApplicationController
             if @user.save
 
               session[:user_id] = @user.id
-              redirect_to 'staff/home'
+              redirect_to controller: '/staff/home', action: 'show', :id => @user.staff_id
             end
           else
-            redirect_to 'users/registerEmp'
+            redirect_to '/signup/emp'
           end
         end
 

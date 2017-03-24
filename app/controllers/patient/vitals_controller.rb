@@ -11,9 +11,12 @@ class Patient::VitalsController < ApplicationController
 
     if @vital.nil?
       @vital=Vital.new
-
+      @id=params[:id]
+      render('/vitals/show')
     else
       @doctor=Doctor.find_by_id(@vital.doctor_id)
+      @id=params[:id]
+      render('/vitals/show')
     end
 
 
@@ -27,8 +30,12 @@ class Patient::VitalsController < ApplicationController
 
     if @vital.nil?
       @vital=Vital.new
+      @id=params[:id]
+      render('/vitals/edit')
     else
       @doctor=Doctor.find_by_id(@vital.doctor_id)
+      @id=params[:id]
+      render('/vitals/edit')
     end
  end
 
@@ -42,13 +49,15 @@ class Patient::VitalsController < ApplicationController
 
     if @vital.save
       flash[:notice] = "patient updated successfully."
-      redirect_to vital_path(:id => @vital.patient_id)
 
+      redirect_to :controller => 'patient/vitals', :action => 'show', :id => params[:id]
 
 
     else
       flash[:notice] = "Update unsuccessful."
-      render('/')  #to get a prepolutaed form
+      @id = params[:id]
+      render('/patient/vital/edit')
+      #render('/')  #to get a prepolutaed form
     end
   end
 

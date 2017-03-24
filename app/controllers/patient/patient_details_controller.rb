@@ -1,4 +1,4 @@
-class Patient::PatientsController < ApplicationController
+class Patient::PatientDetailsController < ApplicationController
    layout 'patient'
    protect_from_forgery
 
@@ -8,6 +8,7 @@ class Patient::PatientsController < ApplicationController
 
    def edit
      @patient = Patient.find(params[:id])
+     render ('/patients/edit')
    end
 
    def update
@@ -15,10 +16,13 @@ class Patient::PatientsController < ApplicationController
 
      if @patient.update_attributes(patient_params)
        flash[:notice] = "patient updated successfully."
-       redirect_to(edit_patient_path(@patient))
+       redirect_to :controller => 'patient/patient_details', :action => 'edit', id: @patient.id
+
      else
        flash[:notice] = "Update unsuccessful."
-       render('/')  #to get a prepolutaed form
+       @id = params[:id]
+       render :action => '/patient/profile'
+       #render('/patient/profile/<%= @patient.id %>')  #to get a prepolutaed form
      end
    end
 

@@ -3,6 +3,7 @@
 <head>
   <script type="text/javascript">
       $(document).ready(function(){
+          $('select').material_select();
           $('#doctorSelect').hide();
 
 
@@ -32,9 +33,9 @@
 <body>
 <header>
   <div class="navbar-fixed">
-    <nav class="teal darken-3 white-text">
+    <nav class="white-text">
 
-      <div class="nav-wrapper teal darken-3 white-text" style="font-family: Trajan Pro">
+      <div class="teal darken-3 white-text" style="font-family: Trajan Pro">
 
         <ul class="left " style="height: 80px; width: 170px; padding-top: 5px">
           <img class="responsive-img"
@@ -46,7 +47,7 @@
         <ul class="right hide-on-med-and-down">
 
 
-          <li class="active"><a href="/users/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
+          <li class="active"><a href="/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
 
         </ul>
       </div>
@@ -64,8 +65,8 @@
     <div class="" style="width:100%;">
       <div class="container">
         <div class="row">
-          <div class="col s9">
-            <form class="card z-depth-4" action="/users" method="post" style=" ">
+          <div class="col s9 offset-m2">
+            <form class="card z-depth-4" action="/signup" method="post" style=" ">
               <div class="card-image col s3" style="width: 100%">
 
                 <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
@@ -134,7 +135,7 @@
                   <i class="material-icons prefix">person</i>
                   <div class="col s12">
                     <div class="col s6 left aligned">
-                      <input name="user[role]" value="2" type="radio" id="doctor"  />
+                      <input class="with-gap" name="user[role]" value="2" type="radio" id="doctor"  />
                       <label for="doctor">Doctor</label>
                     </div>
                     <div class="col s6">
@@ -151,7 +152,7 @@
                   </div>
                   <div class="col s12">
                     <div class="col s6 left aligned">
-                      <input name="user[role]" value="3" type="radio" id="staff" checked="checked" />
+                      <input class="with-gap" name="user[role]" value="3" type="radio" id="staff" checked="checked" />
                       <label for="staff">Clinical Staff</label>
                     </div>
                   </div>
@@ -172,7 +173,7 @@
 
                 <div class="row">
                   <div class="col s12">
-                    <button class="btn waves-effect waves-light col s12" type="submit" id="submit" style="background-color: darkorange">Register</button>
+                    <button class="btn waves-effect waves-light col s12" type="submit" id="submit" >Register</button>
                   </div>
                 </div>
 

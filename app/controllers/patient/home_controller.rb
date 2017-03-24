@@ -3,6 +3,7 @@ class Patient::HomeController < ApplicationController
   protect_from_forgery
 
   def show
+    @patient = Patient.find(params[:id])
     render('patients/home')
   end
 

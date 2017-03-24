@@ -16,15 +16,15 @@ class User::Signin::LoginController < ApplicationController
       #redirect_to '/patient/home'
 
       if @user.role == 1
-        redirect_to controller: '/patient/home', action: 'show', :id => @user.role, :id => @user.patient_id
+        redirect_to controller: '/patient/home', action: 'show', :id => @user.patient_id
       end
 
       if @user.role ==2
-        redirect_to controller: '/doctor/home', action: 'show', :id => @user.role, :id => @user.doctor_id
+        redirect_to controller: '/doctor/home', action: 'show', :id => @user.doctor_id
       end
 
       if @user.role ==3
-        redirect_to controller: '/staff/home', action: 'show', :id => @user.role, :id => @user.staff_id
+        redirect_to controller: '/staff/home', action: 'show', :id => @user.staff_id
       end
 
 
@@ -37,7 +37,7 @@ class User::Signin::LoginController < ApplicationController
   def logout
     session[:user_id] = nil
     flash[:notice] = 'logged out'
-    redirect_to('login/login')
+    redirect_to('/login')
   end
 
 

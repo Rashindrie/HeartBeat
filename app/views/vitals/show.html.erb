@@ -1,4 +1,8 @@
-<div class="container " style="width: 85%">
+<%= render partial: 'patients/sideNav', :locals => { :patient_id => params[:id] } %>
+
+<main style="padding-left: 240px">
+
+  <div class="container " style="width: 85%">
   <div class="row">
     <h4>Vitals</h4>
     <div class="divider"></div>
@@ -154,13 +158,10 @@
        <div class="row">
           <% #if current_user && current_user.doctor? %>
           <div class="col s3">
-            <a class="btn waves-effect waves-light" style="background-color: darkorange" href="/vitals/<%= @patient.id %>/edit">Update Vitals</a>
+            <a class="btn waves-effect waves-light"  href="/patient/vital/edit/<%= @patient.id %>">Update Vitals</a>
           </div>
           <% #end %>
-          <div class="col s3">
-            <a class="btn waves-effect waves-light" style="background-color: darkorange" href="/">Back</a>
 
-          </div>
         </div>
 
 
@@ -213,3 +214,4 @@
 
   </div>
 </div>
+</main>
