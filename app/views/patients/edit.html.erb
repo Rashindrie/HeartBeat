@@ -1,0 +1,126 @@
+
+
+    <div class="container">
+      <div class="row">
+
+          <form  action="/patients/<%= @patient.id %>" method="post">
+            <input type="hidden" name="_method" value="patch" />
+
+
+              <h4>Edit Details</h4>
+
+            <div class="divider"></div>
+
+              <div class="section">
+
+
+                  <div class="row">
+
+                    <div class="input-field col s12 m6 l4">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input id="first_name" type="text" name="patient[first_name]" value="<%= @patient.first_name %>" class="validate">
+
+                      <label class="active" for="first_name">First Name</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l4">
+                      <input id="middle_name" type="text" name="patient[middle_name]" value="<%= @patient.middle_name %>" class="validate">
+                      <label class="active" for="middle_name">Middle Name</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l4">
+                      <input id="last_name" type="text" name="patient[last_name]" value="<%= @patient.last_name %>" class="validate">
+                      <label class="active" for="last_name">Last Name</label>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col s12">
+                      <i class="material-icons prefix">wc</i>
+                      <div class="col s12">
+
+
+                        <div class="col s6 left aligned">
+                          <input name="patient[gender]" value="0" type="radio" id="male" checked="<% @patient.gender==0 ? checked : ' ' %>"/>
+                          <label class="active" for="male">Male</label>
+                        </div>
+                        <div class="col s6 left aligned">
+                          <input name="patient[gender]" value="1" type="radio" id="female" checked="<% @patient.gender==1? checked : ' ' %>"/>
+                          <label class="active" for="female">Female</label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <br>
+
+
+                  <div class="row">
+
+                    <div class="input-field col s12 l5">
+                      <i class="material-icons prefix">today</i>
+
+                      <input id="date_of_birth" value="<%= @patient.date_of_birth %>" type="date" name="patient[date_of_birth]" class="datepicker">
+                      <label class="active" for="date_of_birth">Date of Birth</label>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="row">
+                    <div class="input-field col s12 l5">
+                      <i class="material-icons prefix">phone</i>
+                      <input id="telephone" type="tel" name="patient[telephone]" value="<%= @patient.telephone %>"  class="validate">
+                      <label class="active" for="telephone">Telephone</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="input-field col s12 m5">
+                      <i class="material-icons prefix">email</i>
+                      <input id="email" type="email" name="patient[email]"  value="<%= @patient.email %>" class="validate">
+                      <label class="active" data-error="wrong" data-success="right">Email</label>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="divider"></div>
+
+
+                    <div id="submit" class="section scrollspy">
+                      <div class="row">
+                        <div class="col s4">
+                          <button class="btn waves-effect waves-light" type="submit" id="submit" style="background-color: darkorange">Update Details</button>
+
+                        </div>
+                      </div>
+
+                  </div>
+
+
+
+
+              </div>
+            </div>
+
+          </form>
+
+
+
+
+        </div>
+
+    <script type="text/javascript">
+        $('.datepicker').pickadate(
+            {
+                selectYears: 100,
+                max: new Date()
+            });
+    </script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HeartBeat</title>
+
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag('application', media: 'all', 'data-turbolinks-track': 'reload') %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+
+</head>
+
+<body>
+<header>
+
+  <div class="navbar-fixed">
+    <nav class="teal darken-3 white-text">
+
+      <div class="nav-wrapper teal darken-3 white-text" style="font-family: Trajan Pro">
+        <ul class="left " style="height: 80px; width: 170px; padding-top: 5px">
+          <img class="responsive-img"
+               <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
+          />
+        </ul>
+
+        <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
+        <ul class="right hide-on-med-and-down">
+          <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
+          <li class="active"><a href="logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+<div class="side-nav fixed" style="width:250px; margin-top:65px; padding-bottom:100px">
+  <ul id= "nav-mobile"  >
+
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Home</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Search Patients</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">View appointments</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">My Profile</a></li>
+
+  </ul>
+</div>
+
+
+<main>
+
+  <%= yield %>
+</main>
+</body>
+</html>

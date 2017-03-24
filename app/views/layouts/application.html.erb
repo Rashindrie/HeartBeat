@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('select').material_select();
+
+        });
+    </script>
     <title>HeartBeat</title>
 
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag('application', media: 'all', 'data-turbolinks-track': 'reload') %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    </head>
 
   <body>
     <%= yield %>

@@ -4,25 +4,7 @@
   <script type="text/javascript">
       $(document).ready(function(){
           $('#doctorSelect').hide();
-          $('select').material_select();
-          $('.modal').modal();
 
-
-          $('.scrollspy').scrollSpy();
-          $('.datepicker').pickadate(
-              {
-                  selectMonths: true,
-                  selectYears: 100,
-                  closeOnSelect: true,
-                  max: new Date()
-              });
-
-          $('.fixed').pushpin({
-              top: 0,
-              bottom: 1500,
-              offset: 0,
-
-          });
 
           $('input[type="radio"]').click(function() {
               if($(this).attr('id') == 'doctor') {
@@ -40,27 +22,8 @@
 
   </script>
 
-  <style>
-    .navbar-material .nav-wrapper .brand-logo img {
-      height: 64px;
-    }
-    @media (max-width: 600px) {
-      .navbar-material .nav-wrapper .brand-logo img {
-        height: 56px;
-      }
-    }
-    main, footer {
 
-    }
 
-    @media only screen and (max-width : 992px) {
-      main, footer {
-        padding-left: 0;
-      }
-    }
-
-  </style>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 
@@ -81,9 +44,9 @@
 
         <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
         <ul class="right hide-on-med-and-down">
-          <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
 
-          <li class="active"><a href="signIn"><i class="material-icons left">account_circle</i>Sign In</a></li>
+
+          <li class="active"><a href="/users/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
 
         </ul>
       </div>
@@ -101,16 +64,15 @@
     <div class="" style="width:100%;">
       <div class="container">
         <div class="row">
-          <div class="col s9 offset-m2">
-            <form class="card z-depth-4" action="users#create" method="post" style="width: 700px; top: 10px ">
-
-              <div class="card-image col s3" style="width: 700px">
+          <div class="col s9">
+            <form class="card z-depth-4" action="/users" method="post" style=" ">
+              <div class="card-image col s3" style="width: 100%">
 
                 <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
 
               </div>
               <div class="card-content">
-                <span class="card-title">Sign Up</span>
+                <span class="card-title"><h5>Register</h5></span>
 
 
 
@@ -119,72 +81,51 @@
 
                   <div class="input-field col s12 m6 l4">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="first_name" type="text" class="validate">
+                    <input id="first_name" type="text" name="user[first_name]" class="validate">
                     <label for="first_name">First Name</label>
                   </div>
 
                   <div class="input-field col s12 m6 l4">
-                    <input id="middle_name" type="text" class="validate">
+                    <input id="middle_name" type="text" name="user[middle_name]" class="validate">
                     <label for="middle_name">Middle Name</label>
                   </div>
 
                   <div class="input-field col s12 m6 l4">
-                    <input id="last_name" type="text" class="validate">
+                    <input id="last_name" type="text" name="user[last_name]" class="validate">
                     <label for="last_name">Last Name</label>
                   </div>
 
+                </div>
+
+
+
+               <div class="row ">
+                  <div class="input-field col s12 l6">
+                    <i class="material-icons prefix">phone</i>
+                    <input id="telephone" type="tel" name="user[telephone]" class="validate">
+                    <label for="telephone">Telephone</label>
+                  </div>
+
+                  <div class="input-field col s12 l6">
+                    <i class="material-icons prefix">email</i>
+                    <input id="email" type="email" name="user[email]" class="validate">
+                    <label for="email" data-error="wrong" data-success="right">Email</label>
+                  </div>
                 </div>
 
                 <div class="row">
                   <div class="col s12">
                     <i class="material-icons prefix">wc</i>
                     <div class="col s12">
-                      <div class="col s6 left aligned">
-                        <input name="gender" type="radio" id="male" />
+                      <div class="col s12 left aligned">
+                        <input class="with-gap" name="user[gender]" value="0" checked="checked" type="radio" id="male" />
                         <label for="male">Male</label>
                       </div>
-                      <div class="col s6 left aligned">
-                        <input name="gender" type="radio" id="female" />
+                      <div class="col s12 left aligned">
+                        <input class="with-gap" name="user[gender]" value="1" type="radio" id="female" />
                         <label for="female">Female</label>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                <br>
-
-                <div class="row">
-
-                  <div class="input-field col s12 l5">
-                    <i class="material-icons prefix">perm_identity</i>
-                    <input id="nic" type="text" class="validate">
-                    <label for="nic">NIC</label>
-                  </div>
-                </div>
-
-
-                <div class="row ">
-                  <div class="input-field col s12 l5">
-                    <i class="material-icons prefix">phone</i>
-                    <input id="telephone" type="tel" class="validate">
-                    <label for="telephone">Telephone</label>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="input-field col s12 l5">
-                    <i class="material-icons prefix">email</i>
-                    <input id="email" type="email" class="validate">
-                    <label for="email" data-error="wrong" data-success="right">Email</label>
-                  </div>
-                </div>
-
-                <div class="row ">
-
-                  <div class="input-field col s5">
-                    <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Password</label>
                   </div>
                 </div>
 
@@ -193,26 +134,24 @@
                   <i class="material-icons prefix">person</i>
                   <div class="col s12">
                     <div class="col s6 left aligned">
-                      <input name="type" type="radio" id="doctor" />
+                      <input name="user[role]" value="2" type="radio" id="doctor"  />
                       <label for="doctor">Doctor</label>
                     </div>
                     <div class="col s6">
                       <div class="input-field" id="doctorSelect">
-                        <select multiple>
-                          <option value="" disabled selected>Choose Specialization</option>
-                          <option value="1">Type 1</option>
-                          <option value="2">Type 2</option>
-                          <option value="3">Type 3</option>
+                        <select name="user[doctor_type_id]">
+                          <% @doctor_types.each do |d| %>
+                              <option value="<%= d.id %>"><%= d.speciality %></option>
+                          <% end %>
                         </select>
 
-
-                        <label>Doctor Type</label>
+                              <label>Doctor Type</label>
                       </div>
                     </div>
                   </div>
                   <div class="col s12">
                     <div class="col s6 left aligned">
-                      <input name="type" type="radio" id="staff" />
+                      <input name="user[role]" value="3" type="radio" id="staff" checked="checked" />
                       <label for="staff">Clinical Staff</label>
                     </div>
                   </div>
@@ -220,13 +159,20 @@
 
                 </div>
 
+                <div class="row ">
 
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">lock</i>
+                    <input id="password" type="password" name="user[password]" class="validate">
+                    <label for="password">Password</label>
+                  </div>
+                </div>
 
                 <div class="divider"></div><br>
 
                 <div class="row">
-                  <div class="col s10">
-                    <p class="left-align col s5 " style="padding-left: 20px"><button class="btn waves-effect waves-light  z-depth-5" style="background-color: darkorange" type="button" name="action">Sign Up</button></p>
+                  <div class="col s12">
+                    <button class="btn waves-effect waves-light col s12" type="submit" id="submit" style="background-color: darkorange">Register</button>
                   </div>
                 </div>
 

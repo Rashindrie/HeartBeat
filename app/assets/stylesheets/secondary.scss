@@ -1,0 +1,23 @@
+
+
+main, footer {
+  padding-left: 240px;
+}
+
+.navbar-material .nav-wrapper .brand-logo img {
+  height: 64px;
+}
+@media (max-width: 600px) {
+  .navbar-material .nav-wrapper .brand-logo img {
+    height: 56px;
+  }
+}
+
+@media only screen and (max-width : 992px) {
+  main, footer {
+    padding-left: 0;
+  }
+}
+
+::-moz-selection { background: #ffa726; color: #fff; }
+::selection { background: #ffa726; color: #fff; }

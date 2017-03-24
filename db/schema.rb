@@ -10,36 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309064740) do
+ActiveRecord::Schema.define(version: 20170324042537) do
 
   create_table "doctor_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "type"
+    t.string   "speciality"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "doctors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "doctor_type_id"
-    t.string   "first_name",               null: false
+    t.string   "first_name",     null: false
     t.string   "middle_name"
-    t.string   "last_name",                null: false
-    t.integer  "gender",         limit: 1, null: false
-    t.string   "telephone",                null: false
-    t.string   "email",                    null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "last_name",      null: false
+    t.string   "telephone",      null: false
+    t.string   "email",          null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.boolean  "gender",         null: false
   end
 
   create_table "patients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "first_name",               null: false
-    t.string   "middle_name",              null: false
+    t.string   "middle_name"
     t.string   "last_name",                null: false
     t.boolean  "gender",                   null: false
-    t.datetime "date_of_birth",            null: false
     t.string   "telephone",                null: false
     t.string   "email",         limit: 40, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.date     "date_of_birth",            null: false
+  end
+
+  create_table "staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "first_name",            null: false
+    t.string   "middle_name"
+    t.string   "last_name",             null: false
+    t.integer  "gender",      limit: 1, null: false
+    t.string   "telephone",             null: false
+    t.string   "email",                 null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -51,6 +62,22 @@ ActiveRecord::Schema.define(version: 20170309064740) do
     t.integer  "staff_id",        limit: 1
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "vitals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "patient_id"
+    t.integer  "doctor_id"
+    t.float    "height",       limit: 24
+    t.float    "weight",       limit: 24
+    t.float    "bmi",          limit: 24
+    t.float    "blood_group",  limit: 24
+    t.float    "temp",         limit: 24
+    t.float    "pulse",        limit: 24
+    t.float    "res_rate",     limit: 24
+    t.float    "bld_pressure", limit: 24
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["patient_id"], name: "patientID", using: :btree
   end
 
 end
