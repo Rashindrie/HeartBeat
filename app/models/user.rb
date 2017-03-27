@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   has_secure_password
 
+  belongs_to :patient, { :optional => true}
+  belongs_to :doctor, { :optional => true}
+  belongs_to :staff, { :optional => true}
+
   def admin?
     self.user_type == 0
   end

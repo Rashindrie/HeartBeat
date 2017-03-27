@@ -1,6 +1,6 @@
 class CreateVitals < ActiveRecord::Migration[5.0]
   def up
-    create_table :editVital do |t|
+    create_table :vitals do |t|
       t.integer :patient_id
       t.integer :doctor_id
       t.float :height
@@ -17,6 +17,6 @@ class CreateVitals < ActiveRecord::Migration[5.0]
   end
 
   def down
-      drop_table :editVital
+    drop_table :vitals
   end
 end

@@ -15,12 +15,21 @@ class Appointment::SearchAppointmentsController < ApplicationController
   def search
 
     @from_date=params[:app][:from_date]
-    @to_date=params[:app][:to_date]
+    @doctor=params[:app][:doctor_id]
+    @app_type=params[:app][:app_type_id]
 
 
-    @timeslots=TimeSlot.fromdate(@from_date)
-    redirect_to :back, :id => @id, :timeslots => @timeslots.inspect
+    @patient = Patient.find((User.find(session[:user_id])).patient_id)
+    @doctor_types=DoctorType.all
+    @doctor_name=Doctor.select(:id, :full_name, :doctor_type_id)
 
+    
+
+
+
+
+
+    #render :text => (@timeslots).inspect
 
   end
 

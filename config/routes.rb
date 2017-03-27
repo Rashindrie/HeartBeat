@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   patch '/patient/vital/update/:id', to: 'patient/vitals#update'
 
   #appointment routes
-  get '/patient/appointment/:id', to: 'appointment/search_appointments#show'
-  post '/appointment/search/:id', to: 'appointment/search_appointments#search'
+  get '/appointment/search', to: 'appointment/search_appointments#show'
+  post '/appointment/search', to: 'appointment/search_appointments#search'
 
 
   #doctor routes

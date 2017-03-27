@@ -131,7 +131,14 @@
         $('.datepicker').pickadate(
             {
                 selectYears: 100,
-                max: new Date()
+                selectMonths: true,
+                max: new Date(),
+                closeOnSelect: true,
+                onSet: function (ele) {
+                    if (ele.select) {
+                        this.close();
+                    }
+                }
             });
 
 

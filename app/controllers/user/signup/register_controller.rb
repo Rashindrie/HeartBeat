@@ -28,7 +28,7 @@ class User::Signup::RegisterController < ApplicationController
     @user = User.new(user_params)
 
     #create a patient
-    if (params[:user][:role]).to_i == 1
+    if (params[:session][:role]).to_i == 1
             @patient = Patient.new
             @patient.full_name = params[:session][:full_name]
             @patient.first_name = params[:session][:first_name]
@@ -53,7 +53,7 @@ class User::Signup::RegisterController < ApplicationController
     end
 
       #create a doctor
-      if (params[:user][:role]).to_i == 2
+      if (params[:session][:role]).to_i == 2
 
         @doctor = Doctor.new
         @doctor.full_name = params[:session][:full_name]
@@ -79,7 +79,7 @@ class User::Signup::RegisterController < ApplicationController
 
     end
               #create a staffs member
-        if (params[:user][:role]).to_i == 3
+        if (params[:session][:role]).to_i == 3
 
           @staff = Staff.new
           @staff.full_name = params[:session][:full_name]
@@ -110,18 +110,18 @@ class User::Signup::RegisterController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :password, :role)
+    params.require(:session).permit(:email, :password, :role)
   end
 
   def patient_params
-    params.require(:user).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email, :date_of_birth)
+    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email, :date_of_birth)
   end
 
   def doctor_params
-    params.require(:user).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email)
+    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email)
   end
 
   def staff_params
-    params.require(:user).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email)
+    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email)
   end
 end

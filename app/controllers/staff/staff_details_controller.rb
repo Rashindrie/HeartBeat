@@ -1,6 +1,6 @@
 class Staff::StaffDetailsController < ApplicationController
   layout 'staff'
-
+  protect_from_forgery unless: -> { request.format.html? }
   def edit
     @staff = Staff.find(params[:id])
 

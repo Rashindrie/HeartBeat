@@ -2,7 +2,7 @@ class Doctor::DoctorDetailsController < ApplicationController
   layout 'doctor'
 
   #before_action :require_doctor, only: [:updateVital, :editVital]
-
+  protect_from_forgery unless: -> { request.format.html? }
 
 
   def edit

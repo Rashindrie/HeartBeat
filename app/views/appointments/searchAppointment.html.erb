@@ -1,9 +1,9 @@
-<%= render partial: 'patients/sideNav', :locals => { :patient_id => params[:id] } %>
+<%= render partial: 'patients/sideNav'%>
 
 <main style="padding-left: 240px">
   <div class="container">
     <div class="row">
-      <form class="col s12 m12 l12" action="/appointment/search/<%= params[:id] %>" method="post">
+      <form class="col s12 m12 l12" action="/appointment/search" method="post">
         <h4>Add Appointment</h4>
 
 
@@ -24,6 +24,10 @@
                 <input class="with-gap" name="searchOn" type="radio" id="appType" />
                 <label for="appType">Appointment Type</label>
               </div>
+              <div class="col s12 left aligned">
+                <input class="with-gap" name="searchOn" type="radio" id="appDate" />
+                <label for="appDate">Date</label>
+              </div>
 
             </div>
           </div>
@@ -42,6 +46,7 @@
               <label>Doctor</label>
             </div>
           </div>
+
           <div class="col s10">
             <div class="input-field" id="appTypeSelect">
               <select name="app[app_type_id]">
@@ -53,29 +58,20 @@
               <label>Appointment Type</label>
             </div>
           </div>
+
+          <div class="row">
+            <div class="input-field col s3 l4" id="dateSelect">
+              <i class="material-icons prefix">date_range</i>
+              <label class="active" for="app_date_from">Date</label>
+              <input id="app_date_from" value="" type="date" name="app[from_date]"  value="<%= @timeslots.present? ? @from_date : " " %>" class="datepicker">
+            </div>
+          </div>
+
+
         </div>
 
 
-        <div class="row">
-          <div class="input-field col s3 l4">
-            <i class="material-icons prefix">date_range</i>
-            <label class="active" for="app_date_from">From </label>
-            <input id="app_date_from" value="" type="date" name="app[from_date]"  class="datepicker">
-          </div>
-
-          <div class="input-field col s3 l4">
-            <label class="active" for="app_date_to">To</label>
-            <input id="app_date_to" value="" type="date" name="app[to_date]" class="datepicker">
-          </div>
-        </div>
-
-
-
-
-
-
-
-        <div class="row">
+       <div class="row">
           <div class="col m2">
             <p class="right-align"><button class="btn waves-effect waves-light" type="submit">Search</button></p>
           </div>
@@ -86,7 +82,7 @@
         <br><div class="divider"></div> <br>
 
 <% if defined? @timeslots %>
-  <% if @timeslots != '' %>
+  <% if @timeslots.blank? == false %>
           <div class="row">
             <div class="col s12">
               <table class="bordered highlight responsive-table">
@@ -95,7 +91,7 @@
                   <th data-field="id">Date</th>
                   <th data-field="name">Time Block</th>
                   <th data-field="price">Doctor</th>
-                  <th data-field="price">Appointments</th>
+                  <th data-field="price">Appointment Type</th>
                   <th data-field="id">Add appointment</th>
                   <th data-field="id">Waiting List</th>
                 </tr>
@@ -104,12 +100,19 @@
                 <tbody>
                 <% @timeslots.each do |d| %>
                 <tr>
-                  <td><%= d.date %></td>
-                  <td><%= d.from_time + "-" + d.to_time%></td>
-                  <td><%= "Dr. " + d.doctor_id %></td>
-                  <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmApp" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
+                  <td><%= d.app_date %></td>
+                  <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
 
-                  <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmList" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">playlist_add</i></button></td>
+                  <% @doctor_name.each do |n| %>
+                      <% if d.doctor_id == n.id %>
+                          <td><%= "Dr. " + n.full_name %></td>
+                          <td><%= @doctor_types[n.doctor_type_id].speciality %></td>
+                      <% end %>
+                  <% end %>
+
+                  <td value="<%=d.id %>"><button class="green btn waves-effect waves-light btn tooltipped" data-target="confirmApp" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
+
+                  <td><button class="orange btn waves-effect waves-light btn tooltipped" data-target="confirmList" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">playlist_add</i></button></td>
 
                 </tr>
                 <% end%>
@@ -121,8 +124,9 @@
 
 
   <% else %>
-  <p>There are no available time slots for the specified search fields</p>
+  <%= "There are no available time slots for the specified search fields" %>
   <% end %>
+
 
 <% end %>
 
@@ -157,6 +161,8 @@
       $(document).ready(function(){
           $('#doctorSelect').hide();
           $('#appTypeSelect').hide();
+          $('#dateSelect').hide();
+
           $('select').material_select();
           $('.modal').modal();
           //$('select').material_select('destroy');
@@ -181,11 +187,20 @@
               if($(this).attr('id') == 'doctor') {
                   $('#doctorSelect').show();
                   $('#appTypeSelect').hide();
+                  $('#dateSelect').hide();
               }
               else{
                   if($(this).attr('id') == 'appType') {
                       $('#doctorSelect').hide();
                       $('#appTypeSelect').show();
+                      $('#dateSelect').hide();
+                  }
+                  else{
+                      if($(this).attr('id') == 'appDate') {
+                          $('#doctorSelect').hide();
+                          $('#appTypeSelect').hide();
+                          $('#dateSelect').show();
+                      }
                   }
               }
           });

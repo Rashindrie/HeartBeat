@@ -1,7 +1,7 @@
 class CreateDoctorTypes < ActiveRecord::Migration[5.0]
   def up
     create_table :doctor_types do |t|
-      t.string :type
+      t.string :speciality
       t.timestamps
     end
   end

@@ -117,7 +117,18 @@
   <script type="text/javascript">
       $(document).ready(function(){
           $('select').material_select();
-
+          $('.datepicker').pickadate(
+              {
+                  selectYears: 100,
+                  selectMonths: true,
+                  max: new Date(),
+                  closeOnSelect: true,
+                  onSet: function (ele) {
+                      if (ele.select) {
+                          this.close();
+                      }
+                  }
+              });
       });
 
 

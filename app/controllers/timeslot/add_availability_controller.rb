@@ -11,7 +11,7 @@ class Timeslot::AddAvailabilityController < ApplicationController
   def create
     @staff = Staff.find(params[:id])
     @time_slot=TimeSlot.new(time_slot_params)
-    @time_slot.staff_id=2
+    @time_slot.staff_id=(User.find(session[:user_id])).staff_id
     if @time_slot.save
       redirect_to controller: '/timeslot/add_availability', action: 'new', :id => @staff.id
     else
