@@ -1,0 +1,27 @@
+<div class="side-nav fixed" style="width:250px; margin-top:65px; padding-bottom:100px">
+  <ul id= "nav-mobile"  >
+
+    <div class="row">
+      <div class="col col s4 m4 l4">
+        <img class="circle responsive-img valign profile-image"
+        <%= image_tag("staff.png", :alt => "rss feed") %>
+
+      </div>
+      <div class="col col s8 m8 l8">
+
+
+        <p><%= @staff.first_name + " " + @staff.last_name %></p>
+        <p><%= "Clinical Staff" %></p>
+
+      </div>
+      <br/>
+    </div>
+
+    <li class="bold active"><a class="waves-effect waves-teal" href="/staff/home/<%= @staff.id %>">Home</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/staff/profile/<%= @staff.id %>">My Profile</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/timeslot/new/<%= @staff.id %>">Add Availability</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">View Availability</a></li>
+
+
+  </ul>
+</div>

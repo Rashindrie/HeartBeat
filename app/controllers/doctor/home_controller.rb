@@ -1,6 +1,5 @@
 class Doctor::HomeController < ApplicationController
   layout 'doctor'
-  protect_from_forgery
 
   def show
     @doctor = Doctor.find(params[:id])

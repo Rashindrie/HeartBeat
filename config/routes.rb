@@ -14,23 +14,44 @@ Rails.application.routes.draw do
   get '/signup/emp', to: 'user/signup/register#registerEmp'
   post '/signup', to: 'user/signup/register#create'
 
+
   #patients routes
   get '/patient/home/:id', to: 'patient/home#show'
   get '/patient/profile/:id', to: 'patient/patient_details#edit'
-  patch '/patient/update/:id', to: 'patient/patient_details#update'
+  patch '/patient/update', to: 'patient/patient_details#update'
 
   #patient Vitals routes
   get '/patient/vital/:id', to: 'patient/vitals#show'
   get '/patient/vital/edit/:id', to: 'patient/vitals#edit'
   patch '/patient/vital/update/:id', to: 'patient/vitals#update'
 
+  #appointment routes
+  get '/patient/appointment/:id', to: 'appointment/search_appointments#show'
+  post '/appointment/search/:id', to: 'appointment/search_appointments#search'
+
+
   #doctor routes
   get '/doctor/home/:id', to: 'doctor/home#show'
+  get '/doctor/profile/:id', to: 'doctor/doctor_details#edit'
+  patch '/doctor/update/:id', to: 'doctor/doctor_details#update'
+
+
 
   #staff routes
   get '/staff/home/:id', to: 'staff/home#show'
+  get '/staff/home/:id', to: 'staff/home#show'
+  get '/staff/profile/:id', to: 'staff/staff_details#edit'
+  patch '/staff/update/:id', to: 'staff/staff_details#update'
+
+
+  #timeslot routes
+  get '/timeslot/new/:id', to: 'timeslot/add_availability#new'
+
+  post '/timeslot/add/:id', to: 'timeslot/add_availability#create'
+
 
   #resources
+
 
 
 

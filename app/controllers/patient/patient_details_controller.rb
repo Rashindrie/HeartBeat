@@ -1,10 +1,9 @@
 class Patient::PatientDetailsController < ApplicationController
    layout 'patient'
-   protect_from_forgery
 
    #before_action :require_doctor, only: [:updateVital, :editVital]
 
-
+   protect_from_forgery unless: -> { request.format.html? }
 
    def edit
      @patient = Patient.find(params[:id])
@@ -12,7 +11,7 @@ class Patient::PatientDetailsController < ApplicationController
    end
 
    def update
-     @patient = Patient.find(params[:id])
+     @patient = Patient.find(User.find(session[:user_id]).patient_id)
 
      if @patient.update_attributes(patient_params)
        flash[:notice] = "patient updated successfully."
@@ -32,7 +31,7 @@ class Patient::PatientDetailsController < ApplicationController
   private
 
   def patient_params
-    params.require(:patient).permit(:first_name, :middle_name, :last_name,
+    params.require(:patient).permit(:full_name, :first_name, :middle_name, :last_name,
                                     :telephone, :date_of_birth, :email, :gender)
   end
 

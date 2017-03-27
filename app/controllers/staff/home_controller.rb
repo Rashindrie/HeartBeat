@@ -1,8 +1,8 @@
 class Staff::HomeController < ApplicationController
-  layout 'patient'
-  protect_from_forgery
+  layout 'staff'
 
   def show
+    @staff = Staff.find(params[:id])
     render('staffs/home')
   end
 

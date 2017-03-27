@@ -5,6 +5,15 @@
         $(document).ready(function(){
           $('select').material_select();
 
+            $('.datepicker').pickadate({
+
+                closeOnSelect: true,
+                onSet: function (ele) {
+                    if (ele.select) {
+                        this.close();
+                    }
+                }
+            });
         });
     </script>
     <title>HeartBeat</title>

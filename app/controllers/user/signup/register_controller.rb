@@ -1,5 +1,5 @@
 class User::Signup::RegisterController < ApplicationController
-  protect_from_forgery
+
   layout 'application'
   #before_action :require_user, only: [:logout, :show]
   #before_action :require_user, only: [:show, :edit, :update, :destroy]
@@ -30,13 +30,14 @@ class User::Signup::RegisterController < ApplicationController
     #create a patient
     if (params[:user][:role]).to_i == 1
             @patient = Patient.new
-            @patient.first_name = params[:user][:first_name]
-            @patient.middle_name = params[:user][:middle_name]
-            @patient.last_name = params[:user][:last_name]
-            @patient.gender = params[:user][:gender]
-            @patient.date_of_birth = params[:user][:date_of_birth]
-            @patient.telephone = params[:user][:telephone]
-            @patient.email = params[:user][:email]
+            @patient.full_name = params[:session][:full_name]
+            @patient.first_name = params[:session][:first_name]
+            @patient.middle_name = params[:session][:middle_name]
+            @patient.last_name = params[:session][:last_name]
+            @patient.gender = params[:session][:gender]
+            @patient.date_of_birth = params[:session][:date_of_birth]
+            @patient.telephone = params[:session][:telephone]
+            @patient.email = params[:session][:email]
 
          if @patient.save
               @user.patient_id = @patient.id
@@ -44,7 +45,8 @@ class User::Signup::RegisterController < ApplicationController
                 session[:user_id] = @user.id
                 redirect_to controller: '/patient/home', action: 'show', :id => @user.patient_id
               end
-          else
+         else
+           flash.now[:notice] = "Signup Unsuccessfull"
             redirect_to '/signup/patient'
          end
 
@@ -54,13 +56,14 @@ class User::Signup::RegisterController < ApplicationController
       if (params[:user][:role]).to_i == 2
 
         @doctor = Doctor.new
-        @doctor.first_name = params[:user][:first_name]
-        @doctor.middle_name = params[:user][:middle_name]
-        @doctor.last_name = params[:user][:last_name]
-        @doctor.gender = params[:user][:gender]
-        @doctor.telephone = params[:user][:telephone]
-        @doctor.email = params[:user][:email]
-        @doctor.doctor_type_id = params[:user][:doctor_type_id]
+        @doctor.full_name = params[:session][:full_name]
+        @doctor.first_name = params[:session][:first_name]
+        @doctor.middle_name = params[:session][:middle_name]
+        @doctor.last_name = params[:session][:last_name]
+        @doctor.gender = params[:session][:gender]
+        @doctor.telephone = params[:session][:telephone]
+        @doctor.email = params[:session][:email]
+        @doctor.doctor_type_id = params[:session][:doctor_type_id]
 
         if @doctor.save
           @user.doctor_id = @doctor.id
@@ -70,6 +73,7 @@ class User::Signup::RegisterController < ApplicationController
             redirect_to controller: '/doctor/home', action: 'show', :id => @user.doctor_id
           end
         else
+          flash.now[:notice] = "Signup Unsuccessfull"
           redirect_to '/signup/emp'
         end
 
@@ -78,12 +82,13 @@ class User::Signup::RegisterController < ApplicationController
         if (params[:user][:role]).to_i == 3
 
           @staff = Staff.new
-          @staff.first_name = params[:user][:first_name]
-          @staff.middle_name = params[:user][:middle_name]
-          @staff.last_name = params[:user][:last_name]
-          @staff.gender = params[:user][:gender]
-          @staff.telephone = params[:user][:telephone]
-          @staff.email = params[:user][:email]
+          @staff.full_name = params[:session][:full_name]
+          @staff.first_name = params[:session][:first_name]
+          @staff.middle_name = params[:session][:middle_name]
+          @staff.last_name = params[:session][:last_name]
+          @staff.gender = params[:session][:gender]
+          @staff.telephone = params[:session][:telephone]
+          @staff.email = params[:session][:email]
 
           if @staff.save
             @user.staff_id = @staff.id
@@ -93,6 +98,7 @@ class User::Signup::RegisterController < ApplicationController
               redirect_to controller: '/staff/home', action: 'show', :id => @user.staff_id
             end
           else
+            flash.now[:notice] = "Signup Unsuccessfull"
             redirect_to '/signup/emp'
           end
         end
@@ -105,5 +111,17 @@ class User::Signup::RegisterController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:email, :password, :role)
+  end
+
+  def patient_params
+    params.require(:user).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email, :date_of_birth)
+  end
+
+  def doctor_params
+    params.require(:user).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email)
+  end
+
+  def staff_params
+    params.require(:user).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email)
   end
 end

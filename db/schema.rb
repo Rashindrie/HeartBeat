@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324042537) do
+ActiveRecord::Schema.define(version: 20170326021742) do
 
   create_table "doctor_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "speciality"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170324042537) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.boolean  "gender",         null: false
+    t.string   "full_name",      null: false
   end
 
   create_table "patients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 20170324042537) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.date     "date_of_birth",            null: false
+    t.string   "full_name",                null: false
   end
 
   create_table "staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -51,6 +53,17 @@ ActiveRecord::Schema.define(version: 20170324042537) do
     t.string   "email",                 null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.string   "full_name",             null: false
+  end
+
+  create_table "time_slots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "app_date"
+    t.time     "from_time"
+    t.time     "to_time"
+    t.integer  "doctor_id"
+    t.integer  "staff_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

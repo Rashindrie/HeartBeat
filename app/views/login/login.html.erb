@@ -30,7 +30,7 @@
         <ul class="left " style="height: 80px; width: 170px; padding-top: 5px">
           <img class="responsive-img"
                <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
-          />
+
         </ul>
 
 
@@ -62,7 +62,7 @@
       <div class="container">
         <div class="row">
           <div class="col s12 m6 offset-m3">
-            <form class="card z-depth-4" action="/attempt_login" method="post" style=" ">
+            <form class="card z-depth-4" action="/attempt_login" method="post" style="">
 
               <div class="card-image col s3" style="width: 450px">
                 <br>
@@ -76,7 +76,7 @@
                 <div class="row margin">
                   <div class="input-field col s12">
                     <i class="material-icons prefix">email</i>
-                    <input id="email" type="email" name="user[email]" class="validate">
+                    <input id="email" type="email" name="session[email]" class="active validate">
                     <label for="email" >Email</label>
                   </div>
                 </div>
@@ -84,23 +84,12 @@
                 <div class="row margin">
                   <div class="input-field col s12">
                     <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" name="user[password]" class="validate">
+                    <input id="password" type="password" name="session[password]" class="validate">
                     <label for="password">Password</label>
                   </div>
                 </div>
 
-                <div class="row margin">
 
-                  <div class="input-field col s12">
-                    <i class="material-icons prefix">person</i>
-                    <select id="role" name="user[role]">
-                      <option value="1">Patient</option>
-                      <option value="2">Doctor</option>
-                      <option value="3">Clinical</option>
-                    </select>
-                    <label>User Type</label>
-                  </div>
-                </div>
 
                 <div class="row">
                   <button class="btn waves-effect waves-light col s12" type="submit" id="submit" >Login</button>

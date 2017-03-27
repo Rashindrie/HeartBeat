@@ -75,24 +75,33 @@
               <div class="card-content">
                 <span class="card-title"><h5>Register</h5></span>
 
+                <div class="row">
 
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="full_name" type="text" name="session[full_name]" class="validate">
+                    <label for="full_name" >Full Name</label>
+                  </div>
+
+
+                </div>
 
 
                 <div class="row">
 
                   <div class="input-field col s12 m6 l4">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="first_name" type="text" name="user[first_name]" class="validate">
+                    <input id="first_name" type="text" name="session[first_name]" class="validate">
                     <label for="first_name">First Name</label>
                   </div>
 
                   <div class="input-field col s12 m6 l4">
-                    <input id="middle_name" type="text" name="user[middle_name]" class="validate">
+                    <input id="middle_name" type="text" name="session[middle_name]" class="validate">
                     <label for="middle_name">Middle Name</label>
                   </div>
 
                   <div class="input-field col s12 m6 l4">
-                    <input id="last_name" type="text" name="user[last_name]" class="validate">
+                    <input id="last_name" type="text" name="session[last_name]" class="validate">
                     <label for="last_name">Last Name</label>
                   </div>
 
@@ -103,13 +112,13 @@
                <div class="row ">
                   <div class="input-field col s12 l6">
                     <i class="material-icons prefix">phone</i>
-                    <input id="telephone" type="tel" name="user[telephone]" class="validate">
+                    <input id="telephone" type="tel" name="session[telephone]" class="validate">
                     <label for="telephone">Telephone</label>
                   </div>
 
                   <div class="input-field col s12 l6">
                     <i class="material-icons prefix">email</i>
-                    <input id="email" type="email" name="user[email]" class="validate">
+                    <input id="email" type="email" name="session[email]" class="validate">
                     <label for="email" data-error="wrong" data-success="right">Email</label>
                   </div>
                 </div>
@@ -119,11 +128,11 @@
                     <i class="material-icons prefix">wc</i>
                     <div class="col s12">
                       <div class="col s12 left aligned">
-                        <input class="with-gap" name="user[gender]" value="0" checked="checked" type="radio" id="male" />
+                        <input class="with-gap" name="session[gender]" value="0" checked="checked" type="radio" id="male" />
                         <label for="male">Male</label>
                       </div>
                       <div class="col s12 left aligned">
-                        <input class="with-gap" name="user[gender]" value="1" type="radio" id="female" />
+                        <input class="with-gap" name="session[gender]" value="1" type="radio" id="female" />
                         <label for="female">Female</label>
                       </div>
                     </div>
@@ -135,12 +144,12 @@
                   <i class="material-icons prefix">person</i>
                   <div class="col s12">
                     <div class="col s6 left aligned">
-                      <input class="with-gap" name="user[role]" value="2" type="radio" id="doctor"  />
+                      <input class="with-gap" name="session[role]" value="2" type="radio" id="doctor"  />
                       <label for="doctor">Doctor</label>
                     </div>
                     <div class="col s6">
                       <div class="input-field" id="doctorSelect">
-                        <select name="user[doctor_type_id]">
+                        <select name="session[doctor_type_id]">
                           <% @doctor_types.each do |d| %>
                               <option value="<%= d.id %>"><%= d.speciality %></option>
                           <% end %>
@@ -152,7 +161,7 @@
                   </div>
                   <div class="col s12">
                     <div class="col s6 left aligned">
-                      <input class="with-gap" name="user[role]" value="3" type="radio" id="staff" checked="checked" />
+                      <input class="with-gap" name="session[role]" value="3" type="radio" id="staff" checked="checked" />
                       <label for="staff">Clinical Staff</label>
                     </div>
                   </div>
@@ -164,7 +173,7 @@
 
                   <div class="input-field col s6">
                     <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" name="user[password]" class="validate">
+                    <input id="password" type="password" name="session[password]" class="validate">
                     <label for="password">Password</label>
                   </div>
                 </div>

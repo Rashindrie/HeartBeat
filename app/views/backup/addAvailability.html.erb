@@ -180,3 +180,39 @@
 
 
 </html>
+#***************************************************
+<div class="row">
+
+  <div class="input-field col s6">
+    <i class="material-icons prefix">person_pin</i>
+    <label for="searchOn">Name of Doctor</label>
+    <input type="text" id="searchOn" class="autocomplete" >
+  </div>
+</div>
+
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">date_range</i>
+    <label class="active" for="date_from">From Date</label>
+    <input id="date_from" value="" type="date" name="date_from" class="datepicker">
+  </div>
+
+  <div class="input-field col s6">
+    <label class="active" for="app_date_to">To Date</label>
+    <input id="date_to" value="" type="date" name="date_to" class="datepicker">
+  </div>
+</div>
+
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">schedule</i>
+    <label class="active" for="date_from">From Time</label>
+    <%= time_select(time_slot[from_to], :time_seperator => ":", :include_seconds => false, :minute_step => 15)%>
+    <input id="date_from" value="" type="date" name="date_from" class="datepicker">
+  </div>
+
+  <div class="input-field col s6">
+    <label class="active" for="app_date_to">To Time</label>
+    <input id="date_to" value="" type="date" name="date_to" class="datepicker">
+  </div>
+</div>

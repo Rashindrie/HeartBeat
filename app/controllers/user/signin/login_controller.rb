@@ -1,6 +1,4 @@
 class User::Signin::LoginController < ApplicationController
-
-  protect_from_forgery
   layout 'application'
 
   def login
@@ -9,13 +7,15 @@ class User::Signin::LoginController < ApplicationController
   end
 
   def attempt_login
-    @user = User.find_by_email(params[:user][:email])
-    if @user && @user.authenticate(params[:user][:password])
+    @user = User.find_by_email(params[:session][:email])
+    if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
       flash[:notice] = "You are now logged in"
       #redirect_to '/patient/home'
 
+
       if @user.role == 1
+
         redirect_to controller: '/patient/home', action: 'show', :id => @user.patient_id
       end
 
