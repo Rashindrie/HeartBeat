@@ -17,15 +17,15 @@
             <div class="input-field inline">
 
               <div class="col s12 left aligned">
-                <input class="with-gap" name="searchOn" type="radio" id="doctor" />
+                <input class="with-gap" name="app[d]" value="0" type="radio" id="doctor" />
                 <label for="doctor">Doctor</label>
               </div>
               <div class="col s12 left aligned">
-                <input class="with-gap" name="searchOn" type="radio" id="appType" />
+                <input class="with-gap" name="app[d]" value="1" type="radio" id="appType" />
                 <label for="appType">Appointment Type</label>
               </div>
               <div class="col s12 left aligned">
-                <input class="with-gap" name="searchOn" type="radio" id="appDate" />
+                <input class="with-gap" name="app[d]" value="2" type="radio" id="appDate" />
                 <label for="appDate">Date</label>
               </div>
 
@@ -59,13 +59,13 @@
             </div>
           </div>
 
-          <div class="row">
+
             <div class="input-field col s3 l4" id="dateSelect">
               <i class="material-icons prefix">date_range</i>
-              <label class="active" for="app_date_from">Date</label>
-              <input id="app_date_from" value="" type="date" name="app[from_date]"  value="<%= @timeslots.present? ? @from_date : " " %>" class="datepicker">
+              <label class="active" for="from_date">Date</label>
+              <input id="from_date" type="date" name="app[from_date]"  class="datepicker">
             </div>
-          </div>
+
 
 
         </div>
@@ -77,13 +77,16 @@
           </div>
 
         </div>
+<br/>
       </form>
 
-        <br><div class="divider"></div> <br>
+
 
 <% if defined? @timeslots %>
   <% if @timeslots.blank? == false %>
+
           <div class="row">
+            <div class="divider"></div>
             <div class="col s12">
               <table class="bordered highlight responsive-table">
                 <thead>
@@ -91,7 +94,7 @@
                   <th data-field="id">Date</th>
                   <th data-field="name">Time Block</th>
                   <th data-field="price">Doctor</th>
-                  <th data-field="price">Appointment Type</th>
+                  <th data-field="price">Speciality</th>
                   <th data-field="id">Add appointment</th>
                   <th data-field="id">Waiting List</th>
                 </tr>
@@ -106,13 +109,19 @@
                   <% @doctor_name.each do |n| %>
                       <% if d.doctor_id == n.id %>
                           <td><%= "Dr. " + n.full_name %></td>
-                          <td><%= @doctor_types[n.doctor_type_id].speciality %></td>
+
+                          <% @doctor_types.each do |d| %>
+                                <% if d.id == n.doctor_type_id %>
+                                  <td><%= d.speciality %></td>
+                                <% end %>
+                            <% end %>
+
                       <% end %>
                   <% end %>
 
-                  <td value="<%=d.id %>"><button class="green btn waves-effect waves-light btn tooltipped" data-target="confirmApp" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
+                  <td value="<%=d.id %>"><button class="blue darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmApp" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
 
-                  <td><button class="orange btn waves-effect waves-light btn tooltipped" data-target="confirmList" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">playlist_add</i></button></td>
+                  <td><button class="pink darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmList" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
 
                 </tr>
                 <% end%>
@@ -124,7 +133,11 @@
 
 
   <% else %>
-  <%= "There are no available time slots for the specified search fields" %>
+<p>
+  <%= @date.present? ? "There are no available time slots for #{@date}" : " "  %></option>
+  <%= @doctor.present? ? "There are no available time slots for given doctor" : " "  %></option>
+  <%= @app_type.present? ? "There are no available time slots for given appointment type" : " "  %></option>
+</p>
   <% end %>
 
 
@@ -142,7 +155,7 @@
         <p>Are you sure you want to add this appointment?</p>
       </div>
       <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Confirm</a>
+        <a href="#!" class=" modal-action modal-close waves-effect btn-flat ">Confirm</a>
       </div>
     </div>
 
