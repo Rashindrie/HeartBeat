@@ -12,7 +12,7 @@ class Staff::StaffDetailsController < ApplicationController
 
     if @staff.update_attributes(staff_params)
       flash[:notice] = "Doctor details updated successfully."
-      redirect_to :controller => 'staff/staff_details', :action => 'edit', id: @doctor.id
+      redirect_to :controller => 'staff/staff_details', :action => 'edit', id: @staff.id
 
     else
       flash[:notice] = "Update unsuccessful."

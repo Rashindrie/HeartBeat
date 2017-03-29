@@ -6,19 +6,19 @@ class User < ApplicationRecord
   belongs_to :staff, { :optional => true}
 
   def admin?
-    self.user_type == 0
+    self.role == 0
   end
 
   def patient?
-    self.user_type == 1
+    self.role == 1
   end
 
   def doctor?
-    self.user_type == 2
+    self.role == 2
   end
 
   def staff?
-    self.user_type == 3
+    self.role== 3
   end
 
 end

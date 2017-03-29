@@ -1,0 +1,102 @@
+<%= render partial: 'doctors/sideNav'%>
+
+<main style="padding-left: 240px"><div class="container " style="width: 85%">
+    <div class="row">
+      <form class="col s12 m12 l12" >
+        <h4>View Appointments</h4>
+
+
+        <div class="divider"></div><br>
+
+
+
+        <div class="input-field col s3 l4" id="dateSelect">
+          <i class="material-icons prefix">date_range</i>
+          <label class="active" for="from_date">Date</label>
+          <input id="from_date" type="date" name="app[from_date]"  class="datepicker">
+        </div>
+
+        <div class="row">
+          <div class="col m2">
+            <p class="right-align"><button class="btn waves-effect waves-light" type="submit">Search</button></p>
+          </div>
+
+        </div>
+        <br/>
+      </form>
+
+
+      <form>
+        <% if defined? @appointments %>
+            <% if @appointments.blank? == false %>
+        <div class="row">
+          <div class="col s12">
+
+            <table class="bordered highlight responsive-table">
+              <thead>
+              <tr>
+                <th data-field="time">Time</th>
+                <th data-field="name">Patient</th>
+                <th data-field="action">Action</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% @appointments.each do |d| %>
+              <tr>
+                <td><%= d.id %></td>
+                <td><a href="#">John Doe</a></td>
+                <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmModal"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" id="addAppointment" type="button" name="action" style="background-color: red"><i class="material-icons prefix">close</i></button></td>
+              </tr>
+
+             <% end %>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+<% end %>
+        <% end %>
+      </form>
+
+      <div id="confirmModal" class="modal">
+        <div class="modal-content">
+          <h4>Cancel Appointment</h4>
+          <p>This action is irreversible. Are you sure you want to cancel this appointment?</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Confirm</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+          $('select').material_select();
+          $('.modal').modal();
+
+          $('.scrollspy').scrollSpy();
+          $('.datepicker').pickadate({
+
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+
+              min: new Date(),
+              format: 'yyyy-mm-dd',
+              closeOnSelect: true,
+              onSet: function (ele) {
+                  if (ele.select) {
+                      this.close();
+                  }
+              }
+          });
+
+
+
+
+
+
+  </script>
+</main>

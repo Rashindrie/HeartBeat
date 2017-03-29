@@ -7,7 +7,7 @@ class Doctor::DoctorDetailsController < ApplicationController
 
   def edit
     @doctor = Doctor.find(params[:id])
-    @doctor_types=DoctorType.all
+    @doctor_types=DoctorType.sorted
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
     render ('/doctors/edit')
   end

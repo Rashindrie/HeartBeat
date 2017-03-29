@@ -22,11 +22,10 @@ Rails.application.routes.draw do
 
   #patient Vitals routes
   get '/patient/vital/:id', to: 'patient/vitals#show'
-  get '/patient/vital/edit/:id', to: 'patient/vitals#edit'
-  patch '/patient/vital/update/:id', to: 'patient/vitals#update'
+
 
   #appointment routes
-  get '/appointments/search', to: 'appointment/search_appointments#show'
+  get '/appointment/search', to: 'appointment/search_appointments#show'
 
   post '/appointment/search', to: 'appointment/search_appointments#search'
   get '/appointment/add/:id', to: 'appointment/search_appointments#create'
@@ -37,7 +36,16 @@ Rails.application.routes.draw do
   get '/doctor/profile/:id', to: 'doctor/doctor_details#edit'
   patch '/doctor/update/:id', to: 'doctor/doctor_details#update'
 
+  #doctor vitals routes
+  get '/vital/:id', to: 'doctor/vitals#show'
+  get '/vital/edit/:id', to: 'doctor/vitals#edit'
+  patch '/vital/update/:id', to: 'doctor/vitals#update'
 
+  #doctor view patients
+  get '/search/patients', to: 'doctor/search_patient#show'
+
+  #doctor view appointments
+  get '/view/appointments', to: 'doctor/view_appointment#show'
 
   #staff routes
   get '/staff/home/:id', to: 'staff/home#show'

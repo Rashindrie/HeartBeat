@@ -1,5 +1,8 @@
-<%= render partial: 'patients/sideNav', :locals => { :patient_id => params[:id] } %>
-
+<% if current_user && current_user.doctor? %>
+<%= render partial: 'doctors/sideNav' %>
+<% else %>
+<%= render partial: 'patients/sideNav' %>
+<% end %>
 <main style="padding-left: 240px">
 
   <div class="container " style="width: 85%">
@@ -34,7 +37,7 @@
           </div>
 
           <div class="input-field col s6">
-            <%=  @vital.created_at.present? ? "Dr. "+ @doctor.first_name + " " + @doctor.last_name : ""  %>
+            <%=  @vital.created_at.present? ? ("Dr. "+ @edit_doctor.first_name + " " + @edit_doctor.last_name) : ""  %>
           </div>
 
         </div>
@@ -76,7 +79,7 @@
           </div>
 
           <div class="input-field col s6">
-            <%= @vital.bmi %>
+            <%= '%.2f' % (@vital.weight/(@vital.height/100)) %>
 
           </div>
 
@@ -156,17 +159,17 @@
 
 
        <div class="row">
-          <% #if current_user && current_user.doctor? %>
+          <% if current_user && current_user.doctor? %>
           <div class="col s3">
-            <a class="btn waves-effect waves-light"  href="/patient/vital/edit/<%= @patient.id %>">Update Vitals</a>
+            <a class="btn waves-effect waves-light"  href="/vital/edit/<%= @patient.id %>">Update Vitals</a>
           </div>
-          <% #end %>
+          <% end %>
 
         </div>
 
 
       </div>
-
+      <% if current_user && current_user.doctor? %>
       <div class="col s4">
 
 
@@ -199,7 +202,7 @@
         </div>
 
       </div>
-
+      <% end %>
     </div>
 
     <div id="save" class="modal">

@@ -1,4 +1,6 @@
-<%= render partial: 'patients/sideNav', :locals => { :patient_id => params[:id] } %>
+
+<%= render partial: 'doctors/sideNav', :locals => { :doctor_id => params[:id] } %>
+
 
 <main style="padding-left: 240px">
 <div class="container " style="width: 85%">
@@ -10,7 +12,7 @@
       <br>
       <div class="col s8" >
 
-        <form class="" action="/patient/vital/update/<%= @patient.id %>" method="post" style="">
+        <form class="" action="/vital/update/<%= @patient.id %>" method="post" style="">
           <input type="hidden" name="_method" value="patch" />
 
 
@@ -38,7 +40,7 @@
             </div>
 
             <div class="input-field col s6">
-              <p  id="doctor" name=""><%=  @vital.created_at.present? ? "Dr. " + @doctor.first_name + " " + @doctor.last_name : "" %></p>
+              <%=  @vital.created_at.present? ? ("Dr. "+ @edit_doctor.first_name + " " + @edit_doctor.last_name) : ""  %>
 
             </div>
 
@@ -81,7 +83,7 @@
             </div>
 
             <div class="input-field col s6">
-              <input id="bmi" value="<%= @vital.bmi %>" readonly="" type="text" name="vital[bmi]"">
+              <input id="bmi" value=" <%= '%.2f' % (@vital.weight/(@vital.height/100)) %>" readonly="" type="text" name="vital[bmi]"">
 
             </div>
 
@@ -179,14 +181,14 @@
               <button class="btn waves-effect waves-light" type="Submit">Save</button>
             </div>
             <div class="col s3">
-              <a class="btn waves-effect waves-light" href="/patient/vital/<%= @patient.id %>">Back</a>
+              <a class="btn waves-effect waves-light" href="/vital/<%= @patient.id %>">Back</a>
 
             </div>
           </div>
 
         </form>
       </div>
-
+      <% if current_user && current_user.doctor? %>
       <div class="col s4">
 
 
@@ -219,7 +221,7 @@
         </div>
 
       </div>
-
+      <% end %>
     </div>
 
     <div id="save" class="modal">

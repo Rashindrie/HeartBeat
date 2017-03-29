@@ -96,43 +96,48 @@
                   <th data-field="name">Time Block</th>
                   <th data-field="price">Doctor</th>
                   <th data-field="price">Speciality</th>
-                  <th data-field="id">Add appointment</th>
-                  <th data-field="id">Waiting List</th>
+
                 </tr>
                 </thead>
 
                 <tbody>
                 <% @timeslots.each do |d| %>
+                  <tr>
 
                   <td><%= d.app_date %></td>
                   <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
 
-                  <% @doctor_name.each do |n| %>
-                      <% if d.doctor_id == n.id %>
-                          <td><%= "Dr. " + n.full_name %></td>
+                              <% @doctor_name.each do |n| %>
+                                  <% if d.doctor_id == n.id %>
+                                      <td><%= "Dr. " + n.full_name %></td>
 
-                          <% @doctor_types.each do |d| %>
-                                <% if d.id == n.doctor_type_id %>
-                                  <td><%= d.speciality %></td>
-                                <% end %>
-                            <% end %>
+                                        <% @doctor_types.each do |t| %>
+                                                <% if t.id == n.doctor_type_id %>
+                                                  <td><%= t.speciality %></td>
+                                                <% end %>
+                                          <% end %>
 
-                      <% end %>
-                  <% end %>
-                    <td><button class="blue darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmApp" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
+                                  <% end %>
+                              <% end %>
 
+                    <% if ((d.to_time - d.from_time)/15.minutes).to_i > (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %>
+                    <td><button class="blue darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmApp/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
+                  <% else %>
                   <td><button class="pink darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmList" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
-                    <div id="confirmApp" class="modal">
+
+                    <% end %>
+
+                </tr>
+                    <div id="confirmApp/<%= d.id %>" class="modal">
                       <div class="modal-content">
                         <h4>Add Appointment</h4>
-                        <p>Are you sure you want to add this appointment?</p>
+                        <p>Are you sure you want to add an appointment on <%= d.app_date %> for the <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> slot?</p>
                       </div>
                       <div class="modal-footer">
                         <button class="modal-action modal-close darken-3 btn waves-effect waves-light" onclick="window.location = '/appointment/add/<%= d.id %>'" type="button">Confirm</button>
                       </div>
                     </div>
-                </tr>
-                <% end%>
+                <% end %>
 
                 </tbody>
               </table>

@@ -52,15 +52,20 @@ class Appointment::SearchAppointmentsController < ApplicationController
     #search results
     if @d.to_i==0
         @timeslots=TimeSlot.fromdoctor(@doctor)
+        @appointments=Appointment.group(:time_slot_id).count
+
+        #render :text => (@appointments[3]).inspect
         render('appointments/searchAppointment')
 
     elsif @d.to_i==1
 
-      @timeslots=TimeSlot.joins(doctor: :doctor_type).where('doctors.doctor_type_id' => @app_type)
+      @timeslots=TimeSlot.joins(doctor: :doctor_type).where('doctors.doctor_type_id' => @app_type).where('app_date >= ?', Date.today)
+      @appointments=Appointment.group(:time_slot_id).count
       render('appointments/searchAppointment')
 
     elsif @d.to_i==2
       @timeslots=TimeSlot.fromdate(@date)
+      @appointments=Appointment.group(:time_slot_id).count
       render('appointments/searchAppointment')
 
 

@@ -8,9 +8,7 @@
 
       </div>
       <div class="col col s8 m8 l8">
-
-
-        <p><%= "Dr. " + @doctor.first_name + " " + @doctor.last_name %></p>
+       <p><%= "Dr. " + @doctor.first_name + " " + @doctor.last_name %></p>
 
         <p><%= @doctor_type.speciality %></p>
 
@@ -20,8 +18,8 @@
 
     <li class="bold active"><a class="waves-effect waves-teal" href="/doctor/home/<%= @doctor.id %>">Home</a></li>
     <li class="active"><a class="waves-effect waves-teal" href="/doctor/profile/<%= @doctor.id %>">My Profile</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="#!">My Appointments</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="#!">View  Patients</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/view/appointments">My Appointments</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/search/patients">View  Patients</a></li>
     <li class="active"><a class="waves-effect waves-teal" href="#!">Organ Donors</a></li>
     <li class="active"><a class="waves-effect waves-teal" href="/">Organ Requesters</a></li>
 
