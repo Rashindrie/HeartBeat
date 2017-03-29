@@ -10,5 +10,4 @@ class Doctor::SearchPatientController < ApplicationController
     render('doctors/searchPatients')
   end
 
-
 end

@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   #doctor view appointments
   get '/view/appointments', to: 'doctor/view_appointment#show'
+  post '/view/appointments', to: 'doctor/view_appointment#search'
 
   #staff routes
   get '/staff/home/:id', to: 'staff/home#show'

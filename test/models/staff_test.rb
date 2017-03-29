@@ -29,4 +29,9 @@ class StaffTest < ActiveSupport::TestCase
 	#asserts successfull deletion
       assert staff_one.destroy
    end
+
+	test "should not save staff without full_name" do
+	  staff_wrong = Staff.new
+	  assert_not staff_wrong.save
+	end
 end

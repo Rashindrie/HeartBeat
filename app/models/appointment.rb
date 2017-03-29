@@ -12,4 +12,5 @@ class Appointment < ApplicationRecord
     where(:time_slot_id => q).count
   }
 
+
 end

@@ -30,4 +30,10 @@ class DoctorTest < ActiveSupport::TestCase
 	#asserts successfull deletion
       assert doctor_one.destroy
    end
+
+
+	test "should not save doctor without full_name" do
+	  doctor_wrong = Doctor.new
+	  assert_not doctor_wrong.save
+	end
 end
