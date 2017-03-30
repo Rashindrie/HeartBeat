@@ -6,10 +6,7 @@
       <form class="col s12 m12 l12" >
         <h4>Search Patients</h4>
 
-
         <div class="divider"></div><br>
-
-
 
         <div class="row">
           <div class="col s3">
@@ -35,32 +32,24 @@
             <table class="bordered highlight responsive-table">
               <thead>
               <tr>
-
                 <th data-field="name">Name</th>
-
               </tr>
               </thead>
 
               <tbody>
               <% @patients.each do |d| %>
               <tr>
-
-
                 <td><%= d.full_name %></td>
                 <td><a href="/vital/<%= d.id %>">View Details</a></td>
-
               </tr>
-                  <% end %>
-
+              <% end %>
               </tbody>
             </table>
+
           </div>
         </div>
 
-
       </form>
-
-
     </div>
   </div>
 </main>

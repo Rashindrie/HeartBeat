@@ -23,7 +23,7 @@ class Appointment::DoctorViewAppointmentsController < ApplicationController
         @appointments=Appointment.joins(:time_slot, :patient)
                         .select('patient_id AS patient_id, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time')
                         .where('time_slots.doctor_id' => @doctor.id)
-                        .where('app_date = ?', @date).order('app_date DESC')
+                        .where('app_date = ?', @date)
 
     else
         @appointments=Appointment.joins(:time_slot, :patient).select('patient_id AS patient_id, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time').where('time_slots.doctor_id' => @doctor.id).order('app_date DESC')

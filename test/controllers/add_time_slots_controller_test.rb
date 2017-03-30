@@ -1,7 +1,7 @@
 require 'test_helper'
 
 # Re-raise errors caught by the controller.
-class PatientController
+class AddTimeSlotsController
    def rescue_action(e)
       raise e
    end
@@ -13,12 +13,12 @@ def test_index_response
 end
 
 def test_index
-   get patient_url
+   get time_slots_url
    assert_response :success
 end
 
 def test_index_template_rendered
    get :index
    assert_template :index
-   assert_equal Patient.all, assigns(:patients)
+   assert_equal TimeSlot.all, assigns(:time_slots)
 end

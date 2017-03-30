@@ -83,7 +83,7 @@
             </div>
 
             <div class="input-field col s6">
-              <input id="bmi" value=" <%= '%.2f' % (@vital.weight/(@vital.height/100)) %>" readonly="" type="text" name="vital[bmi]"">
+              <input id="bmi" value=" <%= @vital.created_at.present? ? '%.2f' % (@vital.weight/(@vital.height/100)) : " " %>" readonly="" type="text" name="vital[bmi]"">
 
             </div>
 

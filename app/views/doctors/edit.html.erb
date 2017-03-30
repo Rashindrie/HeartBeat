@@ -10,16 +10,15 @@
 
       <div class="divider"></div>
       <div class="row">
-        <div class="row">
 
+        <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
             <input id="full_name" type="text" name="doctor[full_name]" value="<%= @doctor.full_name %>"  class="validate">
             <label class="active"  for="full_name" >Full Name</label>
           </div>
-
-
         </div>
+
         <div class="input-field col s12 m6 l4">
           <i class="material-icons prefix">account_circle</i>
           <input id="first_name" type="text" name="doctor[first_name]" value="<%= @doctor.first_name %>" class="validate">
@@ -63,19 +62,14 @@
       <div class="row">
         <div class="col s12">
           <i class="material-icons prefix">wc</i>
-
-
-
-            <div class="col s12 left aligned">
+          <div class="col s12 left aligned">
               <input class="with-gap" name="doctor[gender]" value="0" type="radio" id="male" checked="<% @doctor.gender==0 ? "checked" : ' ' %>"/>
               <label class="active" for="male">Male</label>
-            </div>
-            <div class="col s12 left aligned">
+          </div>
+          <div class="col s12 left aligned">
               <input class="with-gap" name="doctor[gender]" value="1" type="radio" id="female" checked="<% @doctor.gender==1 ? "checked" : ' ' %>"/>
               <label class="active" for="female">Female</label>
-            </div>
-
-
+          </div>
         </div>
       </div>
 
@@ -85,8 +79,6 @@
           <input id="telephone" type="tel" name="doctor[telephone]" value="<%= @doctor.telephone %>" class="validate">
           <label class="active" for="telephone">Telephone</label>
         </div>
-
-
       </div>
 
       <div class="row">
@@ -96,14 +88,6 @@
           <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
         </div>
       </div>
-
-
-
-
-
-
-
-
 
       <div class="divider"></div><br>
 

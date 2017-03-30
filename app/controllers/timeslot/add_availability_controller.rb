@@ -1,6 +1,8 @@
 class Timeslot::AddAvailabilityController < ApplicationController
   layout 'staff'
   protect_from_forgery unless: -> { request.format.html? }
+
+  #render a form to add a new timeslot
   def new
     @staff = Staff.find(params[:id])
     @doctors=Doctor.all
@@ -8,6 +10,7 @@ class Timeslot::AddAvailabilityController < ApplicationController
     render('time_slots/new')
   end
 
+  #add a new timeslot for a doctor
   def create
     @staff = Staff.find(params[:id])
     @time_slot=TimeSlot.new(time_slot_params)
@@ -25,7 +28,6 @@ class Timeslot::AddAvailabilityController < ApplicationController
   def time_slot_params
       params.require(:time_slot).permit(:doctor_id, :app_date, :from_time,
                                       :to_time, :staff_id)
-
   end
 
 end

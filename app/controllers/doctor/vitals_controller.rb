@@ -1,6 +1,6 @@
 class Doctor::VitalsController < ApplicationController
   layout 'doctor'
-   sprotect_from_forgery unless: -> { request.format.html? }
+   protect_from_forgery unless: -> { request.format.html? }
 
   #get patients vitals
   def show

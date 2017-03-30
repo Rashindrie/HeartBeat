@@ -25,14 +25,15 @@ class Timeslot::UpdateTimeSlotController < ApplicationController
 
     #search results
     if @d.to_i==0
-      @timeslots=TimeSlot.from_doctor(@doctor).where('app_date >= ?', Date.today)
+      @timeslots=TimeSlot.from_doctor(@doctor).order('app_date DESC')
       @appointments=Appointment.group(:time_slot_id).count
       #render :text => (@appointments[3]).inspect
       render('time_slots/show')
 
     elsif @d.to_i==1
 
-      @timeslots=TimeSlot.joins(doctor: :doctor_type).where('doctors.doctor_type_id' => @app_type).where('app_date >= ?', Date.today)
+      @timeslots=TimeSlot.joins(doctor: :doctor_type).where('doctors.doctor_type_id' => @app_type)
+                     .order('app_date DESC')
       @appointments=Appointment.group(:time_slot_id).count
       render('time_slots/show')
 

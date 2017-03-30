@@ -9,7 +9,7 @@ class TimeSlot < ApplicationRecord
   }
 
   scope :from_doctor, lambda { |q|
-    where(:doctor_id => q).where('app_date >= ?', Date.today)
+    where(:doctor_id => q)
   }
 
   scope :valid_slots, lambda { |q|

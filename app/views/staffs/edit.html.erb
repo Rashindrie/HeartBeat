@@ -7,22 +7,18 @@
 
 
       <h4>Edit Details</h4>
-
       <div class="divider"></div>
-      <div class="row">
 
-        <div class="input-field col s12">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="full_name" type="text" name="staff[full_name]" value="<%= @staff.full_name %>"  class="validate">
-          <label class="active" for="full_name" >Full Name</label>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="full_name" type="text" name="staff[full_name]" value="<%= @staff.full_name %>"  class="validate">
+            <label class="active" for="full_name" >Full Name</label>
+          </div>
         </div>
 
-
-      </div>
-
-      <div class="row">
-
-        <div class="input-field col s12 m6 l4">
+        <div class="row">
+          <div class="input-field col s12 m6 l4">
           <i class="material-icons prefix">account_circle</i>
           <input id="first_name" type="text" name="staff[first_name]" value="<%= @staff.first_name %>" class="validate">
           <label class="active" for="first_name">First Name</label>
@@ -44,9 +40,6 @@
       <div class="row">
         <div class="col s12">
           <i class="material-icons prefix">wc</i>
-
-
-
           <div class="col s12 left aligned">
             <input class="with-gap" name="staff[gender]" value="0" type="radio" id="male" checked="<% @staff.gender==0 ? "checked" : ' ' %>"/>
             <label class="active" for="male">Male</label>
@@ -55,8 +48,6 @@
             <input class="with-gap" name="staff[gender]" value="1" type="radio" id="female" checked="<% @staff.gender==1 ? "checked" : ' ' %>"/>
             <label class="active" for="female">Female</label>
           </div>
-
-
         </div>
       </div>
 
@@ -66,8 +57,6 @@
           <input id="telephone" type="tel" name="staff[telephone]" value="<%= @staff.telephone %>" class="validate">
           <label class="active" for="telephone">Telephone</label>
         </div>
-
-
       </div>
 
       <div class="row">
@@ -77,15 +66,6 @@
           <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
       <div class="divider"></div><br>
 
       <div class="row">

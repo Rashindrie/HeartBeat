@@ -45,20 +45,18 @@
               <tr>
                 <td><%= d.app_date %></td>
                 <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
-                <td><a href="/vital/<%= d.patient_id %>">John Doe</a></td>
+                <td><a href="/vital/<%= d.patient_id %>">View Patient Profile</a></td>
 
               </tr>
-
-             <% end %>
+              <% end %>
 
               </tbody>
             </table>
           </div>
         </div>
-
-                <% else %>
+            <% else %>
             <p>You have no appointments for <%= @date %> </p>
-<% end %>
+            <% end %>
         <% end %>
       </div>
 

@@ -52,11 +52,11 @@
 
 
                         <div class="col s6 left aligned">
-                          <input class="with-gap" name="patient[gender]" value="0" type="radio" id="male" checked="<% @patient.gender==0 ? checked : ' ' %>"/>
+                          <input class="with-gap" name="patient[gender]" value="0" type="radio" id="male" checked="<% @patient.gender==false ? "checked" : " " %>"/>
                           <label class="active" for="male">Male</label>
                         </div>
                         <div class="col s6 left aligned">
-                          <input class="with-gap" name="patient[gender]" value="1" type="radio" id="female" checked="<% @patient.gender==1? checked : ' ' %>"/>
+                          <input class="with-gap" name="patient[gender]" value="1" type="radio" id="female" checked="<% @patient.gender==true ? "checked" : " " %>"/>
                           <label class="active" for="female">Female</label>
                         </div>
 

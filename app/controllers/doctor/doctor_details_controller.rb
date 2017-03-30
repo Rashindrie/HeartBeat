@@ -4,7 +4,7 @@ class Doctor::DoctorDetailsController < ApplicationController
   #before_action :require_doctor, only: [:updateVital, :editVital]
   protect_from_forgery unless: -> { request.format.html? }
 
-
+  #render form to view/edit doctor details
   def edit
     @doctor = Doctor.find(params[:id])
     @doctor_types=DoctorType.sorted
@@ -12,6 +12,7 @@ class Doctor::DoctorDetailsController < ApplicationController
     render ('/doctors/edit')
   end
 
+  #update doctor details
   def update
     @doctor = Doctor.find(params[:id])
 
