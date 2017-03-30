@@ -1,8 +1,8 @@
 class Doctor::VitalsController < ApplicationController
   layout 'doctor'
+   sprotect_from_forgery unless: -> { request.format.html? }
 
-
-  protect_from_forgery unless: -> { request.format.html? }
+  #get patients vitals
   def show
     @doctor =Doctor.find(User.find(session[:user_id]).doctor_id)
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
@@ -20,10 +20,10 @@ class Doctor::VitalsController < ApplicationController
       @id=params[:id]
       render('/vitals/show')
     end
-
-
   end
 
+
+  #edit patients vital page
   def edit
     @doctor =Doctor.find(User.find(session[:user_id]).doctor_id)
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
@@ -43,6 +43,8 @@ class Doctor::VitalsController < ApplicationController
     end
   end
 
+
+  #update patients vitals
   def update
     @doctor =Doctor.find(User.find(session[:user_id]).doctor_id)
 
@@ -54,18 +56,16 @@ class Doctor::VitalsController < ApplicationController
 
     if @vital.save
       flash[:notice] = "patient updated successfully."
-
       redirect_to :controller => 'doctor/vitals', :action => 'show', :id => params[:id]
-
-
     else
       flash[:notice] = "Update unsuccessful."
       @id = params[:id]
       redirect_to :controller => 'doctor/vitals', :action => 'edit', :id => params[:id]
-      #render('/')  #to get a prepolutaed form
     end
   end
 
+
+  #private methods
   private
   def vital_params
     params.require(:vital).permit(:doctor_id, :height, :weight, :bmi,

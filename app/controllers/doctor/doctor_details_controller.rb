@@ -23,7 +23,6 @@ class Doctor::DoctorDetailsController < ApplicationController
       flash[:notice] = "Update unsuccessful."
       @id = params[:id]
       render :action => '/doctor/profile'
-      #render('/patient/profile/<%= @patient.id %>')  #to get a prepolutaed form
     end
   end
 
@@ -31,12 +30,8 @@ class Doctor::DoctorDetailsController < ApplicationController
 
 
   private
-
   def doctor_params
     params.require(:doctor).permit(:full_name, :first_name, :middle_name, :last_name,
                                     :telephone, :doctor_type_id, :email, :gender)
   end
-
-
-
 end

@@ -1,8 +1,9 @@
 class Patient::VitalsController < ApplicationController
   layout 'patient'
-
-
   protect_from_forgery unless: -> { request.format.html? }
+
+
+  #show patient vitals
   def show
     @patient = Patient.find(params[:id])
     @age=age(@patient.date_of_birth)
@@ -18,8 +19,6 @@ class Patient::VitalsController < ApplicationController
       @id=params[:id]
       render('/vitals/show')
     end
-
-
   end
 
 

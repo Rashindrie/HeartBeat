@@ -12,9 +12,11 @@ class Timeslot::AddAvailabilityController < ApplicationController
     @staff = Staff.find(params[:id])
     @time_slot=TimeSlot.new(time_slot_params)
     @time_slot.staff_id=(User.find(session[:user_id])).staff_id
+
     if @time_slot.save
       redirect_to controller: '/timeslot/add_availability', action: 'new', :id => @staff.id
     else
+      flash.now[:notice] = "Time Slot adding failed. The given time fields clash with an existing time slot. Please try again"
       render('time_slots/new')
     end
   end

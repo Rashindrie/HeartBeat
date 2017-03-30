@@ -5,11 +5,13 @@ class Patient::PatientDetailsController < ApplicationController
 
    protect_from_forgery unless: -> { request.format.html? }
 
+   #get edit patient details page
    def edit
      @patient = Patient.find(params[:id])
      render ('/patients/edit')
    end
 
+   #update patients details
    def update
      @patient = Patient.find(User.find(session[:user_id]).patient_id)
 
@@ -21,7 +23,6 @@ class Patient::PatientDetailsController < ApplicationController
        flash[:notice] = "Update unsuccessful."
        @id = params[:id]
        render :action => '/patient/profile'
-       #render('/patient/profile/<%= @patient.id %>')  #to get a prepolutaed form
      end
    end
 
@@ -29,7 +30,6 @@ class Patient::PatientDetailsController < ApplicationController
 
 
   private
-
   def patient_params
     params.require(:patient).permit(:full_name, :first_name, :middle_name, :last_name,
                                     :telephone, :date_of_birth, :email, :gender)

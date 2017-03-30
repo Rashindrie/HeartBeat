@@ -42,11 +42,11 @@ Rails.application.routes.draw do
   patch '/vital/update/:id', to: 'doctor/vitals#update'
 
   #doctor view patients
-  get '/search/patients', to: 'doctor/search_patient#show'
+  get '/search/patients', to: 'patient/search_patient#show'
 
   #doctor view appointments
-  get '/view/appointments', to: 'doctor/view_appointment#show'
-  post '/view/appointments', to: 'doctor/view_appointment#search'
+  get '/view/appointments', to: 'appointment/doctor_view_appointments#show'
+  post '/view/appointments', to: 'appointment/doctor_view_appointments#search'
 
   #staff routes
   get '/staff/home/:id', to: 'staff/home#show'
@@ -55,10 +55,12 @@ Rails.application.routes.draw do
   patch '/staff/update/:id', to: 'staff/staff_details#update'
 
 
-  #timeslot routes
+  #add timeslot routes
   get '/timeslot/new/:id', to: 'timeslot/add_availability#new'
-
   post '/timeslot/add/:id', to: 'timeslot/add_availability#create'
+  #view timeslots
+  get '/timeslot/show', to: 'timeslot/update_time_slot#show'
+  post '/timeslot/search', to: 'timeslot/update_time_slot#search'
 
 
   #resources

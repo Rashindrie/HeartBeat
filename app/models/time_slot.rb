@@ -4,15 +4,17 @@ class TimeSlot < ApplicationRecord
   has_many :appointments
 
 
-  scope :fromdate, lambda { |q|
+  scope :from_date, lambda { |q|
     where(:app_date => q)
   }
 
-  scope :fromdoctor, lambda { |q|
+  scope :from_doctor, lambda { |q|
     where(:doctor_id => q).where('app_date >= ?', Date.today)
   }
 
+  scope :valid_slots, lambda { |q|
 
+  }
 
 
 end

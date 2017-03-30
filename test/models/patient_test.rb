@@ -37,4 +37,14 @@ class PatientTest < ActiveSupport::TestCase
 	  patient_wrong = Patient.new
 	  assert_not patient_wrong.save
 	end
+
+test "should not save patient without first_name" do
+	  patient_wrong = Patient.new
+	  assert_not patient_wrong.save
+	end
+
+test "should not save patient without last_name" do
+	  patient_wrong = Patient.new
+	  assert_not patient_wrong.save
+	end
 end

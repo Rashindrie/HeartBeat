@@ -2,7 +2,7 @@ require 'test_helper'
 require 'appointment/search_appointments_controller'
 
 # Re-raise errors caught by the controller.
-class SearchPatientsController
+class Appointment::SearchAppointmentsController
    def rescue_action(e) 
       raise e 
    end

@@ -3,6 +3,8 @@ class Appointment::SearchAppointmentsController < ApplicationController
   #before_filter :require_user
   protect_from_forgery unless: -> { request.format.html? }
 
+
+  #get appointment timeslots search page
   def show
     @patient = Patient.find((User.find(session[:user_id])).patient_id)
     @doctor_name=Doctor.select(:id, :full_name)
@@ -11,6 +13,9 @@ class Appointment::SearchAppointmentsController < ApplicationController
     render('appointments/searchAppointment')
   end
 
+
+
+  #add an appointment
   def create
     @patient = Patient.find((User.find(session[:user_id])).patient_id)
     @app=Appointment.new
@@ -30,10 +35,8 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
   end
 
-  def addWaitingList
 
-  end
-
+  #search for available appointment timeslots
   def search
     #entered search parameters
     @date=params[:app][:from_date]
@@ -46,12 +49,9 @@ class Appointment::SearchAppointmentsController < ApplicationController
     @doctor_types=DoctorType.sorted
     @doctor_name=Doctor.select(:id, :full_name, :doctor_type_id)
 
-    #appointment/waitingList
-
-
     #search results
     if @d.to_i==0
-        @timeslots=TimeSlot.fromdoctor(@doctor)
+        @timeslots=TimeSlot.from_doctor(@doctor)
         @appointments=Appointment.group(:time_slot_id).count
 
         #render :text => (@appointments[3]).inspect
@@ -64,20 +64,10 @@ class Appointment::SearchAppointmentsController < ApplicationController
       render('appointments/searchAppointment')
 
     elsif @d.to_i==2
-      @timeslots=TimeSlot.fromdate(@date)
+      @timeslots=TimeSlot.from_date(@date)
       @appointments=Appointment.group(:time_slot_id).count
       render('appointments/searchAppointment')
-
-
-    end
-
-    #render :text => (@timeslots).inspect
-
+      end
   end
-
-
-
-
-
 
 end
