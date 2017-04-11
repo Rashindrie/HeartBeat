@@ -12,8 +12,8 @@ class TimeSlot < ApplicationRecord
     where(:doctor_id => q)
   }
 
-  scope :valid_slots, lambda { |q|
-
+  scope :doc_time_slots, ->(doctor_id, date, from_time,to_time) {
+      where("from_time < ?", to_time).where("to_time > ?", from_time).from_date(date).from_doctor(doctor_id).count
   }
 
 

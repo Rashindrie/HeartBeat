@@ -1,0 +1,59 @@
+<%= render partial: 'doctor/sideNav'%>
+
+<main style="padding-left: 240px">
+
+  <div class="container " style="width: 85%">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <div class="row">
+      <form class="col s12 m12 l12" >
+        <h4>Search Patients</h4>
+
+        <div class="divider"></div><br>
+
+        <div class="row">
+          <div class="col s3">
+            <div class="input-field" id="searchField">
+              <select>
+
+                <option value="1">Last name</option>
+                <option value="3">First Name</option>
+              </select>
+              <label>Search</label>
+            </div>
+          </div>
+          <div class="input-field col s6">
+            <label for="searchOn"></label>
+            <input type="text" id="searchOn" class="autocomplete" >
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col s12">
+
+            <table class="bordered highlight responsive-table">
+              <thead>
+              <tr>
+                <th data-field="name">Name</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% @patients.each do |d| %>
+              <tr>
+                <td><%= d.full_name %></td>
+                <td><a href="/vital/<%= d.id %>">View Details</a></td>
+              </tr>
+              <% end %>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</main>

@@ -1,11 +1,10 @@
 class Staff::HomeController < ApplicationController
-  layout 'staff'
+  layout 'application'
   protect_from_forgery unless: -> { request.format.html? }
 
 
-  def show
+  def home
     @staff = Staff.find(params[:id])
-    render('staffs/home')
   end
 
 

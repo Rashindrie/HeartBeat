@@ -1,0 +1,151 @@
+<%= render partial: 'patient/sideNav', :locals => { :patient_id => params[:id] } %>
+
+<main style="padding-left: 240px">
+
+    <div class="container">
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <div class="row">
+
+          <form  action="/patient/update" method="post">
+            <input type="hidden" name="_method" value="patch" />
+
+
+              <h4>Edit Details</h4>
+
+            <div class="divider"></div>
+
+              <div class="section">
+                <div class="row">
+
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="full_name" type="text" name="patient[full_name]" value="<%= @patient.full_name %>"  class="validate">
+                    <label class="active" for="full_name" >Full Name</label>
+                  </div>
+
+
+                </div>
+
+                  <div class="row">
+
+                    <div class="input-field col s12 m6 l4">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input id="first_name" type="text" name="patient[first_name]" value="<%= @patient.first_name %>" class="validate">
+
+                      <label class="active" for="first_name">First Name</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l4">
+                      <input id="middle_name" type="text" name="patient[middle_name]" value="<%= @patient.middle_name %>" class="validate">
+                      <label class="active" for="middle_name">Middle Name</label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l4">
+                      <input id="last_name" type="text" name="patient[last_name]" value="<%= @patient.last_name %>" class="validate">
+                      <label class="active" for="last_name">Last Name</label>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col s12">
+                      <i class="material-icons prefix">wc</i>
+                      <div class="col s12">
+
+
+                        <div class="col s6 left aligned">
+                          <input class="with-gap" name="patient[gender]" value="0" type="radio" id="male" checked="<% @patient.gender==false ? "checked" : " " %>"/>
+                          <label class="active" for="male">Male</label>
+                        </div>
+                        <div class="col s6 left aligned">
+                          <input class="with-gap" name="patient[gender]" value="1" type="radio" id="female" checked="<% @patient.gender==true ? "checked" : " " %>"/>
+                          <label class="active" for="female">Female</label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <br>
+
+
+                  <div class="row">
+
+                    <div class="input-field col s12 l5">
+                      <i class="material-icons prefix">today</i>
+
+                      <input id="date_of_birth" value="<%= @patient.date_of_birth %>" type="date" name="patient[date_of_birth]" class="datepicker">
+                      <label class="active" for="date_of_birth">Date of Birth</label>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="row">
+                    <div class="input-field col s12 l5">
+                      <i class="material-icons prefix">phone</i>
+                      <input id="telephone" type="tel" name="patient[telephone]" value="<%= @patient.telephone %>"  class="validate">
+                      <label class="active" for="telephone">Telephone</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="input-field col s12 m5">
+                      <i class="material-icons prefix">email</i>
+                      <input id="email" type="email" name="patient[email]"  value="<%= @patient.email %>" class="validate">
+                      <label class="active" data-error="wrong" data-success="right">Email</label>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="divider"></div>
+
+
+                    <div id="submit" class="section scrollspy">
+                      <div class="row">
+                        <div class="col s4">
+                          <button class="btn waves-effect waves-light" type="submit" id="submit" >Update Details</button>
+
+                        </div>
+                      </div>
+
+                  </div>
+
+
+
+
+              </div>
+            </div>
+
+          </form>
+
+
+
+
+        </div>
+
+    <script type="text/javascript">
+        $('.datepicker').pickadate(
+            {
+                selectYears: 100,
+                selectMonths: true,
+                max: new Date(),
+                closeOnSelect: true,
+                onSet: function (ele) {
+                    if (ele.select) {
+                        this.close();
+                    }
+                }
+            });
+
+
+    </script>
+
+</main>

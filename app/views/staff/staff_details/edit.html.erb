@@ -1,0 +1,101 @@
+<%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
+
+<main style="padding-left: 240px">
+
+  <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <form  action="/staff/update/<%= @staff.id %>" method="post">
+      <input type="hidden" name="_method" value="patch" />
+
+
+      <h4>Edit Details</h4>
+      <div class="divider"></div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="full_name" type="text" name="staff[full_name]" value="<%= @staff.full_name %>"  class="validate">
+            <label class="active" for="full_name" >Full Name</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6 l4">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="first_name" type="text" name="staff[first_name]" value="<%= @staff.first_name %>" class="validate">
+          <label class="active" for="first_name">First Name</label>
+        </div>
+
+        <div class="input-field col s12 m6 l4">
+          <input id="middle_name" type="text" name="staff[middle_name]" value="<%= @staff.middle_name %>"  class="validate">
+          <label class="active" for="middle_name">Middle Name</label>
+        </div>
+
+        <div class="input-field col s12 m6 l4">
+          <input id="last_name" type="text" name="staff[last_name]" value="<%= @staff.last_name %>" class="validate">
+          <label class="active" for="last_name">Last Name</label>
+        </div>
+
+      </div>
+
+
+      <div class="row">
+        <div class="col s12">
+          <i class="material-icons prefix">wc</i>
+          <div class="col s12 left aligned">
+            <input class="with-gap" name="staff[gender]" value="0" type="radio" id="male" checked="<% @staff.gender==0 ? "checked" : ' ' %>"/>
+            <label class="active" for="male">Male</label>
+          </div>
+          <div class="col s12 left aligned">
+            <input class="with-gap" name="staff[gender]" value="1" type="radio" id="female" checked="<% @staff.gender==1 ? "checked" : ' ' %>"/>
+            <label class="active" for="female">Female</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix">phone</i>
+          <input id="telephone" type="tel" name="staff[telephone]" value="<%= @staff.telephone %>" class="validate">
+          <label class="active" for="telephone">Telephone</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix">email</i>
+          <input id="email" type="email" name="staff[email]" value="<%= @staff.email %>" class="validate">
+          <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
+        </div>
+      </div>
+      <div class="divider"></div><br>
+
+      <div class="row">
+        <div class="col s3">
+          <button class="btn waves-effect waves-light col s12" type="submit" id="submit" >Update</button>
+        </div>
+      </div>
+
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $('select').material_select();
+          $('.datepicker').pickadate(
+              {
+                  selectYears: 100,
+                  selectMonths: true,
+                  max: new Date(),
+                  closeOnSelect: true,
+                  onSet: function (ele) {
+                      if (ele.select) {
+                          this.close();
+                      }
+                  }
+              });
+      });
+
+
+  </script>
+</main>

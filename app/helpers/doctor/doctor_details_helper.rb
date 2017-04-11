@@ -1,0 +1,2 @@
+module Doctor::DoctorDetailsHelper
+end

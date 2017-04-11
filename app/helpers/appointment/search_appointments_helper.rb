@@ -1,0 +1,2 @@
+module Appointment::SearchAppointmentsHelper
+end

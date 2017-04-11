@@ -1,34 +1,34 @@
 class Appointment::SearchAppointmentsController < ApplicationController
-  layout 'patient'
+  layout 'application'
   #before_filter :require_user
   protect_from_forgery unless: -> { request.format.html? }
 
 
-  #get appointment timeslots search page
-  def show
+  #get appointment timeslots searchApp page
+
+  def searchApp
     @patient = Patient.find((User.find(session[:user_id])).patient_id)
     @doctor_name=Doctor.select(:id, :full_name)
     @doctor_types=DoctorType.sorted
-
-    render('appointments/searchAppointment')
   end
 
 
 
-  #add an appointment
+  #add an appointment-registered patient
   def create
     @patient = Patient.find((User.find(session[:user_id])).patient_id)
     @app=Appointment.new
 
     @app.time_slot_id=TimeSlot.find(params[:id]).id
     @app.patient_id=@patient.id
+    @app.registered=1
 
     if @app.save
-      flash.now[:notice] = "Appointement successfully added."
+      flash[:success] = "Appointement successfully added."
       session[:return_to] ||= request.referer
       redirect_to session.delete(:return_to)
     else
-      flash.now[:notice] = "Appointement adding failed. Please try again"
+      flash[:error] = "Appointement adding failed. Please try again"
       session[:return_to] ||= request.referer
       redirect_to session.delete(:return_to)
     end
@@ -38,7 +38,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
   #search for available appointment timeslots
   def search
-    #entered search parameters
+    #entered searchApp parameters
     @date=params[:app][:from_date]
     @doctor=params[:app][:doctor_id]
     @app_type=params[:app][:app_type_id]
@@ -51,12 +51,12 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
     #search results
     if @d.to_i==0
-        @timeslots=TimeSlot.from_doctor(@doctor).where('app_date >= ?', Date.today)
-                       .order('app_date DESC')
-        @appointments=Appointment.group(:time_slot_id).count
+      @timeslots=TimeSlot.from_doctor(@doctor).where('app_date >= ?', Date.today)
+                     .order('app_date DESC')
+      @appointments=Appointment.group(:time_slot_id).count
 
-        #render :text => (@appointments[3]).inspect
-        render('appointments/searchAppointment')
+      #render :text => (@appointments[3]).inspect
+      render('appointment/search_appointments/searchApp')
 
     elsif @d.to_i==1
 
@@ -64,13 +64,13 @@ class Appointment::SearchAppointmentsController < ApplicationController
                      .where('doctors.doctor_type_id' => @app_type)
                      .where('app_date >= ?', Date.today)
       @appointments=Appointment.group(:time_slot_id).count
-      render('appointments/searchAppointment')
+      render('appointment/search_appointments/searchApp')
 
     elsif @d.to_i==2
       @timeslots=TimeSlot.from_date(@date)
       @appointments=Appointment.group(:time_slot_id).count
-      render('appointments/searchAppointment')
-      end
+      render('appointment/search_appointments/searchApp')
+    end
   end
 
 end

@@ -1,5 +1,5 @@
 class Doctor::DoctorDetailsController < ApplicationController
-  layout 'doctor'
+  layout 'application'
 
   #before_action :require_doctor, only: [:updateVital, :editVital]
   protect_from_forgery unless: -> { request.format.html? }
@@ -9,7 +9,6 @@ class Doctor::DoctorDetailsController < ApplicationController
     @doctor = Doctor.find(params[:id])
     @doctor_types=DoctorType.sorted
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
-    render ('/doctors/edit')
   end
 
   #update doctor details
@@ -33,6 +32,6 @@ class Doctor::DoctorDetailsController < ApplicationController
   private
   def doctor_params
     params.require(:doctor).permit(:full_name, :first_name, :middle_name, :last_name,
-                                    :telephone, :doctor_type_id, :email, :gender)
+                                   :telephone, :doctor_type_id, :email, :gender)
   end
 end

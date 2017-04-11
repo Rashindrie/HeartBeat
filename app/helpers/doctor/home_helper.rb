@@ -1,0 +1,2 @@
+module Doctor::HomeHelper
+end

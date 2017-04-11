@@ -1,2 +1,0 @@
-module Appointment::VitalsHelper
-end

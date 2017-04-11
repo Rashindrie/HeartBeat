@@ -1,11 +1,10 @@
 class Staff::StaffDetailsController < ApplicationController
-  layout 'staff'
+  layout 'application'
   protect_from_forgery unless: -> { request.format.html? }
 
 
   def edit
     @staff = Staff.find(params[:id])
-    render ('/staffs/edit')
   end
 
   def update
@@ -30,7 +29,7 @@ class Staff::StaffDetailsController < ApplicationController
 
   def staff_params
     params.require(:staff).permit(:full_name,:first_name, :middle_name, :last_name,
-                                   :telephone, :email, :gender)
+                                  :telephone, :email, :gender)
   end
 
 

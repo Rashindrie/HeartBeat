@@ -16,7 +16,7 @@ class Doctor < ApplicationRecord
     where(:doctor_type_id => q)
   }
 
-  scope :search, lambda{|query|
+  scope :searchApp, lambda{|query|
     where(["full_name LIKE ?", "%#{query}%"])
   }
 

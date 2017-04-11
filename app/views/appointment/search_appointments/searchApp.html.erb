@@ -1,0 +1,236 @@
+<%= render partial: 'patient/sideNav'%>
+
+<main style="padding-left: 240px">
+  <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <div class="row">
+      <form class="col s12 m12 l12" action="/appointment/search" method="post">
+        <h4>Add Appointment</h4>
+
+
+        <div class="divider"></div><br>
+
+
+
+        <div class="row">
+          <div class="col s12">
+            <i class="material-icons prefix">search</i>Search
+            <div class="input-field inline">
+
+              <div class="col s12 left aligned">
+                <input class="with-gap" name="app[d]" value="0" type="radio" id="doctor" />
+                <label for="doctor">Doctor</label>
+              </div>
+              <div class="col s12 left aligned">
+                <input class="with-gap" name="app[d]" value="1" type="radio" id="appType" />
+                <label for="appType">Appointment Type</label>
+              </div>
+              <div class="col s12 left aligned">
+                <input class="with-gap" name="app[d]" value="2" type="radio" id="appDate" />
+                <label for="appDate">Date</label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s10">
+            <div class="input-field" id="doctorSelect">
+              <select name="app[doctor_id]">
+                <option value="" disabled selected>Choose Doctor</option>
+                <% @doctor_name.each do |d| %>
+                    <option value="<%= d.id %>"><%= d.full_name %></option>
+                <% end %>
+              </select>
+
+
+              <label>Doctor</label>
+            </div>
+          </div>
+
+          <div class="col s10">
+            <div class="input-field" id="appTypeSelect">
+              <select name="app[app_type_id]">
+                <option value="" disabled selected>Choose Appointemnt Type</option>
+                <% @doctor_types.each do |d| %>
+                    <option value="<%= d.id %>"><%= d.speciality %></option>
+                <% end %>
+              </select>
+              <label>Appointment Type</label>
+            </div>
+          </div>
+
+
+            <div class="input-field col s3 l4" id="dateSelect">
+              <i class="material-icons prefix">date_range</i>
+              <label class="active" for="from_date">Date</label>
+              <input id="from_date" type="date" name="app[from_date]"  class="datepicker">
+            </div>
+
+
+
+        </div>
+
+
+       <div class="row">
+          <div class="col m2">
+            <p class="right-align"><button class="btn waves-effect waves-light" type="submit">Search</button></p>
+          </div>
+
+        </div>
+<br/>
+      </form>
+
+
+
+<% if defined? @timeslots %>
+  <% if @timeslots.blank? == false %>
+
+          <div class="row">
+            <form class="col s12 m12 l12" action="/appointment/add" method="post">
+            <div class="divider"></div>
+            <div class="col s12">
+              <table class="bordered highlight responsive-table">
+                <thead>
+                <tr>
+                  <th data-field="id">Date</th>
+                  <th data-field="name">Time Block</th>
+                  <th data-field="price">Doctor</th>
+                  <th data-field="price">Speciality</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <% @timeslots.each do |d| %>
+                  <tr>
+
+                  <td><%= d.app_date %></td>
+                  <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
+
+                              <% @doctor_name.each do |n| %>
+                                  <% if d.doctor_id == n.id %>
+                                      <td><%= "Dr. " + n.full_name %></td>
+
+                                        <% @doctor_types.each do |t| %>
+                                                <% if t.id == n.doctor_type_id %>
+                                                  <td><%= t.speciality %></td>
+                                                <% end %>
+                                          <% end %>
+
+                                  <% end %>
+                              <% end %>
+
+                    <% if ((d.to_time - d.from_time)/15.minutes).to_i > (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %>
+                    <td><button class="blue darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmApp/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
+                  <% else %>
+                  <td><button class="pink darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmList" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
+
+                    <% end %>
+
+                </tr>
+                    <div id="confirmApp/<%= d.id %>" class="modal">
+                      <div class="modal-content">
+                        <h4>Add Appointment</h4>
+                        <p>Are you sure you want to add an appointment on <%= d.app_date %> for the <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> slot?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="modal-action modal-close darken-3 btn waves-effect waves-light" onclick="window.location = '/appointment/add/<%= d.id %>'" type="button">Confirm</button>
+                      </div>
+                    </div>
+                <% end %>
+
+                </tbody>
+              </table>
+            </div>
+            </form>
+          </div>
+
+
+  <% else %>
+<p>
+  <%= @date.present? ? "There are no available time slots for #{@date}" : " "  %></option>
+  <%= @doctor.present? ? "There are no available time slots for given doctor" : " "  %></option>
+  <%= @app_type.present? ? "There are no available time slots for given appointment type" : " "  %></option>
+</p>
+  <% end %>
+
+
+<% end %>
+
+
+
+
+
+
+    </div>
+
+
+    <div id="confirmList" class="modal">
+      <div class="modal-content">
+        <h4>Add to Waiting List</h4>
+        <p>Are you sure you want to add to waiting list?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Confirm</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $('#doctorSelect').hide();
+          $('#appTypeSelect').hide();
+          $('#dateSelect').hide();
+
+          $('select').material_select();
+          $('.modal').modal();
+          //$('select').material_select('destroy');
+
+          $('.scrollspy').scrollSpy();
+          $('.datepicker').pickadate({
+
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+
+              min: new Date(),
+              format: 'yyyy-mm-dd',
+              closeOnSelect: true,
+              onSet: function (ele) {
+                  if (ele.select) {
+                      this.close();
+                  }
+              }
+          });
+
+          $('input[type="radio"]').click(function() {
+              if($(this).attr('id') == 'doctor') {
+                  $('#doctorSelect').show();
+                  $('#appTypeSelect').hide();
+                  $('#dateSelect').hide();
+              }
+              else{
+                  if($(this).attr('id') == 'appType') {
+                      $('#doctorSelect').hide();
+                      $('#appTypeSelect').show();
+                      $('#dateSelect').hide();
+                  }
+                  else{
+                      if($(this).attr('id') == 'appDate') {
+                          $('#doctorSelect').hide();
+                          $('#appTypeSelect').hide();
+                          $('#dateSelect').show();
+                      }
+                  }
+              }
+          });
+      });
+
+
+
+
+
+  </script>
+</main>

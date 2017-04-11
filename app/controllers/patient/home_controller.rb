@@ -1,10 +1,9 @@
 class Patient::HomeController < ApplicationController
-  layout 'patient'
+  layout 'application'
   protect_from_forgery unless: -> { request.format.html? }
 
-  def show
+  def home
     @patient = Patient.find(params[:id])
-    render('patients/home')
   end
 
 

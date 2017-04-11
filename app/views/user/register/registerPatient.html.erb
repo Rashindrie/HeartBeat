@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+      $(document).ready(function() {
+
+          $('.scrollspy').scrollSpy();
+
+          $('.modal').modal();
+
+          $('.datepicker').pickadate(
+              {
+                  selectYears: 100,
+                  selectMonths: true,
+                  max: new Date(),
+                  closeOnSelect: true,
+                  onSet: function (ele) {
+                      if (ele.select) {
+                          this.close();
+                      }
+                  }
+              });
+      });
+
+  </script>
+</head>
+<body >
+<header>
+  <div class="navbar-fixed">
+    <nav class="white-text">
+
+      <div class="nav-wrapper white-text" style="font-family: Trajan Pro">
+
+        <ul class="left " style="height: 80px; width: 170px; padding-top: 5px">
+          <img class="responsive-img"
+          <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
+
+        </ul>
+        <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
+        <ul class="right hide-on-med-and-down">
+          <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
+
+          <li class="active"><a href="/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
+
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+<main>
+  <% if !flash[:notice].blank? %>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+  <% end %>
+  <div style="width:100%;height:100%;position: relative;">
+    <div class="" style="width:100%;">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m9 offset-m2">
+            <form class="card z-depth-4" action="/signup" method="post" style="top: 15px ">
+
+              <div class="card-image col s3" style="width: 100%">
+
+                <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
+
+              </div>
+              <div class="card-content">
+                <span class="card-title">Sign Up</span>
+
+                <input id="role" type="hidden" name= "session[role]" value="1">
+                <div class="section">
+
+                  <div id="personal"  class="section scrollspy">
+                    <div class="row">
+
+                      <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="full_name" type="text" name="session[full_name]" class="validate">
+                        <label for="full_name" >Full Name</label>
+                      </div>
+
+
+                   </div>
+                    <div class="row">
+
+                      <div class="input-field col s12 m6 l4">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="first_name" type="text" name="session[first_name]" class="validate">
+                        <label for="first_name" >First Name</label>
+                      </div>
+
+                      <div class="input-field col s12 m6 l4">
+                        <input id="middle_name" type="text" name="session[middle_name]" class="validate">
+                        <label for="middle_name" >Middle Name</label>
+                      </div>
+
+                      <div class="input-field col s12 m6 l4">
+                        <input id="last_name" type="text" name="session[last_name]" class="validate">
+                        <label for="last_name">Last Name</label>
+                      </div>
+
+                    </div>
+
+
+
+                    <div class="row">
+                      <div class="col s12">
+                        <i class="material-icons prefix">wc</i>
+                        <div class="col s12">
+                          <div class="col s6 left aligned">
+                            <input class = 'with-gap' name="session[gender]" value="0" type="radio" id="male" checked="checked" />
+                            <label for="male">Male</label>
+                          </div>
+                          <div class="col s6 left aligned">
+                            <input class = 'with-gap' name="session[gender]" value="1" type="radio" id="female" />
+                            <label for="female">Female</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <br>
+
+
+                    <div class="row">
+
+                      <div class="input-field col s12 l5">
+                        <i class="material-icons prefix">today</i>
+
+                        <input id="date_of_birth" value="" type="date" name="session[date_of_birth]" class="datepicker">
+                        <label class="active" for="date_of_birth">Date of Birth</label>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div class="divider"></div>
+
+                    <div id="contact"  class="section scrollspy">
+                      <div class="row">
+                        <div class="input-field col s12 l5">
+                          <i class="material-icons prefix">phone</i>
+                          <input id="telephone" type="tel" name="session[telephone]"  class="validate">
+                          <label for="telephone">Telephone</label>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="input-field col s12 m5">
+                          <i class="material-icons prefix">email</i>
+                          <input id="email" type="email" name="session[email]"  class="validate">
+                          <label for="email" data-error="wrong" data-success="right">Email</label>
+                        </div>
+                      </div>
+                    </div>
+
+                  <div class="divider"></div>
+                  <div class="row ">
+
+                    <div id="pwd" class="section scrollspy">
+                      <div class="row">
+                        <div class="input-field col s12 m5">
+                          <i class="material-icons prefix">lock</i>
+                          <input id="password" type="password" name="session[password]" class="validate">
+                          <label for="password">Password</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+<br />
+                          <div class="col s12">
+                            <button class="btn waves-effect waves-light col s12" type="Submit" id="submit" >Sign Up</button>
+
+                          </div>
+
+
+                  </div>
+
+
+                </div>
+              </div>
+
+            </form>
+
+
+
+
+          </div>
+          <div class="fixed col hide-on-small-only l1" style="width: 16.6666666667%">
+
+            <div class="toc-wrapper pin-top" style="top: 50px;  ">
+              <div style="height: 10px;">
+                <ul class=" section table-of-contents">
+                  <li><a href="#personal">Personal Details</a></li>
+                  <li><a href="#contact">Contact Details</a></li>
+                  <li><a href="#pwd">Authorization</a></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div></div>
+    </div></div>
+</main>
+
+
+
+
+</body>
+
+</html>
+
+

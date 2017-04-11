@@ -1,0 +1,113 @@
+<%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
+<script type="text/javascript">
+    document.addEventListener("turbolinks:load", function() {
+        $('select').material_select();
+
+        $('.datepicker').pickadate({
+
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 1, // Creates a dropdown of 15 years to control year
+            min: new Date(),
+            closeOnSelect: true,
+            onSet: function (ele) {
+                if (ele.select) {
+                    this.close();
+                }
+            }
+        });
+
+        $('input.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+    });
+
+</script>
+
+<div style="padding-left: 240px">
+  <div class="container " style="width: 85%">
+
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+
+    <h4>Add Availability</h4>
+    <div class="divider"></div><br>
+
+
+    <div class="row">
+
+      <div class="col s12" >
+        <form class="card z-depth-2" action="/timeslot/add/<%= params[:id]%>" method="post" style="">
+          <div class="card-content ">
+
+              <div class="row">
+                <div class="col s6">
+                  <div class="input-field">
+                    <i class="material-icons prefix">person_pin</i>
+                    <select name="time_slot[doctor_id]">
+                      <option value="" disabled selected>Select Doctor</option>
+                      <% @doctors.each do |d| %>
+                          <option value="<%= d.id %>"><%= d.first_name + " " + d.last_name %></option>
+                      <% end %>
+                    </select>
+
+                    <label>Name of Doctor</label>
+                  </div>
+                </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">date_range</i>
+                    <label class="active" for="date_from">Date</label>
+                    <input id="date" value="" type="date" name="time_slot[app_date]" class="datepicker">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">schedule</i>
+                    <label class="active" for="from_time">From Time</label>
+                    <input type="time" name="time_slot[from_time]" class="timepicker">
+
+                  </div>
+
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">schedule</i>
+                    <label class="active" for="to_time">To Time</label>
+                    <input type="time" name="time_slot[to_time]" class="timepicker">
+                  </div>
+                </div>
+
+                <div class="divider"></div><br>
+            <div class="row">
+
+              <div class="col s3">
+                <button class="btn waves-effect waves-light" type="Submit">Add Time Slot</button>
+              </div>
+
+
+            </div>
+
+
+
+
+
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  </div>
+
+
+                </div>

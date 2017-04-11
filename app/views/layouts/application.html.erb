@@ -29,11 +29,39 @@
     </head>
 
   <body>
+  <header>
 
-  <main>
+    <div class="navbar-fixed">
+      <nav class="white-text">
 
+        <div class="nav-wrapper white-text" style="font-family: Trajan Pro">
+          <ul class="left " style="height: 80px; width: 170px; padding-top: 5px">
+            <img class="responsive-img"
+                 <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
+            />
+          </ul>
+
+          <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
+          <ul class="right hide-on-med-and-down">
+            <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
+            <% if current_user %>
+            <li class="active"><a href="/logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+            <% else %>
+                <li class="active"><a href="/signup/patient"><i class="material-icons left">power_settings_new</i>Sign Up</a></li>
+                <li class="active"><a href="/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
+          <% end %>
+
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+
+  </header>
+
+<main>
     <%= yield %>
-  </main>
+</main>
 
   </body>
 </html>

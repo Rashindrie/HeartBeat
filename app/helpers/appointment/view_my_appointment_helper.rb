@@ -1,0 +1,2 @@
+module Appointment::ViewMyAppointmentHelper
+end

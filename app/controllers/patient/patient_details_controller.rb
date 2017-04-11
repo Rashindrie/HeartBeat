@@ -1,30 +1,29 @@
 class Patient::PatientDetailsController < ApplicationController
-   layout 'patient'
+  layout 'application'
 
-   #before_action :require_doctor, only: [:updateVital, :editVital]
+  #before_action :require_doctor, only: [:updateVital, :editVital]
 
-   protect_from_forgery unless: -> { request.format.html? }
+  protect_from_forgery unless: -> { request.format.html? }
 
-   #get edit patient details page
-   def edit
-     @patient = Patient.find(params[:id])
-     render ('/patients/edit')
-   end
+  #get edit patient details page
+  def edit
+    @patient = Patient.find(params[:id])
+  end
 
-   #update patients details
-   def update
-     @patient = Patient.find(User.find(session[:user_id]).patient_id)
+  #update patients details
+  def update
+    @patient = Patient.find(User.find(session[:user_id]).patient_id)
 
-     if @patient.update_attributes(patient_params)
-       flash[:notice] = "patient updated successfully."
-       redirect_to :controller => 'patient/patient_details', :action => 'edit', id: @patient.id
+    if @patient.update_attributes(patient_params)
+      flash[:notice] = "patient updated successfully."
+      redirect_to :controller => 'patient/patient_details', :action => 'edit', id: @patient.id
 
-     else
-       flash[:notice] = "Update unsuccessful."
-       @id = params[:id]
-       render :action => '/patient/profile'
-     end
-   end
+    else
+      flash[:notice] = "Update unsuccessful."
+      @id = params[:id]
+      render :action => '/patient/profile'
+    end
+  end
 
 
 

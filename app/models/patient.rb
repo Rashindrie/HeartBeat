@@ -7,6 +7,6 @@ class Patient < ApplicationRecord
   validates_presence_of :full_name
 
   scope :newest_first, -> { order("created_at DESC").limit(1)}
-  #scope :search, -> {|query| where(["name LIKE ?", "%#{query}%"])}
+  #scope :searchApp, -> {|query| where(["name LIKE ?", "%#{query}%"])}
 
 end

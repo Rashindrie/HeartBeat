@@ -21,10 +21,10 @@ class DoctorTest < ActiveSupport::TestCase
          :first_name => doctors(:one).first_name, 
          :middle_name => doctors(:one).middle_name, 
          :last_name => doctors(:one).last_name, 
-	 :gender => doctors(:one).gender, 
-	 :doctor_type_id => doctors(:one).doctor_type_id, 
-	 :email => doctors(:one).email, 
-	 :telephone => doctors(:one).telephone
+				 :gender => doctors(:one).gender,
+				 :doctor_type_id => doctors(:one).doctor_type_id,
+				 :email => doctors(:one).email,
+				 :telephone => doctors(:one).telephone
 
 	#assertion to test that saving a doctor is successful
       assert doctor_one.save 
