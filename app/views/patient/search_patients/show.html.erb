@@ -1,0 +1,100 @@
+<%= render partial: 'doctor/sideNav'%>
+
+<main style="padding-left: 240px">
+
+  <div class="container " style="width: 85%">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+    <div class="row">
+
+      <br>
+      <div class="col s8" >
+
+    <div class="row">
+
+      <div class="col s4">
+        <div class="card  teal darken-2 z-depth-3">
+          <div class="card-content white-text">
+            <span class="card-title">View my vitals</span>
+            </div>
+          <div class="card-action">
+            <td><a href="/vital/<%= @patient.id %>">Vitals</a></td>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col s3">
+
+      </div>
+      <div class="col s4">
+        <div class="card  pink lighten-1 z-depth-3">
+          <div class="card-content white-text">
+          <strong><span class="card-title">View my recent visits</span></strong>
+          </div>
+          <div class="card-action">
+            <td><a href="/visit/<%= @doctor.id %>/<%= @patient.id %>">Recent Visits</a></td>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+      </div>
+
+
+
+      <div class="col s4">
+
+
+        <div id="profile-card" class="card sticky z-depth-4" style="">
+          <div class="card-image waves-effect waves-block waves-light">
+            <br>
+
+            <%= image_tag("Heart_Beat.png", :alt => "user background") %>
+          </div>
+
+          <div class="card-content">
+            <a class="btn-floating activator btn-move-up waves-effect purple waves-light darken-2 right">
+              <i class="material-icons">account_circle</i></a>
+            <span class="card-title activator grey-text text-darken-4"><strong><%= @patient.first_name + " " + @patient.last_name %> </strong></span>
+
+            <p><i class="material-icons prefix">wc</i><%=  @patient.gender? ? "Female" : "Male" %></p>
+
+
+            <p><i class="material-icons prefix">cake</i><%= @age %> year(s)</p>
+
+          </div>
+          <div class="card-reveal" style="display: none; transform: translateY(0px);">
+            <span class="card-title grey-text text-darken-4"><%= @patient.first_name + " " + @patient.last_name %> <i class="mdi-navigation-close right"></i></span>
+            <p><i class="material-icons prefix">wc</i><%=  @patient.gender? ? "Female" : "Male" %></p>
+            <p><i class="material-icons prefix">cake</i><%= @age %> year(s)</p>
+            <p><i class="material-icons prefix">email</i><%= @patient.email %></p>
+            <p><i class="material-icons prefix">phone</i><%= @patient.telephone %></p>
+
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <%= render partial: 'patient/vitals_summary' %>
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <a class="btn waves-effect waves-light" href="/search/patients">Back to search</a>
+      </div>
+    </div>
+  </div>
+</main>

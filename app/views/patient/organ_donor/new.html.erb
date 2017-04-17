@@ -1,0 +1,195 @@
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+          $('select').material_select();
+          $('select').material_select('update');
+          $('.modal').modal();
+
+          $('.datepicker').pickadate({
+
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+
+
+
+              closeOnSelect: true,
+              closeOnClear: true
+          });
+
+          $('.sticky').pushpin({
+              top: 50,
+              bottom: 1500,
+              offset: 0,
+
+          });
+      });
+
+ </script>
+
+  <script type="text/javascript">
+      $('#submit').click(function(){
+        /* when the submit button in the modal is clicked, submit the form */
+        $('#formRegister').submit();
+      });
+  </script>
+
+
+
+
+<%= render partial: 'patient/sideNav', :locals => { :patient_id => params[:id] } %>
+
+<main style="padding-left: 240px">
+
+  <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+
+    <h4>Donor Register</h4>
+    <div class="divider"></div>
+    <div class="row">
+      <br>
+      <div class="col s10" >
+
+        <form action="/organ/donor/register/<%= @patient.id %>" method="post" id="formRegister">
+          <div class="row">
+
+            <div class="row">
+              <h5>Living Donation</h5>
+              <br>
+
+              <div class="row">
+                <div class="col s6">
+                  <p>Blood</p>
+                </div>
+
+                <div class="input-field col s6">
+                  <input type="checkbox" id="blood" checked="<%= @patient_blood.blank? ? "" : "checked" %>" name=organ[blood] class="filled-in"/>
+                  <label for="blood"></label>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col s6">
+                  <p>Organs</p>
+                </div>
+
+                <div class="input-field col s6">
+                <select id="organ_living" multiple="multiple" name="organ_living[]">
+                  <option value="" disabled selected></option>
+                  <% @organ_living.each do |ol| %>
+                      <% if @patient_organ_living.include? ol.id %>
+                        <option value="<%= ol.id %>" selected ><%= ol.name %></option>
+                      <% else %>
+                        <option value="<%= ol.id %>" ><%= ol.name %></option>
+                      <% end %>
+                  <% end %>
+                </select>
+                  <label>Select Organ(s)</label>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col s6">
+                  <p>Tissues</p>
+                </div>
+
+                <div class="input-field col s6">
+                  <select id="tissue_living" multiple="multiple" name="tissue_living[]">
+                    <option value="" disabled selected></option>
+                    <% @tissue_living.each do |tl| %>
+                        <% if @patient_tissue_living.include? tl.id %>
+                            <option value="<%= tl.id %>" selected><%= tl.name %></option>
+                        <% else %>
+                            <option value="<%= tl.id %>"><%= tl.name %></option>
+                        <% end %>
+
+                    <% end %>
+                  </select>
+                  <label>Select Tissue(s)</label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="divider"></div>
+            <br>
+            <div class="row">
+              <h5>Deceased Donation</h5>
+              <br>
+              <div class="row">
+                <div class="col s6">
+                  <p>Organs</p>
+                </div>
+
+                <div class="input-field col s6">
+                  <select id="organ_deceased" multiple="multiple" name="organ_deceased[]">
+                    <option value="" disabled selected></option>
+                    <% @organ_deceased.each do |od| %>
+                            <% if @patient_organ_deceased.include? od.id %>
+                                <option value="<%= od.id %>" selected ><%= od.name %></option>
+                            <% else %>
+                                <option value="<%= od.id %>"><%= od.name %></option>
+                            <% end %>
+                    <% end %>
+                  </select>
+                  <label>Select Organ(s)</label>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col s6">
+                  <p>Tissues</p>
+                </div>
+
+                <div class="input-field col s6">
+                  <select id="tissue_deceased" multiple="multiple" name="tissue_deceased[]">
+                    <option value="" disabled selected></option>
+                    <% @tissue_deceased.each do |td| %>
+                            <% if @patient_tissue_deceased.include? td.id %>
+                                <option value="<%= td.id %>" selected><%= td.name %></option>
+                            <% else %>
+                                <option value="<%= td.id %>"><%= td.name %></option>
+                            <% end %>
+                    <% end %>
+                  </select>
+                  <label>Select Tissue(s)</label>
+
+                </div>
+              </div>
+
+            </div>
+
+              <div id="calendar"></div>
+
+
+            <div class="divider"></div><br>
+            <div class="row">
+              <div class="col s3">
+                <button class="btn waves-effect waves-light" type="button" data-toggle="modal" data-target="confirm">Register</button>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+      <div id="confirm" class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-content">
+          <h4>Add to Organ Donor List</h4>
+          <p>This registration is a binding document. You can update or specify donation preferences at any time.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success success" type="submit" data-target="confirm" id="submit" >Agree</button>
+        </div>
+      </div>
+      </form>
+
+
+    </div>
+  </div>
+</main>
+

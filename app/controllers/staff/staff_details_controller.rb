@@ -11,11 +11,11 @@ class Staff::StaffDetailsController < ApplicationController
     @staff = Staff.find(params[:id])
 
     if @staff.update_attributes(staff_params)
-      flash[:notice] = "Doctor details updated successfully."
+      flash[:success] = "Doctor details updated successfully."
       redirect_to :controller => 'staff/staff_details', :action => 'edit', id: @staff.id
 
     else
-      flash[:notice] = "Update unsuccessful."
+      flash[:error] = "Update unsuccessful."
       @id = params[:id]
       render :action => '/staff/profile'
       #render('/patient/profile/<%= @patient.id %>')  #to get a prepolutaed form

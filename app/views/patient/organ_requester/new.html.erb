@@ -1,0 +1,111 @@
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('select').material_select();
+
+        $('.modal').modal();
+
+        $('.datepicker').pickadate({
+
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 1, // Creates a dropdown of 15 years to control year
+
+
+
+            closeOnSelect: true,
+            closeOnClear: true
+        });
+
+        $('.sticky').pushpin({
+            top: 50,
+            bottom: 1500,
+            offset: 0,
+
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+    $('#submit').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+        $('#formRegister').submit();
+    });
+</script>
+
+
+
+
+<%= render partial: 'patient/sideNav', :locals => { :patient_id => params[:id] } %>
+
+<main style="padding-left: 240px">
+
+  <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+
+    <h4>Requester Register</h4>
+    <div class="divider"></div>
+    <div class="row">
+      <br>
+
+        <form action="/organ/requester/register/<%= @patient.id %>" method="post" id="formRegister">
+                <div class="row">
+
+                <div class="col s6">
+                  <p>Select</p>
+                </div>
+
+                <div class="input-field col s6">
+                  <select id="organ" name="organ[organ_id]">
+                    <option value="" disabled selected></option>
+                    <% @organ.each do |od| %>
+                            <option value="<%= od.id %>"><%= od.name %></option>
+                    <% end %>
+                  </select>
+                  <label>Select your option</label>
+
+                </div>
+              </div>
+
+
+
+
+            <div class="row" style="margin-top: 2.5cm;">
+
+
+              <div class="col s9">
+                <a class="btn waves-effect waves-light" href="/organ/requester/<%= @patient.id %>">Back</a>
+              </div>
+
+              <div class="col s3">
+                <button class="btn waves-effect waves-light" type="button" data-toggle="modal" data-target="confirm">Register</button>
+              </div>
+            </div>
+          </div>
+
+
+
+      <div id="confirm" class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-content">
+          <h4>Add to Organ Requester List</h4>
+          <p>Once submitted, you will not get the chance to modify requests.
+            This registration will be submitted to be approved by a doctor before being considered as a valid entry.
+            Registering with the system therefore requires an authenticated doctor validating the request.
+            Until such time, the request will not be considered when matching donor and requester facilities.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success success" type="submit" data-target="confirm" id="submit" >Agree</button>
+        </div>
+      </div>
+      </form>
+
+
+
+    </div>
+  </div>
+</main>
+

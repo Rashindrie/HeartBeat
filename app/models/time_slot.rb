@@ -16,5 +16,7 @@ class TimeSlot < ApplicationRecord
       where("from_time < ?", to_time).where("to_time > ?", from_time).from_date(date).from_doctor(doctor_id).count
   }
 
-
+  def start_time
+    app_date.to_datetime
+  end
 end

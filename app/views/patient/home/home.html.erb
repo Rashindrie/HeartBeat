@@ -8,5 +8,15 @@
     <br/><br/><br/>
     <h5>Welcome to your personalised Patient Doctor Management System </h5>
 
+    <div class="row">
+    <div class="col s6">
+      <%= render partial: 'patient/appointment_summary', :locals => { :app_scheduled => @app_scheduled, :app_cancelled => @app_cancelled, :wl => @wl }  %>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col s12">
+      <%= render partial: 'patient/vitals_summary' %>
+    </div>
+    </div>
   </div>
 </main>

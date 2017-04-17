@@ -1,0 +1,2 @@
+module Patient::OrganDonorHelper
+end

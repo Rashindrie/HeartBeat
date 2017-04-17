@@ -16,10 +16,13 @@
 
     <li class="bold active"><a class="waves-effect waves-teal" href="/patient/home/<%= @patient.id %>">Home</a></li>
     <li class="active"><a class="waves-effect waves-teal" href="/patient/profile/<%= @patient.id %>">My Profile</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/appointment/search">Search Appointment</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="#!">View my Appointments</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/appointment/search">Search Appointments</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/patient/appointments/<%= @patient.id %>">My Appointments</a></li>
     <li class="active"><a class="waves-effect waves-teal" href="/patient/vital/<%= @patient.id %>">My Vitals</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/patient/vital/<%= @patient.id %>">Recent Visits</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/visits/<%= @patient.id %>">Recent Visits</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/organ/donor/<%= @patient.id %>">Organ Donations</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="/organ/requester/<%= @patient.id %>">Organ Requests</a></li>
+
 
 
   </ul>

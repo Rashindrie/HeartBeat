@@ -1,0 +1,274 @@
+<% if current_user && current_user.doctor? %>
+    <%= render partial: 'doctor/sideNav' %>
+<% else %>
+    <%= render partial: 'patient/sideNav' %>
+<% end %>
+<main style="padding-left: 240px">
+  <div class="container " style="width: 85%">
+    <div class="row">
+      <h4>Recent Visits</h4>
+      <div class="divider"></div>
+<br/>
+
+      <% if current_user && current_user.doctor? %>
+      <div class="col s8" >
+        <% else %>
+          <div class="clo s12">
+            <%end %>
+        <% if defined? @visits %>
+            <% if @visits.blank? == false %>
+                <ul class="collapsible popout" data-collapsible="expandable">
+              <% if @count == 1  %>
+                <% Array(@visits).each do |v| %>
+
+                      <li>
+                        <div class="collapsible-header"><i class="material-icons">event_note</i><%= v.created_at.to_s(:long_ordinal) %></div>
+                        <div class="collapsible-body">
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="date">Created On</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.created_at.to_date %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="time">Created At</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.created_at.to_s(:time) %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="doctor">Created By</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <% @doctors.each do |doctor| %>
+                                  <% if doctor.id == v.doctor_id %>
+                                      <p><%= doctor.first_name + " " + doctor.last_name %></p>
+                                  <% end %>
+                              <% end %>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="problem">Problems and Complaints</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.problems_complaints %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="diagnosis">Diagnosis</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.diagnosis %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="drug">Prescribed Drugs</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.drugs %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="remark">Remarks</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%=  v.remarks.blank? ? "None" : v.remarks %></p>
+
+                            </div>
+                          </div>
+
+
+                        </div>
+                      </li>
+
+                <% end %>
+
+              <% else %>
+                  <% @visits.each do |v| %>
+                      <li>
+                        <div class="collapsible-header"><i class="material-icons">event_note</i><%= v.created_at.to_s(:long_ordinal) %></div>
+                        <div class="collapsible-body">
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="date">Created On</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.created_at.to_date %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="time">Created At</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.created_at.to_s(:time) %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="doctor">Created By</p>
+                            </div>
+                            <div class="col s12 l5">
+                              <% @doctors.each do |doctor| %>
+                                  <% if doctor.id == v.doctor_id %>
+                                      <p><%= doctor.first_name + " " + doctor.last_name %></p>
+                                  <% end %>
+                              <% end %>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="problem">Problems and Complaints</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.problems_complaints %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="diagnosis">Diagnosis</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.diagnosis %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="drug">Prescribed Drugs</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%= v.drugs %></p>
+
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col s6">
+                              <p for="remark">Remarks</p>
+                            </div>
+                            <div class="col s12 l5">
+
+                              <p><%=  v.remarks.blank? ? "None" : v.remarks %></p>
+
+                            </div>
+                          </div>
+
+
+                        </div>
+                      </li>
+                  <% end %>
+              <% end %>
+            </ul>
+                <br/>
+            <% end %>
+
+       <% end %>
+
+
+
+            <br><br>
+
+
+
+      </div>
+
+      <% if current_user && current_user.doctor? %>
+      <div class="col s4">
+
+
+        <div id="profile-card" class="card sticky-action z-depth-4">
+          <div class="card-image waves-effect waves-block waves-light">
+            <br>
+
+            <%= image_tag("Heart_Beat.png", :alt => "user background") %>
+          </div>
+
+          <div class="card-content">
+            <a class="btn-floating activator btn-move-up waves-effect purple waves-light darken-2 right">
+              <i class="material-icons">account_circle</i></a>
+            <span class="card-title activator grey-text text-darken-4"><strong>Roger Waters</strong></span>
+            <p><i class="material-icons prefix">wc</i>Male</p>
+            <p><i class="material-icons prefix">cake</i>21 year(s)</p>
+
+          </div>
+          <div class="card-reveal" style="display: none; transform: translateY(0px);">
+            <span class="card-title grey-text text-darken-4">Roger Waters <i class="mdi-navigation-close right"></i></span>
+            <p><i class="material-icons prefix">wc</i>Male</p>
+            <p><i class="material-icons prefix">cake</i>21 year(s)</p>
+            <p><i class="material-icons prefix">email</i>roger@waters.com</p>
+            <p><i class="material-icons prefix">phone</i>+94 77 3831036</p>
+
+          </div>
+        </div>
+
+      </div>
+        <br/>
+          <div class="divider"></div>
+          <div class="row">
+            <br/>
+            <div class="left-aligned col s5">
+              <a class="btn waves-effect waves-light" href="/search/patients">Back to Search</a>
+            </div>
+
+            <div class="left-aligned col s4">
+              <a class="btn waves-effect waves-light" href="/visit/new/<%= @doctor.id %>/<%= @patient.id %>">Add New Visit</a>
+            </div>
+
+          </div>
+
+      <% end %>
+    </div>
+
+
+
+  </div>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+  </script>
+</main>

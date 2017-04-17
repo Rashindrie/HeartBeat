@@ -2,8 +2,10 @@ class Doctor < ApplicationRecord
   has_one :user
   belongs_to :doctor_type
   has_many :vitals
+  has_many :visits
   has_many :appointments
   has_many :time_slots
+  has_many :organs_requester_patients
 
   validates_presence_of :full_name
   validates_presence_of :first_name

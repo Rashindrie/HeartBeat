@@ -1,0 +1,93 @@
+<%= render partial: 'patient/sideNav'%>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+            $('select').material_select();
+            $('.modal').modal();
+
+        });
+</script>
+<main style="padding-left: 240px">
+  <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <div class="row">
+      <form class="col s12 m12 l12" action="/appointment/search" method="post">
+        <h4>Appointment</h4>
+
+
+        <div class="divider"></div><br>
+        <div class="row">
+          <div class="col s12">
+            <table class="highlight responsive-table">
+              <tbody>
+              <% @appointments.each do |d| %>
+              <tr>
+                <th data-field="time">Date</th>
+                <td><%= d.app_date %></td>
+              </tr>
+
+              <tr>
+                <th data-field="time">Time Slot</th>
+                <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
+              </tr>
+
+              <tr>
+                <th data-field="time">Doctor Name</th>
+                <td><%= d.first_name + " " + d.last_name %></td>
+              </tr>
+                  <tr>
+                    <th data-field="time">Status</th>
+                    <% if d.status == true %>
+                        <td><%= "Scheduled" %></td>
+                    <% else %>
+                        <td><%= "Cancelled" %></td>
+                    <% end %>
+                  </tr>
+
+                  <tr>
+
+                    <% if d.status == true && d.app_date.past? == false && d.app_date.today? == false %>
+                        <th data-field="time">Action</th>
+                        <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmModal"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" id="confirmModal" type="button" style="background-color: red"><i class="material-icons prefix">close</i></button></td>
+                    <% else %>
+
+                    <% end %>
+                  </tr>
+
+                  <div id="confirmModal" class="modal">
+                    <div class="modal-content">
+                      <h4>Cancel Appointment</h4>
+                      <p>Are you sure you want to cancel the appointment on <%= d.app_date %> for the <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> slot?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="modal-action modal-close darken-3 btn waves-effect waves-light" onclick="window.location = '/appointment/delete/<%= @patient.id %>/<%= d.app_id %>'" type="button">Confirm</button>
+                    </div>
+                  </div>
+
+            <% end %>
+                        </tbody>
+                      </table>
+                  </div>
+
+        </div>
+
+        <br/>
+        <div class="row">
+            <div class="col s3">
+            <a class="btn waves-effect waves-light" href="/patient/appointments/<%= @patient.id %>">Back</a>
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col s12">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</main>

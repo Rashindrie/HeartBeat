@@ -1,6 +1,6 @@
 class VitalController < ApplicationController
 
-  layout 'doctor'
+  layout 'application'
 
   protect_from_forgery unless: -> { request.format.html? }
 
@@ -63,10 +63,10 @@ class VitalController < ApplicationController
 
 
     if @vital.save
-      flash[:notice] = "patient updated successfully."
+      flash[:success] = "Vitals updated successfully."
       redirect_to :controller => 'vital', :action => 'show', :id => params[:id]
     else
-      flash[:notice] = "Update unsuccessful."
+      flash[:error] = "Update unsuccessful."
       @id = params[:id]
       redirect_to :controller => 'vital', :action => 'edit', :id => params[:id]
     end

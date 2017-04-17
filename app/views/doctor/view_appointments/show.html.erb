@@ -1,6 +1,9 @@
 <%= render partial: 'doctor/sideNav'%>
 
 <main style="padding-left: 240px"><div class="container " style="width: 85%">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
     <div class="row">
       <form class="col s12 m12 l12" action="/view/appointments" method="post">
         <h4>View Appointments</h4>
@@ -47,7 +50,7 @@
               <tr>
                 <td><%= d.app_date %></td>
                 <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
-                <td><a href="/vital/<%= d.patient_id %>">View Patient Profile</a></td>
+                <td><a href="/search/patients/<%= @doctor.id %>/<%= d.patient_id %>"><%= d.first_name + " " + d.last_name %></a></td>
                 <% if d.registered == false %>
                 <td>Non Registered</td>
                 <% else %>

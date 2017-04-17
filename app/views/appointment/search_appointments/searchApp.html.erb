@@ -123,12 +123,20 @@
                                   <% end %>
                               <% end %>
 
-                    <% if ((d.to_time - d.from_time)/15.minutes).to_i > (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %>
-                    <td><button class="blue darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmApp/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
-                  <% else %>
-                  <td><button class="pink darken-3 btn waves-effect waves-light btn tooltipped" data-target="confirmList" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
+                  <% if @existing_app.each.include? d.id %>
 
-                    <% end %>
+                            <td><%= "Scheduled" %></td>
+                  <% else %>
+                            <% if ((d.to_time - d.from_time)/15.minutes).to_i > (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %>
+                                <td><button class="blue darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="confirmApp/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
+                            <% else %>
+                                <td><button class="pink darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="confirmList/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
+
+                            <% end %>
+
+                  <% end %>
+
+
 
                 </tr>
                     <div id="confirmApp/<%= d.id %>" class="modal">
@@ -138,6 +146,16 @@
                       </div>
                       <div class="modal-footer">
                         <button class="modal-action modal-close darken-3 btn waves-effect waves-light" onclick="window.location = '/appointment/add/<%= d.id %>'" type="button">Confirm</button>
+                      </div>
+                    </div>
+
+                    <div id="confirmList/<%= d.id %>" class="modal">
+                      <div class="modal-content">
+                        <h4>Add to Waiting List</h4>
+                        <p>Are you sure you want to add to waiting list on <%= d.app_date %> for the <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> slot?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="modal-action modal-close darken-3 btn waves-effect waves-light" onclick="window.location = '/waitinglist/add/<%= @patient.id %>/<%= d.id %>'" type="button">Confirm</button>
                       </div>
                     </div>
                 <% end %>
@@ -167,16 +185,6 @@
 
     </div>
 
-
-    <div id="confirmList" class="modal">
-      <div class="modal-content">
-        <h4>Add to Waiting List</h4>
-        <p>Are you sure you want to add to waiting list?</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Confirm</a>
-      </div>
-    </div>
   </div>
 
   <script type="text/javascript">

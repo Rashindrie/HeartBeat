@@ -1,6 +1,9 @@
 <%= render partial: 'doctor/sideNav', :locals => { :doctor_id => params[:id] } %>
 <main style="padding-left: 240px">
   <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
     <br/><br/><br/>
     <h5>Welcome to your personalised Patient Doctor Management System </h5>
 

@@ -1,5 +1,14 @@
 <%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
 
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+        });
+    });
+</script>
+
+
 <main style="padding-left: 240px">
 
   <div class="container">
@@ -7,7 +16,14 @@
         <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
     <br/><br/><br/>
-    <h5>Welcome to your personalised Patient Doctor Management System </h5>
 
+    <div id="calendar"></div>
+
+    <br/><br/>
+
+
+    <%= month_calendar events: @events do |day| %>
+        <%= day %>
+    <% end %>
   </div>
 </main>

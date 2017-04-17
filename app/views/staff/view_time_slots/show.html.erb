@@ -127,12 +127,12 @@
                             <% end %>
                             <td class="center"><%= (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %></td>
                             <% if d.app_date.past? == false %>
-                                <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmModal"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" id="addAppointment" type="button" name="action" style="background-color: red"><i class="material-icons prefix">close</i></button></td>
+                                <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmModal"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" id="cancelAppointment" type="button" name="action" style="background-color: red"><i class="material-icons prefix">close</i></button></td>
                           <% end %>
                                 </tr>
                           <div id="confirmApp/<%= d.id %>" class="modal">
                             <div class="modal-content">
-                              <h4>Add Appointment</h4>
+                              <h4>Cancel Appointment</h4>
                               <p>Are you sure you want to cancel the timeslot <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> on <%= d.app_date %> ?</p>
                             </div>
                             <div class="modal-footer">

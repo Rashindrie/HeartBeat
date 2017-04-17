@@ -13,18 +13,9 @@
         <div class="divider"></div><br>
 
         <div class="row">
-          <div class="col s3">
-            <div class="input-field" id="searchField">
-              <select>
 
-                <option value="1">Last name</option>
-                <option value="3">First Name</option>
-              </select>
-              <label>Search</label>
-            </div>
-          </div>
-          <div class="input-field col s6">
-            <label for="searchOn"></label>
+          <div class="input-field col s12">
+            <label for="searchOn">Search</label>
             <input type="text" id="searchOn" class="autocomplete" >
           </div>
         </div>
@@ -33,10 +24,13 @@
         <div class="row">
           <div class="col s12">
 
-            <table class="bordered highlight responsive-table">
+            <table id="datatable" class="mdl-data-table" cellspacing="0" width="100%">
               <thead>
               <tr>
                 <th data-field="name">Name</th>
+                <th data-field="name">View Profile</th>
+                <th data-field="name">View Vitals</th>
+                <th data-field="name">View visits</th>
               </tr>
               </thead>
 
@@ -44,7 +38,9 @@
               <% @patients.each do |d| %>
               <tr>
                 <td><%= d.full_name %></td>
-                <td><a href="/vital/<%= d.id %>">View Details</a></td>
+                <td><a href="/search/patients/<%= @doctor.id %>/<%= d.id %>">Profile</a></td>
+                <td><a href="/vital/<%= d.id %>">Vitals</a></td>
+                <td><a href="/visit/<%= @doctor.id %>/<%= d.id %>">Recent Visits</a></td>
               </tr>
               <% end %>
               </tbody>
@@ -56,4 +52,16 @@
       </form>
     </div>
   </div>
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('#datatable').DataTable( {
+              columnDefs: [
+                  {
+                      targets: [ 0, 1, 2 ],
+                      className: 'mdl-data-table__cell--non-numeric'
+                  }
+              ]
+          } );
+      } );
+  </script>
 </main>

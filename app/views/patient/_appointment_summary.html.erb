@@ -1,0 +1,41 @@
+<head>
+  <style>
+    .vertical-center {
+      min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+      min-height: 100vh; /* These two lines are counted as one :-)       */
+      display: flex;
+      align-items: center;}
+  </style>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+              ['Appointments', 'Count'],
+              ['Scheduled',     <%= @app_scheduled %>],
+              ['Cancelled',      <%= @app_cancelled %>],
+              ['Waiting List',      <%= @wl %>],
+          ]);
+          var options = {
+              title: 'Appointment Summary',
+              is3D: true,
+          };
+          var chart = new google.visualization.PieChart(document.getElementById('piechart_appointment_summary'));
+          chart.draw(data, options);
+      }
+  </script>
+</head>
+
+
+
+
+<br />
+      <div class="col s2 card-panel" style="width: 550px; height: 380px;" >
+
+
+        <div id="piechart_appointment_summary" style="height: 350px;" ></div>
+
+      </div>
+

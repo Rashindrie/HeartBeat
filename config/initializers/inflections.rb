@@ -14,3 +14,10 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.irregular 'organs_requester_patient', 'organs_requester_patients'
+end
+
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.irregular 'organs_donor_patient', 'organs_donor_patients'
+end

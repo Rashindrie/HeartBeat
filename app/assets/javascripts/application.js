@@ -12,7 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+// require dataTables/jquery.dataTables
 //= require turbolinks
 //= require_tree .
 //= require materialize-sprockets
 //= require primary
+//= require moment
+//= require fullcalendar
+//= require fullcalendar/gcal
+

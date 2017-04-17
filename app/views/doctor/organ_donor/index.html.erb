@@ -1,0 +1,146 @@
+<%= render partial: 'doctor/sideNav', :locals => { :doctor_id => params[:id] } %>
+
+
+<main style="padding-left: 240px">
+  <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <div class="row">
+      <form class="col s12 m12 l12" action="/doctor/donor/search/<%= @doctor.id %>" method="post">
+        <h4>Organ Donor</h4>
+
+
+        <div class="divider"></div><br>
+
+
+
+        <div class="row">
+          <div class="col s12">
+            <i class="material-icons prefix">search</i>Search
+            <div class="input-field inline">
+
+              <div class="col s12 left aligned">
+                <input class="with-gap" name="app[d]" value="0" type="radio" id="allTypes" />
+                <label for="allTypes">All</label>
+              </div>
+              <div class="col s12 left aligned">
+                <input class="with-gap" name="app[d]" value="1" type="radio" id="selectType" />
+                <label for="selectType">Specific Category</label>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s10">
+            <div class="input-field" id="organSelect">
+              <select name="organ[organ_id]">
+                <option value="" disabled selected>Choose option</option>
+                <% @organs.each do |d| %>
+                    <option value="<%= d.id %>"><%= d.name %></option>
+                <% end %>
+              </select>
+
+
+              <label>Select Category</label>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <div class="col m2">
+            <p class="right-align"><button class="btn waves-effect waves-light" type="submit">Search</button></p>
+          </div>
+
+        </div>
+        <br/>
+      </form>
+
+
+
+      <% if defined? @searchResults %>
+          <% if @searchResults.blank? == false %>
+
+              <div class="row">
+                <form class="col s12 m12 l12" action="/organ/donor/search/<%= @doctor.id %>" method="post">
+                  <div class="divider"></div>
+                  <div class="col s12">
+                    <table class="bordered highlight responsive-table">
+                      <thead>
+                      <tr>
+                        <th data-field="id">Category</th>
+                        <th data-field="name">Patient</th>
+
+                      </tr>
+                      </thead>
+
+                      <tbody>
+                      <% @searchResults.each do |d| %>
+                          <tr>
+                            <td><%= d[0] %></td>
+                            <td><a href="/search/patients/<%= @doctor.id %>/<%= d[3] %>"><%= d[1].to_s+ " " + d[2].to_s %></a></td>
+                          </tr>
+
+                      <% end %>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </form>
+              </div>
+
+
+          <% else %>
+              <p>
+
+                <%= @searchResults.present? ? "There are no available donors registered" : " " %></option>
+
+              </p>
+          <% end %>
+
+
+      <% end %>
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+          $('#organSelect').hide();
+
+
+          $('select').material_select();
+          $('.modal').modal();
+          //$('select').material_select('destroy');
+
+          $('.scrollspy').scrollSpy();
+
+
+          $('input[type="radio"]').click(function() {
+              if($(this).attr('id') == 'selectType') {
+                  $('#organSelect').show();
+
+              }
+              else{
+                  $('#organSelect').hide();
+              }
+          });
+      });
+
+
+
+
+
+  </script>
+</main>

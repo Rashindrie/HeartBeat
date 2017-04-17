@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410085343) do
+ActiveRecord::Schema.define(version: 20170417074225) do
 
   create_table "appointments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "time_slot_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170410085343) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.boolean  "registered",   null: false
+    t.boolean  "status",       null: false
   end
 
   create_table "doctor_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -37,6 +38,34 @@ ActiveRecord::Schema.define(version: 20170410085343) do
     t.string   "email",          null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "organs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name",              limit: 20, null: false
+    t.boolean  "living_donation",              null: false
+    t.boolean  "deceased_donation",            null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "category",                     null: false
+  end
+
+  create_table "organs_donor_patients", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "organ_id"
+    t.integer "patient_id"
+    t.boolean "category",   null: false
+    t.index ["organ_id", "patient_id"], name: "organs_donor_patients_index", unique: true, using: :btree
+    t.index ["organ_id"], name: "index_organs_donor_patients_on_organ_id", using: :btree
+    t.index ["patient_id"], name: "index_organs_donor_patients_on_patient_id", using: :btree
+  end
+
+  create_table "organs_requester_patients", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "organ_id"
+    t.integer "patient_id"
+    t.integer "doctor_id"
+    t.integer "status",     null: false
+    t.index ["organ_id", "patient_id"], name: "organs_requester_patients_index", unique: true, using: :btree
+    t.index ["organ_id"], name: "index_organs_requester_patients_on_organ_id", using: :btree
+    t.index ["patient_id"], name: "index_organs_requester_patients_on_patient_id", using: :btree
   end
 
   create_table "patients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -85,6 +114,17 @@ ActiveRecord::Schema.define(version: 20170410085343) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "visits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "patient_id"
+    t.integer  "doctor_id"
+    t.string   "problems_complaints"
+    t.string   "diagnosis"
+    t.string   "drugs"
+    t.string   "remarks"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
   create_table "vitals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "patient_id"
     t.integer  "doctor_id"
@@ -98,6 +138,14 @@ ActiveRecord::Schema.define(version: 20170410085343) do
     t.float    "bld_pressure", limit: 24
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "waiting_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "time_slot_id"
+    t.integer  "patient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.boolean  "registered",   null: false
   end
 
 end

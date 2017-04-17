@@ -160,6 +160,9 @@
 
        <div class="row">
           <% if current_user && current_user.doctor? %>
+             <div class="left-aligned col s8">
+               <a class="btn waves-effect waves-light" href="/search/patients">Back to Search</a>
+             </div>
           <div class="col s3">
             <a class="btn waves-effect waves-light"  href="/vital/edit/<%= @patient.id %>">Update Vitals</a>
           </div>
@@ -181,7 +184,7 @@
           </div>
 
           <div class="card-content">
-            <a class="btn-floating halfway-fab waves-effect waves-light orange activator card-profile-image">
+            <a class="btn-floating activator btn-move-up waves-effect purple waves-light darken-2 right">
               <i class="material-icons">account_circle</i></a>
             <span class="card-title activator grey-text text-darken-4"><strong><%= @patient.first_name + " " + @patient.last_name %> </strong></span>
 

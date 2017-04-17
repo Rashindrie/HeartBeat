@@ -1,0 +1,2 @@
+module Patient::OrgansControllerHelper
+end

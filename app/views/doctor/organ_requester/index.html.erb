@@ -1,0 +1,182 @@
+<%= render partial: 'doctor/sideNav', :locals => { :doctor_id => params[:id] } %>
+
+<script type="text/javascript">
+    $('#submit1').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+        $('#searchDB').submit();
+    });
+    $('#submit2').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+        $('#setStatus').submit();
+    });
+</script>
+
+<main style="padding-left: 240px">
+  <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <div class="row">
+      <form class="col s12 m12 l12" id="searchDB" action="/doctor/requester/search/<%= @doctor.id %>" method="post">
+        <h4>Organ Requesters</h4>
+
+
+        <div class="divider"></div><br>
+
+
+
+        <div class="row">
+          <div class="col s12">
+            <i class="material-icons prefix">search</i>Search
+            <div class="input-field inline">
+
+              <div class="col s12 left aligned">
+                <input class="with-gap" name="app[d]" value="0" type="radio" id="allTypes" />
+                <label for="allTypes">All</label>
+              </div>
+              <div class="col s12 left aligned">
+                <input class="with-gap" name="app[d]" value="1" type="radio" id="selectType" />
+                <label for="selectType">Specific Category</label>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s10">
+            <div class="input-field" id="organSelect">
+              <select name="organ[organ_id]">
+                <option value="" disabled selected>Choose option</option>
+                <% @organs.each do |d| %>
+                    <option value="<%= d.id %>"><%= d.name %></option>
+                <% end %>
+              </select>
+
+
+              <label>Select Category</label>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <div class="col s4">
+            <p><button class="btn waves-effect waves-light" id="submit1" type="submit">Search <i class="material-icons right">send</i></button></p>
+          </div>
+
+        </div>
+        <br/>
+      </form>
+
+
+
+      <% if defined? @searchResults %>
+          <% if @searchResults.blank? == false %>
+
+              <div class="row">
+                <form class="col s12 m12 l12" id="setStatus" action="/organ/donor/update/<%= @doctor.id %>" method="post">
+                  <div class="divider"></div>
+                  <div class="col s12">
+                    <table class="bordered highlight responsive-table">
+                      <thead>
+                      <tr>
+                        <th data-field="id">Category</th>
+                        <th data-field="name">Patient</th>
+                        <th>Status</th>
+
+                        <th>Approved Doctor</th>
+                        <th style="text-align:center">Action</th>
+
+                      </tr>
+                      </thead>
+
+                      <tbody>
+                      <% @searchResults.each do |d| %>
+                          <tr>
+                            <td name="status[record_id]" value="<%= d[7] %>"><%= d[0] %></td>
+                            <td name="status[patient_id]" value="<%= d[1] %>"><a href="/search/patients/<%= @doctor.id %>/<%= d[1] %>"><%= d[2].to_s+ " " + d[3].to_s %></a></td>
+                            <% if d[4] == 0 %>
+                                <td><p><%= "Pending" %></p></td>
+                            <% elsif d[4] == 1 %>
+                                <td><p> <%= "Accepted" %></p></td>
+                            <% elsif d[4] == 2 %>
+                                <td><p><%= "Rejected" %></p></td>
+                            <% end %>
+
+                            <% if d[5].blank? %>
+                                <td style=" "><%= "-" %></td>
+                            <% else %>
+                                <td style=""> <%=  "Dr." + d[5].to_s + " " + d[6].to_s %></td>
+                            <% end %>
+
+                            <% if d[4] == 0 %>
+                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accept" id="submit2" name="status[add]" type="submit"><i class="material-icons prefix">add</i></button></td>
+                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reject" id="submit2"  name="status[remove]" type="submit"><i class="material-icons prefix">close</i></button></td>
+                          <% elsif d[4] == 1 %>
+                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reject" id="submit2" name="status[remove]" type="submit"><i class="material-icons prefix">close</i></button></td>
+                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Clear" id="submit2" name="status[clear]" type="submit"><i class="material-icons prefix">remove</i></button></td>
+                            <% elsif d[4] == 2 %>
+                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accept" id="submit2" name="status[add]" type="submit"><i class="material-icons prefix">add</i></button></td>
+                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Clear" id="submit2" name="status[clear]" type="submit"><i class="material-icons prefix">remove</i></button></td>
+                            <% end %>
+                          </tr>
+
+                      <% end %>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </form>
+              </div>
+
+
+          <% else %>
+              <p>
+                <%= @searchResults.present? ? "There are no available time slots for " : " "  %></option>
+
+              </p>
+          <% end %>
+
+      <% end %>
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+          $('#organSelect').hide();
+
+
+          $('select').material_select();
+          $('.modal').modal();
+          //$('select').material_select('destroy');
+
+          $('.scrollspy').scrollSpy();
+
+
+          $('input[type="radio"]').click(function() {
+              if($(this).attr('id') == 'selectType') {
+                  $('#organSelect').show();
+
+              }
+              else{
+                  $('#organSelect').hide();
+              }
+          });
+      });
+
+
+
+
+
+  </script>
+</main>

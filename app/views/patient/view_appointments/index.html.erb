@@ -1,0 +1,127 @@
+<%= render partial: 'patient/sideNav'%>
+
+<main style="padding-left: 240px">
+  <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <div class="row">
+      <form class="col s12 m12 l12" action="/appointment/search" method="post">
+        <h4>My Appointments</h4>
+
+
+        <div class="divider"></div><br>
+        <div class="row">
+        <% if defined? @appointments %>
+            <% if @appointments.blank? == false %>
+                <div class="row">
+                  <div class="col s12">
+
+                    <table class="bordered highlight responsive-table">
+                      <thead>
+                      <tr>
+                        <th data-field="time">Date</th>
+                        <th data-field="name">Time Slot</th>
+                        <th data-field="action">Doctor Name</th>
+                        <th data-field="action">Status</th>
+                      </tr>
+                      </thead>
+
+                      <tbody>
+
+                    <% @appointments.each do |d| %>
+                          <tr>
+                            <td><%= d.app_date %></td>
+                            <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
+                            <td><%= d.first_name + " " + d.last_name %></td>
+                            <% if d.status == true %>
+                                <td><%= "Scheduled" %></td>
+                            <% else %>
+                                <td><%= "Cancelled" %></td>
+                            <% end %>
+                            <td><a href="/appointment/<%= @patient.id %>/<%= d.app_id %>">Show</a></td>
+                          </tr>
+                      <% end %>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            <% else %>
+                <p> You have no appointments scheduled yet. </p>
+            <% end %>
+        <% end %>
+    </div>
+
+
+        <div class="row">
+          <div class="col s12">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $('#doctorSelect').hide();
+          $('#appTypeSelect').hide();
+          $('#dateSelect').hide();
+
+          $('select').material_select();
+          $('.modal').modal();
+          //$('select').material_select('destroy');
+
+          $('.scrollspy').scrollSpy();
+          $('.datepicker').pickadate({
+
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+
+              min: new Date(),
+              format: 'yyyy-mm-dd',
+              closeOnSelect: true,
+              onSet: function (ele) {
+                  if (ele.select) {
+                      this.close();
+                  }
+              }
+          });
+
+          $('input[type="radio"]').click(function() {
+              if($(this).attr('id') == 'doctor') {
+                  $('#doctorSelect').show();
+                  $('#appTypeSelect').hide();
+                  $('#dateSelect').hide();
+              }
+              else{
+                  if($(this).attr('id') == 'appType') {
+                      $('#doctorSelect').hide();
+                      $('#appTypeSelect').show();
+                      $('#dateSelect').hide();
+                  }
+                  else{
+                      if($(this).attr('id') == 'appDate') {
+                          $('#doctorSelect').hide();
+                          $('#appTypeSelect').hide();
+                          $('#dateSelect').show();
+                      }
+                  }
+              }
+          });
+      });
+
+
+
+
+
+  </script>
+</main>
