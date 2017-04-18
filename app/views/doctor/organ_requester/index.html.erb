@@ -9,6 +9,32 @@
       /* when the submit button in the modal is clicked, submit the form */
         $('#setStatus').submit();
     });
+
+    $(document).ready(function(){
+
+        $('#organSelect').hide();
+
+        $('select').material_select();
+        $('.modal').modal();
+        //$('select').material_select('destroy');
+
+        $('.scrollspy').scrollSpy();
+
+
+        $('input[type="radio"]').click(function() {
+            if($(this).attr('id') == 'selectType') {
+                $('#organSelect').show();
+            }
+            else{
+                $('#organSelect').hide();
+            }
+        });
+    });
+
+
+
+
+
 </script>
 
 <main style="padding-left: 240px">
@@ -86,7 +112,7 @@
                         <th data-field="name">Patient</th>
                         <th>Status</th>
 
-                        <th>Approved Doctor</th>
+                        <th>Modified By</th>
                         <th style="text-align:center">Action</th>
 
                       </tr>
@@ -95,8 +121,10 @@
                       <tbody>
                       <% @searchResults.each do |d| %>
                           <tr>
-                            <td name="status[record_id]" value="<%= d[7] %>"><%= d[0] %></td>
-                            <td name="status[patient_id]" value="<%= d[1] %>"><a href="/search/patients/<%= @doctor.id %>/<%= d[1] %>"><%= d[2].to_s+ " " + d[3].to_s %></a></td>
+                            <td><%= d[0] %></td>
+                            <input name="status[record_id]" value="<%= d[7] %>" type="hidden"/>
+                            <td><a href="/search/patients/<%= @doctor.id %>/<%= d[1] %>"><%= d[2].to_s+ " " + d[3].to_s %></a></td>
+                            <input name="status[patient_id]" value="<%= d[1] %>" type="hidden"/>
                             <% if d[4] == 0 %>
                                 <td><p><%= "Pending" %></p></td>
                             <% elsif d[4] == 1 %>
@@ -112,14 +140,14 @@
                             <% end %>
 
                             <% if d[4] == 0 %>
-                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accept" id="submit2" name="status[add]" type="submit"><i class="material-icons prefix">add</i></button></td>
-                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reject" id="submit2"  name="status[remove]" type="submit"><i class="material-icons prefix">close</i></button></td>
+                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accept request" id="submit2" value="1" name="commit" type="submit"><i class="material-icons prefix">add</i></button></td>
+                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reject request" id="submit2"  value="2" name="commit" type="submit"><i class="material-icons prefix">close</i></button></td>
                           <% elsif d[4] == 1 %>
-                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reject" id="submit2" name="status[remove]" type="submit"><i class="material-icons prefix">close</i></button></td>
-                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Clear" id="submit2" name="status[clear]" type="submit"><i class="material-icons prefix">remove</i></button></td>
+                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reject request" id="submit2" value="2" name="commit" type="submit"><i class="material-icons prefix">close</i></button></td>
+                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Clear status" id="submit2" value="0" name="commit" type="submit"><i class="material-icons prefix">remove</i></button></td>
                             <% elsif d[4] == 2 %>
-                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accept" id="submit2" name="status[add]" type="submit"><i class="material-icons prefix">add</i></button></td>
-                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Clear" id="submit2" name="status[clear]" type="submit"><i class="material-icons prefix">remove</i></button></td>
+                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accept request" id="submit2" value="1" name="commit" type="submit"><i class="material-icons prefix">add</i></button></td>
+                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Clear status" id="submit2" value="0" name="commit" type="submit"><i class="material-icons prefix">remove</i></button></td>
                             <% end %>
                           </tr>
 
@@ -150,33 +178,5 @@
 
   </div>
 
-  <script type="text/javascript">
-      $(document).ready(function(){
 
-          $('#organSelect').hide();
-
-
-          $('select').material_select();
-          $('.modal').modal();
-          //$('select').material_select('destroy');
-
-          $('.scrollspy').scrollSpy();
-
-
-          $('input[type="radio"]').click(function() {
-              if($(this).attr('id') == 'selectType') {
-                  $('#organSelect').show();
-
-              }
-              else{
-                  $('#organSelect').hide();
-              }
-          });
-      });
-
-
-
-
-
-  </script>
 </main>

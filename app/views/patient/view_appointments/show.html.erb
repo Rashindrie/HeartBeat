@@ -50,7 +50,7 @@
 
                     <% if d.status == true && d.app_date.past? == false && d.app_date.today? == false %>
                         <th data-field="time">Action</th>
-                        <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmModal"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" id="confirmModal" type="button" style="background-color: red"><i class="material-icons prefix">close</i></button></td>
+                        <td><button class="btn-floating waves-effect waves-light btn tooltipped" data-target="confirmModal"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" id="confirmModal" type="button" style="background-color: red"><i class="material-icons prefix">close</i></button></td>
                     <% else %>
 
                     <% end %>

@@ -84,9 +84,9 @@ Rails.application.routes.draw do
   post '/timeslot/add/:id', to: 'staff/add_time_slot#create'
 
   #view timeslots
-  get '/timeslot/show', to: 'staff/view_time_slots#show'
-  post '/timeslot/searchApp', to: 'staff/view_time_slots#searchApp'
-
+  get '/timeslot/show/:id', to: 'staff/view_time_slots#show'
+  get '/timeslot/search/:id', to: 'staff/view_time_slots#search'
+  patch '/timeslot/cancel/:id', to: 'staff/view_time_slots#update'
 
   #resources
 

@@ -47,7 +47,56 @@ class Doctor::OrganRequesterController < ApplicationController
 
 
   def update
-    render :text => params.inspect
+    @doctor = Doctor.find(params[:id])
+    @doctor_type = DoctorType.find(@doctor.doctor_type_id)
+    @organs=Organ.distinct.all
+
+    @organ_id=params[:status][:record_id]
+    @patient_id=params[:status][:patient_id]
+
+    @op=Patient.find(@patient_id)
+    @organ=@op.requester_organs.find(@organ_id)
+
+
+    if params[:commit] == '0'
+      # Clear Status
+      @organ.update_all( :status => 0, :doctor_id => @doctor.id)
+
+      if @p.save!
+
+      else
+        flash[:error] = "Status Update unsuccessful. Please try again"
+        return redirect_to controller: '/doctor/organ_requester', action: 'index', :id => @doctor.id
+      end
+
+    elsif params[:commit] == '1'
+      # Accept
+      @organ.update_all( :status => 1, :doctor_id => @doctor.id)
+
+      if @p.save!
+
+      else
+        flash[:error] = "Status Update unsuccessful. Please try again"
+        return redirect_to controller: '/doctor/organ_requester', action: 'index', :id => @doctor.id
+      end
+
+    elsif params[:commit] == '2'
+      # Reject
+
+      @organ.update_all( :status => 2, :doctor_id => @doctor.id)
+
+      if @p.save!
+
+      else
+        flash[:error] = "Status Update unsuccessful. Please try again"
+        return redirect_to controller: '/doctor/organ_requester', action: 'index', :id => @doctor.id
+      end
+
+    end
+
+
+    flash[:success] = "Status Update Successful."
+    return redirect_to controller:'/doctor/organ_requester', action: 'index', :id => @doctor.id
   end
 
 end

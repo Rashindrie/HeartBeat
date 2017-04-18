@@ -128,7 +128,7 @@
                             <td><%= "Scheduled" %></td>
                   <% else %>
                             <% if ((d.to_time - d.from_time)/15.minutes).to_i > (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %>
-                                <td><button class="blue darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="confirmApp/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
+                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="confirmApp/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
                             <% else %>
                                 <td><button class="pink darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="confirmList/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
 

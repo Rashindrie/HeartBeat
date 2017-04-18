@@ -5,6 +5,7 @@ class Staff::HomeController < ApplicationController
 
   def home
     @staff = Staff.find(params[:id])
+    @events=TimeSlot.all
   end
 
 

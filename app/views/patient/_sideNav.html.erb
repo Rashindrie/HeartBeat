@@ -1,29 +1,45 @@
-<div class="side-nav fixed" style="width:250px; margin-top:65px; padding-bottom:100px">
-  <ul id= "nav-mobile"  >
-
-    <div class="row">
-      <div class="col col s4 m4 l4">
-        <img class="circle responsive-img valign profile-image"
-        <%= image_tag("patient.png", :alt => "rss feed") %>
-      </div>
-
-      <div class="col col s8 m8 l8">
-        <p><%= @patient.first_name + " " + @patient.last_name %></p>
-        <p><%= "Patient" %></p>
-      </div>
-      <br/>
+<ul id= "slide-out"  class="side-nav fixed" style="width:250px; margin-top:63px;  padding-bottom:200px"">
+  <li><div class="userView">
+    <div class="background">
+      <img src="http://www.tba3.net/images/header-bg.jpg">
+    </div>
+    <div class="circle responsive-img valign profile-image" style="">
+      <img style="height:80px; width:80px;"
+      <%= image_tag("patient.png", :alt => "rss feed") %>
     </div>
 
-    <li class="bold active"><a class="waves-effect waves-teal" href="/patient/home/<%= @patient.id %>">Home</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/patient/profile/<%= @patient.id %>">My Profile</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/appointment/search">Search Appointments</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/patient/appointments/<%= @patient.id %>">My Appointments</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/patient/vital/<%= @patient.id %>">My Vitals</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/visits/<%= @patient.id %>">Recent Visits</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/organ/donor/<%= @patient.id %>">Organ Donations</a></li>
-    <li class="active"><a class="waves-effect waves-teal" href="/organ/requester/<%= @patient.id %>">Organ Requests</a></li>
+    <p><span class="white-text name"><%= @patient.first_name + " " + @patient.last_name %></span></p>
+    <p>
+      <span class="white-text name"> <%= "Patient" %></span>
+    </p>
+    <p></p>
+  </div>
+  </li>
 
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">Profile<i class="material-icons">arrow_drop_down</i></a>
 
-
+        <div class="collapsible-body">
+          <ul>
+            <li><a class="waves-effect waves-teal" href="/patient/profile/<%= @patient.id %>"><i class="material-icons left">mood</i>My Profile</a></li>
+            <li class="bold"><a href="/logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <ul class="bold">
+    <li><a class="waves-effect waves-teal" href="/patient/home/<%= @patient.id %>">Home</a></li>
+    <li><a class="waves-effect waves-teal" href="/appointment/search">Search Appointments</a></li>
+    <li><a class="waves-effect waves-teal" href="/patient/appointments/<%= @patient.id %>">My Appointments</a></li>
+    <li><a class="waves-effect waves-teal" href="/patient/vital/<%= @patient.id %>">My Vitals</a></li>
+    <li><a class="waves-effect waves-teal" href="/visits/<%= @patient.id %>">Recent Visits</a></li>
+    <li><a class="waves-effect waves-teal" href="/organ/donor/<%= @patient.id %>">Organ Donations</a></li>
+    <li><a class="waves-effect waves-teal" href="/organ/requester/<%= @patient.id %>">Organ Requests</a></li>
   </ul>
-</div>
+</ul>
+
+
+<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>

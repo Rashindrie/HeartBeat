@@ -14,6 +14,7 @@ class Staff::AddTimeSlotController < ApplicationController
     @staff = Staff.find(params[:id])
     @time_slot=TimeSlot.new(time_slot_params)
     @time_slot.staff_id=(User.find(session[:user_id])).staff_id
+    @time_slot.status=1
 
     if TimeSlot.doc_time_slots(@time_slot.doctor_id, @time_slot.app_date, @time_slot.from_time, @time_slot.to_time) == 0
       if @time_slot.save

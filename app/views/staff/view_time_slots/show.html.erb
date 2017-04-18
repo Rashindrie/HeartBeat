@@ -1,3 +1,13 @@
+<script type="text/javascript">
+    $('#submit1').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+        $('#searchApp').submit();
+    });
+    $('#submit2').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+        $('#cancelAppointment').submit();
+    });
+</script>
 <%= render partial: 'staff/sideNav'%>
 
 <main style="padding-left: 240px">
@@ -7,7 +17,7 @@
         <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
     <div class="row">
-      <form class="col s12 m12 l12" action="/timeslot/search" method="post">
+      <form class="col s12 m12 l12" action="/timeslot/search/<%= @staff.id %>" id="searchApp" method="get">
         <h4>Doctor Schedules</h4>
 
 
@@ -77,7 +87,7 @@
 
         <div class="row">
           <div class="col m2">
-            <p class="right-align"><button class="btn waves-effect waves-light" type="submit">Search</button></p>
+            <p class="right-align"><button class="btn waves-effect waves-light" type="submit" id="submit1">Search</button></p>
           </div>
 
         </div>
@@ -90,7 +100,9 @@
           <% if @timeslots.blank? == false %>
 
               <div class="row">
-                <form class="col s12 m12 l12" action="/appointment/add" method="post">
+                <form class="col s12 m12 l12" action="/timeslot/cancel/<%= @staff.id %>" id="cancelAppoitnment" method="post">
+                  <input type="hidden" name="_method" value="patch" />
+
                   <div class="divider"></div>
                   <div class="col s12">
                     <table class="bordered highlight responsive-table">
@@ -109,7 +121,7 @@
                       <tbody>
                       <% @timeslots.each do |d| %>
                           <tr>
-
+                            <input type="hidden" name="timeslot[id]" value="<%= d.id %>" />
                             <td><%= d.app_date %></td>
                             <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
 
@@ -126,17 +138,23 @@
                                 <% end %>
                             <% end %>
                             <td class="center"><%= (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %></td>
-                            <% if d.app_date.past? == false %>
-                                <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmModal"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" id="cancelAppointment" type="button" name="action" style="background-color: red"><i class="material-icons prefix">close</i></button></td>
-                          <% end %>
+                            <% if d.app_date.past? == false && d.status == true %>
+                                <td><button class="red btn-floating waves-effect waves-light btn tooltipped" data-target="confirmModal/<%= d.id %>"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" ><i class="material-icons prefix">close</i></button></td>
+                            <% elsif d.status == false %>
+                                <td>Cancelled</td>
+                            <% else %>
+                            <td>No action</td>
+                            <% end %>
                                 </tr>
-                          <div id="confirmApp/<%= d.id %>" class="modal">
+                          <div id="confirmModal/<%= d.id %>" class="modal">
                             <div class="modal-content">
                               <h4>Cancel Appointment</h4>
                               <p>Are you sure you want to cancel the timeslot <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> on <%= d.app_date %> ?</p>
+                              <p></p>
+                              <p>This action cannot be reversed. Upon cancelling a time slot, you cannot re-activate the same.</p>
                             </div>
                             <div class="modal-footer">
-                              <button class="modal-action modal-close darken-3 btn waves-effect waves-light" onclick="window.location = '/appointment/add/<%= d.id %>'" type="button">Confirm</button>
+                              <button class="modal-action modal-close darken-3 btn waves-effect waves-light" id="submit2" type="submit" >Confirm</button>
                             </div>
                           </div>
                       <% end %>
