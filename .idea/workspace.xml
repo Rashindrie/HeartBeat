@@ -3,22 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4de1614d-39ac-4acf-b0f2-b188251801c6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/appointment/search_appointments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/appointment/search_appointments_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/doctor/organ_requester_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/doctor/organ_requester_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/staff/add_time_slot_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/staff/add_time_slot_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/staff/home_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/staff/home_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/staff/view_time_slots_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/staff/view_time_slots_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/appointment/search_appointments/searchApp.html.erb" afterPath="$PROJECT_DIR$/app/views/appointment/search_appointments/searchApp.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/doctor/_sideNav.html.erb" afterPath="$PROJECT_DIR$/app/views/doctor/_sideNav.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/doctor/organ_requester/index.html.erb" afterPath="$PROJECT_DIR$/app/views/doctor/organ_requester/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/patient/_sideNav.html.erb" afterPath="$PROJECT_DIR$/app/views/patient/_sideNav.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/patient/view_appointments/show.html.erb" afterPath="$PROJECT_DIR$/app/views/patient/view_appointments/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/staff/_sideNav.html.erb" afterPath="$PROJECT_DIR$/app/views/staff/_sideNav.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/staff/view_time_slots/show.html.erb" afterPath="$PROJECT_DIR$/app/views/staff/view_time_slots/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user/register/registerPatient.html.erb" afterPath="$PROJECT_DIR$/app/views/user/register/registerPatient.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -38,41 +24,31 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/staff/view_time_slots/show.html.erb">
+      <file leaf-file-name="register_controller.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/user/register_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="140" column="9" lean-forward="false" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
+            <state relative-caret-position="272">
+              <caret line="120" column="42" lean-forward="true" selection-start-line="120" selection-start-column="42" selection-end-line="120" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <file leaf-file-name="patient.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/patient.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1584">
-              <caret line="88" column="7" lean-forward="false" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
+            <state relative-caret-position="342">
+              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view_time_slots_controller.rb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/staff/view_time_slots_controller.rb">
+      <file leaf-file-name="registerPatient.html.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/user/register/registerPatient.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="50" column="12" lean-forward="false" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_time_slot_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/staff/add_time_slot_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="26" column="9" lean-forward="true" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+            <state relative-caret-position="-360">
+              <caret line="40" column="91" lean-forward="true" selection-start-line="40" selection-start-column="91" selection-end-line="40" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -117,7 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/.rvm/gems/ruby-2.3.3/gems/simple_calendar-2.2.5/lib/simple_calendar/calendar.rb" />
         <option value="$PROJECT_DIR$/app/views/patient/organ_donor/_simple_calendar.html.erb" />
         <option value="$PROJECT_DIR$/config/environment.rb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
@@ -144,7 +119,6 @@
         <option value="$PROJECT_DIR$/app/models/organs_donor_patient.rb" />
         <option value="$PROJECT_DIR$/app/controllers/patient/organ_donor_controller.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20170417060919_add_status_organ_requester_patient.rb" />
-        <option value="$PROJECT_DIR$/app/models/patient.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20170417074225_change_statusrgan_requester_patient.rb" />
         <option value="$PROJECT_DIR$/app/models/organs_requester_patient.rb" />
         <option value="$PROJECT_DIR$/app/controllers/patient/organ_requester_controller.rb" />
@@ -166,8 +140,10 @@
         <option value="$PROJECT_DIR$/db/migrate/20170418161545_add_status_time_slot.rb" />
         <option value="$PROJECT_DIR$/app/controllers/staff/add_time_slot_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/appointment/search_appointments_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/staff/view_time_slots_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/staff/view_time_slots/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/staff/view_time_slots_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/user/register_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/patient.rb" />
       </list>
     </option>
   </component>
@@ -183,8 +159,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
     <option name="y" value="24" />
-    <option name="width" value="1301" />
-    <option name="height" value="593" />
+    <option name="width" value="616" />
+    <option name="height" value="631" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -204,76 +180,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="RailsProjectView" />
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HeartBeat">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HeartBeat">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HeartBeat">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="controllers">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HeartBeat">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="controllers">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="patient">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1470,6 +1378,74 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="HeartBeat">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="HeartBeat">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="HeartBeat">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="controllers">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="HeartBeat">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="controllers">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="patient">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1793,35 +1769,36 @@
       <workItem from="1492393452201" duration="229000" />
       <workItem from="1492405474337" duration="31751000" />
       <workItem from="1492495504152" duration="13581000" />
-      <workItem from="1492541183666" duration="1061000" />
+      <workItem from="1492541183666" duration="3133000" />
+      <workItem from="1492597842144" duration="2495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="763411000" />
+    <option name="totallyTimeSpent" value="767978000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1301" height="593" extended-state="6" />
+    <frame x="65" y="24" width="616" height="631" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3075697" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23508772" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28982726" sideWeight="0.27192983" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2701252" sideWeight="0.27192983" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33810377" sideWeight="0.7280702" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24980783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869565" sideWeight="0.49402392" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.319398" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33810377" sideWeight="0.7280702" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3252174" sideWeight="0.46613547" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1857,34 +1834,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/db/migrate/20170416144837_add_column_organs_donor_patients.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="true" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/patient/patient_details_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/appointment.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/staff/staff_details_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/user/register/registerEmp.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-162">
@@ -2067,13 +2016,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/patient.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/doctor/_sideNav.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -2113,13 +2055,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="9" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user/register/registerPatient.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="40" column="91" lean-forward="true" selection-start-line="40" selection-start-column="91" selection-end-line="40" selection-end-column="91" />
         </state>
       </provider>
     </entry>
@@ -2179,10 +2114,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/patient/patient_details_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/appointment/search_appointments_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
+        <state relative-caret-position="1222">
           <caret line="87" column="78" lean-forward="false" selection-start-line="87" selection-start-column="78" selection-end-line="87" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/staff/view_time_slots/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2538">
+          <caret line="141" column="95" lean-forward="false" selection-start-line="141" selection-start-column="95" selection-end-line="141" selection-end-column="95" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2194,26 +2144,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/staff/add_time_slot_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="26" column="9" lean-forward="true" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/staff/view_time_slots/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="140" column="9" lean-forward="false" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/staff/view_time_slots_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="50" column="12" lean-forward="false" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
+        <state relative-caret-position="160">
+          <caret line="47" column="45" lean-forward="false" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/staff/add_time_slot_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/user/log_in_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-20">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user/register/registerPatient.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-360">
+          <caret line="40" column="91" lean-forward="true" selection-start-line="40" selection-start-column="91" selection-end-line="40" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/user/register_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="120" column="42" lean-forward="true" selection-start-line="120" selection-start-column="42" selection-end-line="120" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/patient.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>

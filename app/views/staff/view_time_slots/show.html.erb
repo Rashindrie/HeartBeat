@@ -121,7 +121,7 @@
                       <tbody>
                       <% @timeslots.each do |d| %>
                           <tr>
-                            <input type="hidden" name="timeslot[id]" value="<%= d.id %>" />
+
                             <td><%= d.app_date %></td>
                             <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
 
@@ -138,7 +138,8 @@
                                 <% end %>
                             <% end %>
                             <td class="center"><%= (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %></td>
-                            <% if d.app_date.past? == false && d.status == true %>
+                            <% if (d.app_date.past? == false) && (d.status == true) %>
+                                <input type="hidden" name="timeslot[id]" value="<%= d.id %>" />
                                 <td><button class="red btn-floating waves-effect waves-light btn tooltipped" data-target="confirmModal/<%= d.id %>"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" ><i class="material-icons prefix">close</i></button></td>
                             <% elsif d.status == false %>
                                 <td>Cancelled</td>

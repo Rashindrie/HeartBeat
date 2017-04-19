@@ -47,7 +47,7 @@ class Staff::ViewTimeSlotsController < ApplicationController
     @staff = Staff.find(params[:id])
     @timeslot=TimeSlot.find(params[:timeslot][:id])
 
-    if @timeslot.update_attribute(:status,0)
+    if @timeslot.update_attribute(:status,false)
       flash[:success] = "Time slot updated successfully"
       redirect_to controller: '/staff/view_time_slots', action: 'show', :id => @staff.id
     else
