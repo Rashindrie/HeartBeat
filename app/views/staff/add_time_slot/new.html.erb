@@ -1,33 +1,7 @@
 <%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
-<script type="text/javascript">
-    document.addEventListener("turbolinks:load", function() {
-        $('select').material_select();
 
-        $('.datepicker').pickadate({
 
-            selectMonths: true, // Creates a dropdown to control month
-            selectYears: 1, // Creates a dropdown of 15 years to control year
-            min: new Date(),
-            closeOnSelect: true,
-            onSet: function (ele) {
-                if (ele.select) {
-                    this.close();
-                }
-            }
-        });
-
-        $('input.timepicker').timepicker({
-            timeFormat: 'h:mm p',
-            interval: 30,
-            dynamic: false,
-            dropdown: true,
-            scrollbar: true
-        });
-    });
-
-</script>
-
-<div style="padding-left: 240px">
+<main style="padding-left: 240px">
   <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
@@ -117,8 +91,32 @@
 
 
 
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $('select').material_select();
 
-  </div>
+          $('.datepicker').pickadate({
 
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+              min: new Date(),
+              closeOnSelect: true,
+              onSet: function (ele) {
+                  if (ele.select) {
+                      this.close();
+                  }
+              }
+          });
 
-                </div>
+          $('input.timepicker').timepicker({
+              timeFormat: 'h:mm p',
+              interval: 30,
+              dynamic: false,
+              dropdown: true,
+              scrollbar: true
+          });
+      });
+
+  </script>
+  </main>
+

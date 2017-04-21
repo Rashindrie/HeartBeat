@@ -12,9 +12,7 @@
         )};
 </script>
 <main style="padding-left: 240px">
-  <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
+
 
   <% if @app.present? && @app.errors.any? %>
       <div class="error_explanation" style="padding-left: 50px">
@@ -43,7 +41,7 @@
           <div class="col s12">
             <i class="material-icons prefix">search</i>Search
             <div class="input-field inline">
-
+              <input class="with-gap" name="app[d]" value="-1" type="hidden" id="" />
               <div class="col s12 left aligned">
                 <input class="with-gap" name="app[d]" value="0" type="radio" id="doctor" />
                 <label for="doctor">Doctor</label>
@@ -106,6 +104,9 @@
 
         </div>
 <br/>
+        <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
       </form>
 
 
@@ -194,9 +195,7 @@
 
   <% else %>
 <p>
-  <%= @date.present? ? "There are no available time slots for #{@date}" : " "  %></option>
-  <%= @doctor.present? ? "There are no available time slots for given doctor" : " "  %></option>
-  <%= @app_type.present? ? "There are no available time slots for given appointment type" : " "  %></option>
+
 </p>
   <% end %>
 

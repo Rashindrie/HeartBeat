@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h5>Hi, <%= @user.full_name %>!</h5>
+<p>
+  Your appointment for <%= @timeslot.app_date %> from <%= @timeslot.from_time.to_s(:time) %> to <%=  @timeslot.to_time.to_s(:time) %> for Dr. <%= @doctor.full_name %> has been cancelled due to unavoidable reasons.
+  <br>
+</p>
+<p>
+  We sincerely apologize for any inconvinience caused.
+</p>
+<br>
+
+<p>
+  If you prefer to schedule another appointment, you can do so by visiting <a href="http://localhost:3000/login" >here</a>.
+</p>
+
+<br>
+
+</body>
+</html>

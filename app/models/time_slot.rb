@@ -25,7 +25,7 @@ class TimeSlot < ApplicationRecord
   validate :to_time_should_be_after_from_time
 
   def to_time_should_be_after_from_time
-    if to_time.present? && from_time.present? && to_time <= from_time + 30.minutes
+    if to_time.present? && from_time.present? && (to_time <= from_time + 29.minutes)
       errors.add(:to_time, "should be at least 30 mins after From time")
     end
   end

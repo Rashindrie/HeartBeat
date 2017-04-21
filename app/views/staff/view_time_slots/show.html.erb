@@ -13,9 +13,7 @@
 <%= render partial: 'staff/sideNav'%>
 
 <main style="padding-left: 240px">
-  <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
+
   <div class="container">
 
     <div class="row">
@@ -31,7 +29,7 @@
           <div class="col s12">
             <i class="material-icons prefix">search</i>Search
             <div class="input-field inline">
-
+              <input class="with-gap" name="app[d]" value="-1" type="hidden" id="#" />
               <div class="col s12 left aligned">
                 <input class="with-gap" name="app[d]" value="0" type="radio" id="doctor" />
                 <label for="doctor">Doctor</label>
@@ -94,6 +92,10 @@
 
         </div>
         <br/>
+
+        <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
       </form>
 
 
@@ -142,7 +144,7 @@
                             <td class="center"><%= (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %></td>
                             <% if (d.app_date.past? == false) && (d.status == true) %>
                                 <input type="hidden" name="timeslot[id]" value="<%= d.id %>" />
-                                <td><button class="red btn-floating waves-effect waves-light btn tooltipped" data-target="confirmModal/<%= d.id %>"  data-position="bottom" data-delay="50" data-tooltip="Cancel Appointment" ><i class="material-icons prefix">close</i></button></td>
+                                <td><button class="red btn-floating waves-effect waves-light btn tooltipped" data-target="confirmModal/<%= d.id %>"  data-position="bottom" data-delay="50" data-tooltip="Cancel TimeSlot" ><i class="material-icons prefix">close</i></button></td>
                             <% elsif d.status == false %>
                                 <td>Cancelled</td>
                             <% else %>
@@ -170,8 +172,7 @@
 
 
           <% else %>
-              <p>
-                </p>
+
           <% end %>
 
 

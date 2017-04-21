@@ -83,11 +83,29 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
 
     #search results
-    if @d.to_i==0
+    if @d.to_i==-1
+      @timeslots=TimeSlot.from_doctor(@doctor).where('app_date = ?', Date.today).where('status = ?',1)
+                     .order('app_date DESC')
+      @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
+
+      if @timeslots.blank?
+        flash.now[:notice]="No records found for #{Date.today}"
+        return render('appointment/search_appointments/searchApp')
+      else
+        return render('appointment/search_appointments/searchApp')
+      end
+
+    elsif @d.to_i==0
       @timeslots=TimeSlot.from_doctor(@doctor).where('app_date >= ?', Date.today).where('status = ?',1)
                      .order('app_date DESC')
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
-      render('appointment/search_appointments/searchApp')
+
+      if @timeslots.blank?
+        flash.now[:notice]="No records found for Doctor #{Doctor.find(@doctor).full_name}"
+        return render('appointment/search_appointments/searchApp')
+      else
+        return render('appointment/search_appointments/searchApp')
+      end
 
     elsif @d.to_i==1
 
@@ -95,12 +113,24 @@ class Appointment::SearchAppointmentsController < ApplicationController
                      .where('doctors.doctor_type_id' => @app_type)
                      .where('app_date >= ?', Date.today).where('status = ?',1)
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
-      render('appointment/search_appointments/searchApp')
+
+      if @timeslots.blank?
+        flash.now[:notice]="No records found for Appointment Type - #{DoctorType.find(@app_type).speciality}"
+        return render('appointment/search_appointments/searchApp')
+      else
+        return render('appointment/search_appointments/searchApp')
+      end
 
     elsif @d.to_i==2
       @timeslots=TimeSlot.from_date(@date).where('status = ?',1)
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
-      render('appointment/search_appointments/searchApp')
+
+      if @timeslots.blank?
+        flash.now[:notice]="No records found for #{@date}"
+        return render('appointment/search_appointments/searchApp')
+      else
+        return render('appointment/search_appointments/searchApp')
+      end
     end
   end
 
