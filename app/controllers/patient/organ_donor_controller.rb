@@ -43,11 +43,13 @@ class Patient::OrganDonorController < ApplicationController
       params[:organ_living].each do |d|
 
         @p=OrgansDonorPatient.create(patient_id: @patient.id, organ_id: d.to_i, category: 1)
-        if @p.save!
+        if @p.valid?
+          @p.save
 
         else
           flash[:error] = "Registration unsuccessful. Please try again"
-          return redirect_to controller: '/patient/organ_donor', action: 'new', :id => @patient.id
+          session[:return_to] ||= request.referer
+          return redirect_to session.delete(:return_to)
         end
       end
     end

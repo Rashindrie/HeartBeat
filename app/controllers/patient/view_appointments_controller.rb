@@ -6,7 +6,7 @@ class Patient::ViewAppointmentsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     @appointments=Appointment.joins(time_slot: :doctor )
-                      .select('appointments.id AS app_id, status AS status, first_name AS first_name,last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time')
+                      .select('appointments.id AS app_id, appointments.status AS status, first_name AS first_name,last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time')
                       .where('appointments.patient_id' => @patient.id)
                       .order('app_date DESC')
   end
@@ -15,7 +15,7 @@ class Patient::ViewAppointmentsController < ApplicationController
     @patient = Patient.find(params[:patient_id])
 
     @appointments=Appointment.joins(time_slot: :doctor )
-                      .select('appointments.id AS app_id, status AS status, first_name AS first_name,last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time')
+                      .select('appointments.id AS app_id, appointments.status AS status, first_name AS first_name,last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time')
                       .where('appointments.id' => params[:id])
 
     #render :text => (@appointments).inspect
@@ -44,7 +44,7 @@ class Patient::ViewAppointmentsController < ApplicationController
       redirect_to :controller => 'patient/view_appointments', :action => 'show', patient_id: @patient.id, id: @app.id
 
     else
-      flash[:notice] = "Appointment cancellation unsuccessful. Please try again"
+      flash[:error] = "Appointment cancellation unsuccessful. Please try again"
       redirect_to :controller => 'patient/view_appointments', :action => 'show', patient_id: @patient.id, id: @app.id
       #render('/patient/profile/<%= @patient.id %>')  #to get a prepolutaed form
     end

@@ -5,7 +5,8 @@ class Appointment < ApplicationRecord
 
   validates :patient, :presence => true
   validates :time_slot, :presence => true
-
+  validates :status, :inclusion => { :in => [true, false] }
+  validates :registered, :inclusion => { :in => [true, false] }
 
 
   scope :countApp, lambda { |q|

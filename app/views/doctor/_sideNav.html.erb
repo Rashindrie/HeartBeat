@@ -32,12 +32,12 @@
   </li>
 <ul class="bold">
   <li><a class="waves-effect waves-teal" href="/doctor/home/<%= @doctor.id %>">Home</a></li>
-  <li><a class="waves-effect waves-teal" href="/view/appointments">My Appointments</a></li>
-  <li><a class="waves-effect waves-teal" href="/search/patients">View  Patients</a></li>
+  <li><a class="waves-effect waves-teal" href="/view/appointments/<%= @doctor.id %>">My Appointments</a></li>
+  <li><a class="waves-effect waves-teal" href="/search/patients/<%= @doctor.id %>">View  Patients</a></li>
   <li><a class="waves-effect waves-teal" href="/doctor/organ/donor/<%= @doctor.id %>">Organ Donors</a></li>
   <li><a class="waves-effect waves-teal" href="/doctor/requester/donor/<%= @doctor.id %>">Organ Requesters</a></li>
 </ul>
 </ul>
 
 
-<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+<a href="#" data-activates="slide-out" class="button-collapse  hide-on-med-and-up"><i class="material-icons">menu</i></a>

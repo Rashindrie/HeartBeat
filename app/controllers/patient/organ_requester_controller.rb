@@ -5,32 +5,37 @@ class Patient::OrganRequesterController < ApplicationController
 
   def new
     @patient = Patient.find(params[:id])
-    @organ=Organ.distinct.all
+    @organs=Organ.distinct.all
     #@events = TimeSlot.all
   end
 
   def create
     @patient=Patient.find(params[:id])
+    @organs=Organ.distinct.all
 
-    @p = OrgansRequesterPatient
-             .includes(:organ)
-             .where('organs_requester_patients.patient_id =?', @patient.id)
-             .where('organs_requester_patients.organ_id =?', params[:organ][:organ_id])
 
-    if params[:organ][:organ_id].blank? == false  && @p.blank?
-      @p=OrgansRequesterPatient.create(patient_id: @patient.id, organ_id: params[:organ][:organ_id].to_i, status: 0)
 
-      if @p.save!
-        flash[:success] = "Registration Successful."
-        return redirect_to controller: '/patient/organ_requester', action: 'index', :id => @patient.id
+    if params[:organ]
+      @p = OrgansRequesterPatient
+               .includes(:organ)
+               .where('organs_requester_patients.patient_id =?', @patient.id)
+               .where('organs_requester_patients.organ_id =?', params[:organ][:organ_id])
+
+      if @p.blank?
+        @organ=OrgansRequesterPatient.create(patient_id: @patient.id, organ_id: params[:organ][:organ_id].to_i, status: 0)
+          @organ.save!
+          flash[:success] = "Registration Successful."
+          return redirect_to controller: '/patient/organ_requester', action: 'index', :id => @patient.id
+
       else
-        flash[:error] = "Registration unsuccessful. Please try again"
+        flash[:error] = "Registration unsuccessful. Cannot register to organ(s)/tissues(s) if once registered for them."
         return redirect_to controller: '/patient/organ_requester', action: 'new', :id => @patient.id
       end
     else
-      flash[:error] = "Registration unsuccessful. Cannot register to organ(s)/tissues(s) if once registered for them."
+      flash[:error] = "Please select a valid option in order to register"
       return redirect_to controller: '/patient/organ_requester', action: 'new', :id => @patient.id
     end
+
   end
 
   def index

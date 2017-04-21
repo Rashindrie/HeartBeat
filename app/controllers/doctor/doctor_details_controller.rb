@@ -15,14 +15,17 @@ class Doctor::DoctorDetailsController < ApplicationController
   def update
     @doctor = Doctor.find(params[:id])
 
-    if @doctor.update_attributes(doctor_params)
-      flash[:notice] = "Doctor details updated successfully."
+    if @doctor.update_attributes(doctor_params) && @doctor.valid?
+      flash[:success] = "Details updated successfully."
       redirect_to :controller => 'doctor/doctor_details', :action => 'edit', id: @doctor.id
 
     else
-      flash[:notice] = "Update unsuccessful."
+      flash.now[:error] = "Update unsuccessful."
       @id = params[:id]
-      render :action => '/doctor/profile'
+
+      @doctor_types=DoctorType.sorted
+      @doctor_type = DoctorType.find(@doctor.doctor_type_id)
+      render('/doctor/doctor_details/edit')
     end
   end
 

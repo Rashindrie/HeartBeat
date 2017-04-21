@@ -1,11 +1,11 @@
-<ul id= "slide-out"  class="side-nav fixed" style="width:250px; margin-top:63px;  padding-bottom:200px"">
+<ul id= "slide-out"  class="side-nav fixed hide-on-med-and-down" style="width: 250px; margin-top: 63px; padding-bottom: 200px">
   <li><div class="userView">
     <div class="background">
       <img src="http://www.tba3.net/images/header-bg.jpg">
     </div>
     <div class="circle responsive-img valign profile-image" style="">
       <img style="height:80px; width:80px;"
-      <%= image_tag("patient.png", :alt => "rss feed") %>
+      <%= image_tag("patient_icon.png", :alt => "rss feed") %>
     </div>
 
     <p><span class="white-text name"><%= @patient.first_name + " " + @patient.last_name %></span></p>
@@ -32,7 +32,7 @@
   </li>
   <ul class="bold">
     <li><a class="waves-effect waves-teal" href="/patient/home/<%= @patient.id %>">Home</a></li>
-    <li><a class="waves-effect waves-teal" href="/appointment/search">Search Appointments</a></li>
+    <li><a class="waves-effect waves-teal" href="/appointment/search/<%= @patient.id %>">Search Appointments</a></li>
     <li><a class="waves-effect waves-teal" href="/patient/appointments/<%= @patient.id %>">My Appointments</a></li>
     <li><a class="waves-effect waves-teal" href="/patient/vital/<%= @patient.id %>">My Vitals</a></li>
     <li><a class="waves-effect waves-teal" href="/visits/<%= @patient.id %>">Recent Visits</a></li>
@@ -40,6 +40,7 @@
     <li><a class="waves-effect waves-teal" href="/organ/requester/<%= @patient.id %>">Organ Requests</a></li>
   </ul>
 </ul>
+<a href="#" data-activates="slide-out" class="button-collapse hide-on-med-and-up"><i class="material-icons">menu</i></a>
 
 
-<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+

@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    $(document).ready(function(){
     $('#submit1').click(function(){
       /* when the submit button in the modal is clicked, submit the form */
         $('#searchApp').submit();
@@ -7,15 +8,16 @@
       /* when the submit button in the modal is clicked, submit the form */
         $('#cancelAppointment').submit();
     });
+        )};
 </script>
 <%= render partial: 'staff/sideNav'%>
 
 <main style="padding-left: 240px">
-
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
   <div class="container">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+
     <div class="row">
       <form class="col s12 m12 l12" action="/timeslot/search/<%= @staff.id %>" id="searchApp" method="get">
         <h4>Doctor Schedules</h4>

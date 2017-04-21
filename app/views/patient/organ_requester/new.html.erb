@@ -32,6 +32,7 @@
       /* when the submit button in the modal is clicked, submit the form */
         $('#formRegister').submit();
     });
+
 </script>
 
 
@@ -40,11 +41,23 @@
 <%= render partial: 'patient/sideNav', :locals => { :patient_id => params[:id] } %>
 
 <main style="padding-left: 240px">
-
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <% if @organ.present? && @organ.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@organ.errors.count, "error") %> prohibited
+          from adding request:
+        </p>
+        <ul>
+          <% @organ.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
   <div class="container">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
 
     <h4>Requester Register</h4>
     <div class="divider"></div>
@@ -61,7 +74,7 @@
                 <div class="input-field col s6">
                   <select id="organ" name="organ[organ_id]">
                     <option value="" disabled selected></option>
-                    <% @organ.each do |od| %>
+                    <% @organs.each do |od| %>
                             <option value="<%= od.id %>"><%= od.name %></option>
                     <% end %>
                   </select>
@@ -98,7 +111,7 @@
           </p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-success success" type="submit" data-target="confirm" id="submit" >Agree</button>
+          <button class="modal-action modal-close btn-flat waves-effect waves-light" type="submit" id="submit" >Agree</button>
         </div>
       </div>
       </form>

@@ -9,10 +9,8 @@
   </script>
 
 <main>
-  <% if !flash[:notice].blank? %>
-      <div class="notice">
-        <%= flash[:notice] %>
-      </div>
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
   <div class=" " style="width:100%;height:100%;position: relative;">
     <div class="" style="width:100%;">

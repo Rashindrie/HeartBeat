@@ -7,7 +7,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
   #get appointment timeslots searchApp page
 
   def searchApp
-    @patient = Patient.find((User.find(session[:user_id])).patient_id)
+    @patient = Patient.find(params[:id])
     @doctor_name=Doctor.select(:id, :full_name)
     @doctor_types=DoctorType.sorted
   end
@@ -16,9 +16,11 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
   #add an appointment-registered patient
   def create
-    @patient = Patient.find((User.find(session[:user_id])).patient_id)
-    @app=Appointment.new
+    @patient = Patient.find(params[:patient_id])
+    @doctor_name=Doctor.select(:id, :full_name)
+    @doctor_types=DoctorType.sorted
 
+    @app=Appointment.new
     @time_slot=TimeSlot.find(params[:id])
     @app.time_slot_id=@time_slot.id
     @app.patient_id=@patient.id
@@ -27,14 +29,18 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
     #@appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
     if ((@time_slot.to_time - @time_slot.from_time)/15.minutes).to_i > Appointment.where('time_slot_id = ?', @time_slot.id).where('status = ?', 1).count
-      @app.save
-      flash[:success] = "Appointement successfully added."
-      session[:return_to] ||= request.referer
-      redirect_to session.delete(:return_to)
+      if @app.valid?
+        @app.save
+        flash[:success] = "Appointement successfully added."
+        redirect_to :controller => 'patient/view_appointments', :action => 'show', patient_id: @patient.id, id: @app.id
+      else
+        flash.now[:error] = "Appointement adding failed. Please try again"
+        render('appointment/search_appointments/searchApp')
+        end
     else
-      flash[:error] = "Appointement adding failed. Please try again"
-      session[:return_to] ||= request.referer
-      redirect_to session.delete(:return_to)
+        flash[:error] = "Appointement adding failed. Please try again"
+        session[:return_to] ||= request.referer
+        redirect_to session.delete(:return_to)
     end
 
   end
@@ -42,20 +48,22 @@ class Appointment::SearchAppointmentsController < ApplicationController
   # add to waiting list - registered patient
   def add
     @patient = Patient.find(params[:patient_id])
-    @wl=WaitingList.new
+    @doctor_name=Doctor.select(:id, :full_name)
+    @doctor_types=DoctorType.sorted
 
-    @wl.time_slot_id=TimeSlot.find(params[:id]).id
-    @wl.patient_id=@patient.id
-    @wl.registered=true
+    @app=WaitingList.new
+    @app.time_slot_id=TimeSlot.find(params[:id]).id
+    @app.patient_id=@patient.id
+    @app.registered=true
 
-    if @wl.save
+    if @app.valid?
+      @app.save
       flash[:success] = "Successfully added to waiting list."
       session[:return_to] ||= request.referer
       redirect_to session.delete(:return_to)
     else
-      flash[:error] = "Adding to waiting list failed. Please try again"
-      session[:return_to] ||= request.referer
-      redirect_to session.delete(:return_to)
+      flash.now[:error] = "Adding to waiting list failed. Please try again"
+      render('appointment/search_appointments/searchApp')
     end
   end
 
@@ -68,7 +76,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
     @d=params[:app][:d]
 
     #search params
-    @patient = Patient.find((User.find(session[:user_id])).patient_id)
+    @patient = Patient.find(params[:id])
     @doctor_types=DoctorType.sorted
     @doctor_name=Doctor.select(:id, :full_name, :doctor_type_id)
     @existing_app = Appointment.where('patient_id = ?', @patient.id).where('status = ?', 1).pluck(:time_slot_id)

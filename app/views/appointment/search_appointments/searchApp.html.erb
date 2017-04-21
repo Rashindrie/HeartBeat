@@ -1,12 +1,37 @@
 <%= render partial: 'patient/sideNav'%>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#submit1').click(function(){
+          /* when the submit button in the modal is clicked, submit the form */
+            $('#searchApp').submit();
+        });
+        $('#submit2').click(function(){
+          /* when the submit button in the modal is clicked, submit the form */
+            $('#addAppointment').submit();
+        });
+        )};
+</script>
 <main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if @app.present? && @app.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@app.errors.count, "error") %> prohibited from updating vital details:
+        </p>
+        <ul>
+          <% @app.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
   <div class="container">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+
     <div class="row">
-      <form class="col s12 m12 l12" action="/appointment/search" method="post">
+      <form class="col s12 m12 l12" id="searchApp" action="/appointment/search/<%= @patient.id %>" method="post">
         <h4>Add Appointment</h4>
 
 
@@ -76,7 +101,7 @@
 
        <div class="row">
           <div class="col m2">
-            <p class="right-align"><button class="btn waves-effect waves-light" type="submit">Search</button></p>
+            <p class="right-align"><button class="btn waves-effect waves-light" id="submit1" type="submit">Search</button></p>
           </div>
 
         </div>
@@ -89,7 +114,7 @@
   <% if @timeslots.blank? == false %>
 
           <div class="row">
-            <form class="col s12 m12 l12" action="/appointment/add" method="post">
+            <form class="col s12 m12 l12" id="addAppointment" action="" method="post">
             <div class="divider"></div>
             <div class="col s12">
               <table class="bordered highlight responsive-table">
@@ -145,7 +170,7 @@
                         <p>Are you sure you want to add an appointment on <%= d.app_date %> for the <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> slot?</p>
                       </div>
                       <div class="modal-footer">
-                        <button class="modal-action modal-close darken-3 btn waves-effect waves-light" onclick="window.location = '/appointment/add/<%= d.id %>'" type="button">Confirm</button>
+                        <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" formaction="/appointment/add/<%= @patient.id %>/<%= d.id %>" id="submit2" type="submit2">Confirm</button>
                       </div>
                     </div>
 
@@ -155,7 +180,7 @@
                         <p>Are you sure you want to add to waiting list on <%= d.app_date %> for the <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> slot?</p>
                       </div>
                       <div class="modal-footer">
-                        <button class="modal-action modal-close darken-3 btn waves-effect waves-light" onclick="window.location = '/waitinglist/add/<%= @patient.id %>/<%= d.id %>'" type="button">Confirm</button>
+                        <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" formaction ="/waitinglist/add/<%= @patient.id %>/<%= d.id %>" id="submit2" type="submit">Confirm</button>
                       </div>
                     </div>
                 <% end %>

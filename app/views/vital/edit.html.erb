@@ -5,6 +5,23 @@
 <% end %>
 
 <main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if @vital.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@vital.errors.count, "error") %> prohibited from updating vital details:
+        </p>
+        <ul>
+          <% @vital.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
 <div class="container " style="width: 85%">
   <div class="row">
     <h4>Update Vitals</h4>
@@ -14,7 +31,7 @@
       <br>
       <div class="col s8" >
 
-        <form class="" action="/vital/update/<%= @patient.id %>" method="post" style="">
+        <form class="" action="/vital/update/<%= @doctor.id %>/<%= @patient.id %>" method="post" style="">
           <input type="hidden" name="_method" value="patch" />
 
 
@@ -84,9 +101,8 @@
               <p class="active" for="bmi">BMI</p>
             </div>
 
-            <div class="input-field col s6">
-              <input id="bmi" value=" <%= @vital.created_at.present? ? '%.2f' % (@vital.weight/(@vital.height/100)) : " " %>" readonly="" type="text" name="vital[bmi]"">
-
+            <div class="col s6">
+              <p><%= @vital.created_at.present? ? '%.2f' % (@vital.weight/(@vital.height/100)) : " " %></p>
             </div>
 
           </div>
@@ -183,7 +199,7 @@
               <button class="btn waves-effect waves-light" type="Submit">Save</button>
             </div>
             <div class="col s3">
-              <a class="btn waves-effect waves-light" href="/vital/<%= @patient.id %>">Back</a>
+              <a class="btn waves-effect waves-light" href="/vital/<%= @doctor.id %>/<%= @patient.id %>">Back</a>
 
             </div>
           </div>

@@ -38,10 +38,11 @@
 </script>
 
 <main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
   <div class="container">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+
     <div class="row">
       <form class="col s12 m12 l12" id="searchDB" action="/doctor/requester/search/<%= @doctor.id %>" method="post">
         <h4>Organ Requesters</h4>

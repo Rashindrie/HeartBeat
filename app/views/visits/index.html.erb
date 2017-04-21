@@ -4,6 +4,10 @@
     <%= render partial: 'patient/sideNav' %>
 <% end %>
 <main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
   <div class="container " style="width: 85%">
     <div class="row">
       <h4>Recent Visits</h4>
@@ -251,7 +255,7 @@
           <div class="row">
             <br/>
             <div class="left-aligned col s5">
-              <a class="btn waves-effect waves-light" href="/search/patients">Back to Search</a>
+              <a class="btn waves-effect waves-light" href="/search/patients/<%= @doctor.id %>">Back to Search</a>
             </div>
 
             <div class="left-aligned col s4">

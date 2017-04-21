@@ -28,11 +28,32 @@
 
 
 <main>
-  <% if !flash[:notice].blank? %>
-      <div class="notice">
-        <%= flash[:notice] %>
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if (@patient.present? && @patient.errors.any?)  ||  (@user.present? && @user.errors.any?)%>
+      <div id="error_explanation">
+        <p>
+          <%= pluralize((@patient.errors.count.to_i + @user.errors.count.to_i), "error") %> prohibited
+          from registering as a valid user:
+        </p>
+        <ul>
+          <% if (@patient.present? && @patient.errors.any?) %>
+              <% @patient.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          <% end %>
+
+          <% if @user.errors.any? %>
+              <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          <% end %>
+        </ul>
       </div>
   <% end %>
+
   <div style="width:100%;height:100%;position: relative;">
     <div class="" style="width:100%;">
       <div class="container">

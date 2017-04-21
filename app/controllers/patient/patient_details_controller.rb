@@ -12,16 +12,16 @@ class Patient::PatientDetailsController < ApplicationController
 
   #update patients details
   def update
-    @patient = Patient.find(User.find(session[:user_id]).patient_id)
+    @patient = Patient.find(params[:id])
 
     if @patient.update_attributes(patient_params)
-      flash[:notice] = "patient updated successfully."
+      flash[:success] = "Update successfull"
       redirect_to :controller => 'patient/patient_details', :action => 'edit', id: @patient.id
 
     else
-      flash[:notice] = "Update unsuccessful."
+      flash.now[:error] = "Update unsuccessful"
       @id = params[:id]
-      render :action => '/patient/profile'
+      render 'patient/patient_details/edit'
     end
   end
 

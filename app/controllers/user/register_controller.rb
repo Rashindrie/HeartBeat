@@ -16,7 +16,6 @@ class User::RegisterController < ApplicationController
 
   def registerEmp
     @doctor_types=DoctorType.all
-    render ('user/register/registerEmp')
   end
 
   def create
@@ -25,25 +24,19 @@ class User::RegisterController < ApplicationController
 
     #create a patient
     if (params[:session][:role]).to_i == 1
-      @patient = Patient.new
-      @patient.full_name = params[:session][:full_name]
-      @patient.first_name = params[:session][:first_name]
-      @patient.middle_name = params[:session][:middle_name]
-      @patient.last_name = params[:session][:last_name]
-      @patient.gender = params[:session][:gender]
-      @patient.date_of_birth = params[:session][:date_of_birth]
-      @patient.telephone = params[:session][:telephone]
-      @patient.email = params[:session][:email]
+      @patient = Patient.new(patient_params)
 
-      if @patient.save
+      if @patient.valid? && @user.valid?
+        @patient.save
         @user.patient_id = @patient.id
         if @user.save
+          flash[:success] = "Signup successfull"
           session[:user_id] = @user.id
           redirect_to controller: '/patient/home', action: 'home', :id => @user.patient_id
         end
       else
         flash.now[:notice] = "Signup Unsuccessfull"
-        redirect_to '/signup/patient'
+        render 'user/register/registerPatient'
       end
 
     end
@@ -51,51 +44,41 @@ class User::RegisterController < ApplicationController
     #create a doctor
     if (params[:session][:role]).to_i == 2
 
-      @doctor = Doctor.new
-      @doctor.full_name = params[:session][:full_name]
-      @doctor.first_name = params[:session][:first_name]
-      @doctor.middle_name = params[:session][:middle_name]
-      @doctor.last_name = params[:session][:last_name]
-      @doctor.gender = params[:session][:gender]
-      @doctor.telephone = params[:session][:telephone]
-      @doctor.email = params[:session][:email]
-      @doctor.doctor_type_id = params[:session][:doctor_type_id]
+      @doctor = Doctor.new(doctor_params)
 
-      if @doctor.save
+      if @doctor.valid? && @user.valid?
+        @doctor.save
         @user.doctor_id = @doctor.id
-        if @user.save
 
-          session[:user_id] = @user.id
-          redirect_to controller: '/doctor/home', action: 'home', :id => @user.doctor_id
-        end
+          if @user.save
+            flash[:success] = "Signup successfull"
+            session[:user_id] = @user.id
+            redirect_to controller: '/doctor/home', action: 'home', :id => @user.doctor_id
+          end
       else
-        flash.now[:notice] = "Signup Unsuccessfull"
-        redirect_to '/signup/emp'
+        @doctor_types=DoctorType.all
+        flash.now[:error] = "Signup Unsuccessfull"
+        render 'user/register/registerEmp'
       end
 
     end
     #create a staffs member
     if (params[:session][:role]).to_i == 3
 
-      @staff = Staff.new
-      @staff.full_name = params[:session][:full_name]
-      @staff.first_name = params[:session][:first_name]
-      @staff.middle_name = params[:session][:middle_name]
-      @staff.last_name = params[:session][:last_name]
-      @staff.gender = params[:session][:gender]
-      @staff.telephone = params[:session][:telephone]
-      @staff.email = params[:session][:email]
+      @staff = Staff.new(staff_params)
 
-      if @staff.save
+      if @staff.valid? && @user.valid?
+        @staff.save
         @user.staff_id = @staff.id
         if @user.save
-
+          flash[:success] = "Signup successfull"
           session[:user_id] = @user.id
           redirect_to controller: '/staff/home', action: 'home', :id => @user.staff_id
         end
       else
-        flash.now[:notice] = "Signup Unsuccessfull"
-        redirect_to '/signup/emp'
+        @doctor_types=DoctorType.all
+        flash.now[:error] = "Signup Unsuccessfull"
+        render 'user/register/registerEmp'
       end
     end
 
@@ -114,7 +97,7 @@ class User::RegisterController < ApplicationController
   end
 
   def doctor_params
-    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email)
+    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email, :doctor_type_id)
   end
 
   def staff_params

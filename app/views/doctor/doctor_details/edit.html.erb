@@ -1,10 +1,26 @@
 <%= render partial: 'doctor/sideNav', :locals => { :doctor_id => params[:id] } %>
 
 <main style="padding-left: 240px">
+
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if @doctor.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@doctor.errors.count, "error") %> prohibited
+          from updating details:
+        </p>
+        <ul>
+          <% @doctor.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
   <div class="container">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+
     <form  action="/doctor/update/<%= @doctor.id %>" method="post">
       <input type="hidden" name="_method" value="patch" />
 

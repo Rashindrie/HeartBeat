@@ -2,6 +2,22 @@
     <%= render partial: 'doctor/sideNav' %>
 <% end %>
 <main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <% if @visit.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@visit.errors.count, "error") %> prohibited
+          from updating details:
+        </p>
+        <ul>
+          <% @visit.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
   <div class="container " style="width: 85%">
     <div class="row">
       <h4>Add new visit</h4>

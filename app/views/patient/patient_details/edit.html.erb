@@ -2,13 +2,29 @@
 
 <main style="padding-left: 240px">
 
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if @patient.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@patient.errors.count, "error") %> prohibited
+          from updating details:
+        </p>
+        <ul>
+          <% @patient.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
     <div class="container">
-      <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
+
       <div class="row">
 
-          <form  action="/patient/update" method="post">
+          <form  action="/patient/update/<%= @patient.id %>" method="post">
             <input type="hidden" name="_method" value="patch" />
 
 
@@ -93,13 +109,6 @@
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="input-field col s12 m5">
-                      <i class="material-icons prefix">email</i>
-                      <input id="email" type="email" name="patient[email]"  value="<%= @patient.email %>" class="validate">
-                      <label class="active" data-error="wrong" data-success="right">Email</label>
-                    </div>
-                  </div>
 
 
 

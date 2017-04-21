@@ -28,12 +28,23 @@
 </script>
 
 <div style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <% if @time_slot.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@time_slot.errors.count, "error") %> prohibited
+          from adding time slot:
+        </p>
+        <ul>
+          <% @time_slot.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
   <div class="container " style="width: 85%">
-
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
-
     <h4>Add Availability</h4>
     <div class="divider"></div><br>
 

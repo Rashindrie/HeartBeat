@@ -1,10 +1,11 @@
 <%= render partial: 'patient/sideNav'%>
 
 <main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
   <div class="container">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+
     <div class="row">
       <form class="col s12 m12 l12" action="/appointment/search" method="post">
         <h4>My Appointments</h4>

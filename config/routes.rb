@@ -20,18 +20,18 @@ Rails.application.routes.draw do
 
 
   #appointment routes
-  get '/appointment/search', to: 'appointment/search_appointments#searchApp'
+  get '/appointment/search/:id', to: 'appointment/search_appointments#searchApp'
 
-  post '/appointment/search', to: 'appointment/search_appointments#search'
-  get '/appointment/add/:id', to: 'appointment/search_appointments#create'
-  get '/waitinglist/add/:patient_id/:id', to: 'appointment/search_appointments#add'
+  post '/appointment/search/:id', to: 'appointment/search_appointments#search'
+  post '/appointment/add/:patient_id/:id', to: 'appointment/search_appointments#create'
+  post '/waitinglist/add/:patient_id/:id', to: 'appointment/search_appointments#add'
 
   #patients routes
   get '/patient/home/:id', to: 'patient/home#home'
   get '/patient/profile/:id', to: 'patient/patient_details#edit'
-  patch '/patient/update', to: 'patient/patient_details#update'
+  patch '/patient/update/:id', to: 'patient/patient_details#update'
   get '/patient/appointments/:id', to: 'patient/view_appointments#index'
-  get '/appointment/delete/:patient_id/:id', to: 'patient/view_appointments#update'
+  patch '/appointment/delete/:patient_id/:id', to: 'patient/view_appointments#update'
   get '/appointment/:patient_id/:id', to: 'patient/view_appointments#show'
   get '/visits/:id', to: 'visits#index'
 
@@ -54,9 +54,9 @@ Rails.application.routes.draw do
 
 
   #doctor vitals routes
-  get '/vital/:id', to: 'vital#show'
-  get '/vital/edit/:id', to: 'vital#edit'
-  patch '/vital/update/:id', to: 'vital#update'
+  get '/vital/:doctor_id/:id', to: 'vital#show'
+  get '/vital/edit/:doctor_id/:id', to: 'vital#edit'
+  patch '/vital/update/:doctor_id/:id', to: 'vital#update'
 
   #doctor visit routes
   get '/visit/:doctor_id/:id', to: 'visits#index'
@@ -64,13 +64,13 @@ Rails.application.routes.draw do
   post '/visit/add/:doctor_id/:id', to: 'visits#create'
 
   #doctor view patients
-  get '/search/patients', to: 'patient/search_patients#index'
+  get '/search/patients/:id', to: 'patient/search_patients#index'
   get '/search/patients/:doctor_id/:id', to: 'patient/search_patients#show'
 
 
   #doctor view appointments
-  get '/view/appointments', to: 'doctor/view_appointments#show'
-  post '/view/appointments', to: 'doctor/view_appointments#searchApp'
+  get '/view/appointments/:id', to: 'doctor/view_appointments#show'
+  post '/search/appointments/:id', to: 'doctor/view_appointments#searchApp'
 
   #staff routes
   get '/staff/home/:id', to: 'staff/home#home'

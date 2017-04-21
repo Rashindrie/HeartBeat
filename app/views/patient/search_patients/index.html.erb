@@ -1,11 +1,11 @@
 <%= render partial: 'doctor/sideNav'%>
 
 <main style="padding-left: 240px">
-
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
   <div class="container " style="width: 85%">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+
     <div class="row">
       <form class="col s12 m12 l12" >
         <h4>Search Patients</h4>
@@ -39,7 +39,7 @@
               <tr>
                 <td><%= d.full_name %></td>
                 <td><a href="/search/patients/<%= @doctor.id %>/<%= d.id %>">Profile</a></td>
-                <td><a href="/vital/<%= d.id %>">Vitals</a></td>
+                <td><a href="/vital/<%= @doctor.id %>/<%= d.id %>">Vitals</a></td>
                 <td><a href="/visit/<%= @doctor.id %>/<%= d.id %>">Recent Visits</a></td>
               </tr>
               <% end %>

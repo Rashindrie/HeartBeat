@@ -10,7 +10,7 @@ class User::LogInController < ApplicationController
     @user = User.find_by_email(params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
-      flash[:notice] = "You are now logged in"
+      flash[:success] = "Logged in"
       #redirect_to '/patient/home'
 
 

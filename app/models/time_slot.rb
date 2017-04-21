@@ -16,6 +16,20 @@ class TimeSlot < ApplicationRecord
       where("from_time < ?", to_time).where("to_time > ?", from_time).from_date(date).from_doctor(doctor_id).count
   }
 
+  validates :from_time, :presence => true
+
+  validates :to_time, :presence => true
+
+  validates :app_date, :presence => true
+
+  validate :to_time_should_be_after_from_time
+
+  def to_time_should_be_after_from_time
+    if to_time.present? && from_time.present? && to_time <= from_time + 30.minutes
+      errors.add(:to_time, "should be at least 30 mins after From time")
+    end
+  end
+
   def start_time
     app_date.to_datetime
   end

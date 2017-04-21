@@ -39,11 +39,48 @@
 
 
 <main>
-  <% if !flash[:notice].blank? %>
-      <div class="notice">
-        <%= flash[:notice] %>
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if (@doctor.present? && @doctor.errors.any?) ||  (@staff.present? && @staff.errors.any?) ||  (@user.present? && @user.errors.any?) %>
+      <div class="error_explanation">
+
+        <ul>
+          <% if (@doctor.present? && @doctor.errors.any?) %>
+              <p>
+                <%= pluralize((@doctor.errors.count), "error") %> prohibited
+                from registering as a valid user:
+              </p>
+              <% @doctor.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          <% end %>
+
+          <% if (@staff.present? && @staff.errors.any?)  %>
+              <p>
+                <%= pluralize((@staff.errors.count), "error") %> prohibited
+                from registering as a valid user:
+              </p>
+              <% @staff.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          <% end %>
+
+          <% if (@user.present? && @user.errors.any?) %>
+              <p>
+                <%= pluralize((@user.errors.count), "error") %> prohibited
+                from registering as a valid user:
+              </p>
+              <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          <% end %>
+        </ul>
       </div>
   <% end %>
+
+
   <div style="width:100%;height:100%;position: relative;">
     <div class="" style="width:100%;">
       <div class="container">

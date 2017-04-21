@@ -40,11 +40,25 @@
 <%= render partial: 'patient/sideNav', :locals => { :patient_id => params[:id] } %>
 
 <main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
 
+
+  <% if @p.present? && @p.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@p.errors.count, "error") %> prohibited from updating vital details:
+        </p>
+        <ul>
+          <% @p.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
   <div class="container">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+
 
     <h4>Donor Register</h4>
     <div class="divider"></div>
@@ -65,7 +79,11 @@
                 </div>
 
                 <div class="input-field col s6">
-                  <input type="checkbox" id="blood" checked="<%= @patient_blood.blank? ? "" : "checked" %>" name=organ[blood] class="filled-in"/>
+                  <% if @patient_blood.blank? %>
+                  <input type="checkbox" id="blood" name=organ[blood] class="filled-in"/>
+                  <% else %>
+                  <input type="checkbox" id="blood" checked="checked" name=organ[blood] class="filled-in"/>
+                  <% end %>
                   <label for="blood"></label>
 
                 </div>
@@ -183,7 +201,7 @@
           <p>This registration is a binding document. You can update or specify donation preferences at any time.</p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-success success" type="submit" data-target="confirm" id="submit" >Agree</button>
+          <button class="btn-flat btn-success success" type="submit" id="submit" >Agree</button>
         </div>
       </div>
       </form>

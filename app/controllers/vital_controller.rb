@@ -7,7 +7,7 @@ class VitalController < ApplicationController
   #get patients vitals
   def show
     if current_user.doctor?
-      @doctor =Doctor.find(User.find(session[:user_id]).doctor_id)
+      @doctor =Doctor.find(params[:doctor_id])
       @doctor_type = DoctorType.find(@doctor.doctor_type_id)
       @patient = Patient.find(params[:id])
       @age=age(@patient.date_of_birth)
@@ -33,7 +33,7 @@ class VitalController < ApplicationController
 
   #edit patients vital page
   def edit
-    @doctor =Doctor.find(User.find(session[:user_id]).doctor_id)
+    @doctor =Doctor.find(params[:doctor_id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
     @patient = Patient.find(params[:id])
     @age=age(@patient.date_of_birth)
@@ -54,21 +54,30 @@ class VitalController < ApplicationController
 
   #update patients vitals
   def update
-    @doctor =Doctor.find(User.find(session[:user_id]).doctor_id)
-
+    @doctor =Doctor.find(params[:doctor_id])
     @patient = Patient.find(params[:id])
     @vital = Vital.new(vital_params)
     @vital.patient_id = params[:id]
     @vital.doctor_id =@doctor.id
 
 
-    if @vital.save
+    if @vital.valid?
+      @vital.save
       flash[:success] = "Vitals updated successfully."
-      redirect_to :controller => 'vital', :action => 'show', :id => params[:id]
+      redirect_to :controller => 'vital', :action => 'show', :id => params[:id], :doctor_id => @doctor.id
     else
-      flash[:error] = "Update unsuccessful."
+      flash.now[:error] = "Update unsuccessful."
       @id = params[:id]
-      redirect_to :controller => 'vital', :action => 'edit', :id => params[:id]
+      @doctor_type = DoctorType.find(@doctor.doctor_type_id)
+      @age=age(@patient.date_of_birth)
+
+      @blood_groups= {"A+" => 0, "A-" => 1, "B+" => 2, "B-" => 3, "O+" => 4, "O-" => 5}
+
+
+      @edit_doctor=Doctor.find_by_id(@vital.doctor_id)
+      @id=params[:id]
+      render('/vital/edit')
+
     end
   end
 

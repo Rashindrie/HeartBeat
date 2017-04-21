@@ -4,5 +4,6 @@ class OrgansRequesterPatient < ApplicationRecord
   belongs_to :patient
   belongs_to :doctor, optional: true
 
-  #validates :status
+  validates :status,  :presence => true
+
 end

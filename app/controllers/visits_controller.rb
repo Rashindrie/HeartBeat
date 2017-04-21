@@ -18,13 +18,19 @@ class VisitsController < ApplicationController
     @visit.patient_id=params[:id]
     @visit.doctor_id=params[:doctor_id]
 
-    if @visit.save
+    if @visit.valid?
+      @vital.save
       flash[:success] = "Visit added successfully."
       redirect_to :controller => 'visits', :action => 'index', :doctor_id => params[:doctor_id], :id => params[:id]
     else
-      flash[:error] = "Action unsuccessful. Please try again."
+      flash.now[:error] = "Action unsuccessful. Please try again."
       @id = params[:id]
-      redirect_to :controller => 'visit', :action => 'new', :doctor_id => params[:doctor_id], :id => params[:id]
+      @doctor =Doctor.find(params[:doctor_id])
+      @doctor_type = DoctorType.find(@doctor.doctor_type_id)
+      @patient = Patient.find(params[:id])
+      @age=age(@patient.date_of_birth)
+      render('/visits/new')
+
     end
 
   end
