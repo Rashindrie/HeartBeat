@@ -18,4 +18,5 @@
 
 #Ignore local env data
 
-/config/local_env.yml
+local_env.yml
+my_local_env.yml
