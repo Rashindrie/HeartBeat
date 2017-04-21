@@ -11,11 +11,13 @@ class User < ApplicationRecord
   validates_format_of :email, :with => EMAIL_REGEX
   validates_uniqueness_of :email
   validates_length_of :email,  :maximum => 100
-  validates_confirmation_of :email
-  validates_presence_of :password
-  validates_length_of :password, :within => 6..100
-  validates_confirmation_of :password
-
+  validates_confirmation_of :email,
+                            :unless => Proc.new { |a| a.email.blank? }
+  validates_presence_of :password_digest
+  validates_length_of :password_digest, :within => 6..100
+  validates_confirmation_of :password_digest,
+                            :unless => Proc.new { |a| a.password_digest.blank? }
+  validates :status, :inclusion => { :in => [true, false] }
 
 
   def admin?

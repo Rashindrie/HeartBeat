@@ -11,7 +11,10 @@ Rails.application.routes.draw do
 
   #signup routes
   get '/signup/patient', to: 'user/register#registerPatient'
-  get '/signup/emp', to: 'user/register#registerEmp'
+  get '/signup/emp/:id', to: 'admin/signup_emp#registerEmp'
+  get '/signup/admin/:id', to: 'admin/signup_emp#registerAdmin'
+  post '/register/emp/:id', to: 'admin/signup_emp#create'
+  post '/register/admin/:id', to: 'admin/signup_emp#create'
   post '/signup', to: 'user/register#create'
 
 
@@ -88,9 +91,11 @@ Rails.application.routes.draw do
   get '/timeslot/search/:id', to: 'staff/view_time_slots#search'
   patch '/timeslot/cancel/:id', to: 'staff/view_time_slots#update'
 
-  #resources
+  #admin routes
 
-
+  get 'admin/home/:id', to: 'admin/home#home'
+  get '/admin/users/:id', to: 'admin/archive_users#show'
+  patch '/admin/users/update/:admin_id/:id', to: 'admin/archive_users#update'
 
 
 end

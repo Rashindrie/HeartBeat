@@ -1,0 +1,13 @@
+
+<%= render partial: 'admin/sideNav' %>
+<main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <div class="container">
+
+    <br/><br/><br/>
+    <h5>Welcome to your personalised Patient Doctor Management System </h5>
+
+  </div>
+</main>

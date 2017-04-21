@@ -1,0 +1,129 @@
+
+<%= render partial: 'admin/sideNav' %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#submit').click(function(){
+          /* when the submit button in the modal is clicked, submit the form */
+            $('#archiveUser').submit();
+        });
+        $('.modal').modal();
+    )};
+</script>
+
+<main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if(@user.present? && @user.errors.any?) %>
+      <div class="error_explanation" style="padding-left: 50px">
+
+        <ul>
+          <% if (@user.present? && @user.errors.any?) %>
+              <p>
+                <%= pluralize((@user.errors.count), "error") %> prohibited
+                from updating user:
+              </p>
+              <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <div class="container">
+
+    <br/><br/>
+    <div class="row">
+      <form class="col s12 m12 l12" id="archiveUser" method="post">
+        <input type="hidden" name="_method" value="patch" />
+        <h4>Aministrators</h4>
+
+    <% if defined? @administrators %>
+        <% if @administrators.blank? == false %>
+
+
+
+                <div class="col s12">
+                  <table class="bordered highlight responsive-table">
+                    <thead>
+                    <tr>
+                      <th data-field="id">Email</th>
+                      <th data-field="name">Status</th>
+                      <th data-field="price">Action</th>
+
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <% @administrators.each do |d| %>
+                        <tr>
+
+                          <td><%= d.email %></td>
+                          <td><%= d.status? ? "Active" : "Inactive" %></td>
+
+
+
+                          <% if d.status == true %>
+
+                              <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="archive/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Archive admin" id="submit" type="button"><i class="material-icons prefix">remove</i></button></td>
+                          <% elsif d.status == false %>
+
+                              <td><button class="green btn-floating waves-effect waves-light btn tooltipped" data-target="add/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add as admin" id="submit" type="button"><i class="material-icons prefix">add</i></button></td>
+                          <% end %>
+
+
+
+
+                        <div id="archive/<%= d.id %>" class="modal">
+                          <div class="modal-content">
+                            <h4>Archive User</h4>
+                            <p>Are you sure you want to archive user <%= d.email %> ?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" value="0" name="commit" formaction="/admin/users/update/<%= @admin.id %>/<%= d.id %>" id="submit" type="submit">Confirm</button>
+                          </div>
+                        </div>
+
+                        <div id="add/<%= d.id %>" class="modal">
+                          <div class="modal-content">
+                            <h4>Add user</h4>
+                            <p>Are you sure you want to un-archive <%= d.email %> ?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" value="1" name="commit" formaction ="/admin/users/update/<%= @admin.id %>/<%= d.id %>" id="submit" type="submit">Confirm</button>
+                          </div>
+                        </div>
+                        </tr>
+                    <% end %>
+
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+
+
+        <% else %>
+            <p>
+              <%= "None" %></option>
+              <%= "None"  %></option>
+              <%= "None"  %></option>
+            </p>
+        <% end %>
+
+
+    <% end %>
+
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+          $('.modal').modal();
+
+          });
+  </script>
+</main>
