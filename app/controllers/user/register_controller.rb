@@ -35,7 +35,7 @@ class User::RegisterController < ApplicationController
           redirect_to controller: '/patient/home', action: 'home', :id => @user.patient_id
         end
       else
-        flash.now[:notice] = "Signup Unsuccessfull"
+        flash.now[:error] = "Signup Unsuccessfull"
         render 'user/register/registerPatient'
       end
 
@@ -89,7 +89,7 @@ class User::RegisterController < ApplicationController
 
   private
   def user_params
-    params.require(:session).permit(:email, :password, :role)
+    params.require(:session).permit(:email, :password, :role, :password_confirmation)
   end
 
   def patient_params

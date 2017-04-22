@@ -2,7 +2,7 @@ class UserMailer < ApplicationMailer
   default from: 'support@heartbeat.com'
 
   def notify_cancel(user)
-    @user = Patient.find(1)
+    @user = user
     @app=Appointment.select('appointments.time_slot_id AS time_slot_id').where('patient_id =?', @user.id).order('updated_at DESC').limit(1)
     @timeslot=TimeSlot.find(@app[0].time_slot_id)
     @doctor=Doctor.find(@timeslot.doctor_id)

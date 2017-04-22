@@ -97,7 +97,7 @@ Rails.application.routes.draw do
   get '/admin/users/:id', to: 'admin/archive_users#show'
   patch '/admin/users/update/:admin_id/:id', to: 'admin/archive_users#update'
 
-
+  resources :account_activations, only: [:edit]
 end
 
 

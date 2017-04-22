@@ -6,7 +6,7 @@ class AppointmentTest < ActiveSupport::TestCase
    def test_appointment
 
       appointment_one = Appointment.new :time_slot_id => appointments(:one).time_slot_id, 
-         :patient_id => appointments(:one).patient_id
+         :patient_id => appointments(:one).patient_id, :status => appointments(:one).status, :registered => appointments(:one).registered
 
 	#assertion to test that saving a appointment is successful
       assert appointment_one.save 

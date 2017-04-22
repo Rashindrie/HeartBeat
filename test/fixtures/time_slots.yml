@@ -11,6 +11,7 @@ one:
  to_time: '12:00'
  doctor_id: 1
  staff_id: 1
+ status: 1
 two:
  id: 2
  app_date: '2017-04-21'
@@ -18,3 +19,4 @@ two:
  to_time: '12:00'
  doctor_id: 1
  staff_id: 1
+ status: 1

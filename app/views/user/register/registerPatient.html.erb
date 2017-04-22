@@ -33,7 +33,7 @@
   <% end %>
 
   <% if (@patient.present? && @patient.errors.any?)  ||  (@user.present? && @user.errors.any?)%>
-      <div id="error_explanation">
+      <div class="error_explanation">
         <p>
           <%= pluralize((@patient.errors.count.to_i + @user.errors.count.to_i), "error") %> prohibited
           from registering as a valid user:
@@ -165,6 +165,16 @@
                           <i class="material-icons prefix">lock</i>
                           <input id="password" type="password" name="session[password]" class="validate">
                           <label for="password">Password</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="pwd" class="section scrollspy">
+                      <div class="row">
+                        <div class="input-field col s12 m5">
+                          <i class="material-icons prefix">lock</i>
+                          <input id="password" type="password" name="session[password_confirmation]" class="validate">
+                          <label for="password">Re-enter Password</label>
                         </div>
                       </div>
                     </div>
