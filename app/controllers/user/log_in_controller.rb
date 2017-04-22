@@ -51,8 +51,8 @@ class User::LogInController < ApplicationController
     if logged_in?
       session[:user_id] = nil
       flash[:notice] = 'logged out'
-      redirect_to('/login')
-      end
+    end
+    redirect_to('/login')
   end
 
 

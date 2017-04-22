@@ -6,11 +6,14 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def account_activation
-
-    UserMailer.account_activation(User.find(12))
+    user = User.find(12)
+    user.activation_token = User.new_token
+    UserMailer.account_activation(user)
   end
 
   def password_reset
-    UserMailer.password_reset(User.first)
+    user = User.first
+    user.reset_token = User.new_token
+    UserMailer.password_reset(user)
   end
 end

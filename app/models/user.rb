@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :activation_token
+  attr_accessor :activation_token, :reset_token
 
   has_secure_password
 
@@ -23,10 +23,11 @@ class User < ApplicationRecord
   validates_confirmation_of :email,
                             :unless => Proc.new { |a| a.email.blank? }
 
-  validates_presence_of :password_digest
-  validates_length_of :password_digest, :within => 6..100
-  validates_confirmation_of :password_digest,
-                            :unless => Proc.new { |a| a.password_digest.blank? }
+  validates :password_digest,
+                        presence: true,
+                        confirmation: {unless: Proc.new { |a| a.password_digest.blank? }}
+
+  validates_length_of :password, :within => 6..100
 
   validates :status, :inclusion => { :in => [true, false] }
 
@@ -78,6 +79,13 @@ class User < ApplicationRecord
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # Sets the password reset attributes.
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest,  User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
   end
 
   # Sends password email.

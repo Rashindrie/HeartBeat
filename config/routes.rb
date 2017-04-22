@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
 
+  get 'password_change/new'
+
+  get 'password_change/edit'
+
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   root 'welcome#index'
   get 'admin', :to => 'users#index'
 
@@ -98,6 +106,8 @@ Rails.application.routes.draw do
   patch '/admin/users/update/:admin_id/:id', to: 'admin/archive_users#update'
 
   resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :password_change, only: [:new, :update]
 end
 
 
