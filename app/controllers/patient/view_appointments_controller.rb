@@ -9,6 +9,11 @@ class Patient::ViewAppointmentsController < ApplicationController
                       .select('appointments.id AS app_id, appointments.status AS status, first_name AS first_name,last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time')
                       .where('appointments.patient_id' => @patient.id)
                       .order('app_date DESC')
+
+    if @appointments.blank?
+      flash.now[:notice] = "No Schedueld Appointments"
+    end
+
   end
 
   def show

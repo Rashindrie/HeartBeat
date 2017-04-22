@@ -4,8 +4,9 @@
       <img src="http://www.tba3.net/images/header-bg.jpg">
     </div>
     <div class="circle responsive-img valign profile-image" style="">
-      <img style="height:80px; width:80px;"
-      <%= image_tag("admin.png", :alt => "rss feed") %>
+
+      <%= gravatar_for @patient %>
+
     </div>
 
     <p><span class="white-text name"><%= @admin.email %></span></p>

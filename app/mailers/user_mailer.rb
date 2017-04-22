@@ -10,15 +10,21 @@ class UserMailer < ApplicationMailer
 
 
     email_with_name = %("#{@user.first_name}" <#{@user.email}>)
-    mail(to: email_with_name, subject: "Important: Appointment on #{@timeslot.app_date} Cancelled")
+    mail(to: email_with_name, subject: "HeartBeat: Appointment on #{@timeslot.app_date} Cancelled")
   end
 
-  def password_reset
-
+  def password_reset(user)
+    @user = user
+    @a = (Patient.find(user.patient_id)) || (Doctor.find(user.doctor_id)) || (Staff.find(user.staff_id))
+    email_with_name = %("#{@a.first_name}" <#{@user.email}>)
+    mail(to: email_with_name, subject: "HeartBeat: Reset your password")
   end
 
-  def welcome_user
-
+  def account_activation(user)
+    @user = user
+    @a = (Patient.find(user.patient_id)) || (Doctor.find(user.doctor_id)) || (Staff.find(user.staff_id))
+    email_with_name = %("#{@a.first_name}" <#{@user.email}>)
+    mail(to: email_with_name, subject: "HeartBeat: Account Activation")
   end
 
 end

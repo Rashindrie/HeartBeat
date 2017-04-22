@@ -11,6 +11,7 @@ class User::RegisterController < ApplicationController
   end
 
   def registerPatient
+    @user = User.new
     render ('user/register/registerPatient')
   end
 
@@ -19,20 +20,21 @@ class User::RegisterController < ApplicationController
   end
 
   def create
-
     @user = User.new(user_params)
 
     #create a patient
     if (params[:session][:role]).to_i == 1
       @patient = Patient.new(patient_params)
 
-      if @patient.valid? && @user.valid?
+      @user.patient = @patient
+
+      if @user.valid?
         @patient.save
         @user.patient_id = @patient.id
         if @user.save
-          flash[:success] = "Signup successfull"
-          session[:user_id] = @user.id
-          redirect_to controller: '/patient/home', action: 'home', :id => @user.patient_id
+          @user.send_activation_email
+          flash[:notice] = "Please check your email to activate your account."
+          redirect_to root_url
         end
       else
         flash.now[:error] = "Signup Unsuccessfull"
@@ -40,48 +42,6 @@ class User::RegisterController < ApplicationController
       end
 
     end
-
-    #create a doctor
-    if (params[:session][:role]).to_i == 2
-
-      @doctor = Doctor.new(doctor_params)
-
-      if @doctor.valid? && @user.valid?
-        @doctor.save
-        @user.doctor_id = @doctor.id
-
-          if @user.save
-            flash[:success] = "Signup successfull"
-            session[:user_id] = @user.id
-            redirect_to controller: '/doctor/home', action: 'home', :id => @user.doctor_id
-          end
-      else
-        @doctor_types=DoctorType.all
-        flash.now[:error] = "Signup Unsuccessfull"
-        render 'user/register/registerEmp'
-      end
-
-    end
-    #create a staffs member
-    if (params[:session][:role]).to_i == 3
-
-      @staff = Staff.new(staff_params)
-
-      if @staff.valid? && @user.valid?
-        @staff.save
-        @user.staff_id = @staff.id
-        if @user.save
-          flash[:success] = "Signup successfull"
-          session[:user_id] = @user.id
-          redirect_to controller: '/staff/home', action: 'home', :id => @user.staff_id
-        end
-      else
-        @doctor_types=DoctorType.all
-        flash.now[:error] = "Signup Unsuccessfull"
-        render 'user/register/registerEmp'
-      end
-    end
-
 
   end
 
@@ -96,11 +56,4 @@ class User::RegisterController < ApplicationController
     params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email, :date_of_birth)
   end
 
-  def doctor_params
-    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email, :doctor_type_id)
-  end
-
-  def staff_params
-    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email)
-  end
 end

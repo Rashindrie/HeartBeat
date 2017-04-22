@@ -36,18 +36,20 @@ class Admin::SignupEmpController < ApplicationController
 
       @doctor = Doctor.new(doctor_params)
 
-      if @doctor.valid? && @user.valid?
+      @user.doctor=@doctor
+      if @user.valid?
         @doctor.save
         @user.doctor_id = @doctor.id
 
         if @user.save
-          flash[:success] = "Doctor Register successfull"
+          @user.send_activation_email
+          flash[:success] = "Doctor Registration successfull. Activation mail sent."
 
           return redirect_to controller: '/admin/signup_emp', action: 'registerEmp', :id => params[:id]
         end
       else
         @doctor_types=DoctorType.all
-        flash.now[:error] = "Doctor Register Unsuccessfull"
+        flash.now[:error] = "Registration Unsuccessfull. Please try again."
         render 'admin/signup_emp/registerEmp'
       end
 
@@ -58,16 +60,19 @@ class Admin::SignupEmpController < ApplicationController
 
       @staff = Staff.new(staff_params)
 
-      if @staff.valid? && @user.valid?
+      @user.staff = @staff
+
+      if @user.valid?
         @staff.save
         @user.staff_id = @staff.id
         if @user.save
-          flash[:success] = "Clinical staff Register successfull"
+          @user.send_activation_email
+          flash[:success] = "Clinical Staff Registration successfull. Activation mail sent."
           redirect_to controller: '/admin/signup_emp', action: 'registerEmp', :id => params[:id]
         end
       else
         @doctor_types=DoctorType.all
-        flash.now[:error] = "Clinical staff Register Unsuccessfull"
+        flash.now[:error] = "Registration Unsuccessfull. Please try again."
         render 'admin/signup_emp/registerEmp'
       end
     end
