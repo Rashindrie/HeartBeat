@@ -1,5 +1,23 @@
 <%= render partial: 'patient/sideNav', :locals => { :patient_id => params[:id] } %>
+<script type="text/javascript">
+    $(document).ready(function() {
 
+
+        $('.datepicker').pickadate(
+            {
+                selectYears: 100,
+                selectMonths: true,
+                max: new Date(),
+                closeOnSelect: true,
+                onSet: function (ele) {
+                    if (ele.select) {
+                        this.close();
+                    }
+                }
+            });
+    });
+
+</script>
 <main style="padding-left: 240px">
 
   <% flash.each do |key, value| %>
@@ -31,130 +49,112 @@
               <h4>Edit Details</h4>
 
             <div class="divider"></div>
+            <br>
 
-              <div class="section">
-                <div class="row">
+            <div class="row">
+              <div class="col s1">
+                <i class="material-icons prefix">account_circle</i>
+              </div>
+              <div class="col s11">
+                <div class="input-field col s12">
+                  <input id="full_name" type="text" name="patient[full_name]" value="<%= @patient.full_name %>"  class="validate">
+                  <label class="active" for="full_name" >Full Name</label>
+                </div>
+              </div>
 
-                  <div class="input-field col s12">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input id="full_name" type="text" name="patient[full_name]" value="<%= @patient.full_name %>"  class="validate">
-                    <label class="active" for="full_name" >Full Name</label>
-                  </div>
+            </div>
 
-
+            <div class="row">
+              <div class="col s1">
+                <i class="material-icons prefix">account_circle</i>
+              </div>
+              <div class="col s11">
+                <div class="input-field col s12 m6 l4">
+                  <input id="first_name" type="text" name="patient[first_name]" value="<%= @patient.first_name %>" class="validate">
+                  <label class="active" for="first_name">First Name</label>
                 </div>
 
-                  <div class="row">
+                <div class="input-field col s12 m6 l4">
+                  <input id="middle_name" type="text" name="patient[middle_name]" value="<%= @patient.middle_name %>" class="validate">
+                  <label class="active" for="middle_name">Middle Name</label>
+                </div>
 
-                    <div class="input-field col s12 m6 l4">
-                      <i class="material-icons prefix">account_circle</i>
-                      <input id="first_name" type="text" name="patient[first_name]" value="<%= @patient.first_name %>" class="validate">
+                <div class="input-field col s12 m6 l4">
+                  <input id="last_name" type="text" name="patient[last_name]" value="<%= @patient.last_name %>" class="validate">
+                  <label class="active" for="last_name">Last Name</label>
+                </div>
+              </div>
+            </div>
 
-                      <label class="active" for="first_name">First Name</label>
+            <div class="row">
+              <div class="col s1">
+                <i class="material-icons prefix">wc</i>
+              </div>
+              <div class="col s11">
+                <div class="col s12 m4 left aligned">
+                  <p>Gender</p>
+                </div>
+                <% if @patient.gender %>
+                    <div class="col s12 m3 left aligned">
+                      <input class="with-gap" name="patient[gender]" value="0" type="radio" id="male" "/>
+                      <label class="active" for="male">Male</label>
                     </div>
-
-                    <div class="input-field col s12 m6 l4">
-                      <input id="middle_name" type="text" name="patient[middle_name]" value="<%= @patient.middle_name %>" class="validate">
-                      <label class="active" for="middle_name">Middle Name</label>
+                    <div class="col s12 m4 left aligned">
+                      <input class="with-gap" name="patient[gender]" value="1" type="radio" id="female" checked="checked"/>
+                      <label class="active" for="female">Female</label>
                     </div>
-
-                    <div class="input-field col s12 m6 l4">
-                      <input id="last_name" type="text" name="patient[last_name]" value="<%= @patient.last_name %>" class="validate">
-                      <label class="active" for="last_name">Last Name</label>
+                <% else %>
+                    <div class="col s12 m3 left aligned">
+                      <input class="with-gap" name="patient[gender]" value="0" type="radio" id="male" checked="checked"/>
+                      <label class="active" for="male">Male</label>
                     </div>
-
-                  </div>
-
-                  <div class="row">
-                    <div class="col s12">
-                      <i class="material-icons prefix">wc</i>
-                      <div class="col s12">
-
-
-                        <div class="col s6 left aligned">
-                          <input class="with-gap" name="patient[gender]" value="0" type="radio" id="male" checked="<% @patient.gender==false ? "checked" : " " %>"/>
-                          <label class="active" for="male">Male</label>
-                        </div>
-                        <div class="col s6 left aligned">
-                          <input class="with-gap" name="patient[gender]" value="1" type="radio" id="female" checked="<% @patient.gender==true ? "checked" : " " %>"/>
-                          <label class="active" for="female">Female</label>
-                        </div>
-
-                      </div>
+                    <div class="col s12 m4 left aligned">
+                      <input class="with-gap" name="patient[gender]" value="1" type="radio" id="female" />
+                      <label class="active" for="female">Female</label>
                     </div>
-                  </div>
-
-                  <br>
-
-
-                  <div class="row">
-
-                    <div class="input-field col s12 l5">
-                      <i class="material-icons prefix">today</i>
-
-                      <input id="date_of_birth" value="<%= @patient.date_of_birth %>" type="date" name="patient[date_of_birth]" class="datepicker">
-                      <label class="active" for="date_of_birth">Date of Birth</label>
-                    </div>
-                  </div>
-
-
-
-
-
-                  <div class="row">
-                    <div class="input-field col s12 l5">
-                      <i class="material-icons prefix">phone</i>
-                      <input id="telephone" type="tel" name="patient[telephone]" value="<%= @patient.telephone %>"  class="validate">
-                      <label class="active" for="telephone">Telephone</label>
-                    </div>
-                  </div>
-
-
-
-
-
-
-                  <div class="divider"></div>
-
-
-                    <div id="submit" class="section scrollspy">
-                      <div class="row">
-                        <div class="col s4">
-                          <button class="btn waves-effect waves-light" type="submit" id="submit" >Update Details</button>
-
-                        </div>
-                      </div>
-
-                  </div>
-
-
-
+                <% end %>
 
               </div>
             </div>
 
-          </form>
+            <div class="row ">
+              <div class="col s1">
+                <i class="material-icons prefix">today</i>
+              </div>
+              <div class="col s11">
+                <div class="input-field col s12 l6">
+                  <input id="date_of_birth" value="<%= @patient.date_of_birth %>" type="date" name="patient[date_of_birth]" class="datepicker">
+                  <label class="active" for="date_of_birth">Date of Birth</label>
+                </div>
+              </div>
+
+            </div>
 
 
+            <div class="row ">
+              <div class="col s1">
+                <i class="material-icons prefix">phone</i>
+              </div>
+              <div class="col s11">
+                <div class="input-field col s12 l6">
+                  <input id="telephone" type="tel" name="patient[telephone]" value="<%= @patient.telephone %>"  class="validate">
+                  <label class="active" for="telephone">Telephone</label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="divider"></div><br>
+
+            <div class="row">
+              <div class="col s6 m3">
+                <button class="btn waves-effect waves-light col s12" type="submit" id="submit" >Update</button>
+              </div>
+            </div>
+      </div>
+      </form>
+    </div>
 
 
-        </div>
-
-    <script type="text/javascript">
-        $('.datepicker').pickadate(
-            {
-                selectYears: 100,
-                selectMonths: true,
-                max: new Date(),
-                closeOnSelect: true,
-                onSet: function (ele) {
-                    if (ele.select) {
-                        this.close();
-                    }
-                }
-            });
-
-
-    </script>
 
 </main>

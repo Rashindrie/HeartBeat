@@ -1,11 +1,11 @@
-<ul id= "slide-out"  class="side-nav fixed" style="width:250px; margin-top:64px;">
+<ul id= "slide-out"  class="side-nav fixed" style="width:240px; margin-top:64px;">
   <li><div class="userView">
     <div class="background">
       <img src="http://www.tba3.net/images/header-bg.jpg">
     </div>
     <div class="circle responsive-img valign profile-image" style="">
 
-      <%= gravatar_for @patient %>
+      <%= gravatar_for @admin %>
 
     </div>
 
@@ -24,6 +24,7 @@
 
         <div class="collapsible-body">
           <ul>
+            <li><a class="waves-effect waves-teal" href="/password_change/new"><i class="material-icons left">settings</i>Settings</a></li>
             <li class="bold"><a href="/logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
           </ul>
         </div>

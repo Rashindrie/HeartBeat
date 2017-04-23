@@ -11,8 +11,17 @@
   <link href="../../dist/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.parallax').parallax();
+  });
+
+</script>
 <body>
 
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 
 <div id="index-banner" class="parallax-container">
   <div class="section no-pad-bot">
@@ -29,10 +38,8 @@
 
     </div>
   </div>
-  <div class="parallax"><%= image_tag("background_1.jpg", :alt => "user background") %>
-    </div>
+  <div class="parallax"><img src="http://lmsofindia.com/wp-content/uploads/2015/08/healthcare-center-qlook.jpg" alt="Unsplashed background img 2"></div>
 </div>
-
 
 <div class="container">
   <div class="section">
@@ -79,7 +86,7 @@
       </div>
     </div>
   </div>
-  <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
+  <div class="parallax">  <img src="http://www.ordiges.com/info-ordiges/wp-content/uploads/2015/04/Fotolia_65704515_M.jpg" /> </div>
 </div>
 
 <div class="container">
@@ -105,7 +112,7 @@
       </div>
     </div>
   </div>
-  <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
+  <div class="parallax"><img src="https://static1.squarespace.com/static/5502b54de4b01348a7aec456/t/557a9035e4b0214e9bc915a8/1434095671336/in-store-wellness-hospital.jpg?format=1500w" alt="Unsplashed background img 3"></div>
 </div>
 
 <footer class="page-footer teal">
@@ -146,9 +153,6 @@
 
 
 <!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="../../dist/js/materialize.js"></script>
-<script src="js/init.js"></script>
 
 </body>
 </html>

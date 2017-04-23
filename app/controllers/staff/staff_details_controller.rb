@@ -11,7 +11,7 @@ class Staff::StaffDetailsController < ApplicationController
     @staff = Staff.find(params[:id])
 
     if @staff.update_attributes(staff_params)
-      flash[:success] = "Doctor details updated successfully."
+      flash[:success] = "Details updated successfully."
       redirect_to :controller => 'staff/staff_details', :action => 'edit', id: @staff.id
 
     else
@@ -29,7 +29,7 @@ class Staff::StaffDetailsController < ApplicationController
 
   def staff_params
     params.require(:staff).permit(:full_name,:first_name, :middle_name, :last_name,
-                                  :telephone, :email, :gender)
+                                  :telephone, :gender)
   end
 
 

@@ -28,42 +28,53 @@
       <h4>Edit Details</h4>
 
       <div class="divider"></div>
+<br>
       <div class="row">
-
-        <div class="row">
+        <div class="col s1">
+          <i class="material-icons prefix">account_circle</i>
+        </div>
+        <div class="col s11">
           <div class="input-field col s12">
-            <i class="material-icons prefix">account_circle</i>
             <input id="full_name" type="text" name="doctor[full_name]" value="<%= @doctor.full_name %>"  class="validate">
             <label class="active"  for="full_name" >Full Name</label>
           </div>
         </div>
 
-        <div class="input-field col s12 m6 l4">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="first_name" type="text" name="doctor[first_name]" value="<%= @doctor.first_name %>" class="validate">
-          <label class="active" for="first_name">First Name</label>
-        </div>
-
-        <div class="input-field col s12 m6 l4">
-          <input id="middle_name" type="text" name="doctor[middle_name]" value="<%= @doctor.middle_name %>"  class="validate">
-          <label class="active" for="middle_name">Middle Name</label>
-        </div>
-
-        <div class="input-field col s12 m6 l4">
-          <input id="last_name" type="text" name="doctor[last_name]" value="<%= @doctor.last_name %>" class="validate">
-          <label class="active" for="last_name">Last Name</label>
-        </div>
-
       </div>
 
       <div class="row">
+          <div class="col s1">
+            <i class="material-icons prefix">account_circle</i>
+          </div>
+            <div class="col s11">
+              <div class="input-field col s12 m6 l4">
 
-        <i class="material-icons prefix">person</i>
-        <div class="col s12">
-          <div class="col s6 left aligned">
+                <input id="first_name" type="text" name="doctor[first_name]" value="<%= @doctor.first_name %>" class="validate">
+                <label class="active" for="first_name">First Name</label>
+              </div>
+
+              <div class="input-field col s12 m6 l4">
+                <input id="middle_name" type="text" name="doctor[middle_name]" value="<%= @doctor.middle_name %>"  class="validate">
+                <label class="active" for="middle_name">Middle Name</label>
+              </div>
+
+              <div class="input-field col s12 m6 l4">
+                <input id="last_name" type="text" name="doctor[last_name]" value="<%= @doctor.last_name %>" class="validate">
+                <label class="active" for="last_name">Last Name</label>
+              </div>
+            </div>
+      </div>
+
+      <div class="row">
+        <div class="col s1">
+          <i class="material-icons prefix">info</i>
+        </div>
+
+        <div class="col s11">
+          <div class="col s4 left aligned">
             <p>Speciality</p>
           </div>
-          <div class="col s6">
+          <div class="col s8">
 
             <select name="doctor[doctor_type_id]">
               <option value="<%= @doctor.doctor_type_id.present? ? @doctor.doctor_type_id.to_i : nil %>%>">
@@ -79,39 +90,55 @@
       </div>
 
       <div class="row">
-        <div class="col s12">
+        <div class="col s1">
           <i class="material-icons prefix">wc</i>
-          <div class="col s12 left aligned">
-              <input class="with-gap" name="doctor[gender]" value="0" type="radio" id="male" checked="<% @doctor.gender==0 ? "checked" : ' ' %>"/>
-              <label class="active" for="male">Male</label>
+        </div>
+        <div class="col s11">
+          <div class="col s12 m4 left aligned">
+            <p>Gender</p>
           </div>
-          <div class="col s12 left aligned">
-              <input class="with-gap" name="doctor[gender]" value="1" type="radio" id="female" checked="<% @doctor.gender==1 ? "checked" : ' ' %>"/>
-              <label class="active" for="female">Female</label>
-          </div>
+          <% if @doctor.gender %>
+              <div class="col s12 m3 left aligned">
+                <input class="with-gap" name="doctor[gender]" value="0" type="radio" id="male" "/>
+                <label class="active" for="male">Male</label>
+              </div>
+              <div class="col s12 m4 left aligned">
+                <input class="with-gap" name="doctor[gender]" value="1" type="radio" id="female" checked="checked"/>
+                <label class="active" for="female">Female</label>
+              </div>
+          <% else %>
+              <div class="col s12 m3 left aligned">
+                <input class="with-gap" name="doctor[gender]" value="0" type="radio" id="male" checked="checked"/>
+                <label class="active" for="male">Male</label>
+              </div>
+              <div class="col s12 m4 left aligned">
+                <input class="with-gap" name="doctor[gender]" value="1" type="radio" id="female" />
+                <label class="active" for="female">Female</label>
+              </div>
+          <% end %>
+
         </div>
       </div>
 
       <div class="row ">
-        <div class="input-field col s12 l6">
+        <div class="col s1">
           <i class="material-icons prefix">phone</i>
-          <input id="telephone" type="tel" name="doctor[telephone]" value="<%= @doctor.telephone %>" class="validate">
-          <label class="active" for="telephone">Telephone</label>
         </div>
+        <div class="col s11">
+          <div class="input-field col s12 l6">
+
+            <input id="telephone" type="tel" name="doctor[telephone]" value="<%= @doctor.telephone %>" class="validate">
+            <label class="active" for="telephone">Telephone</label>
+          </div>
+        </div>
+
       </div>
 
-      <div class="row">
-        <div class="input-field col s12 l6">
-          <i class="material-icons prefix">email</i>
-          <input id="email" type="email" name="doctor[email]" value="<%= @doctor.email %>" class="validate">
-          <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
-        </div>
-      </div>
 
       <div class="divider"></div><br>
 
       <div class="row">
-        <div class="col s3">
+        <div class="col s6 m3">
           <button class="btn waves-effect waves-light col s12" type="submit" id="submit" >Update</button>
         </div>
       </div>
