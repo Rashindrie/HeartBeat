@@ -1,0 +1,86 @@
+<%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
+
+<main style="padding-left: 240px">
+
+
+  <% if @app.present? && @app.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@app.errors.count, "error") %> prohibited from updating vital details:
+        </p>
+        <ul>
+          <% @app.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <div class="container">
+
+    <div class="row">
+      <form class="col s12 m12 l12" id="searchApp" action="/" method="post">
+        <h4>Payment Summary</h4>
+
+        <div class="divider"></div>
+        <br>
+        <div class="row">
+
+          <br>
+
+          <table>
+            <tbody>
+            <tr>
+              <th>Date</th>
+              <td><%= @timeslot.app_date %></td>
+            </tr>
+
+            <tr>
+              <th>Time</th>
+              <td><%= @timeslot.from_time.strftime("%I:%M %p") + " - " + @timeslot.to_time.strftime("%I:%M %p") %></td>
+            </tr>
+
+            <tr>
+              <th>Doctor</th>
+              <td><%= @doctor.first_name + " " + @doctor.last_name %></td>
+            </tr>
+
+            <tr>
+              <th>Speciality</th>
+              <td><%= @doctor_type %></td>
+            </tr>
+
+            <tr>
+              <th>Patient Name</th>
+              <td><%= @patient.first_name + " " + @patient.last_name %></td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <div class="row">
+
+
+          <div class="col s12 m10">
+            <%= link_to "Download PDF",
+                        "/staff/appointments/download/#{@staff.id}/#{@app.patient_id}/#{@app.id}",
+                        target: "_blank" %>
+          </div>
+          <div class="col s12 m2">
+            <a class="btn waves-effect waves-light" href="/staff/appointments/<%= @staff.id %>">Back</a>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $('select').material_select();
+
+      });
+
+  </script>
+</main>

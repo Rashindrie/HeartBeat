@@ -20,6 +20,8 @@
  *= require materialize
  *= require fullcalendar
  *= require_self
+ *= require jquery.timepicker.css
+ *= require jquery-ui-timepicker-addon
  */
 
 

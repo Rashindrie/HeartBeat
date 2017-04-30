@@ -3,7 +3,9 @@ class Patient::OrganDonorController < ApplicationController
   protect_from_forgery unless: -> { request.format.html? }
 
   def new
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
     @blood=Organ.where('category =?', 2)
     @organ_living=Organ.where('category =?', 0).where('living_donation = ?', 1).order('name')
     @tissue_living=Organ.where('category =?', 1).where('living_donation = ?', 1).order('name')
@@ -22,7 +24,9 @@ class Patient::OrganDonorController < ApplicationController
   end
 
   def create
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
     @p=OrgansDonorPatient.where('patient_id =?',@patient.id)
 
     if @p.blank?

@@ -90,17 +90,20 @@
           <div class="card-content">
             <a class="btn-floating activator btn-move-up waves-effect purple waves-light darken-2 right">
               <i class="material-icons">account_circle</i></a>
-            <span class="card-title activator grey-text text-darken-4"><strong>Roger Waters</strong></span>
-            <p><i class="material-icons prefix">wc</i>Male</p>
-            <p><i class="material-icons prefix">cake</i>21 year(s)</p>
+            <span class="card-title activator grey-text text-darken-4"><strong><%= @patient.first_name + " " + @patient.last_name %> </strong></span>
+
+            <p><i class="material-icons prefix">wc</i><%=  @patient.gender? ? "Female" : "Male" %></p>
+
+
+            <p><i class="material-icons prefix">cake</i><%= @age %> year(s)</p>
 
           </div>
           <div class="card-reveal" style="display: none; transform: translateY(0px);">
-            <span class="card-title grey-text text-darken-4">Roger Waters <i class="mdi-navigation-close right"></i></span>
-            <p><i class="material-icons prefix">wc</i>Male</p>
-            <p><i class="material-icons prefix">cake</i>21 year(s)</p>
-            <p><i class="material-icons prefix">email</i>roger@waters.com</p>
-            <p><i class="material-icons prefix">phone</i>+94 77 3831036</p>
+            <span class="card-title grey-text text-darken-4"><%= @patient.first_name + " " + @patient.last_name %> <i class="mdi-navigation-close right"></i></span>
+            <p><i class="material-icons prefix">wc</i><%=  @patient.gender? ? "Female" : "Male" %></p>
+            <p><i class="material-icons prefix">cake</i><%= @age %> year(s)</p>
+            <p><i class="material-icons prefix">email</i><%= @patient.email %></p>
+            <p><i class="material-icons prefix">phone</i><%= @patient.telephone %></p>
 
           </div>
         </div>

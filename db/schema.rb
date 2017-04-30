@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422114406) do
+ActiveRecord::Schema.define(version: 20170425133904) do
 
   create_table "appointments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "time_slot_id"
     t.integer  "patient_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.boolean  "registered",   null: false
     t.boolean  "status",       null: false
   end
 
@@ -69,16 +68,16 @@ ActiveRecord::Schema.define(version: 20170422114406) do
   end
 
   create_table "patients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "full_name",                null: false
-    t.string   "first_name",               null: false
+    t.string   "full_name",                    null: false
+    t.string   "first_name",                   null: false
     t.string   "middle_name"
-    t.string   "last_name",                null: false
-    t.boolean  "gender",                   null: false
-    t.date     "date_of_birth",            null: false
-    t.string   "telephone",                null: false
-    t.string   "email",         limit: 40, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "last_name",                    null: false
+    t.boolean  "gender",                       null: false
+    t.date     "date_of_birth",                null: false
+    t.string   "telephone",                    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "registered",    default: true
   end
 
   create_table "staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -153,7 +152,6 @@ ActiveRecord::Schema.define(version: 20170422114406) do
     t.integer  "patient_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.boolean  "registered",   null: false
   end
 
 end

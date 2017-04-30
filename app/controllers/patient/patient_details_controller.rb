@@ -7,12 +7,14 @@ class Patient::PatientDetailsController < ApplicationController
 
   #get edit patient details page
   def edit
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user).where('patient_id =?',params[:id]).first
   end
 
   #update patients details
   def update
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
 
     if @patient.update_attributes(patient_params)
       flash[:success] = "Update successfull"

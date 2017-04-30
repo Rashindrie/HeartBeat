@@ -108,12 +108,13 @@
               }
           });
 
-          $('input.timepicker').timepicker({
-              timeFormat: 'h:mm p',
-              interval: 30,
+          $('.timepicker').timepicker({
+
               dynamic: false,
               dropdown: true,
-              scrollbar: true
+              scrollbar: true,
+              'minTime': '8:00am',
+              'maxTime': '11:00pm'
           });
       });
 

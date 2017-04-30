@@ -12,7 +12,9 @@ class VitalController < ApplicationController
       @patient = Patient.find(params[:id])
       @age=age(@patient.date_of_birth)
     else
-      @patient = Patient.find(User.find(session[:user_id]).patient_id)
+      @patient = Patient.joins(:user)
+                     .select('patients.id AS id,date_of_birth AS date_of_birth, full_name AS full_name, first_name AS first_name,last_name AS last_name, users.email AS email')
+                     .where('patient_id = ?',params[:id]).first
       @age=age(@patient.date_of_birth)
     end
 

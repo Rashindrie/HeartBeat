@@ -53,7 +53,7 @@ class User::RegisterController < ApplicationController
   end
 
   def patient_params
-    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :email, :date_of_birth)
+    params.require(:session).permit(:full_name, :first_name, :middle_name, :last_name, :gender, :telephone, :date_of_birth)
   end
 
 end

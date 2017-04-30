@@ -12,56 +12,30 @@
 
         <div class="divider"></div><br>
 
-        <div class="row">
 
-          <div class="input-field col s12">
-            <label for="searchOn">Search</label>
-            <input type="text" id="searchOn" class="autocomplete" >
-          </div>
+        <div class="table-responsive">
+          <table id="dataTable" data-source="<%= search_patients_path(format: :json) %>" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr class="filters">
+              <th><input/></th>
+              <th><input/></th>
+              <th>
+                <%= collection_select(:patient, :id ,Patient.all , :id, :full_name, include_blank: true) %>
+              </th>
+            </tr>
+            <tr>
+              <th>Id</th>
+              <th>Full Name</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
         </div>
 
 
-        <div class="row">
-          <div class="col s12">
-
-            <table id="datatable" class="mdl-data-table" cellspacing="0" width="100%">
-              <thead>
-              <tr>
-                <th data-field="name">Name</th>
-                <th data-field="name">View Profile</th>
-                <th data-field="name">View Vitals</th>
-                <th data-field="name">View visits</th>
-              </tr>
-              </thead>
-
-              <tbody>
-              <% @patients.each do |d| %>
-              <tr>
-                <td><%= d.full_name %></td>
-                <td><a href="/search/patients/<%= @doctor.id %>/<%= d.id %>">Profile</a></td>
-                <td><a href="/vital/<%= @doctor.id %>/<%= d.id %>">Vitals</a></td>
-                <td><a href="/visit/<%= @doctor.id %>/<%= d.id %>">Recent Visits</a></td>
-              </tr>
-              <% end %>
-              </tbody>
-            </table>
-
-          </div>
-        </div>
 
       </form>
     </div>
   </div>
-  <script type="text/javascript">
-      $(document).ready(function() {
-          $('#datatable').DataTable( {
-              columnDefs: [
-                  {
-                      targets: [ 0, 1, 2 ],
-                      className: 'mdl-data-table__cell--non-numeric'
-                  }
-              ]
-          } );
-      } );
-  </script>
+
 </main>

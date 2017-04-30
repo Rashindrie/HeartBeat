@@ -24,11 +24,11 @@
 
           <div class="col s6">
 
-            <p for="datetime">Date Modified</p>
+            <p for="datetime">Modified Date/Time</p>
           </div>
 
           <div class="input-field col s6">
-            <%= @vital.created_at.present? ? @vital.created_at.to_s(:long_ordinal) : "" %>
+            <%= @vital.created_at.present? ? @vital.created_at.strftime("#{@vital.created_at.day.ordinalize} %B %Y") + ",  " +@vital.created_at.strftime("%I:%M %p") : "" %>
           </div>
 
         </div>

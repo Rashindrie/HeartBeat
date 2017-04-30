@@ -7,16 +7,19 @@ class Appointment::SearchAppointmentsController < ApplicationController
   #get appointment timeslots searchApp page
 
   def searchApp
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
     @doctor_name=Doctor.select(:id, :full_name)
     @doctor_types=DoctorType.sorted
   end
 
 
-
   #add an appointment-registered patient
   def create
-    @patient = Patient.find(params[:patient_id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:patient_id]).first
     @doctor_name=Doctor.select(:id, :full_name)
     @doctor_types=DoctorType.sorted
 
@@ -24,7 +27,6 @@ class Appointment::SearchAppointmentsController < ApplicationController
     @time_slot=TimeSlot.find(params[:id])
     @app.time_slot_id=@time_slot.id
     @app.patient_id=@patient.id
-    @app.registered=1
     @app.status=1
 
     #@appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
@@ -47,14 +49,15 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
   # add to waiting list - registered patient
   def add
-    @patient = Patient.find(params[:patient_id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:patient_id]).first
     @doctor_name=Doctor.select(:id, :full_name)
     @doctor_types=DoctorType.sorted
 
     @app=WaitingList.new
     @app.time_slot_id=TimeSlot.find(params[:id]).id
     @app.patient_id=@patient.id
-    @app.registered=true
 
     if @app.valid?
       @app.save
@@ -76,7 +79,9 @@ class Appointment::SearchAppointmentsController < ApplicationController
     @d=params[:app][:d]
 
     #search params
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
     @doctor_types=DoctorType.sorted
     @doctor_name=Doctor.select(:id, :full_name, :doctor_type_id)
     @existing_app = Appointment.where('patient_id = ?', @patient.id).where('status = ?', 1).pluck(:time_slot_id)

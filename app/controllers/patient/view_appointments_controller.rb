@@ -3,7 +3,9 @@ class Patient::ViewAppointmentsController < ApplicationController
   protect_from_forgery unless: -> { request.format.html? }
 
   def index
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
 
     @appointments=Appointment.joins(time_slot: :doctor )
                       .select('appointments.id AS app_id, appointments.status AS status, first_name AS first_name,last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time')
@@ -17,7 +19,9 @@ class Patient::ViewAppointmentsController < ApplicationController
   end
 
   def show
-    @patient = Patient.find(params[:patient_id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:patient_id]).first
 
     @appointments=Appointment.joins(time_slot: :doctor )
                       .select('appointments.id AS app_id, appointments.status AS status, first_name AS first_name,last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time')
@@ -27,26 +31,30 @@ class Patient::ViewAppointmentsController < ApplicationController
   end
 
   def update
-    @patient = Patient.find(params[:patient_id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, full_name AS full_name, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:patient_id]).first
     @app=Appointment.find(params[:id])
 
     @app.status=0
 
     if @app.save
+      UserMailer.appointment_cancelled(@patient, @app.id).deliver_now
       flash[:success] = "Appointment cancelled successfully"
 
-      #adding an appointment to a waitinglist patient
+      #notify waitinglist patients
+      @time_slot_id=@app.time_slot_id
+      @wl=WaitingList.where('time_slot_id = ?', @time_slot_id)
+      if !@wl.blank?
+        @wl.each do |d|
+          @user=Patient.joins(:user)
+                    .select('patients.id AS id, full_name AS full_name, first_name AS first_name,last_name AS last_name, users.email AS email')
+                    .where('patient_id = ?',d.patient_id).first
+          UserMailer.waiting_list(@user, @time_slot_id).deliver_now
+        end
+      end
 
-      #@time_slot_id=Appointment.joins(:time_slot).where('appointments.id' => @app.id).pluck(:time_slot_id)
-      #@wl_patient_id=WaitingList.where('time_slot_id = ?', @time_slot_id).order('created_at DESC').limit(1).pluck(:patient_id)
-      #@wl=WaitingList.where('time_slot_id = ?', @time_slot_id).order('created_at DESC').limit(1).pluck(:id)
-      #WaitingList.destroy(@wl)
-      #@new_app=Appointment.new
-      #@new_app.patient_id= @wl_patient_id
-      #@new_app.time_slot_id= @time_slot_id
-      #@new_app.save!
-
-      redirect_to :controller => 'patient/view_appointments', :action => 'show', patient_id: @patient.id, id: @app.id
+     redirect_to :controller => 'patient/view_appointments', :action => 'show', patient_id: @patient.id, id: @app.id
 
     else
       flash[:error] = "Appointment cancellation unsuccessful. Please try again"

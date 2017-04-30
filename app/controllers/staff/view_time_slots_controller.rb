@@ -79,17 +79,21 @@ class Staff::ViewTimeSlotsController < ApplicationController
 
     if @timeslot.update_attribute(:status,false)
       @timeslot.update_attribute(:staff_id, @staff.id)
-      #send email
+      UserMailer.notify_cancel_doctor(@staff,@timeslot).deliver_now
       @appointments=Appointment.joins(:time_slot, :patient)
-                        .select('appointments.id AS app_id, appointments.status AS status, appointments.patient_id AS patient_id , patients.email AS email')
+                        .select('appointments.id AS app_id, appointments.status AS status,appointments.registered AS registered, appointments.patient_id AS patient_id , patients.email AS email')
                         .where('appointments.status' => 1)
                         .where('time_slots.id' => params[:timeslot][:id])
 
       #send email notifications
       @appointments.each do |app|
           app.update_attribute(:status, false)
-          @user=Patient.find(app.patient_id)
-          UserMailer.notify_cancel(@user).deliver_now
+          @user = Patient.joins(:user)
+                         .select('patients.id AS id, full_name AS full_name, first_name AS first_name,last_name AS last_name, users.email AS email,patients.registered AS registered')
+                         .where('id = ?',app.patient_id).first
+          if @user.registered
+            UserMailer.notify_cancel(@user,app.app_id).deliver_now
+          end
       end
 
       flash[:success] = "Time slot updated successfully"

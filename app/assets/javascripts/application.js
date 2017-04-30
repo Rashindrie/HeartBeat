@@ -21,3 +21,7 @@
 //= require fullcalendar
 //= require fullcalendar/gcal
 
+
+//= require rails_script
+//= require js-routes
+//= require jquery.timepicker.js

@@ -7,7 +7,9 @@ class VisitsController < ApplicationController
   def new
     @doctor =Doctor.find(params[:doctor_id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
     @age=age(@patient.date_of_birth)
 
     @visit=Visit.new
@@ -27,7 +29,9 @@ class VisitsController < ApplicationController
       @id = params[:id]
       @doctor =Doctor.find(params[:doctor_id])
       @doctor_type = DoctorType.find(@doctor.doctor_type_id)
-      @patient = Patient.find(params[:id])
+      @patient = Patient.joins(:user)
+                     .select('patients.id AS id, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                     .where('patient_id = ?',params[:id]).first
       @age=age(@patient.date_of_birth)
       render('/visits/new')
 
@@ -43,7 +47,9 @@ class VisitsController < ApplicationController
       @patient = Patient.find(params[:id])
       @age=age(@patient.date_of_birth)
     else
-      @patient = Patient.find(params[:id])
+      @patient = Patient.joins(:user)
+                     .select('patients.id AS id, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                     .where('patient_id = ?',params[:id]).first
       @age=age(@patient.date_of_birth)
     end
 

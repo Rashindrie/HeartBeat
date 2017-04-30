@@ -64,6 +64,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" >
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     </head>
@@ -75,15 +77,15 @@
       <nav class="white-text">
 
         <div class="nav-wrapper white-text" style="font-family: Trajan Pro">
-          <ul class="left " style="height: 80px; width: 170px; padding-top: 5px">
+          <ul class="left hide-on-med-and-down" style="height: 80px; width: 170px; padding-top: 5px">
             <img class="responsive-img"
                  <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
 
           </ul>
 
-          <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
+          <a href="/" class="brand-logo center"><strong>HeartBeat</strong></a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-            <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
             <% if current_user %>
             <li class="active"><a href="/logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
             <% else %>
@@ -91,6 +93,15 @@
                 <li class="active"><a href="/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
           <% end %>
 
+          </ul>
+
+          <ul class="side-nav" id="mobile-demo">
+            <% if current_user %>
+                <li class="active"><a href="/logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+            <% else %>
+                <li class="active"><a href="/signup/patient"><i class="material-icons left">power_settings_new</i>Sign Up</a></li>
+                <li class="active"><a href="/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
+            <% end %>
           </ul>
         </div>
       </nav>
@@ -100,6 +111,7 @@
   </header>
 
 <main>
+  <%= include_rails_script %>
     <%= yield %>
 
 </main>

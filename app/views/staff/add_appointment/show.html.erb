@@ -1,0 +1,94 @@
+<%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
+
+<main style="padding-left: 240px">
+
+
+  <% if @app.present? && @app.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@app.errors.count, "error") %> prohibited from updating vital details:
+        </p>
+        <ul>
+          <% @app.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <div class="container">
+
+    <div class="row">
+      <form class="col s12 m12 l12" id="searchApp" action="/staff/appointments/add/<%= @staff.id %>" method="post">
+        <h4>Add Appointment</h4>
+
+        <div class="divider"></div>
+        <br>
+        <div class="row">
+          <input type="hidden" name="app[id]" value="<%= @timeslot.id %>" />
+          <input type="hidden" name="app[doctor_id]" value="<%= @doctor.id %>" />
+
+          <br>
+
+        <table>
+          <tbody>
+          <tr>
+            <th>Date</th>
+            <td><%= @timeslot.app_date %></td>
+          </tr>
+
+          <tr>
+            <th>Time</th>
+            <td><%= @timeslot.from_time.strftime("%I:%M %p") + " - " + @timeslot.to_time.strftime("%I:%M %p") %></td>
+          </tr>
+
+          <tr>
+            <th>Doctor</th>
+            <td><%= @doctor.first_name + " " + @doctor.last_name %></td>
+          </tr>
+
+          <tr>
+            <th>Speciality</th>
+            <td><%= @doctor_type %></td>
+          </tr>
+
+          <tr>
+            <th>Patient Name</th>
+            <td>
+              <select name="app[patient_id]">
+                <option id="dropdown" value="" disabled selected>Select Patient</option>
+                <% @patients.each do |d| %>
+                    <option value="<%= d.id %>"><%= d.first_name + " " + d.last_name %></option>
+                <% end %>
+              </select>
+            </td>
+
+
+          </tr>
+
+
+          </tbody>
+        </table>
+        </div>
+        <br>
+        <div class="row">
+
+          <div class="col s12 m8">
+            <a class="btn waves-effect waves-light" href="/staff/appointments/<%= @staff.id %>">Back</a>
+
+          </div>
+          <div class="col s12 m4">
+            <button class="btn waves-effect waves-light float-left" type="submit">Add appointment</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $('select').material_select();
+
+      });
+
+  </script>
+</main>

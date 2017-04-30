@@ -28,6 +28,7 @@ class Patient < ApplicationRecord
   validates_numericality_of :telephone
   validates_length_of :telephone, :within => 10..15
   validates_presence_of :date_of_birth
+  validates :registered, :inclusion => { :in => [true, false] }
 
 
 end

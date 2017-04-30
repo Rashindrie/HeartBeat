@@ -1,0 +1,46 @@
+<head>
+  <style>
+    div.navbar-fixed{display:none;}
+  </style>
+</head>
+<main style="">
+  <div class="container">
+
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <h4>Payment Summary</h4>
+
+        <div class="divider"></div>
+        <br>
+        <div class="row">
+
+          <br>
+          <div style="float: left; width: 50%;">
+            <ul>
+              <p>Date</p>
+              <p>Time</p>
+              <p>Doctor</p>
+              <p>Speciality</p>
+              <p>Patient Name</p>
+            </ul>
+          </div>
+          <div style="float: right; width: 50%;">
+            <ul>
+              <p><%= @timeslot.app_date %></p>
+              <p><%= @timeslot.from_time.strftime("%I:%M %p") + " - " + @timeslot.to_time.strftime("%I:%M %p") %></p>
+              <p><%= @doctor.first_name + " " + @doctor.last_name %></p>
+              <p><%= @doctor_type %></p>
+              <p><%= @patient.first_name + " " + @patient.last_name %></p>
+
+            </ul>
+          </div>
+
+
+        </div>
+        <br>
+
+      </div>
+    </div>
+  </div>
+
+</main>

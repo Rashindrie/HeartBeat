@@ -16,7 +16,7 @@
   <p></p>
 </div>
 </li>
-
+<li><a class="waves-effect waves-teal" href="/staff/home/<%= @staff.id %>">Home</a></li>
 <li class="no-padding">
   <ul class="collapsible collapsible-accordion">
     <li>
@@ -33,9 +33,28 @@
   </ul>
 </li>
 <ul class="bold">
-  <li><a class="waves-effect waves-teal" href="/staff/home/<%= @staff.id %>">Home</a></li>
-  <li><a class="waves-effect waves-teal" href="/timeslot/new/<%= @staff.id %>">Add Availability</a></li>
-  <li><a class="waves-effect waves-teal" href="/timeslot/show/<%= @staff.id %>">View Availability</a></li>
+  <ul class="collapsible collapsible-accordion">
+    <li>
+      <a class="collapsible-header">Patient<i class="material-icons">arrow_drop_down</i></a>
+       <div class="collapsible-body">
+         <ul>
+           <li><a class="waves-effect waves-teal" href="/patient/new/<%= @staff.id %>">Add Patient</a></li>
+           <li><a class="waves-effect waves-teal" href="/staff/appointments/<%= @staff.id %>">Add Appointment</a></li>
+         </ul>
+       </div>
+    </li>
+  </ul>
+  <ul class="collapsible collapsible-accordion">
+    <li>
+      <a class="collapsible-header">Doctor<i class="material-icons">arrow_drop_down</i></a>
+      <div class="collapsible-body">
+        <ul>
+          <li><a class="waves-effect waves-teal" href="/timeslot/new/<%= @staff.id %>">Add Availability</a></li>
+          <li><a class="waves-effect waves-teal" href="/timeslot/show/<%= @staff.id %>">View Availability</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
 </ul>
 </ul>
 

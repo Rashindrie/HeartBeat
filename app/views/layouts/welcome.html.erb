@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error_explanation {
+      background-color: #f44336 ;
+      padding: 0px 0px 1px 0px;
+    }
+
+    .alert {
+      height: 60px;
+      -moz-border-radius: 4px 4px 4px 4px;
+      -webkit-border-radius: 4px 4px 4px 4px;
+      border-radius: 4px 4px 4px 4px;
+      padding: 12px 25px 12px 24px;
+      -moz-box-shadow: 3px 3px 1px 1px #CCCCCC;
+      -webkit-box-shadow: 3px 3px 1px 1px #CCCCCC;
+      box-shadow: 3px 3px 1px 1px #CCCCCC;
+    }
+
+    .alert-error {
+      background-color: #f44336 ;
+    }
+
+    .alert-success {
+      background-color: #4caf50 ;
+    }
+
+    .alert-notice {
+      background-color: #cddc39 ;
+    }
+
+  </style>
+
+  <title>HeartBeat</title>
+
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag('application', media: 'all', 'data-turbolinks-track': 'reload') %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<header>
+
+  <div class="navbar-fixed">
+    <nav class="white-text" style="font-family: Trajan Pro">
+
+        <ul class="left  hide-on-med-and-down " style="height: 80px; width: 170px; padding-top: 5px">
+          <img class="responsive-img"
+          <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
+
+        </ul>
+
+        <a href="/" class="brand-logo center"><strong>HeartBeat</strong></a>
+
+        <ul class="right hide-on-med-and-down">
+          <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
+          <% if current_user %>
+              <li><a href="/home"><i class="material-icons prefix">home</i></a></li>
+              <li><a href="/logout"><i class="material-icons prefix">power_settings_new</i></a></li>
+          <% end %>
+
+        </ul>
+
+      <% if current_user %>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a href="/home"><i class="material-icons prefix">home</i></a></li>
+            <li><a href="/logout"><i class="material-icons prefix">power_settings_new</i></a></li>
+          </ul>
+      <% end %>
+
+
+    </nav>
+
+  </div>
+
+</header>
+
+<main>
+  <%= yield %>
+
+</main>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.parallax').parallax();
+        $(".button-collapse").sideNav();
+    });
+
+</script>
+</body>
+</html>

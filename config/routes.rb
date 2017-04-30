@@ -88,7 +88,14 @@ Rails.application.routes.draw do
   get '/staff/home/:id', to: 'staff/home#show'
   get '/staff/profile/:id', to: 'staff/staff_details#edit'
   patch '/staff/update/:id', to: 'staff/staff_details#update'
-
+  get 'patient/new/:id', to: 'staff/add_patient#new'
+  post 'patient/add/new/:id', to: 'staff/add_patient#create'
+  get '/staff/appointments/:staff_id/:id', to: 'staff/add_appointment#show'
+  post '/staff/appointments/add/:id', to: 'staff/add_appointment#create'
+  get '/staff/appointments/:id', to: 'staff/add_appointment#index'
+  post '/staff/appointments/search/:id', to: 'staff/add_appointment#search'
+  get '/staff/appointments/summary/:staff_id/:patient_id/:id', to: 'staff/add_appointment#summary'
+  get '/staff/appointments/download/:staff_id/:patient_id/:id', to: 'staff/add_appointment#print'
 
   #add timeslot routes
   get '/timeslot/new/:id', to: 'staff/add_time_slot#new'
@@ -108,6 +115,11 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :password_change, only: [:new, :update]
+
+  scope module: 'patient' do
+    resources :search_patients, only: [:index]
+  end
+
 end
 
 
