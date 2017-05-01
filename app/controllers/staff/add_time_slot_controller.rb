@@ -39,7 +39,7 @@ class Staff::AddTimeSlotController < ApplicationController
   private
   def time_slot_params
     params.require(:time_slot).permit(:doctor_id, :app_date, :from_time,
-                                      :to_time, :staff_id)
+                                      :to_time, :staff_id, :price)
   end
 
 end

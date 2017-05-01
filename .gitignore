@@ -20,17 +20,6 @@
 
 local_env.yml
 my_local_env.yml
-app/helpers/admin/home_helper
-app/controllers/account_activations_controller.rb
-app/controllers/password_change_controller.rb
-app/controllers/password_resets_controller.rb
-app/mailers/user_mailer.rb
-app/views/backup/*
-app/views/user_mailer/*
-app/views/password_change/*
-app/views/password_resets/*
-app/config/routes.rb
-.rspec
 config/initializers/secret_token.rb
 
 /spec/temp

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h5>Hi, <%= @a.full_name %>!</h5>
+<p>
+  Your appointment for <%= @timeslot.app_date %> from <%= @timeslot.from_time.strftime("%I:%M %p") %> to <%= @timeslot.to_time.strftime("%I:%M %p") %> for Dr. <%= @doctor.first_name + " " + @doctor.last_name %> has successfully been cancelled.
+
+</p>
+<br>
+
+<p>
+  If you prefer to schedule another appointment, you can do so by visiting <%= link_to "here", @url %>.
+</p>
+
+<br>
+
+</body>
+</html>

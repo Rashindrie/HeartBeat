@@ -126,6 +126,7 @@
                         <th data-field="name">Time Block</th>
                         <th data-field="price">Doctor</th>
                         <th data-field="price">Speciality</th>
+                        <th>Price</th>
 
                       </tr>
                       </thead>
@@ -149,16 +150,17 @@
 
                                 <% end %>
                             <% end %>
-
+                            <td><%= number_to_currency(d.price, :unit => "Rs.") %></td>
                             <% if ((d.to_time - d.from_time)/15.minutes).to_i > (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %>
-                                    <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="confirmApp/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
+                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="confirmApp/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button"><i class="material-icons prefix">add</i></button></td>
                             <% else %>
-                            <td>Fully booked</td>
+                                <td>Fully booked</td>
                             <% end %>
 
 
 
                           </tr>
+
                           <div id="confirmApp/<%= d.id %>" class="modal">
                             <div class="modal-content">
                               <h4>Add Appointment</h4>

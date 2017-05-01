@@ -1,0 +1,12 @@
+
+Hi, <%= @a.full_name %>!
+
+
+One(1) appointment slot for <%= @timeslot.app_date %> from <%= @timeslot.from_time.strftime("%I:%M %p") %> to <%= @timeslot.to_time.strftime("%I:%M %p") %> for Dr. <%= @doctor.first_name + " " + @doctor.last_name %> is now available.
+
+
+You are being notified since you registered in the waiting list for it.
+
+
+You can add an appointment by visiting <%= link_to "here", @url %>.
+

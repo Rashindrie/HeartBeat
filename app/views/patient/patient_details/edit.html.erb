@@ -43,6 +43,7 @@
       <div class="row">
 
           <form  action="/patient/update/<%= @patient.id %>" method="post">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
             <input type="hidden" name="_method" value="patch" />
 
 

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+          $('select').material_select();
+          $('.modal').modal();
+
+          $('.datepicker').pickadate({
+
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+
+
+
+              closeOnSelect: true,
+              closeOnClear: true
+          });
+
+          $('.sticky').pushpin({
+              top: 50,
+              bottom: 1500,
+              offset: 0,
+
+          });
+      });
+
+
+
+
+
+  </script>
+
+  <style>
+    main, footer {
+      padding-left: 240px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      main, footer {
+        padding-left: 0;
+      }
+    }
+
+  </style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+
+
+
+<body>
+<header>
+  <div class="navbar-fixed">
+    <nav class="teal darken-3 white-text">
+
+      <div class="nav-wrapper teal darken-3 white-text" style="font-family: Trajan Pro">
+        <ul class="left " style="height: 80px; width: 170px; padding-top: 5px">
+          <img class="responsive-img"
+               <%= image_tag("Heart_Beat.png", :alt => "rss feed") %>
+          />
+        </ul>
+
+        <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
+        <ul class="right hide-on-med-and-down">
+          <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
+          <li class="active"><a href="logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+<div class="side-nav fixed" style="width:250px; margin-top:65px; padding-bottom:100px">
+  <ul id= "nav-mobile"  >
+
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Home</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Search Patients</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">View appointments</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">My Profile</a></li>
+
+  </ul>
+</div>
+
+<main>
+  <div class="container " style="width: 85%">
+    <h4>Register as Donee</h4>
+    <div class="divider"></div>
+    <div class="row">
+      <br>
+      <div class="col s12" >
+
+        <form class="card z-depth-2" action="" method="post" style="">
+          <div class="card-content ">
+
+            <div class="row">
+              <p>Select the required donation type from below stated categories. </p>
+            </div>
+            <div class="row">
+
+              <br>
+
+
+              <div class="row">
+                <div class="col s6">
+                  <p>Blood</p>
+                </div>
+
+                <div class="input-field col s6">
+                  <input type="checkbox" id="blood" class="filled-in"/>
+                  <label for="blood"></label>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col s6">
+                  <p>Organs</p>
+                </div>
+
+                <div class="input-field col s6">
+                  <select multiple>
+                    <option value="" disabled selected></option>
+                    <option value="1">Heart</option>
+                    <option value="2">Intestine</option>
+                    <option value="3">Kidney</option>
+                    <option value="4">Liver</option>
+                    <option value="5">Lungs</option>
+                    <option value="5">Pancreas</option>
+
+                  </select>
+                  <label>Select Organ(s)</label>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col s6">
+                  <p>Tissues</p>
+                </div>
+
+                <div class="input-field col s6">
+                  <select multiple>
+                    <option value="" disabled selected></option>
+                    <option value="1">Bone</option>
+                    <option value="2">Cartilage</option>
+                    <option value="3">Corneas</option>
+                    <option value="4">Fascia</option>
+                    <option value="5">Heart Valves</option>
+                    <option value="6">Ligaments</option>
+                    <option value="7">Pericardium</option>
+                    <option value="8">Skin</option>
+                    <option value="9">Tendons</option>
+                    <option value="10">Veins</option>
+
+
+                  </select>
+                  <label>Select Tissue(s)</label>
+
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+            <div class="divider"></div><br>
+            <div class="row">
+              <div class="col s3">
+                <p class="left-align"><button class="btn waves-effect waves-light" data-target="confirm" style="background-color: darkorange" type="button" name="action">Register</button></p>
+              </div>
+            </div>
+
+
+            <div class="divider"></div><br>
+            <h5>Request Details</h5>
+
+
+            <table class="bordered highlight responsive-table">
+              <thead>
+              <tr>
+                <th data-field="organ">Organ</th>
+                <th data-field="status">Status</th>
+                <th data-field="approved_doctor">Approved Doctor</th>
+                <th data-field="approved_date">Approved Date</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+                <td>Heart</td>
+                <td>Approved</td>
+                <td>Dr. D.M. Silva</td>
+                <td>12/2/2017</td>
+
+              </tr>
+              <tr>
+                <td>Heart</td>
+                <td>Invalid</td>
+                <td>Dr. D.M. Silva</td>
+                <td>12/2/2017</td>
+              </tr>
+              <tr>
+                <td>Heart</td>
+                <td>Pending</td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+
+      <div id="confirm" class="modal">
+        <div class="modal-content">
+          <h4>Add to Organ Donee List</h4>
+          <p>Once submitted, you will not get the chance to modify requests.
+            This registration will be submitted to be approved by a doctor before being considered as a valid entry.
+            Registering with the system therefore requires an authenticated doctor validating the request.
+            Until such time, the request will not be considered when matching donor and requester facilities.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</main>
+
+
+
+</body>
+
+
+</html>
+
+

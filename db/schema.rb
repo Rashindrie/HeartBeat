@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425133904) do
+ActiveRecord::Schema.define(version: 20170501001927) do
 
   create_table "appointments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "time_slot_id"
@@ -98,9 +98,10 @@ ActiveRecord::Schema.define(version: 20170425133904) do
     t.time     "to_time"
     t.integer  "doctor_id"
     t.integer  "staff_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "status",     null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "status",                             null: false
+    t.decimal  "price",      precision: 8, scale: 2
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

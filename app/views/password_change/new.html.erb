@@ -1,0 +1,77 @@
+<% if current_user && current_user.doctor? %>
+    <%= render partial: 'doctor/sideNav' %>
+<% elsif current_user && current_user.patient?  %>
+    <%= render partial: 'patient/sideNav' %>
+<% elsif current_user && current_user.staff?  %>
+    <%= render partial: 'staff/sideNav' %>
+<% end %>
+
+
+<main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if  (@user.present? && @user.errors.any?)%>
+      <div class="error_explanation"  style="padding-left: 50px">
+        <p>
+          <%= pluralize((@user.errors.count.to_i), "error") %> prohibited
+          from updating the password:
+        </p>
+        <ul>
+          <% if @user.errors.any? %>
+              <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <div class="container " style="width: 85%">
+  <div class="row">
+
+    <div class="col s6 offset-m3" style="padding-top: 50px;">
+      <div class="card">
+        <div class="card-content">
+          <h5 class="">Reset password</h5>
+          <%= form_for(@user, url: password_change_path(@user)) do |f| %>
+              <br/>
+              <%= hidden_field_tag :email, @user.email %>
+              <div class="row">
+                <div class="col s1">
+                  <i class="material-icons prefix">lock</i>
+                </div>
+
+                <div class="col s11">
+
+                  <div class="row">
+                    <%= f.label :current_password, "Current Password" %>
+                    <%= f.password_field :current_password, class: 'form-control' %>
+                  </div>
+
+                  <div class="row">
+                    <%= f.label :password , "New Password" %>
+                    <%= f.password_field :password, class: 'form-control' %>
+                  </div>
+
+                  <div class="row">
+                    <%= f.label :password_confirmation, "Re-enter New Password" %>
+                    <%= f.password_field :password_confirmation, class: 'form-control' %>
+                  </div>
+
+                </div>
+
+              </div>
+                <%= f.submit "Update password", class: "btn btn-primary" %>
+          <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</main>

@@ -1,0 +1,11 @@
+
+Hi, <%= @user.full_name %>!
+
+
+Your appointment for <%= @timeslot.app_date %> from <%= @timeslot.from_time.to_s(:time) %> to <%=  @timeslot.to_time.to_s(:time) %> for Dr. <%= @doctor.full_name %> has been cancelled due to unavoidable reasons.
+
+We sincerely apologize for any inconvinience caused.
+
+
+If you prefer to schedule another appointment, you can do so by visiting <%= link_to "here", 'http://localhost:3000/login' %>.
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h5>Hi, Dr. <%= @a.full_name %>!</h5>
+<p>
+  Your timeslot for <%= @timeslot.app_date %> from <%= @timeslot.from_time.strftime("%I:%M %p") %> to <%= @timeslot.to_time.strftime("%I:%M %p") %> has successfully been cancelled.
+
+</p>
+<br>
+<p>
+  Cancellation Details-Clinical Staff member:
+</p>
+<table>
+  <tbody>
+  <tr class="align-left">
+   <th>Name</th>
+    <td><%= @staff.full_name %></td>
+  </tr>
+  <tr>
+    <th>Updated on</th>
+    <td><%= @timeslot.updated_at.to_date %></td>
+  </tr>
+  <tr>
+    <th>Updated at</th>
+    <td><%= @timeslot.updated_at.strftime("%I:%M %p") %></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td><%= @staff.email %></td>
+  </tr>
+  <tr>
+    <th>Telephone</th>
+    <td><%= @staff.telephone %></td>
+  </tr>
+  </tbody>
+</table>
+<p>
+  You can view your appointments by visiting <%= link_to "here", @url %>.
+</p>
+
+<br>
+
+</body>
+</html>

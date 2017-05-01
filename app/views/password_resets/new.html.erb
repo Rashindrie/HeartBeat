@@ -1,0 +1,39 @@
+
+<div class="container">
+  <% provide(:title, "Forgot password") %>
+<br/>
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <div class="row">
+
+    <div class="col s6 offset-m3" style="padding-top: 50px;">
+      <div class="card">
+        <div class="card-content">
+          <h5 class="">Forgot password</h5>
+          <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+              <br/>
+              <div class="row">
+              <div class="col s1">
+                <i class="material-icons prefix">email</i>
+              </div>
+                <div class="col s11">
+                  <%= f.label :email %>
+                  <%= f.email_field :email, class: 'form-control' %>
+                </div>
+
+
+              </div>
+
+
+              <%= f.submit "Submit", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

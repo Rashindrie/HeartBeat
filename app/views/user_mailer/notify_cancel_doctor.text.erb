@@ -1,0 +1,21 @@
+Hi, Dr.<%= @a.full_name %>!
+
+
+Your timeslot for <%= @timeslot.app_date %> from <%= @timeslot.from_time.strftime("%I:%M %p") %> to <%= @timeslot.to_time.strftime("%I:%M %p") %> has successfully been cancelled.
+
+
+Cancellation Details-Clinical Staff member:
+
+
+Name          <%= @staff.full_name %>
+
+Cancelled on  <%= @timeslot.updated_at.to_date %>
+
+Cancelled at  <%= @timeslot.updated_at.strftime("%I:%M %p") %>
+
+Email         <%= @staff.email %>
+
+Telephone     <%= @staff.telephone %>
+
+
+You can view your other appointments by visiting <%= link_to "here", @url %>.

@@ -3,18 +3,18 @@ class Patient::PatientDetailsController < ApplicationController
 
   #before_action :require_doctor, only: [:updateVital, :editVital]
 
-  protect_from_forgery unless: -> { request.format.html? }
+  protect_from_forgery
 
   #get edit patient details page
   def edit
-    @patient = Patient.joins(:user).where('patient_id =?',params[:id]).first
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, gender AS gender, first_name AS first_name, middle_name AS middle_name, last_name AS last_name, full_name AS full_name, date_of_birth AS date_of_birth, telephone AS telephone, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
   end
 
   #update patients details
   def update
-    @patient = Patient.joins(:user)
-                   .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
-                   .where('patient_id = ?',params[:id]).first
+    @patient = Patient.find(params[:id])
 
     if @patient.update_attributes(patient_params)
       flash[:success] = "Update successfull"
@@ -22,6 +22,9 @@ class Patient::PatientDetailsController < ApplicationController
 
     else
       flash.now[:error] = "Update unsuccessful"
+      @patient = Patient.joins(:user)
+                     .select('patients.id AS id, gender AS gender, first_name AS first_name, middle_name AS middle_name, last_name AS last_name, full_name AS full_name, date_of_birth AS date_of_birth, telephone AS telephone, users.email AS email')
+                     .where('patient_id = ?',params[:id]).first
       @id = params[:id]
       render 'patient/patient_details/edit'
     end

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $('#doctorSelect').hide();
+          $('#appTypeSelect').hide();
+          $('select').material_select();
+          $('.modal').modal();
+          //$('select').material_select('destroy');
+
+          $('.scrollspy').scrollSpy();
+          $('.datepicker').pickadate({
+
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+
+              min: new Date(),
+
+              closeOnSelect: true
+          });
+
+          $('input[type="radio"]').click(function() {
+              if($(this).attr('id') == 'doctor') {
+                  $('#doctorSelect').show();
+                  $('#appTypeSelect').hide();
+              }
+              else{
+                  if($(this).attr('id') == 'appType') {
+                      $('#doctorSelect').hide();
+                      $('#appTypeSelect').show();
+                  }
+              }
+          });
+      });
+
+
+
+
+
+  </script>
+
+  <style>
+    main, footer {
+      padding-left: 240px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      main, footer {
+        padding-left: 0;
+      }
+    }
+
+  </style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+
+
+
+<body>
+<header>
+  <div class="navbar-fixed">
+    <nav class="teal darken-3 white-text">
+      <div class="nav-wrapper teal darken-3 white-text" style="font-family: Trajan Pro">
+        <a href="#!" class="brand-logo center"><strong>HeartBeat</strong></a>
+        <ul class="right hide-on-med-and-down">
+          <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
+          <li class="active"><a href="logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+<div class="side-nav fixed" style="width:250px; margin-top:65px; padding-bottom:100px">
+  <ul id= "nav-mobile"  >
+    <li style="height: 150px">
+
+      <div class="background" style="height: 150px">
+        <img class="responsive-img" src="http://hd.wallpaperswide.com/thumbs/heart_beat-t2.jpg">
+
+      </div>
+    </li>
+    <li><div class="divider"></div></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Home</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Add appointment</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">View appointment</a></li>
+    <li class="active"><a class="waves-effect waves-teal" href="#!">Request appointment</a></li>
+
+  </ul>
+</div>
+
+<main>
+  <div class="container " style="width: 85%">
+    <div class="row">
+      <form class="col s12 m12 l12" >
+        <h4>Add Appointment</h4>
+
+
+        <div class="divider"></div><br>
+
+
+
+        <div class="row">
+          <div class="col s12">
+            <i class="material-icons prefix">search</i>Search
+            <div class="input-field inline">
+
+              <div class="col s12 left aligned">
+                <input name="searchOn" type="radio" id="doctor" />
+                <label for="doctor">Doctor</label>
+              </div>
+              <div class="col s12 left aligned">
+                <input name="searchOn" type="radio" id="appType" />
+                <label for="appType">Appointment Type</label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s10">
+            <div class="input-field" id="doctorSelect">
+              <select>
+                <option value="" disabled selected>Choose Doctor</option>
+                <option value="1">Doctor 1</option>
+                <option value="2">Doctor 2</option>
+                <option value="3">Doctor 3</option>
+              </select>
+
+
+              <label>Doctor</label>
+            </div>
+          </div>
+          <div class="col s10">
+            <div class="input-field" id="appTypeSelect">
+              <select>
+                <option value="" disabled selected>Choose Appointment Type</option>
+                <option value="1">Type 1</option>
+                <option value="2">Type 2</option>
+                <option value="3">Type 3</option>
+              </select>
+              <label>Appointment Type</label>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="input-field col s3 l4">
+            <i class="material-icons prefix">date_range</i>
+            <label class="active" for="app_date_from">From </label>
+            <input id="app_date_from" value="" type="date" name="app_date_from" class="datepicker">
+          </div>
+
+          <div class="input-field col s3 l4">
+            <label class="active" for="app_date_to">To</label>
+            <input id="app_date_to" value="" type="date" name="app_date_to" class="datepicker">
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="row">
+          <div class="col m2">
+            <p class="right-align"><button class="btn waves-effect waves-light" style="background-color: darkorange" type="button" name="action">Search</button></p>
+          </div>
+
+
+
+          <div class="col m2">
+            <p class="right-align"><button class="btn waves-effect waves-light" type="button" name="action">Clear</button></p>
+          </div>
+        </div>
+
+        <br> <br>
+        <div class="row">
+          <div class="col s12">
+            <table class="bordered highlight responsive-table">
+              <thead>
+              <tr>
+                <th data-field="id">Date</th>
+                <th data-field="name">Time Block</th>
+                <th data-field="price">Doctor</th>
+                <th data-field="price">Appointments</th>
+                <th data-field="id">Add appointment</th>
+                <th data-field="id">Waiting List</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+                <td>12/2/2017</td>
+                <td>9:00AM-11:00AM</td>
+                <td>Dr. D.M. Silva</td>
+                <td>2 Scheduled (170 minutes available)</td>
+                <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmApp" data-position="bottom" data-delay="50" data-tooltip="Add appointment" id="addAppointment" type="button" name="action"><i class="material-icons prefix">add</i></button></td>
+
+                <td><button class="btn waves-effect waves-light btn tooltipped" data-target="confirmList" data-position="bottom" data-delay="50" data-tooltip="Add to waiting list"  id="addToList" type="button" name="action"><i class="material-icons prefix">playlist_add</i></button></td>
+
+              </tr>
+              <tr>
+                <td>12/2/2017</td>
+                <td>9:00AM-11:00AM</td>
+                <td>Dr. D.M. Silva</td>
+                <td>2 Scheduled (170 minutes available)</td>
+                <td><a href="#">Add Appointment</a></td>
+
+                <td><a href="#">Add to waiting List</a></td>
+              </tr>
+              <tr>
+                <td>12/2/2017</td>
+                <td>9:00AM-11:00AM</td>
+                <td>Dr. D.M. Silva</td>
+                <td>2 Scheduled (170 minutes available)</td>
+                <td><a href="#">Add Appointment</a></td>
+
+                <td><a href="#">Add to waiting List</a></td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+
+
+
+
+
+      </form>
+
+
+    </div>
+    <div id="confirmApp" class="modal">
+      <div class="modal-content">
+        <h4>Add Appointment</h4>
+        <p>Are you sure you want to add this appointment?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Confirm</a>
+      </div>
+    </div>
+
+    <div id="confirmList" class="modal">
+      <div class="modal-content">
+        <h4>Add to Waiting List</h4>
+        <p>Are you sure you want to add to waiting list?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ">Confirm</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="page-footer teal darken-3 white-text" style="position: fixed;
+    bottom: 0px; width: 100%; ">
+
+  <div class="footer-copyright">
+    <div class="container left aligned">
+      Doctor Patient Management System
+
+    </div></div>
+</footer>
+
+</body>
+
+
+</html>
+
+
