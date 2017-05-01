@@ -14,14 +14,12 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require_self
  * require dataTables/jquery.dataTables
- *= require primary
- *= require secondary
+
+ *= require jquery.timepicker.css
  *= require materialize
  *= require fullcalendar
- *= require_self
- *= require jquery.timepicker.css
- *= require jquery-ui-timepicker-addon
  */
 
 
