@@ -20,8 +20,9 @@
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/gcal
+//= require jquery-ui
+//= require autocomplete-rails
 
-
-//= require rails_script
-//= require js-routes
+// require rails_script
+// require js-routes
 //= require jquery.timepicker.js

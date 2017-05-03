@@ -5,11 +5,13 @@ class Staff::AddTimeSlotController < ApplicationController
   #render a form to add a new timeslot
   def new
     @staff = Staff.find(params[:id])
-    @doctors=Doctor.all
+    @doctors=Doctor.all.pluck(:full_name, :id)
     @time_slot=TimeSlot.new
+
+    #render :text => params.inspect
   end
 
-  #add a new timeslot for a doctor
+ #add a new timeslot for a doctor
   def create
     @staff = Staff.find(params[:id])
     @time_slot=TimeSlot.new(time_slot_params)
