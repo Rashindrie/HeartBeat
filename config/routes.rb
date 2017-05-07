@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   #doctor view patients
   get '/search/patients/:id', to: 'patient/search_patients#index'
   get '/search/patients/:doctor_id/:id', to: 'patient/search_patients#show'
-
+  get '/search/profile/:id', to: 'patient/search_patients#search'
 
   #doctor view appointments
   get '/view/appointments/:id', to: 'doctor/view_appointments#show'
@@ -96,6 +96,8 @@ Rails.application.routes.draw do
   post '/staff/appointments/search/:id', to: 'staff/add_appointment#search'
   get '/staff/appointments/summary/:staff_id/:patient_id/:id', to: 'staff/add_appointment#summary'
   get '/staff/appointments/download/:staff_id/:patient_id/:id', to: 'staff/add_appointment#print'
+  get '/view_appointment/:id', to: 'staff/view_appointment#index'
+  get '/search_appointment/:id', to: 'staff/view_appointment#search'
 
   #add timeslot routes
   get '/timeslot/new/:id', to: 'staff/add_time_slot#new'
@@ -111,6 +113,9 @@ Rails.application.routes.draw do
   get 'admin/home/:id', to: 'admin/home#home'
   get '/admin/users/:id', to: 'admin/archive_users#show'
   patch '/admin/users/update/:admin_id/:id', to: 'admin/archive_users#update'
+  get '/admin/doctors/:id', to: 'admin/add_doctor_types#index'
+  post '/admin/add/type/:id', to: 'admin/add_doctor_types#create'
+  patch '/admin/remove/type/:admin_id/:id', to: 'admin/add_doctor_types#update'
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

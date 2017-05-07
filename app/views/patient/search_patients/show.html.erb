@@ -13,10 +13,10 @@
 
     <div class="row">
 
-      <div class="col s4">
+      <div class="col s5">
         <div class="card  teal darken-2 z-depth-3">
           <div class="card-content white-text">
-            <span class="card-title">View my vitals</span>
+            <span class="card-title">View vitals</span>
             </div>
           <div class="card-action">
             <td><a href="/vital/<%= @doctor.id %>/<%= @patient.id %>">Vitals</a></td>
@@ -26,13 +26,13 @@
 
       </div>
 
-      <div class="col s3">
+      <div class="col s1">
 
       </div>
-      <div class="col s4">
+      <div class="col s6">
         <div class="card  pink lighten-1 z-depth-3">
           <div class="card-content white-text">
-          <strong><span class="card-title">View my recent visits</span></strong>
+          <strong><span class="card-title">View recent visits</span></strong>
           </div>
           <div class="card-action">
             <td><a href="/visit/<%= @doctor.id %>/<%= @patient.id %>">Recent Visits</a></td>
@@ -54,7 +54,7 @@
       <div class="col s4">
 
 
-        <div id="profile-card" class="card sticky z-depth-4" style="">
+        <div id="profile-card" class="card sticky z-depth-1" style="">
           <div class="card-image waves-effect waves-block waves-light">
             <br>
 
@@ -93,7 +93,7 @@
 
     <div class="row">
       <div class="col s6">
-        <a class="btn waves-effect waves-light" href="/search/patients/<%= @doctor.id %>">Back to search</a>
+        <a class="btn waves-effect waves-light" href="<%= url_for(:back) %>">Back</a>
       </div>
     </div>
   </div>

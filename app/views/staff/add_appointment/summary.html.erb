@@ -15,7 +15,9 @@
         </ul>
       </div>
   <% end %>
-
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
   <div class="container">
 
     <div class="row">
@@ -69,7 +71,7 @@
                         target: "_blank" %>
           </div>
           <div class="col s12 m2">
-            <a class="btn waves-effect waves-light" href="/staff/appointments/<%= @staff.id %>">Back</a>
+            <a class="btn waves-effect waves-light" href="<%= url_for(:back) %>">Back</a>
 
           </div>
         </div>

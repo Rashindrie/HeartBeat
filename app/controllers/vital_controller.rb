@@ -9,7 +9,9 @@ class VitalController < ApplicationController
     if current_user.doctor?
       @doctor =Doctor.find(params[:doctor_id])
       @doctor_type = DoctorType.find(@doctor.doctor_type_id)
-      @patient = Patient.find(params[:id])
+      @patient = Patient.joins(:user)
+                     .select('patients.id AS id, gender AS gender, telephone AS telephone, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                     .where('patient_id = ?',params[:id]).first
       @age=age(@patient.date_of_birth)
     else
       @patient = Patient.joins(:user)
@@ -37,7 +39,9 @@ class VitalController < ApplicationController
   def edit
     @doctor =Doctor.find(params[:doctor_id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, gender AS gender, telephone AS telephone, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
     @age=age(@patient.date_of_birth)
     @blood_groups= {"A+" => 0, "A-" => 1, "B+" => 2, "B-" => 3, "O+" => 4, "O-" => 5}
     @vital = Vital.order("created_at DESC").find_by_patient_id(params[:id])
@@ -57,7 +61,9 @@ class VitalController < ApplicationController
   #update patients vitals
   def update
     @doctor =Doctor.find(params[:doctor_id])
-    @patient = Patient.find(params[:id])
+    @patient = Patient.joins(:user)
+                   .select('patients.id AS id, gender AS gender, telephone AS telephone, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
+                   .where('patient_id = ?',params[:id]).first
     @vital = Vital.new(vital_params)
     @vital.patient_id = params[:id]
     @vital.doctor_id =@doctor.id
@@ -69,7 +75,6 @@ class VitalController < ApplicationController
       redirect_to :controller => 'vital', :action => 'show', :id => params[:id], :doctor_id => @doctor.id
     else
       flash.now[:error] = "Update unsuccessful."
-      @id = params[:id]
       @doctor_type = DoctorType.find(@doctor.doctor_type_id)
       @age=age(@patient.date_of_birth)
 

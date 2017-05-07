@@ -15,7 +15,7 @@ class Staff::StaffDetailsController < ApplicationController
       redirect_to :controller => 'staff/staff_details', :action => 'edit', id: @staff.id
 
     else
-      flash[:error] = "Update unsuccessful."
+      flash.now[:error] = "Update unsuccessful."
       @id = params[:id]
       render :action => '/staff/profile'
       #render('/patient/profile/<%= @patient.id %>')  #to get a prepolutaed form

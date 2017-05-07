@@ -1,5 +1,66 @@
 <%= render partial: 'doctor/sideNav'%>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var patients = <%== @patients %>;
 
+        var data = patients.map(function (a) {
+            return { label: a[0], id: a[1] };
+        });
+
+        $( "#tags" ).autocomplete({
+            delay: 0,
+            source: data,
+            select: function(event, ui) {
+                $('#patient_id').val(ui.item.id);
+            }
+        });
+    } );
+</script>
+
+<script>
+    function pagination(){
+        var req_num_row=10;
+        var $tr=jQuery('tbody tr');
+        var total_num_row=$tr.length;
+        var num_pages=0;
+        if(total_num_row % req_num_row ==0){
+            num_pages=total_num_row / req_num_row;
+        }
+        if(total_num_row % req_num_row >=1){
+            num_pages=total_num_row / req_num_row;
+            num_pages++;
+            num_pages=Math.floor(num_pages++);
+        }
+        for(var i=1; i<=num_pages; i++){
+            jQuery('#pagination').append(" " + '<li class="waves-effect"><a href="#!">' + i + ' </a></li>'+ " ");
+        }
+        $tr.each(function(i){
+            jQuery(this).hide();
+            if(i+1 <= req_num_row){
+                $tr.eq(i).show();
+            }
+
+        });
+        jQuery('#pagination a').click(function(e){
+            e.preventDefault();
+            $tr.hide();
+            var page=jQuery(this).text();
+            var temp=page-1;
+            var start=temp*req_num_row;
+            //alert(start);
+
+            for(var i=0; i< req_num_row; i++){
+
+                $tr.eq(start+i).show();
+
+            }
+        });
+    }
+    jQuery('document').ready(function(){
+        pagination();
+    });
+
+</script>
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>"><%= value %></div>
@@ -7,34 +68,58 @@
   <div class="container " style="width: 85%">
 
     <div class="row">
-      <form class="col s12 m12 l12" >
+      <form class="col s12 m12 l12" action="/search/profile/<%= @doctor.id %>" method="get">
         <h4>Search Patients</h4>
 
         <div class="divider"></div><br>
 
+        <div class="row">
+          <div class="col s9">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">textsms</i>
+                <label class="active" for="tags">Patient</label>
+                <input id="tags" required/>
+                <input id="patient_id" name="search[patient_id]" type="hidden" required/>
+              </div>
+            </div>
+          </div>
 
-        <div class="table-responsive">
-          <table id="dataTable" data-source="<%= search_patients_path(format: :json) %>" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-            <tr class="filters">
-              <th><input/></th>
-              <th><input/></th>
-              <th>
-                <%= collection_select(:patient, :id ,Patient.all , :id, :full_name, include_blank: true) %>
-              </th>
-            </tr>
-            <tr>
-              <th>Id</th>
-              <th>Full Name</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+          <div class="col s3">
+            <button class="btn waves-effect waves-light col s12" type="submit"  id="submit" >View Profile</button>
+          </div>
         </div>
 
-
-
       </form>
+
+        <div class="row">
+          <div class="col s12">
+            <div id="pagination">
+              <table class="bordered highlight responsive-table">
+              <thead>
+              <tr>
+                <th data-field="name">Name</th>
+                <th data-field="name">View Profile</th>
+                <th data-field="name">View Vitals</th>
+                <th data-field="name">View visits</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% @patientsAll.each do |d| %>
+                  <tr>
+                    <td><%= d.full_name %></td>
+                    <td><a href="/search/patients/<%= @doctor.id %>/<%= d.id %>">Profile</a></td>
+                    <td><a href="/vital/<%= @doctor.id %>/<%= d.id %>">Vitals</a></td>
+                    <td><a href="/visit/<%= @doctor.id %>/<%= d.id %>">Recent Visits</a></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+<br/><br/>
+          </div>
+        </div>
+
     </div>
   </div>
 

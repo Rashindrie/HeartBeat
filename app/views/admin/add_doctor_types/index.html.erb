@@ -1,0 +1,187 @@
+
+<%= render partial: 'admin/sideNav' %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#submit1').click(function(){
+          /* when the submit button in the modal is clicked, submit the form */
+            $('#add').submit();
+        });
+        $('#submit2').click(function(){
+          /* when the submit button in the modal is clicked, submit the form */
+            $('#archive').submit();
+        });
+        $('.modal').modal();
+        )};
+</script>
+<style>
+
+  .pagination a {
+    border-radius: 5px;
+  }
+
+  .pagination a.active {
+    border-radius: 5px;
+  }
+</style>
+<script>
+    function pagination(){
+        var req_num_row=5;
+        var $tr=jQuery('tbody tr');
+        var total_num_row=$tr.length;
+        var num_pages=0;
+        if(total_num_row % req_num_row ==0){
+            num_pages=total_num_row / req_num_row;
+        }
+        if(total_num_row % req_num_row >=1){
+            num_pages=total_num_row / req_num_row;
+            num_pages++;
+            num_pages=Math.floor(num_pages++);
+        }
+        for(var i=1; i<=num_pages; i++){
+            jQuery('#pagination').append(" " + '<li class="waves-effect"><a href="#!">' + i + ' </a></li>'+ " ");
+        }
+        $tr.each(function(i){
+            jQuery(this).hide();
+            if(i+1 <= req_num_row){
+                $tr.eq(i).show();
+            }
+
+        });
+        jQuery('#pagination a').click(function(e){
+            e.preventDefault();
+            $tr.hide();
+            var page=jQuery(this).text();
+            var temp=page-1;
+            var start=temp*req_num_row;
+            //alert(start);
+
+            for(var i=0; i< req_num_row; i++){
+
+                $tr.eq(start+i).show();
+
+            }
+        });
+    }
+    jQuery('document').ready(function(){
+        pagination();
+    });
+
+</script>
+
+<main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <% if(@d.present? && @d.errors.any?) %>
+      <div class="error_explanation" style="padding-left: 50px">
+
+        <ul>
+          <% if (@d.present? && @d.errors.any?) %>
+              <p>
+                <%= pluralize((@d.errors.count), "error") %> prohibited
+                from adding doctor type:
+              </p>
+              <% @d.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <div class="container">
+
+    <br/><br/>
+    <div class="row">
+      <form class="col s12 m12 l12" id="add" action="/admin/add/type/<%= @admin.id %>" method="post">
+        <h5>Add New Doctor Type</h5>
+        <div class="row">
+          <div class="input-field col s12 m8">
+
+            <input id="speciality" type="text" name="type[speciality]" value="<%= @name.present? ? @name : nil %>" class="validate" required>
+            <label class="active" for="speciality">Speciality</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s6 m4">
+            <button class="btn waves-effect waves-light col s12" type="submit" id="submit1" >Add Type</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <form class="col s12 m12 l12" id="archive" method="post">
+        <input type="hidden" name="_method" value="patch" />
+
+
+        <% if defined? @doctor_types %>
+            <% if @doctor_types.blank? == false %>
+                <br/><div class="divider"></div><br/>
+                <h5>Doctor Types</h5>
+                <br/>
+
+                <div id="pagination">
+                <div class="col s12">
+                  <table class="bordered highlight responsive-table">
+                    <thead>
+                    <tr>
+                      <th data-field="id">Name</th>
+                      <th data-field="price">Action</th>
+
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <% @doctor_types.each do |d| %>
+                        <tr>
+
+                          <td><%= d.speciality %></td>
+                          <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="archive/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Archive admin" id="submit" type="button"><i class="material-icons prefix">remove</i></button></td>
+
+                          </tr>
+                        <div id="archive/<%= d.id %>" class="modal">
+                          <div class="modal-content">
+                            <h4>Archive Doctor Type</h4>
+                            <p>Are you sure you want to archive type <%= d.speciality %> ?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" value="0" name="commit" formaction="/admin/remove/type/<%= @admin.id %>/<%= d.id %>" id="submit" type="submit2">Confirm</button>
+                          </div>
+                        </div>
+                    <% end %>
+
+                    </tbody>
+                  </table>
+                  <br/><br/>
+
+                </div>
+                </div>
+                </form>
+
+
+
+            <% else %>
+                <p>
+                  <%= "No Results" %></option>
+
+                </p>
+            <% end %>
+
+
+        <% end %>
+
+        </div>
+        </div>
+  <script type="text/javascript">
+      $(document).ready(function(){
+
+          $('.modal').modal();
+
+      });
+  </script>
+</main>

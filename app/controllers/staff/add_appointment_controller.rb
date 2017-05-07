@@ -78,12 +78,12 @@ class Staff::AddAppointmentController < ApplicationController
     @timeslot = TimeSlot.find(params[:id])
     @doctor=Doctor.find(@timeslot.doctor_id)
     @doctor_type=DoctorType.find(@doctor.doctor_type_id).speciality
-    @patients=Patient.where('registered = 0')
+    @patients=Patient.where('registered = 0').pluck(:full_name, :id)
   end
 
   def create
     @staff = Staff.find(params[:id])
-    @patients=Patient.where('registered = 0')
+    @patients=Patient.where('registered = 0').pluck(:full_name, :id)
 
     @doctor=Doctor.find(params[:app][:doctor_id])
     @doctor_type=DoctorType.find(@doctor.doctor_type_id).speciality
@@ -98,7 +98,7 @@ class Staff::AddAppointmentController < ApplicationController
     if ((@timeslot.to_time - @timeslot.from_time)/15.minutes).to_i > Appointment.where('time_slot_id = ?', @timeslot.id).where('status = ?', 1).count
       if @app.valid?
         @app.save
-        flash.now[:success] = "Appointement successfully added."
+        flash[:success] = "Appointement successfully added."
         redirect_to :controller => 'staff/add_appointment', :action => 'summary', staff_id: @staff.id, patient_id: @app.patient_id, id: @app.id
       else
         flash.now[:error] = "Appointement adding failed. Please try again"

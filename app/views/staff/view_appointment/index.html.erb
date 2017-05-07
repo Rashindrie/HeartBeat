@@ -1,0 +1,130 @@
+<%= render partial: 'staff/sideNav'%>
+
+<main style="padding-left: 240px">
+
+  <div class="container " style="width: 85%">
+
+    <div class="row">
+      <form class="col s12 m12 l12" action="/search_appointment/<%= @staff.id %>" method="get">
+        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+        <h4>View Appointments</h4>
+
+
+        <div class="divider"></div><br>
+
+        <div class="row">
+          <div class="col s12">
+
+              <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <label class="active" for="tags">Doctor </label>
+                <input id="tags" value="<%= @name.present? ? @name : nil %>"required />
+                <input id="doctor_id" name="app[doctor_id]" type="hidden" />
+              </div>
+          </div>
+        </div>
+
+
+            <div class="col m2">
+              <p class="right-align"><button class="btn waves-effect waves-light" type="submit">Search</button></p>
+            </div>
+
+
+
+
+      </form>
+
+
+      <div>
+
+        <% if defined? @appointments %>
+            <% if @appointments.blank? == false %>
+
+                <div class="row">
+                  <div class="col s12">
+                    <br/>
+                    <div class="divider"></div><br/><br/>
+                    <table class="bordered highlight responsive-table">
+                      <thead>
+                      <tr>
+                        <th data-field="time">Date</th>
+                        <th data-field="name">Time Slot</th>
+                        <th data-field="action">Patient</th>
+                        <th data-field="action">Patient Type</th>
+                      </tr>
+                      </thead>
+
+                      <tbody>
+
+                      <% @appointments.each do |d| %>
+                          <tr>
+                            <td><%= d.app_date %></td>
+                            <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
+                            <td><a href="/staff/appointments/summary/<%= @staff.id %>/<%= d.patient_id %>/<%= d.app_id %>"><%= d.first_name + " " + d.last_name %></a></td>
+                            <% if d.registered == 1 %>
+                                <td><%= "Registered" %></td>
+                            <% else %>
+                                <td><%= "Non Registered" %></td>
+                            <% end %>
+                          </tr>
+                      <% end %>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            <% else %>
+
+            <% end %>
+
+        <% end %>
+
+      </div>
+
+
+    </div>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function() {
+
+          $('select').material_select();
+          $('.modal').modal();
+
+          $('.scrollspy').scrollSpy();
+          $('.datepicker').pickadate({
+
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+              format: 'yyyy-mm-dd',
+              closeOnSelect: true,
+              onSet: function (ele) {
+                  if (ele.select) {
+                      this.close();
+                  }
+              }
+          });
+      });
+
+  </script>
+</main>
+<script type="text/javascript">
+    $(document).on('ready page:load', function() {
+        var doctors = <%== @doctors %>;
+
+        var data = doctors.map(function (a) {
+            return { label: a[0], id: a[1] };
+        });
+
+        $( "#tags" ).autocomplete({
+            delay: 0,
+            source: data,
+            select: function(event, ui) {
+                $('#doctor_id').val(ui.item.id);
+            }
+        });
+
+    });
+</script>

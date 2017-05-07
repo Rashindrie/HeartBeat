@@ -1,5 +1,22 @@
 <%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var patients = <%== @patients %>;
 
+        var data = patients.map(function (a) {
+            return { label: a[0], id: a[1] };
+        });
+
+        $( "#tags" ).autocomplete({
+            delay: 0,
+            source: data,
+            select: function(event, ui) {
+                $('#patient_id').val(ui.item.id);
+            }
+        });
+
+    });
+</script>
 <main style="padding-left: 240px">
 
 
@@ -54,16 +71,13 @@
 
           <tr>
             <th>Patient Name</th>
+
+
             <td>
-              <select name="app[patient_id]">
-                <option id="dropdown" value="" disabled selected>Select Patient</option>
-                <% @patients.each do |d| %>
-                    <option value="<%= d.id %>"><%= d.first_name + " " + d.last_name %></option>
-                <% end %>
-              </select>
+                    <label class="active" for="tags">Select Patient</label>
+                    <input id="tags" />
+                    <input id="patient_id" name="app[patient_id]" type="hidden" />
             </td>
-
-
           </tr>
 
 
