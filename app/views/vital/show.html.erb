@@ -165,7 +165,7 @@
        <div class="row">
           <% if current_user && current_user.doctor? %>
              <div class="left-aligned col s8">
-               <a class="btn waves-effect waves-light" href="/search/patients/<%= @doctor.id %>">Back to Search</a>
+               <a class="btn waves-effect waves-light" href="<%= url_for(:back) %>">Back</a>
              </div>
           <div class="col s3">
             <a class="btn waves-effect waves-light"  href="/vital/edit/<%= @doctor.id %>/<%= @patient.id %>">Update Vitals</a>

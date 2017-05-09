@@ -1,4 +1,5 @@
 <%= render partial: 'doctor/sideNav'%>
+
 <script type="text/javascript">
     $(document).ready(function() {
         var patients = <%== @patients %>;
@@ -7,11 +8,12 @@
             return { label: a[0], id: a[1] };
         });
 
-        $( "#tags" ).autocomplete({
+        $('input.autocomplete').autocomplete({
             delay: 0,
             source: data,
             select: function(event, ui) {
                 $('#patient_id').val(ui.item.id);
+                $('#search').href="/search/patients/<%= @doctor.id %>/" + ui.item.id;
             }
         });
     } );
@@ -68,7 +70,7 @@
   <div class="container " style="width: 85%">
 
     <div class="row">
-      <form class="col s12 m12 l12" action="/search/profile/<%= @doctor.id %>" method="get">
+      <form class="col s12 m12 l12" id="search" action="" method="get">
         <h4>Search Patients</h4>
 
         <div class="divider"></div><br>
@@ -79,7 +81,7 @@
               <div class="input-field col s12">
                 <i class="material-icons prefix">textsms</i>
                 <label class="active" for="tags">Patient</label>
-                <input id="tags" required/>
+                <input id="tags" class="autocomplete" required/>
                 <input id="patient_id" name="search[patient_id]" type="hidden" required/>
               </div>
             </div>
@@ -94,7 +96,7 @@
 
         <div class="row">
           <div class="col s12">
-            <div id="pagination">
+            <div id=" ">
               <table class="bordered highlight responsive-table">
               <thead>
               <tr>

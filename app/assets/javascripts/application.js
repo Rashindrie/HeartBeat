@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require dataTables/jquery.dataTables
 //= require turbolinks
 //= require_tree .
 //= require materialize-sprockets
@@ -21,7 +20,6 @@
 //= require fullcalendar
 //= require fullcalendar/gcal
 //= require jquery-ui
-//= require autocomplete-rails
 
 // require rails_script
 // require js-routes
