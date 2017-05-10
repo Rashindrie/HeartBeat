@@ -1,0 +1,55 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+
+          var chartDiv = document.getElementById('chart_div');
+
+          var data = google.visualization.arrayToDataTable([
+              ['Month', 'Appointment Count'],
+              ['Jan', <%= @jan  %>],
+              ['Feb', <%=  @feb %>],
+              ['Mar', <%= @mar  %>],
+              ['Apr', <%=  @apr %>],
+              ['May', <%= @may  %>],
+              ['Jun', <%=  @jun %>],
+              ['Jul', <%= @jul  %>],
+              ['Aug', <%= @aug  %>],
+              ['Sep', <%=  @sep %>],
+              ['Oct', <%=  @oct %>],
+              ['Nov', <%=  @nov %>],
+              ['Dec', <%= @dec  %>]
+          ]);
+
+          var options = {
+              title: 'My Appointment Summary',
+              chartArea: {width: '50%'},
+              width: 500,
+              height: 268,
+              chartArea: {  width: "50%", height: "85%" },
+              hAxis: {
+                  title: 'Number of Appointments',
+                  minValue: 0
+              },
+              vAxis: {
+                  title: 'Month'
+              }
+          };
+
+          var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+          chart.draw(data, options);
+      };
+  </script>
+</head>
+<body>
+
+
+<div id="chart_div"  ></div>
+</body>
+</html>

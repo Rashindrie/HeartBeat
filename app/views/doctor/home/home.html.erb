@@ -3,10 +3,80 @@
   <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
+
+
+    <br/><br/>
+    <h5 class="center-align">Welcome to your personalised Patient Doctor Management System </h5>
+  <br/>
+  <div class="row">
+    <div class="fixed-action-btn horizontal">
+      <a class="btn-floating btn-medium  cyan">
+        <i class="medium material-icons">menu</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating red darken-4 tooltipped" data-position="bottom" data-delay="50" data-tooltip="My Profile" href="/doctor/profile/<%= @doctor.id %>"><i class="material-icons">perm_identity</i></a></li>
+        <li><a class="btn-floating orange" href="/view/appointments/<%= @doctor.id %>"><i class="material-icons">schedule</i></a></li>
+        <li><a class="btn-floating  pink" href=/search_patients"><i class="material-icons">search</i></a></li>
+      </ul>
+    </div>
+  </div>
   <div class="container">
 
-    <br/><br/><br/>
-    <h5>Welcome to your personalised Patient Doctor Management System </h5>
 
+<div class="row">
+    <div class="col s6">
+      <ul id="task-card" class="collection with-header teal">
+        <li class="collection-header teal darken-3" style="height: 65px;">
+          <p class="task-card-title"><strong>My Time Slots for today (<%= Date.today %>)</strong></p>
+       </li>
+        <% if defined? @time_slot %>
+            <% if !@time_slot.blank? %>
+                <% @time_slot.each do |t| %>
+                    <li>
+                    <p style="text-decoration: none;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= t.from_time.strftime("%I:%M %p") + " - " + t.to_time.strftime("%I:%M %p") %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+                      <% if t.status == true %>
+                          <span class="task-cat green" style="border-radius: 2em; padding: 5px; ">Cancelled</span>
+                      <% else %>
+                          <span class="task-cat amber" style="border-radius: 2em; padding: 5px; ">Cancelled</span>
+                      <% end%>
+                    </p>
+                    </li>
+                <% end %>
+            <% else %>
+            <label class="white-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Time slots scheduled</label>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col s6">
+      <ul id="task-card" class="collection with-header pink">
+        <li class="collection-header pink darken-3" style="height: 65px;">
+          <p class="task-card-title"><strong>Organ Requests</strong></p>
+        </li>
+        <li>
+
+          <p href="/doctor/requester/donor/<%= @doctor.id %>" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="task-cat yellow" style="border-radius: 2em; padding: 5px; "><%= @requests %></span> Pending request(s)</p>
+          <p><a href="/doctor/requester/donor/<%= @doctor.id %>"></a></p>
+
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m5">
+      <div class="card">
+        <%= render partial: 'doctor/app_summary' %>
+      </div>
+    </div>
+
+    <div class="col s12 m7">
+      <div class="card">
+        <%= render partial: 'doctor/app_summary_year' %>
+      </div>
+    </div>
   </div>
 </main>

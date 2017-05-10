@@ -1,0 +1,33 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+              ['Appointment', 'Count'],
+              ['Monday',     <%= @mon %> ],
+              ['Tuesday',  <%= @tue %>  ],
+              ['Wednesday', <%= @wed %> ],
+              ['Thursday', <%= @thur %> ],
+              ['Friday', <%= @fri %> ],
+              ['Saturday', <%= @sat %>  ],
+              ['Sunday',  <%= @sun %> ]
+          ]);
+
+          var options = {
+              title: 'My Daily Average Appointment Count',
+              pieHole: 0.4,
+              chartArea: {  width: "80%"}
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+          chart.draw(data, options);
+      }
+  </script>
+</head>
+<body>
+<div id="donutchart" style="width: 350px; height: 268px;"></div>
+</body>
+</html>
