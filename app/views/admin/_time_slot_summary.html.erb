@@ -1,0 +1,39 @@
+<head>
+  <style>
+    .vertical-center {
+      min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+      min-height: 100vh; /* These two lines are counted as one :-)       */
+      display: flex;
+      align-items: center;}
+  </style>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawBasic);
+      function drawBasic() {
+          var data = google.visualization.arrayToDataTable([
+              ['Time Slots', 'Count'],
+              ['Scheduled', 11 ],
+              ['Cancelled', 22 ],
+          ]);
+          var options = {
+              title: 'Overall Time Slot Summary',
+              is3D: true,
+          };
+          var chart = new google.visualization.PieChart(document.getElementById('piechart_time_slot_summary'));
+          chart.draw(data, options);
+      }
+  </script>
+</head>
+
+
+
+
+<br />
+
+
+
+<div id="piechart_time_slot_summary" style="height: 268px;" ></div>
+
+

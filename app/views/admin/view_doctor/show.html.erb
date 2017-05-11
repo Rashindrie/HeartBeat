@@ -1,0 +1,93 @@
+<%= render partial: 'admin/sideNav'%>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#submit').click(function(){
+          /* when the submit button in the modal is clicked, submit the form */
+            $('#updateDoc').submit();
+        });
+        $('.modal').modal();
+        )};
+</script>
+<main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <% if @user.errors.any? %>
+      <div class="error_explanation" style="padding-left: 50px">
+        <p>
+          <%= pluralize(@user.errors.count, "error") %> prohibited
+          from updating user:
+        </p>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+  <div class="container " style="width: 85%">
+    <form class="col s12 m12 l12" id="updateDoc" method="post">
+      <input type="hidden" name="_method" value="patch" />
+    <div class="row">
+      <div class="col s12 m8">
+        <div class="row">
+
+            <div class="card">
+              <%= render partial: 'doctor/app_summary' %>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="card">
+              <%= render partial: 'doctor/app_summary_year' %>
+            </div>
+        </div>
+      </div>
+
+      <div class="col s12 m4">
+        <div id="profile-card" class="card sticky z-depth-1" style="">
+          <div class="card-image waves-effect waves-block waves-light">
+            <br>
+
+            <%= image_tag("Heart_Beat.png", :alt => "user background") %>
+          </div>
+
+          <div class="card-content">
+
+            <span class="card-title activator grey-text text-darken-4"><strong>Dr.<%= @doctor.first_name + " " + @doctor.last_name %> </strong></span>
+
+            <p><i class="material-icons prefix">wc</i><%=  @doctor.gender? ? "Female" : "Male" %></p>
+            <p><i class="material-icons prefix">work</i><%= @doctor_type %></p>
+            <p><i class="material-icons prefix">email</i><%= @doctor.email %></p>
+            <p><i class="material-icons prefix">phone</i><%= @doctor.telephone %></p>
+            <br/>
+            <% if @user.status %>
+                <p>Status: <span class="task-cat green" style="border-radius: 2em; padding: 5px; ">Active</span></p>
+            <% else %>
+                <p>Status: <span class="task-cat red darken-2" style="border-radius: 2em; padding: 5px; ">Inactive</span></p>
+            <% end %>
+            <br/><br/>
+            <% if @user.status %>
+
+               <button class="red darken-2 btn waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Archive Doctor" id="submit" formaction="/admin/update/doctor/<%= 0 %>/<%= @admin.id %>/<%= @doctor.id %>" type="submit">Archive</button>
+            <% else %>
+
+                <button class="green btn waves-effect waves-light btn tooltipped"  data-position="bottom" data-delay="50" data-tooltip="Unarchive Doctor" id="submit" formaction="/admin/update/doctor/<%= 1 %>/<%= @admin.id %>/<%= @doctor.id %>" type="submit">Unarchive</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="divider"></div>
+    <br/>
+
+    <div class="row">
+      <div class="col s9">
+        <a class="btn waves-effect waves-light" href="/admin/search/<%= @admin.id %>">Back</a>
+      </div>
+    </div>
+    </form>
+  </div>
+</main>

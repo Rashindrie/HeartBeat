@@ -116,6 +116,9 @@ Rails.application.routes.draw do
   get '/admin/doctors/:id', to: 'admin/add_doctor_types#index'
   post '/admin/add/type/:id', to: 'admin/add_doctor_types#create'
   patch '/admin/remove/type/:admin_id/:id', to: 'admin/add_doctor_types#update'
+  get '/admin/search/:admin_id/:id', to: 'admin/view_doctor#show'
+  get '/admin/search/:id', to: 'admin/view_doctor#index'
+  patch '/admin/update/doctor/:action_id/:admin_id/:id', to: 'admin/view_doctor#update'
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

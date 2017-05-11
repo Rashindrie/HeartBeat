@@ -1,0 +1,54 @@
+<%= render partial: 'admin/sideNav'%>
+
+<script>
+    $(document).ready(function() {
+        var doctors = <%== @doctors %>;
+
+        var data = doctors.map(function (a) {
+            return { label: a[0], id: a[1] };
+        });
+
+        $('input.autocomplete').autocomplete({
+            delay: 0,
+            source: data,
+            select: function(event, ui) {
+                $('#doctor_id').val(ui.item.id);
+                location.href="/admin/search/<%= @admin.id %>/" + ui.item.id;
+            }
+        });
+    } );
+</script>
+
+<main style="padding-left: 240px">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <div class="container " style="width: 85%">
+
+    <div class="row">
+      <form class="col s12 m12 l12" id="search" action="" method="get">
+        <h4>Search Doctors</h4>
+
+        <div class="divider"></div><br>
+
+        <div class="row">
+          <div class="col s12">
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">textsms</i>
+                <label class="active" for="tags">Doctor</label>
+                <input id="tags" class="autocomplete" required/>
+                <input id="doctor_id" name="doctor_id" type="hidden" required/>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s3">
+            <button class="btn waves-effect waves-light col s12" type="submit"  id="submit" >View Profile</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</main>
