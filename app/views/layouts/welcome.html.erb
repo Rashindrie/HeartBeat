@@ -60,7 +60,7 @@
         <ul class="right hide-on-med-and-down">
           <!li><!a class="waves-effect waves-light btn"><!i class="material-icons right"><!/i><!/a><!/li>
           <% if current_user %>
-              <li><a href="/home"><i class="material-icons prefix">home</i></a></li>
+              <li><a href="<%= url_for(:back)%>"><i class="material-icons prefix">home</i></a></li>
               <li><a href="/logout"><i class="material-icons prefix">power_settings_new</i></a></li>
           <% end %>
 

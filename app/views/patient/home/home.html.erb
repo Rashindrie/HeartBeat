@@ -37,6 +37,8 @@
 
       <div class="col s12 m7">
         <div class="card">
+
+          <% if !@from_date.blank? %>
         <div class="card-image waves-effect waves-block waves-light">
           <%= render partial: 'patient/vitals_summary' %>
         </div>
@@ -77,6 +79,9 @@
             </tbody>
             </table>
           </div>
+          <% else %>
+
+          <% end %>
         </div>
       </div>
       </div>

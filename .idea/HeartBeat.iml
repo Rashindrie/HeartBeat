@@ -174,7 +174,6 @@
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.14.3, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="byebug (v9.0.6, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v2.13.0, RVM: ruby-2.3.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="childprocess (v0.6.3, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-rails (v4.2.1, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script (v2.4.1, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script-source (v1.12.2, RVM: ruby-2.3.3) [gem]" level="application" />
@@ -233,7 +232,6 @@
     <orderEntry type="library" scope="PROVIDED" name="rubyzip (v1.2.1, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.4.23, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v5.0.6, RVM: ruby-2.3.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v3.3.0, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simple_calendar (v2.2.5, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simplecov (v0.14.1, RVM: ruby-2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simplecov-html (v0.10.0, RVM: ruby-2.3.3) [gem]" level="application" />

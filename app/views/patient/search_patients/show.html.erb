@@ -12,6 +12,7 @@
       <br/>
       <div class="col s12 m8">
         <div class="card">
+          <% if @from_date != nil %>
           <div class="card-image waves-effect waves-block waves-light">
             <%= render partial: 'patient/vitals_summary' %>
           </div>
@@ -52,6 +53,7 @@
               </tbody>
             </table>
           </div>
+          <% end %>
         </div>
       </div>
       <div class="col s4">

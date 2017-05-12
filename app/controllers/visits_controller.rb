@@ -21,7 +21,7 @@ class VisitsController < ApplicationController
     @visit.doctor_id=params[:doctor_id]
 
     if @visit.valid?
-      @vital.save
+      @visit.save
       flash[:success] = "Visit added successfully."
       redirect_to :controller => 'visits', :action => 'index', :doctor_id => params[:doctor_id], :id => params[:id]
     else

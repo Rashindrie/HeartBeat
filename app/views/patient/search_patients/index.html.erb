@@ -7,12 +7,14 @@
         var data = patients.map(function (a) {
             return { label: a[0], id: a[1] };
         });
+        var url="/search/patients/<%= @doctor.id %>/change";
 
         $('input.autocomplete').autocomplete({
             delay: 0,
             source: data,
             select: function(event, ui) {
                 $('#patient_id').val(ui.item.id);
+                //document.getElementById('#patient_id').value = ui.item.id;
                 $('#search').href="/search/patients/<%= @doctor.id %>/" + ui.item.id;
             }
         });

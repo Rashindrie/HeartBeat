@@ -89,7 +89,7 @@
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
             <% if current_user %>
-            <li class="active"><a href="/logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+            <li class="active"><a id="logout" href="/logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
             <% else %>
                 <li class="active"><a href="/signup/patient"><i class="material-icons left">power_settings_new</i>Sign Up</a></li>
                 <li class="active"><a href="/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
