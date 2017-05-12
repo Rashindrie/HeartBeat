@@ -40,7 +40,6 @@ class Doctor::HomeController < ApplicationController
     #organ requests
     @requests=OrgansRequesterPatient.where('status = 0').count
 
-    #organ donors
 
   end
 

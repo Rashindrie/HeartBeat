@@ -6,9 +6,14 @@ class UserTest < ActiveSupport::TestCase
   # end
 
   def setup
-    @user = User.new(email: "user@example.com",
-                     password: "foobar", password_confirmation: "foobar", role: 1, status: 1)
-  end
+  @user = User.new :email => users(:one).email, 
+         :password_digest => users(:one).password_digest,  
+         :role => users(:one).role, 
+         :patient_id => users(:one).patient_id, 
+	 :activation_digest => users(:one).activation_digest, 
+	 :activated => users(:one).activated, 
+	 :activated_at => users(:one).activated_at    
+  
 
   test "should be valid" do
     assert @user.valid?
@@ -25,7 +30,7 @@ class UserTest < ActiveSupport::TestCase
                          first.last@foo.jp alice+bob@baz.cn]
     valid_addresses.each do |valid_address|
       @user.email = valid_address
-      assert_not @user.valid?, "#{valid_address.inspect} should be valid"
+     assert_not @user.valid?, "#{valid_address.inspect} should be valid"
     end
   end
 
@@ -51,6 +56,6 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 5
     assert @user.valid?
   end
-
+end
 
 end

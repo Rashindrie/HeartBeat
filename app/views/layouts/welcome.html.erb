@@ -69,7 +69,7 @@
       <% if current_user %>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="side-nav" id="mobile-demo">
-            <li><a href="/home"><i class="material-icons prefix">home</i></a></li>
+            <li><a href="<%= url_for(:back) %>"><i class="material-icons prefix">home</i></a></li>
             <li><a href="/logout"><i class="material-icons prefix">power_settings_new</i></a></li>
           </ul>
       <% end %>

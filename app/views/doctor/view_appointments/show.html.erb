@@ -18,7 +18,7 @@
             <div class="input-field col s3 l4" id="dateSelect">
               <i class="material-icons prefix">date_range</i>
               <label class="active" for="date">Date</label>
-              <input id="date" type="date" name="app[date]"  class="datepicker">
+              <input id="date" type="date" name="app[date]" value="<%= @date.present? ? @date : nil %>"  class="datepicker" required>
             </div>
 
           <div class="col m2">
@@ -52,11 +52,12 @@
               <tr>
                 <td><%= d.app_date %></td>
                 <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
-                <td><a href="/search/patients/<%= @doctor.id %>/<%= d.patient_id %>"><%= d.first_name + " " + d.last_name %></a></td>
                 <% if d.registered == false %>
-                <td>Non Registered</td>
+                    <td>No action</td>
+                    <td>Non Registered</td>
                 <% else %>
-                <td>Registered</td>
+                    <td><a href="/search/patients/<%= @doctor.id %>/<%= d.patient_id %>"><%= d.first_name + " " + d.last_name %></a></td>
+                    <td>Registered</td>
                 <% end %>
               </tr>
               <% end %>

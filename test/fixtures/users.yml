@@ -4,8 +4,20 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-#one: {}
-# column: value
-#
+one: 
+ id: 1
+ email: james@gmail.com
+ password_digest: $2a$10$yWJv8NYuAn1lJl0nhsGo5eKVCUTuuRGxEXqhY.YKIcUoG5ACKFoVe
+ role: 1
+ patient_id: 1
+ status: 1
+ activation_digest: $2a$10$q3KQT8GAqbu59NwyGydI.uPXrG8nQ5kT6bXpZAP.isIXjQkdecAYq
+ activated: 1
+ activated_at: 2017-04-22 10:49:57
+ reset_digest: $2a$10$g5.f3M/fiu4PUz7y9akIlO675pMe7sQ6qcAnyOEP8EDLusY.XcXu.
+ reset_sent_at: 2017-04-22 15:40:53
+
 #two: {}
 # column: value
+
+

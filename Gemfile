@@ -60,6 +60,9 @@ gem 'simple_calendar', '~> 2.2'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
+#performace testing
+#gem 'rails-perftest'
+#gem 'ruby-prof'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

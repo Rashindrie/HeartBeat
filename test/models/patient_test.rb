@@ -11,7 +11,7 @@ class PatientTest < ActiveSupport::TestCase
          :last_name => patients(:one).last_name, 
 	 :gender => patients(:one).gender, 
 	 :date_of_birth => patients(:one).date_of_birth, 
-	 :email => patients(:one).email, 
+	 :registered => patients(:one).registered, 
 	 :telephone => patients(:one).telephone
 
 	#assertion to test that saving a patient is successful
@@ -33,18 +33,75 @@ class PatientTest < ActiveSupport::TestCase
 
    end
 
-	test "should not save patient without full_name" do
+	test "should not save registered patient without full_name" do
 	  patient_wrong = Patient.new
+	  patient_wrong.first_name="Jane"
+	  patient_wrong.middle_name="Doe"
+	  patient_wrong.last_name="Ferdinando"
+	  patient_wrong.date_of_birth="1999-02-18"
+	  patient_wrong.telephone=0111111111
+	  patient_wrong.registered=1
+	  patient_wrong.gender=1
 	  assert_not patient_wrong.save
 	end
 
-test "should not save patient without first_name" do
+	test "should not save unregistered patient without full_name" do
 	  patient_wrong = Patient.new
+	  patient_wrong.first_name="Jane"
+	  patient_wrong.middle_name="Doe"
+	  patient_wrong.last_name="Ferdinando"
+	  patient_wrong.date_of_birth="1999-02-18"
+	  patient_wrong.telephone=0111111111
+	  patient_wrong.registered=0
+	  patient_wrong.gender=1
 	  assert_not patient_wrong.save
 	end
 
-test "should not save patient without last_name" do
+	test "should not save registered patient without first_name" do
 	  patient_wrong = Patient.new
+	  patient_wrong.full_name="Jane Doe Ferdinando"
+	  patient_wrong.middle_name="Doe"
+	  patient_wrong.last_name="Ferdinando"
+	  patient_wrong.date_of_birth="1999-02-18"
+	  patient_wrong.telephone=0111111111
+	  patient_wrong.registered=1
+	  patient_wrong.gender=1
+	  assert_not patient_wrong.save
+	end
+
+	test "should not save unregistered patient without first_name" do
+	  patient_wrong = Patient.new
+	  patient_wrong.full_name="Jane Doe Ferdinando"
+	  patient_wrong.middle_name="Doe"
+	  patient_wrong.last_name="Ferdinando"
+	  patient_wrong.date_of_birth="1999-02-18"
+	  patient_wrong.telephone=0111111111
+	  patient_wrong.registered=0
+	  patient_wrong.gender=1
+	  assert_not patient_wrong.save
+	end
+
+	test "should not save registered patient without last_name" do
+	  patient_wrong = Patient.new
+	  patient_wrong.full_name="Jane Doe Ferdinando"
+	  patient_wrong.middle_name="Doe"
+	  patient_wrong.first_name="Jane"
+	  patient_wrong.date_of_birth="1999-02-18"
+	  patient_wrong.telephone=0111111111
+	  patient_wrong.registered=1
+	  patient_wrong.gender=1
+	  assert_not patient_wrong.save
+	end
+
+	test "should not save unregistered patient without last_name" do
+	  patient_wrong = Patient.new
+	  patient_wrong.full_name="Jane Doe Ferdinando"
+	  patient_wrong.middle_name="Doe"
+	  patient_wrong.first_name="Jane"
+	  patient_wrong.date_of_birth="1999-02-18"
+	  patient_wrong.telephone=0111111111
+	  patient_wrong.registered=0
+	  patient_wrong.gender=1
 	  assert_not patient_wrong.save
 	end
 end

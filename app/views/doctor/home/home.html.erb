@@ -35,7 +35,7 @@
                     <li>
                     <p style="text-decoration: none;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= t.from_time.strftime("%I:%M %p") + " - " + t.to_time.strftime("%I:%M %p") %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
                       <% if t.status == true %>
-                          <span class="task-cat green" style="border-radius: 2em; padding: 5px; ">Cancelled</span>
+                          <span class="task-cat green accent-4" style="border-radius: 2em; padding: 5px; ">Scheduled</span>
                       <% else %>
                           <span class="task-cat amber" style="border-radius: 2em; padding: 5px; ">Cancelled</span>
                       <% end%>

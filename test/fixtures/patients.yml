@@ -13,7 +13,7 @@ one:
  gender: 1
  telephone: '0112345612'
  date_of_birth: 1999-08-31
- email: 'john@gmail.com'
+ registered: 1
 two:
  id: 2
  full_name: 'Dean Mary Winster'
@@ -23,4 +23,4 @@ two:
  gender: 0
  telephone: '0112342342'
  date_of_birth: 1980-08-31
- email: 'dean@gmail.com'
+ registered: 1
