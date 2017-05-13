@@ -137,6 +137,7 @@ GEM
       nokogiri (~> 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-perftest (0.0.7)
     rails_script (2.0.3)
       coffee-rails (~> 4.0, >= 4.0.0)
     railties (5.0.1)
@@ -170,6 +171,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    ruby-prof (0.15.9)
     rubyzip (1.2.1)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -248,10 +250,12 @@ DEPENDENCIES
   pdfkit
   puma (~> 3.0)
   rails (~> 5.0.1)
+  rails-perftest
   rails_script
   render_anywhere
   responders
   rspec-rails
+  ruby-prof (~> 0.15.9)
   sass-rails (~> 5.0)
   selenium-webdriver (~> 2.46.2)
   simple_calendar (~> 2.2)

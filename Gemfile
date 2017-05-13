@@ -61,8 +61,8 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 
 #performace testing
-#gem 'rails-perftest'
-#gem 'ruby-prof'
+gem 'rails-perftest'
+gem 'ruby-prof', '~> 0.15.9'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
