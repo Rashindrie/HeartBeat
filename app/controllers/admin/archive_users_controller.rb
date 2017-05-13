@@ -13,7 +13,7 @@ class Admin::ArchiveUsersController < ApplicationController
     @admin = User.find(params[:admin_id])
     @user=User.find(params[:id])
 
-    if  @user.update_attribute(:status, params[:commit]) && @user.valid?
+    if  @user.update_attribute(:status, params[:commit])
       flash[:success] = "Update successfull"
       redirect_to :controller => '/admin/archive_users', :action => 'show', id: @admin.id
 

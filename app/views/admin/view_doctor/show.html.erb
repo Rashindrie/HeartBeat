@@ -10,10 +10,22 @@
 </script>
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+      <div id="toast-container">
+      <% if key=="success" %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 15000,'green');
+              });
+          </script>
+      <% elsif key=="error"%>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% else %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      </div>
   <% end %>
   <% if @user.errors.any? %>
-      <div class="error_explanation" style="padding-left: 50px">
+      <div class="error_explanation" style="border-radius: 0.5em; padding: 1px; padding-left: 50px">
         <p>
           <%= pluralize(@user.errors.count, "error") %> prohibited
           from updating user:

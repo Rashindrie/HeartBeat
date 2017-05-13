@@ -30,11 +30,23 @@
         background-color: #cddc39 ;
       }
 
+
+      #toast-container {
+        bottom: auto !important;
+        left: auto !important;
+        top: 50%;
+        right: 7%;
+      }
     </style>
     <script type="text/javascript">
-        $(document).ready(function(){
-          $('select').material_select();
-
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+        $(document).on('turbolinks:load', function(){
+            Materialize.updateTextFields();
+        });
+        $(document).ready(function() {
+            $('.tooltipped').tooltip();
             $('.datepicker').pickadate({
 
                 closeOnSelect: true,
@@ -44,7 +56,8 @@
                     }
                 }
             });
-
+        });
+        $(document).ready(function() {
             $('.button-collapse').sideNav({
                     menuWidth: 300, // Default is 300
                     edge: 'right', // Choose the horizontal origin
@@ -89,10 +102,10 @@
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
             <% if current_user %>
-            <li class="active"><a id="logout" href="/logout"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+            <li class="active"><a id="logout" href="/logout"><i class="material-icons left"></i>Logout</a></li>
             <% else %>
-                <li class="active"><a href="/signup/patient"><i class="material-icons left">power_settings_new</i>Sign Up</a></li>
-                <li class="active"><a href="/login"><i class="material-icons left">account_circle</i>Sign In</a></li>
+                <li class="active"><a href="/signup/patient"><i class="material-icons left"></i>Sign Up</a></li>
+                <li class="active"><a href="/login"><i class="material-icons left"></i>Sign In</a></li>
           <% end %>
 
           </ul>
@@ -113,7 +126,7 @@
   </header>
 
 <main>
-  <%= include_rails_script %>
+
     <%= yield %>
 
 </main>

@@ -20,12 +20,13 @@ class Admin::SignupEmpController < ApplicationController
     if (params[:session][:role]).to_i == 0
       if @user.valid?
         @user.save
-          flash[:success] = "Admin Register successfull"
+          flash[:success] = "Admin Register successfull. Activation mail sent."
+          @user.send_activation_email
           return redirect_to controller: '/admin/signup_emp', action: 'registerAdmin', :id => params[:id]
 
       else
         @doctor_types=DoctorType.all
-        flash.now[:error] = "Admin Register Unsuccessfull"
+        #flash.now[:error] = "Admin Register Unsuccessfull"
         render 'admin/signup_emp/registerAdmin'
       end
 
@@ -49,7 +50,7 @@ class Admin::SignupEmpController < ApplicationController
         end
       else
         @doctor_types=DoctorType.all
-        flash.now[:error] = "Registration Unsuccessfull. Please try again."
+        #flash.now[:error] = "Registration Unsuccessfull. Please try again."
         render 'admin/signup_emp/registerEmp'
       end
 
@@ -72,7 +73,7 @@ class Admin::SignupEmpController < ApplicationController
         end
       else
         @doctor_types=DoctorType.all
-        flash.now[:error] = "Registration Unsuccessfull. Please try again."
+        #flash.now[:error] = "Registration Unsuccessfull. Please try again."
         render 'admin/signup_emp/registerEmp'
       end
     end

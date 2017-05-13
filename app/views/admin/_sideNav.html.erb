@@ -32,12 +32,33 @@
     </ul>
   </li>
   <ul class="bold">
+
     <li><a class="waves-effect waves-teal" href="/admin/home/<%= @admin.id %>">Home</a></li>
-    <li><a class="waves-effect waves-teal" href="/signup/emp/<%= @admin.id %>">Register Users</a></li>
-    <li><a class="waves-effect waves-teal" href="/signup/admin/<%= @admin.id %>">Register Admin</a></li>
-    <li><a class="waves-effect waves-teal" href="/admin/users/<%= @admin.id %>">View Administrators</a></li>
-    <li><a class="waves-effect waves-teal" href="/admin/search/<%= @admin.id %>">View Doctors</a></li>
-    <li><a class="waves-effect waves-teal" href="/admin/doctors/<%= @admin.id %>">Add Doctor Types</a></li>
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">Administrators<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a class="waves-effect waves-teal" href="/signup/admin/<%= @admin.id %>">Register Admins</a></li>
+            <li><a class="waves-effect waves-teal" href="/admin/users/<%= @admin.id %>">View Administrators</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <ul class="collapsible collapsible-accordion">
+      <li>
+        <a class="collapsible-header">Doctor/Clinical Staff<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a class="waves-effect waves-teal" href="/signup/emp/<%= @admin.id %>">Register Employees</a></li>
+            <li><a class="waves-effect waves-teal" href="/admin/search/<%= @admin.id %>">View Doctors</a></li>
+            <li><a class="waves-effect waves-teal" href="/admin/doctors/<%= @admin.id %>">Add Doctor Types</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+
   </ul>
 </ul>
 

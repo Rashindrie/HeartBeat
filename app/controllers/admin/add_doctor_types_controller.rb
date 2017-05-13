@@ -18,7 +18,7 @@ class Admin::AddDoctorTypesController < ApplicationController
       flash[:success] = "Doctor Type successfully added."
       redirect_to :controller => 'admin/add_doctor_types', :action => 'index', id: @admin.id
     else
-      flash.now[:error] = "Update unsuccessful."
+      #flash.now[:error] = "Update unsuccessful."
       @name = params[:type][:speciality]
       render('admin/add_doctor_types/index')
     end

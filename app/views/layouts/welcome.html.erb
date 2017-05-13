@@ -30,6 +30,10 @@
       background-color: #cddc39 ;
     }
 
+    #toast-container {
+      top: auto !important;
+      right: auto !important;
+    }
   </style>
 
   <title>HeartBeat</title>
@@ -82,6 +86,31 @@
 </header>
 
 <main>
+  <% flash.each do |key, value| %>
+      <div id="toast-container"></div>
+      <% if key=="success" %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 4000,'green');
+              });
+          </script>
+      <% elsif key=="error"%>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 8000,'red');
+              });
+          </script>
+      <% else %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 6000,'amber');
+              });
+          </script>
+
+      <% end %>
+
+  <% end %>
+
   <%= yield %>
 
 </main>

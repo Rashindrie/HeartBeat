@@ -29,9 +29,29 @@
 
 <main>
   <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
+      <div id="toast-container"></div>
+      <% if key=="success" %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 5000,'green');
+              });
+          </script>
+      <% elsif key=="error"%>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 8000,'red');
+              });
+          </script>
+      <% else %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 5000,'amber');
+              });
+          </script>
 
+      <% end %>
+
+  <% end %>
   <% if (@patient.present? && @patient.errors.any?)  ||  (@user.present? && @user.errors.any?)%>
       <div class="error_explanation">
         <p>

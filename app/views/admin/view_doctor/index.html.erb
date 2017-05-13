@@ -1,54 +1,79 @@
 <%= render partial: 'admin/sideNav'%>
 
 <script>
-    $(document).ready(function() {
+    $(function() {
         var doctors = <%== @doctors %>;
 
         var data = doctors.map(function (a) {
             return { label: a[0], id: a[1] };
         });
 
-        $('input.autocomplete').autocomplete({
+        $('#tags').autocomplete({
             delay: 0,
             source: data,
             select: function(event, ui) {
                 $('#doctor_id').val(ui.item.id);
-                location.href="/admin/search/<%= @admin.id %>/" + ui.item.id;
             }
         });
     } );
+
+
 </script>
 
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+      <div id="toast-container"></div>
+      <% if key=="success" %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 15000,'green');
+              });
+          </script>
+      <% elsif key=="error"%>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% else %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
   <% end %>
   <div class="container " style="width: 85%">
 
     <div class="row">
-      <form class="col s12 m12 l12" id="search" action="" method="get">
+      <form class="col s12 m12 l12" id="search" onsubmit="submitform()" method="get">
         <h4>Search Doctors</h4>
 
         <div class="divider"></div><br>
 
         <div class="row">
-          <div class="col s12">
+
             <div class="row">
               <div class="input-field col s12 m6">
                 <i class="material-icons prefix">textsms</i>
                 <label class="active" for="tags">Doctor</label>
-                <input id="tags" class="autocomplete" required/>
+                <input id="tags" type="text" class="autocomplete" required/>
                 <input id="doctor_id" name="doctor_id" type="hidden" required/>
               </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col s3">
+              <button class="btn waves-effect waves-light col s12" type="submit"  id="submit" >View Profile</button>
             </div>
           </div>
 
-          <div class="col s3">
-            <button class="btn waves-effect waves-light col s12" type="submit"  id="submit" >View Profile</button>
-          </div>
         </div>
 
       </form>
     </div>
   </div>
+<script>
+    function submitform() {
+        var x = document.getElementById("doctor_id").value;
+        if(x !== ""){
+            document.getElementById("search").action = "/admin/search/<%= @admin.id %>/"+ x;
+        }
+        return true;
+    }
+</script>
 </main>

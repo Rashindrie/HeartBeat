@@ -1,72 +1,27 @@
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('select').material_select();
-        $('.datepicker').pickadate(
-            {
-                selectYears: 100,
-                selectMonths: true,
-                max: new Date(),
-                closeOnSelect: true,
-                onSet: function (ele) {
-                    if (ele.select) {
-                        this.close();
-                    }
-                }
-            });
-
-
-        $('#doctorSelect').hide();
-
-
-        $('input[type="radio"]').click(function() {
-            if($(this).attr('id') == 'doctor') {
-                $('#doctorSelect').show();
-
-            }
-            else{
-                $('#doctorSelect').hide();
-
-
-            }
-        });
-    });
-
-
-</script>
-
-
 
 <%= render partial: 'admin/sideNav' %>
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+      <div id="toast-container"></div>
+      <% if key=="success" %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 15000,'green');
+              });
+          </script>
+      <% elsif key=="error"%>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% else %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
   <% end %>
 
   <% if (@doctor.present? && @doctor.errors.any?) ||  (@staff.present? && @staff.errors.any?) ||  (@user.present? && @user.errors.any?) %>
-      <div class="error_explanation"  style="padding-left: 50px">
+      <div class="error_explanation"  style="border-radius: 0.5em; padding: 0.1px; padding-left: 50px">
 
         <ul>
-          <% if (@doctor.present? && @doctor.errors.any?) %>
-              <p>
-                <%= pluralize((@doctor.errors.count), "error") %> prohibited
-                from registering as a valid user:
-              </p>
-              <% @doctor.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-              <% end %>
-          <% end %>
-
-          <% if (@staff.present? && @staff.errors.any?)  %>
-              <p>
-                <%= pluralize((@staff.errors.count), "error") %> prohibited
-                from registering as a valid user:
-              </p>
-              <% @staff.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-              <% end %>
-          <% end %>
-
           <% if (@user.present? && @user.errors.any?) %>
               <p>
                 <%= pluralize((@user.errors.count), "error") %> prohibited
@@ -76,10 +31,38 @@
                   <li><%= msg %></li>
               <% end %>
           <% end %>
+
+          <% if (@doctor.present? && @doctor.errors.any?) %>
+
+              <% @doctor.errors.full_messages.each do |msg| %>
+                  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= msg %></li>
+              <% end %>
+          <% end %>
+
+          <% if (@staff.present? && @staff.errors.any?)  %>
+
+              <% @staff.errors.full_messages.each do |msg| %>
+                  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= msg %></li>
+              <% end %>
+          <% end %>
+
+
         </ul>
       </div>
   <% end %>
 
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('select').material_select();
+      });
+
+      function show1(){
+          document.getElementById('doctorSelect').style.display ='none';
+      }
+      function show2(){
+          document.getElementById('doctorSelect').style.display = 'block';
+      }
+  </script>
 
   <div style="width:100%;height:100%;position: relative;">
     <div class="" style="width:100%;">
@@ -95,8 +78,8 @@
 
                   <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="full_name" type="text" name="session[full_name]" class="validate">
-                    <label for="full_name" >Full Name</label>
+                    <input id="full_name" type="text" name="session[full_name]" class="validate" value="<%= params[:session].present? ? params[:session][:full_name] : nil %>" required>
+                    <label class="active" for="full_name" >Full Name</label>
                   </div>
 
 
@@ -107,18 +90,18 @@
 
                   <div class="input-field col s12 m6 l4">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="first_name" type="text" name="session[first_name]" class="validate">
-                    <label for="first_name">First Name</label>
+                    <input id="first_name" type="text" name="session[first_name]" value="<%= params[:session].present? ? params[:session][:first_name] : nil %>" class="validate"  required>
+                    <label class="active" for="first_name">First Name</label>
                   </div>
 
                   <div class="input-field col s12 m6 l4">
-                    <input id="middle_name" type="text" name="session[middle_name]" class="validate">
-                    <label for="middle_name">Middle Name</label>
+                    <input id="middle_name" type="text" name="session[middle_name]" value="<%= params[:session].present? ? params[:session][:middle_name] : nil %>" class="validate" >
+                    <label class="active" for="middle_name">Middle Name</label>
                   </div>
 
                   <div class="input-field col s12 m6 l4">
-                    <input id="last_name" type="text" name="session[last_name]" class="validate">
-                    <label for="last_name">Last Name</label>
+                    <input id="last_name" type="text" name="session[last_name]" value="<%= params[:session].present? ? params[:session][:last_name] : nil %>" class="validate" required>
+                    <label class="active" for="last_name">Last Name</label>
                   </div>
 
                 </div>
@@ -128,14 +111,14 @@
                 <div class="row ">
                   <div class="input-field col s12 l6">
                     <i class="material-icons prefix">phone</i>
-                    <input id="telephone" type="tel" name="session[telephone]" class="validate">
-                    <label for="telephone">Telephone</label>
+                    <input id="telephone" type="tel" name="session[telephone]" value="<%= params[:session].present? ? params[:session][:telephone] : nil %>" class="validate" required>
+                    <label class="active" for="telephone">Telephone</label>
                   </div>
 
                   <div class="input-field col s12 l6">
                     <i class="material-icons prefix">email</i>
-                    <input id="email" type="email" name="session[email]" class="validate">
-                    <label for="email" data-error="wrong" data-success="right">Email</label>
+                    <input id="email" type="email" name="session[email]" class="validate" value="<%= params[:session].present? ? params[:session][:email] : nil %>" required>
+                    <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
                   </div>
                 </div>
 
@@ -160,11 +143,11 @@
                     <i class="material-icons prefix">person</i>
                     <div class="col s12">
                       <div class="col s6 left aligned">
-                        <input class="with-gap" name="session[role]" value="2" type="radio" id="doctor"  />
+                        <input class="with-gap" name="session[role]" value="2" onclick="show2();" type="radio" id="doctor"  />
                         <label for="doctor">Doctor</label>
                       </div>
-                      <div class="col s6">
-                        <div class="input-field" id="doctorSelect">
+                      <div class="col s6" style="display: none;" id="doctorSelect">
+                        <div class="input-field" >
                           <select name="session[doctor_type_id]">
                             <% @doctor_types.each do |d| %>
                                 <option value="<%= d.id %>"><%= d.speciality %></option>
@@ -177,7 +160,7 @@
                     </div>
                     <div class="col s12">
                       <div class="col s6 left aligned">
-                        <input class="with-gap" name="session[role]" value="3" type="radio" id="staff" checked="checked" />
+                        <input class="with-gap" name="session[role]" value="3" type="radio" onclick="show1();" id="staff" checked="checked" />
                         <label for="staff">Clinical Staff</label>
                       </div>
                     </div>

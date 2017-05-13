@@ -40,11 +40,23 @@
 <%= render partial: 'admin/sideNav' %>
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+      <div id="toast-container"></div>
+      <% if key=="success" %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 15000,'green');
+              });
+          </script>
+      <% elsif key=="error"%>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% else %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
   <% end %>
 
   <% if(@user.present? && @user.errors.any?) %>
-      <div class="error_explanation" style="padding-left: 50px">
+      <div class="error_explanation" style="border-radius: 0.5em; padding: 1px; padding-left: 50px">
 
         <ul>
           <% if (@user.present? && @user.errors.any?) %>
@@ -76,8 +88,8 @@
 
                   <div class="input-field col s12">
                     <i class="material-icons prefix">email</i>
-                    <input id="email" type="email" name="session[email]" class="validate">
-                    <label for="email" data-error="wrong" data-success="right">Email</label>
+                    <input id="email" type="email" name="session[email]" value="<%= params[:session].present? ? params[:session][:email] : nil %>" class="validate" required>
+                    <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
                   </div>
                 </div>
 
@@ -86,7 +98,7 @@
                   <input type="hidden" name="session[role]" value="0"  />
                   <div class="input-field col s12">
                     <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" name="session[password]" class="validate">
+                    <input id="password" type="password" name="session[password]" class="validate" required>
                     <label for="password">Password</label>
                   </div>
                 </div>

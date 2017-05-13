@@ -1,11 +1,32 @@
 <%= render partial: 'doctor/sideNav', :locals => { :doctor_id => params[:id] } %>
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+      <div id="toast-container"></div>
+      <% if key=="success" %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 5000,'green');
+              });
+          </script>
+      <% elsif key=="error"%>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 8000,'red');
+              });
+          </script>
+      <% else %>
+          <script>
+              $(function() {
+                  Materialize.toast("<%= value %>", 5000,'amber');
+              });
+          </script>
+
+      <% end %>
+
   <% end %>
 
 
-    <br/>
+  <br/>
     <h5 class="center-align">Welcome to your personalised Patient Doctor Management System </h5>
 
   <div class="row">

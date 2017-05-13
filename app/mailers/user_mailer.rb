@@ -50,14 +50,36 @@ class UserMailer < ApplicationMailer
 
   def password_reset(user)
     @user = user
-    @a = (Patient.find(user.patient_id)) || (Doctor.find(user.doctor_id)) || (Staff.find(user.staff_id))
+    if @user.role = 0
+      @a=Doctor.new
+      @a.first_name = @user.email
+      @a.full_name = @user.email
+    elsif @user.role = 1
+      @a = Patient.find(user.patient_id)
+    elsif @user.role = 2
+      @a = Doctor.find(user.doctor_id)
+    elsif @user.role = 3
+      @a = Staff.find(user.staff_id)
+    end
+
     email_with_name = %("#{@a.first_name}" <#{@user.email}>)
     mail(to: email_with_name, subject: "HeartBeat: Reset your password")
   end
 
   def account_activation(user)
     @user = user
-    @a = (Patient.find(user.patient_id)) || (Doctor.find(user.doctor_id)) || (Staff.find(user.staff_id))
+    if @user.role = 0
+      @a=Doctor.new
+      @a.first_name = @user.email
+      @a.full_name = @user.email
+    elsif @user.role = 1
+      @a = Patient.find(user.patient_id)
+    elsif @user.role = 2
+      @a = Doctor.find(user.doctor_id)
+    elsif @user.role = 3
+      @a = Staff.find(user.staff_id)
+    end
+
     email_with_name = %("#{@a.first_name}" <#{@user.email}>)
     mail(to: email_with_name, subject: "HeartBeat: Account Activation")
   end
