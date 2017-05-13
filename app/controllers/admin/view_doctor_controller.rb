@@ -5,7 +5,8 @@ class Admin::ViewDoctorController < ApplicationController
 
   def index
     @admin = User.find(params[:id])
-    @doctors=Doctor.all.pluck(:full_name, :id)
+    #@doctors=Doctor.all.pluck(:full_name, :id)
+    @doctors = Doctor.all.select('id AS id').select('full_name AS full_name').to_json
   end
 
   def show

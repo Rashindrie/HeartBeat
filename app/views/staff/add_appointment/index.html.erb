@@ -16,7 +16,7 @@
 
 
   <% if @app.present? && @app.errors.any? %>
-      <div class="error_explanation" style="padding-left: 50px">
+      <div class="error_explanation"  style="border-radius: 0.5em; padding: 1px; padding-left: 50px">
         <p>
           <%= pluralize(@app.errors.count, "error") %> prohibited from updating vital details:
         </p>

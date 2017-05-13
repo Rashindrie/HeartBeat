@@ -2,21 +2,24 @@
 
 <script>
     $(function() {
-        var doctors = <%== @doctors %>;
+        var data={};
+        var doctors = <%= @doctors.html_safe %>;
+        //console.log(doctors);
+        for (var i=0; i< doctors.length; i++){
+            data[(doctors[i]["full_name"])] = doctors[i]["id"];
+        };
+        //console.log((data));
 
-        var data = doctors.map(function (a) {
-            return { label: a[0], id: a[1] };
-        });
 
-        $('#tags').autocomplete({
-            delay: 0,
-            source: data,
-            select: function(event, ui) {
-                $('#doctor_id').val(ui.item.id);
-            }
+        $('input.autocomplete').autocomplete({
+            data: data,
+            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function(val) {
+                    $('#doctor_id').val(); //append the key here
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
     } );
-
 
 </script>
 
@@ -39,7 +42,7 @@
   <div class="container " style="width: 85%">
 
     <div class="row">
-      <form class="col s12 m12 l12" id="search" onsubmit="submitform()" method="get">
+      <form class="col s12 m12 l12" id="search" onsubmit="submitform()" method="get" >
         <h4>Search Doctors</h4>
 
         <div class="divider"></div><br>

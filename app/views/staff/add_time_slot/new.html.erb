@@ -21,76 +21,46 @@
       });
   </script>
 
-  <script>
-      function pagination(){
-          var req_num_row=2;
-          var $tr=jQuery('tbody tr');
-          var total_num_row=$tr.length;
-          var num_pages=0;
-          if(total_num_row % req_num_row ==0){
-              num_pages=total_num_row / req_num_row;
-          }
-          if(total_num_row % req_num_row >=1){
-              num_pages=total_num_row / req_num_row;
-              num_pages++;
-              num_pages=Math.floor(num_pages++);
-          }
-          for(var i=1; i<=num_pages; i++){
-              jQuery('#pagination').append(" " + '<li class="waves-effect"><a href="#!">' + i + ' </a></li>'+ " ");
-          }
-          $tr.each(function(i){
-              jQuery(this).hide();
-              if(i+1 <= req_num_row){
-                  $tr.eq(i).show();
-              }
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $('select').material_select();
 
-          });
-          jQuery('#pagination a').click(function(e){
-              e.preventDefault();
-              $tr.hide();
-              var page=jQuery(this).text();
-              var temp=page-1;
-              var start=temp*req_num_row;
-              //alert(start);
+          $('.datepicker').pickadate({
 
-              for(var i=0; i< req_num_row; i++){
-
-                  $tr.eq(start+i).show();
-
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 1, // Creates a dropdown of 15 years to control year
+              min: new Date(),
+              closeOnSelect: true,
+              onSet: function (ele) {
+                  if (ele.select) {
+                      this.close();
+                  }
               }
           });
-      }
-      jQuery('document').ready(function(){
-          pagination();
+
+          var picker = $input.pickadate('picker');
+          picker.set('min', Date.now());
       });
 
   </script>
+
   <% flash.each do |key, value| %>
       <div id="toast-container"></div>
       <% if key=="success" %>
           <script>
               $(function() {
-                  Materialize.toast("<%= value %>", 5000,'green');
+                  Materialize.toast("<%= value %>", 10000,'green');
               });
           </script>
       <% elsif key=="error"%>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 8000,'red');
-              });
-          </script>
+          <div class="alert alert-<%= key %>"><%= value %></div>
       <% else %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'amber');
-              });
-          </script>
-
+          <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
 
   <% end %>
   <% if @time_slot.errors.any? %>
-      <div class="error_explanation" style="padding-left: 50px">
+      <div class="error_explanation"  style="border-radius: 0.5em; padding: 1px; padding-left: 50px">
         <p>
           <%= pluralize(@time_slot.errors.count, "error") %> prohibited
           from adding time slot:
@@ -183,33 +153,6 @@
 
 
 
-  <script type="text/javascript">
-      $(document).ready(function(){
-          $('select').material_select();
 
-          $('.datepicker').pickadate({
-
-              selectMonths: true, // Creates a dropdown to control month
-              selectYears: 1, // Creates a dropdown of 15 years to control year
-              min: new Date(),
-              closeOnSelect: true,
-              onSet: function (ele) {
-                  if (ele.select) {
-                      this.close();
-                  }
-              }
-          });
-
-          $('.timepicker').timepicker({
-
-              dynamic: false,
-              dropdown: true,
-              scrollbar: true,
-              'minTime': '8:00am',
-              'maxTime': '11:00pm'
-          });
-      });
-
-  </script>
 </main>
 

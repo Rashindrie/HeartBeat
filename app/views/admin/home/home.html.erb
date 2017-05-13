@@ -40,7 +40,7 @@
     <div class="card green darken-2">
       <div class="card-content white-text center-align">
         <p class="card-stats-title"><i class="material-icons">group_add</i>&nbsp;&nbsp;<strong>Total New Users</strong></p>
-        <p class="card-stats-compare"><i class="material-icons">expand_less</i><%= @new_users %>% from last month
+        <p class="card-stats-compare"><i class="material-icons">expand_less</i><%= @new_users.present? ? @new_users : 0 %>% from last month
         </p>
       </div>
     </div>
