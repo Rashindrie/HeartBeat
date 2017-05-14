@@ -37,13 +37,13 @@
 <div class="row">
   <div class="fixed-action-btn horizontal">
     <a class="btn-floating btn-medium  cyan">
-      <i class="medium material-icons">mode_edit</i>
+      <i class="medium material-icons">menu</i>
     </a>
     <ul>
-      <li><a class="btn-floating red darken-4 tooltipped" data-position="bottom" data-delay="50" data-tooltip="My Profile" href="/patient/profile/<%= @patient.id %>"><i class="material-icons">perm_identity</i></a></li>
-      <li><a class="btn-floating orange" href="/appointment/search/<%= @patient.id %>"><i class="material-icons">add_alert</i></a></li>
-      <li><a class="btn-floating  green accent-4" href="/patient/vital/<%= @patient.id %>"><i class="material-icons">equalizer</i></a></li>
-      <li><a class="btn-floating pink" href="/visits/<%= @patient.id %>"><i class="material-icons">description</i></a></li>
+      <li><a class="btn-floating red darken-4 tooltipped" data-position="top" data-delay="0" data-tooltip="My Profile"  href="/patient/profile/<%= @patient.id %>"><i class="material-icons">perm_identity</i></a></li>
+      <li><a class="btn-floating orange tooltipped" data-position="top" data-delay="0" data-tooltip="Add Appointment"  href="/appointment/search/<%= @patient.id %>"><i class="material-icons">add_alert</i></a></li>
+      <li><a class="btn-floating  green accent-4 tooltipped" data-position="top" data-delay="0" data-tooltip="My Vitals"  href="/patient/vital/<%= @patient.id %>" ><i class="material-icons">equalizer</i></a></li>
+      <li><a class="btn-floating pink tooltipped" data-position="top" data-delay="0" data-tooltip="My Visits"  href="/visits/<%= @patient.id %>"><i class="material-icons">description</i></a></li>
     </ul>
   </div>
 </div>

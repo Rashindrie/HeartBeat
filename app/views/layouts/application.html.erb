@@ -37,6 +37,10 @@
         top: 50%;
         right: 7%;
       }
+
+      nav ul a.active {
+        background: rgba(0,0,0,0.2);
+      }
     </style>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -126,7 +130,16 @@
   </header>
 
 <main>
-
+  <script>
+      $(function(){
+          $('a').each(function(){
+              if ($(this).prop('href') == window.location.href) {
+                  $(this).addClass('active');
+                  $(this).parents('li').addClass('active');
+              }
+          });
+      });
+  </script>
     <%= yield %>
 
 </main>

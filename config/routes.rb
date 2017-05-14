@@ -98,7 +98,8 @@ Rails.application.routes.draw do
   get '/staff/appointments/download/:staff_id/:patient_id/:id', to: 'staff/add_appointment#print'
   get '/view_appointment/:id', to: 'staff/view_appointment#index'
   get '/search_appointment/:id', to: 'staff/view_appointment#search'
-
+  get '/staff/doctor/summary/:staff_id/:doctor_id', to: 'staff/view_appointment#print'
+  
   #add timeslot routes
   get '/timeslot/new/:id', to: 'staff/add_time_slot#new'
   post '/timeslot/add/:id', to: 'staff/add_time_slot#create'

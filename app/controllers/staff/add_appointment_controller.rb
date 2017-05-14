@@ -23,6 +23,7 @@ class Staff::AddAppointmentController < ApplicationController
 
     #search results
     if @d.to_i==-1
+      @name=Date.today.to_date
       @timeslots=TimeSlot.from_doctor(@doctor).where('app_date = ?', Date.today).where('status = ?',1)
                      .order('app_date DESC')
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
@@ -35,6 +36,7 @@ class Staff::AddAppointmentController < ApplicationController
       end
 
     elsif @d.to_i==0
+      @name=Doctor.find(@doctor).full_name
       @timeslots=TimeSlot.from_doctor(@doctor).where('app_date >= ?', Date.today).where('status = ?',1)
                      .order('app_date DESC')
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
@@ -47,7 +49,8 @@ class Staff::AddAppointmentController < ApplicationController
       end
 
     elsif @d.to_i==1
-
+      @name=DoctorType.find(@app_type).speciality
+      @name=Doctor.find(@doctor).full_name
       @timeslots=TimeSlot.joins(doctor: :doctor_type)
                      .where('doctors.doctor_type_id' => @app_type)
                      .where('app_date >= ?', Date.today).where('status = ?',1)
@@ -61,6 +64,7 @@ class Staff::AddAppointmentController < ApplicationController
       end
 
     elsif @d.to_i==2
+      @name=@date
       @timeslots=TimeSlot.from_date(@date).where('status = ?',1)
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
 
@@ -78,12 +82,12 @@ class Staff::AddAppointmentController < ApplicationController
     @timeslot = TimeSlot.find(params[:id])
     @doctor=Doctor.find(@timeslot.doctor_id)
     @doctor_type=DoctorType.find(@doctor.doctor_type_id).speciality
-    @patients=Patient.where('registered = 0').pluck(:full_name, :id)
+    @patients = Patient.all.select('id AS id').select('full_name AS full_name').to_json
   end
 
   def create
     @staff = Staff.find(params[:id])
-    @patients=Patient.where('registered = 0').pluck(:full_name, :id)
+    @patients = Patient.all.select('id AS id').select('full_name AS full_name').to_json
 
     @doctor=Doctor.find(params[:app][:doctor_id])
     @doctor_type=DoctorType.find(@doctor.doctor_type_id).speciality
@@ -134,7 +138,14 @@ class Staff::AddAppointmentController < ApplicationController
     @doctor_type=DoctorType.find(@doctor.doctor_type_id).speciality
 
     if Rails.env.development?
-      render template: "staff/add_appointment/print"
+      #render template: "staff/add_appointment/print"
+      require "pdfkit"
+      html=render_to_string(:action=>"print")
+      @kit  = PDFKit.new(html, page_size: 'A4')
+      @kit.to_file("payment.pdf")
+      send_data @kit.to_pdf,  :filename => "Payment Details:#{@app.id}.pdf",
+                :type => "application/pdf",
+                :disposition  => "attachment"  #change to "attachment" later to force download
     else
         require "pdfkit"
         html=render_to_string(:action=>"print")

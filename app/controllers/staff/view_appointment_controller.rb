@@ -1,16 +1,17 @@
 class Staff::ViewAppointmentController < ApplicationController
   layout 'application'
-  protect_from_forgery
+  protect_from_forgery unless: -> { request.format.html? }
   def index
     @staff = Staff.find(params[:id])
-    @doctors=Doctor.pluck(:full_name, :id)
+    @doctors = Doctor.all.select('id AS id').select('full_name AS full_name').to_json
     @doctor_types=DoctorType.sorted
   end
 
   def search
     #entered searchApp parameters
 
-    @doctor=params[:app][:doctor_id]
+    @doctor=params[:doctor_id]
+    @doctors = Doctor.all.select('id AS id').select('full_name AS full_name').to_json
 
     #search params
     @staff = Staff.find(params[:id])
@@ -35,5 +36,35 @@ class Staff::ViewAppointmentController < ApplicationController
 
 
   end
+
+
+  def print
+    @staff = Staff.find(params[:staff_id])
+    @doctor=Doctor.find(params[:doctor_id])
+    @appointments=Appointment.joins(:time_slot, :patient)
+                      .select('appointments.id AS app_id, patient_id AS patient_id, patients.first_name AS first_name,patients.last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time, (patients.registered) AS registered')
+                      .where('time_slots.doctor_id' => @doctor.id)
+
+    if Rails.env.development?
+      #render template: "staff/view_appointment/print"
+      require "pdfkit"
+      html=render_to_string(:action=>"print")
+      @kit  = PDFKit.new(html, page_size: 'A4')
+      @kit.to_file("appointment.pdf")
+      send_data @kit.to_pdf,  :filename => "Appointment Details:#{@doctor.id}.pdf",
+                :type => "application/pdf",
+                :disposition  => "attachment"  #change to "attachment" later to force download
+    else
+      require "pdfkit"
+      html=render_to_string(:action=>"print")
+      @kit  = PDFKit.new(html, page_size: 'A4')
+      @kit.to_file("appointment.pdf")
+      send_data @kit.to_pdf,  :filename => "Appointment Details:#{@doctor.id}.pdf",
+                :type => "application/pdf",
+                :disposition  => "attachment"  #change to "attachment" later to force download
+    end
+  end
+
+
 
 end

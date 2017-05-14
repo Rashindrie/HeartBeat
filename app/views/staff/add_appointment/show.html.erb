@@ -1,20 +1,22 @@
 <%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
 <script type="text/javascript">
-    $(document).ready(function(){
-        var patients = <%== @patients %>;
+    $( document ).on('turbolinks:load', function() {
+        var data={};
+        var patients = <%= @patients.html_safe %>;
+        //console.log(doctors);
+        for (var i=0; i< patients.length; i++){
+            data[(patients[i]["full_name"])] = patients[i]["id"];
+        };
 
-        var data = patients.map(function (a) {
-            return { label: a[0], id: a[1] };
+        $('input.autocomplete').autocomplete({
+            data: data,
+            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function(val) {
+                $('#patient_id').val(data[(val)]); //append the key here
+
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
-
-        $( "#tags" ).autocomplete({
-            delay: 0,
-            source: data,
-            select: function(event, ui) {
-                $('#patient_id').val(ui.item.id);
-            }
-        });
-
     });
 </script>
 <main style="padding-left: 240px">
@@ -74,9 +76,11 @@
 
 
             <td>
-                    <label class="active" for="tags">Select Patient</label>
-                    <input id="tags" />
-                    <input id="patient_id" name="app[patient_id]" type="hidden" />
+              <div class="input-field col s12">
+                <label class="active" for="tags">Select Patient</label>
+                <input id="tags" type="text" class="autocomplete" required/>
+                <input id="patient_id" name="app[patient_id]" type="hidden" required/>
+              </div>
             </td>
           </tr>
 

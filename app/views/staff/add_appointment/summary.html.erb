@@ -38,6 +38,9 @@
 
         <div class="divider"></div>
         <br>
+        <%= link_to '<button class="btn waves-effect waves-light float-left red" style="float: right;">Download PDF</button>'.html_safe,
+                        "/staff/appointments/download/#{@staff.id}/#{@app.patient_id}/#{@app.id}",
+                        target: "_blank" %>
         <div class="row">
 
           <br>
@@ -77,13 +80,9 @@
         <div class="row">
 
 
-          <div class="col s12 m10">
-            <%= link_to "Download PDF",
-                        "/staff/appointments/download/#{@staff.id}/#{@app.patient_id}/#{@app.id}",
-                        target: "_blank" %>
-          </div>
-          <div class="col s12 m2">
-            <a class="btn waves-effect waves-light" href="<%= url_for(:back) %>">Back</a>
+
+          <div class="col s12 m4">
+            <a class="btn waves-effect waves-light" href="/staff/appointments/<%= @staff.id %>">Back to Search</a>
 
           </div>
         </div>

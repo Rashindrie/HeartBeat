@@ -1,0 +1,66 @@
+<head>
+  <style>
+    div.navbar-fixed{display:none;}
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<main style="">
+  <div class="container">
+
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <h4>Appointment Summary</h4>
+
+        <div class="divider"></div>
+        <div class="row">
+          <div style="float: left; width: 50%;">
+            <ul>
+              <p><strong>Name</strong></p>
+              <p><strong>Time Period</strong></p>
+            </ul>
+          </div>
+          <div style="float: right; width: 50%;">
+            <ul>
+              <p>Dr.<%= @doctor.full_name %></p>
+              <p><%= Date.today.to_date %></p>
+            </ul>
+          </div>
+          <br><br>
+
+          <table cellpadding="3" id="printTable">
+            <tbody><tr>
+              <th>Date</th>
+              <th>Time Slot</th>
+              <th>Patient</th>
+              <th>Patient Type</th>
+            </tr>
+            <% @appointments.each do |d| %>
+                <tr>
+                  <td><%= d.app_date %></td>
+                  <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
+                  <td><%= d.first_name + " " + d.last_name %></a></td>
+                  <% if d.registered == 1 %>
+                      <td><%= "Registered" %></td>
+                  <% else %>
+                      <td><%= "Non Registered" %></td>
+                  <% end %>
+                </tr>
+            <% end %>
+            </tbody></table>
+
+        </div>
+        <br>
+
+      </div>
+    </div>
+  </div>
+
+</main>

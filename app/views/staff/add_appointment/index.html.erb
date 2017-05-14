@@ -12,6 +12,7 @@
         });
         )};
 </script>
+
 <main style="padding-left: 240px">
 
 
@@ -106,7 +107,19 @@
         </div>
         <br/>
         <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
+            <div id="toast-container"></div>
+            <% if key=="success" %>
+                <script>
+                    $(function() {
+                        Materialize.toast("<%= value %>", 10000,'green');
+                    });
+                </script>
+            <% elsif key=="error"%>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% else %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
+
         <% end %>
       </form>
 
@@ -118,6 +131,8 @@
               <div class="row">
                 <form class="col s12 m12 l12" id="addAppointment" action="" method="get">
                   <div class="divider"></div>
+                  <br>
+                  <p>Search Field: <%= @name.present? ? @name : nil %></p>
                   <div class="col s12">
                     <table class="bordered highlight responsive-table">
                       <thead>

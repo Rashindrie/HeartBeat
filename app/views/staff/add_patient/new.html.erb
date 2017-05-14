@@ -77,8 +77,8 @@
 
                       <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="full_name" type="text" name="session[full_name]" class="validate">
-                        <label for="full_name" >Full Name</label>
+                        <input id="full_name" type="text" name="session[full_name]" value="<%= params[:session].present? ? params[:session][:full_name] : nil %>" class="validate" required>
+                        <label class="active" for="full_name" >Full Name</label>
                       </div>
 
 
@@ -87,18 +87,18 @@
 
                       <div class="input-field col s12 m6 l4">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="first_name" type="text" name="session[first_name]" class="validate">
-                        <label for="first_name" >First Name</label>
+                        <input id="first_name" type="text" name="session[first_name]" value="<%= params[:session].present? ? params[:session][:first_name] : nil %>"  class="validate" required>
+                        <label class="active" for="first_name" >First Name</label>
                       </div>
 
                       <div class="input-field col s12 m6 l4">
-                        <input id="middle_name" type="text" name="session[middle_name]" class="validate">
-                        <label for="middle_name" >Middle Name</label>
+                        <input id="middle_name" type="text" name="session[middle_name]" value="<%= params[:session].present? ? params[:session][:middle_name] : nil %>"  class="validate">
+                        <label class="active" for="middle_name" >Middle Name</label>
                       </div>
 
                       <div class="input-field col s12 m6 l4">
-                        <input id="last_name" type="text" name="session[last_name]" class="validate">
-                        <label for="last_name">Last Name</label>
+                        <input id="last_name" type="text" name="session[last_name]" value="<%= params[:session].present? ? params[:session][:last_name] : nil %>"  class="validate" required>
+                        <label class="active" for="last_name">Last Name</label>
                       </div>
 
                     </div>
@@ -129,7 +129,7 @@
                       <div class="input-field col s12 l5">
                         <i class="material-icons prefix">today</i>
 
-                        <input id="date_of_birth" value="" type="date" name="session[date_of_birth]" class="datepicker">
+                        <input id="date_of_birth" value="" type="date" name="session[date_of_birth]" value="<%= params[:session].present? ? params[:session][:date_of_birth] : nil %>" class="datepicker" required>
                         <label class="active" for="date_of_birth">Date of Birth</label>
                       </div>
                     </div>
@@ -142,8 +142,8 @@
                     <div class="row">
                       <div class="input-field col s12 l5">
                         <i class="material-icons prefix">phone</i>
-                        <input id="telephone" type="tel" name="session[telephone]"  class="validate">
-                        <label for="telephone">Telephone</label>
+                        <input id="telephone" type="tel" name="session[telephone]"  class="validate" value="<%= params[:session].present? ? params[:session][:telephone] : nil %>"  required>
+                        <label class="active" for="telephone">Telephone</label>
                       </div>
                     </div>
 

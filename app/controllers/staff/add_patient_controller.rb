@@ -19,7 +19,6 @@ class Staff::AddPatientController < ApplicationController
         flash[:success] = "Patient Registered"
         redirect_to controller: '/staff/add_patient', action: 'new', :id => @staff.id
       else
-        flash.now[:error] = "Signup Unsuccessfull"
         render 'staff/add_patient/new'
       end
 

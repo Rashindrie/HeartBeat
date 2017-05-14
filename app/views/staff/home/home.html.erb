@@ -1,15 +1,12 @@
-<%= render partial: 'staff/sideNav', :locals => { :staff_id => params[:id] } %>
 
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({
-        });
-    });
-</script>
-
-
+<%= render partial: 'staff/sideNav' %>
 <main style="padding-left: 240px">
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('select').material_select();
+          $('.tooltipped').tooltip({delay: 0});
+      });
+  </script>
   <% flash.each do |key, value| %>
       <div id="toast-container"></div>
       <% if key=="success" %>
@@ -25,17 +22,96 @@
       <% end %>
 
   <% end %>
-  <div class="container">
+  <br/>
+  <h5 class="center-align">Welcome to Staff Dashboard </h5>
+  <br/>
+  <div class="row">
+    <div class="fixed-action-btn horizontal">
+      <a class="btn-floating btn-medium  cyan">
+        <i class="medium material-icons">menu</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating red darken-4 tooltipped" data-position="top" data-delay="0" data-tooltip="My Profile" href="/staff/profile/<%= @staff.id %>"><i class="material-icons">perm_identity</i></a></li>
 
-    <br/><br/><br/>
-
-    <div id="calendar"></div>
-
-    <br/><br/>
-
-
-    <%= month_calendar events: @events do |day| %>
-        <%= day %>
-    <% end %>
+        <li><a class="btn-floating pink tooltipped" href="/timeslot/new/<%= @staff.id %>" data-position="top" data-delay="50" data-tooltip="Add Time Slot"><i class="material-icons">schedule</i></a></li>
+      </ul>
+    </div>
   </div>
+  <div class="row">
+    <div class="col s3" >
+      <div class="card green darken-2">
+        <div class="card-content white-text center-align">
+          <p class="card-stats-title"><i class="material-icons">group_add</i>&nbsp;&nbsp;<strong>Total New Users</strong></p>
+          <p class="card-stats-compare"><i class="material-icons">expand_less</i><%= @new_users.present? ? @new_users : 0 %>% from last month
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s3">
+      <div class="card blue darken-2">
+        <div class="card-content white-text center-align">
+          <p class="card-stats-title"><i class="material-icons">group_add</i>&nbsp;&nbsp;<strong>Registered Patients</strong></p>
+          <p class="card-stats-compare"><i class="material-icons">expand_less</i><%= @new_patients.present? ? @new_patients : 0 %><span class="green-text text-lighten-5">% from last month</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s3" >
+      <div class="card grey darken-2">
+        <div class="card-content white-text center-align">
+          <p class="card-stats-title"><i class="material-icons">schedule</i>&nbsp;&nbsp;<strong>New Time Slots</strong></p>
+          <p class="card-stats-compare"><i class="material-icons">expand_less</i><%= @new_timeslots.present? ? @new_timeslots : 0 %><span class="green-text text-lighten-5">% from last month</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s3" >
+      <div class="card pink darken-2">
+        <div class="card-content white-text center-align">
+          <p class="card-stats-title"><i class="material-icons">notifications</i>&nbsp;&nbsp;<strong>New Appointments</strong></p>
+          <p class="card-stats-compare"><i class="material-icons">expand_less</i><%= @new_apps.present? ? @new_apps : 0 %><span class="green-text text-lighten-5">% from last month</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="row">
+  <div class="col s12 m6 ">
+    <ul id="task-card" class="collection with-header teal">
+      <li class="collection-header teal darken-3" style="height: 65px;">
+        <p class="task-card-title"><strong>Time Slots for today (<%= Date.today %>)</strong></p>
+      </li>
+      <% if defined? @time_slot %>
+          <% if !@time_slot.blank? %>
+              <% @time_slot.each do |t| %>
+                  <li>
+                    <p style="text-decoration: none;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= t.from_time.strftime("%I:%M %p") + " - " + t.to_time.strftime("%I:%M %p") %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dr.<%= t.full_name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <% if t.status == true %>
+                          <span class="task-cat green accent-4" style="border-radius: 2em; padding: 5px; ">Scheduled</span>
+                      <% else %>
+                          <span class="task-cat amber" style="border-radius: 2em; padding: 5px; ">Cancelled</span>
+                      <% end%>
+                    </p>
+                  </li>
+              <% end %>
+          <% else %>
+              <label class="white-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Time slots scheduled</label>
+          <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col s12 m6">
+    <a class="btn btn-floating btn-large tooltipped pulse" data-position="right" data-delay="50" data-tooltip="Add New Time Slot" href="/timeslot/new/<%= @staff.id %>"><i class="material-icons">add</i></a>
+  </div>
+
+
+</div>
+
+
 </main>

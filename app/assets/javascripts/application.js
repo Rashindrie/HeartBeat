@@ -17,8 +17,8 @@
 //= require materialize-sprockets
 //= require primary
 //= require moment
-//= require fullcalendar
-//= require fullcalendar/gcal
+// require fullcalendar
+// require fullcalendar/gcal
 // require jquery-ui
 
 // require rails_script

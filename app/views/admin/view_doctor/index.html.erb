@@ -1,26 +1,24 @@
 <%= render partial: 'admin/sideNav'%>
 
-<script>
-    $(function() {
+<script type="text/javascript">
+    $( document ).on('turbolinks:load', function() {
         var data={};
         var doctors = <%= @doctors.html_safe %>;
         //console.log(doctors);
         for (var i=0; i< doctors.length; i++){
             data[(doctors[i]["full_name"])] = doctors[i]["id"];
         };
-        //console.log((data));
-
 
         $('input.autocomplete').autocomplete({
             data: data,
             limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
             onAutocomplete: function(val) {
-                    $('#doctor_id').val(); //append the key here
+                $('#doctor_id').val(data[(val)]); //append the key here
+
             },
             minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
-    } );
-
+    });
 </script>
 
 <main style="padding-left: 240px">
@@ -56,8 +54,7 @@
                 <input id="tags" type="text" class="autocomplete" required/>
                 <input id="doctor_id" name="doctor_id" type="hidden" required/>
               </div>
-
-          </div>
+            </div>
 
           <div class="row">
             <div class="col s3">

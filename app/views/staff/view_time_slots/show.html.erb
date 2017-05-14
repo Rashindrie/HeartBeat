@@ -10,6 +10,13 @@
     });
         )};
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('.modal').modal();
+
+    });
+</script>
 <%= render partial: 'staff/sideNav'%>
 
 <main style="padding-left: 240px">
@@ -94,7 +101,19 @@
         <br/>
 
         <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
+            <div id="toast-container"></div>
+            <% if key=="success" %>
+                <script>
+                    $(function() {
+                        Materialize.toast("<%= value %>", 15000,'green');
+                    });
+                </script>
+            <% elsif key=="error"%>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% else %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
+
         <% end %>
       </form>
 
@@ -108,6 +127,8 @@
                   <input type="hidden" name="_method" value="patch" />
 
                   <div class="divider"></div>
+                  <br>
+                  <p>Search Field: <%= @name.present? ? @name : nil %></p>
                   <div class="col s12">
                     <table class="bordered highlight responsive-table">
                       <thead>
@@ -159,7 +180,7 @@
                               <p>This action cannot be reversed. Upon cancelling a time slot, you cannot re-activate the same.</p>
                             </div>
                             <div class="modal-footer">
-                              <button class="modal-action modal-close darken-3 btn waves-effect waves-light" id="submit2" type="submit" >Confirm</button>
+                              <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" id="submit2" type="submit" >Confirm</button>
                             </div>
                           </div>
                       <% end %>

@@ -1,34 +1,63 @@
 <%= render partial: 'staff/sideNav'%>
+<style>
 
+</style>
+<script>
+    var getProperty = function (propertyName) {
+        return data[propertyName];
+    };
+
+    $( document ).on('turbolinks:load', function() {
+        var data={};
+        var doctors = <%= @doctors.html_safe %>;
+        //console.log(doctors);
+        for (var i=0; i< doctors.length; i++){
+            data[(doctors[i]["full_name"])] = doctors[i]["id"];
+        };
+        //console.log((data));
+
+
+        $('input.autocomplete').autocomplete({
+            data: data,
+            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function(val) {
+                $('#doctor_id').val(getProperty(val)); //append the key here
+
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+        });
+    } );
+
+
+</script>
 <main style="padding-left: 240px">
 
   <div class="container " style="width: 85%">
 
     <div class="row">
       <form class="col s12 m12 l12" action="/search_appointment/<%= @staff.id %>" method="get">
-        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
         <h4>View Appointments</h4>
 
 
         <div class="divider"></div><br>
 
         <div class="row">
-          <div class="col s12">
 
-              <div class="input-field col s6">
-                <i class="material-icons prefix">account_circle</i>
-                <label class="active" for="tags">Doctor </label>
-                <input id="tags" value="<%= @name.present? ? @name : nil %>"required />
-                <input id="doctor_id" name="app[doctor_id]" type="hidden" />
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">textsms</i>
+                <label class="active" for="tags">Doctor</label>
+                <input id="tags" type="text" value="<%= @name.present? ? @name : nil %>" class="autocomplete" required/>
+                <input id="doctor_id" name="doctor_id" value="<%= @doctor.present? ? @doctor : nil %>" type="hidden" required/>
               </div>
-          </div>
-        </div>
+            </div>
 
-
+              <div class="row">
             <div class="col m2">
               <p class="right-align"><button class="btn waves-effect waves-light" type="submit">Search</button></p>
             </div>
-
+              </div>
+        </div>
 
 
 
@@ -42,8 +71,12 @@
 
                 <div class="row">
                   <div class="col s12">
+                    <div class="divider"></div>
                     <br/>
-                    <div class="divider"></div><br/><br/>
+                    <%= link_to '<button class="btn waves-effect waves-light float-left red" style="float: right;">Download PDF</button>'.html_safe,
+                                "/staff/doctor/summary/#{@staff.id}/#{@doctor}",
+                                target: "_blank" %>
+<br/><br/><br/>
                     <table class="bordered highlight responsive-table">
                       <thead>
                       <tr>
@@ -51,6 +84,7 @@
                         <th data-field="name">Time Slot</th>
                         <th data-field="action">Patient</th>
                         <th data-field="action">Patient Type</th>
+                        <th></th>
                       </tr>
                       </thead>
 
@@ -60,12 +94,13 @@
                           <tr>
                             <td><%= d.app_date %></td>
                             <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
-                            <td><a href="/staff/appointments/summary/<%= @staff.id %>/<%= d.patient_id %>/<%= d.app_id %>"><%= d.first_name + " " + d.last_name %></a></td>
+                            <td><%= d.first_name + " " + d.last_name %></a></td>
                             <% if d.registered == 1 %>
                                 <td><%= "Registered" %></td>
                             <% else %>
                                 <td><%= "Non Registered" %></td>
                             <% end %>
+                            <td><a href="/staff/appointments/summary/<%= @staff.id %>/<%= d.patient_id %>/<%= d.app_id %>">Summary</a></td>
                           </tr>
                       <% end %>
 

@@ -26,7 +26,7 @@ class Staff::ViewTimeSlotsController < ApplicationController
     if @d.to_i==-1
       @timeslots=TimeSlot.from_date(Date.today)
       @appointments=Appointment.group(:time_slot_id).count
-
+      @name=Date.today.to_date
       if @timeslots.blank?
         flash.now[:notice]="No records found for #{Date.today}"
         return render('staff/view_time_slots/show')
@@ -35,6 +35,7 @@ class Staff::ViewTimeSlotsController < ApplicationController
       end
 
     elsif @d.to_i==0
+      @name=Doctor.find(@doctor).full_name
       @timeslots=TimeSlot.from_doctor(@doctor).order('app_date DESC')
       @appointments=Appointment.group(:time_slot_id).count
 
@@ -47,7 +48,7 @@ class Staff::ViewTimeSlotsController < ApplicationController
       end
 
     elsif @d.to_i==1
-
+      @name=DoctorType.find(@app_type).speciality
       @timeslots=TimeSlot.joins(doctor: :doctor_type).where('doctors.doctor_type_id' => @app_type)
                      .order('app_date DESC')
       @appointments=Appointment.group(:time_slot_id).count
@@ -60,6 +61,7 @@ class Staff::ViewTimeSlotsController < ApplicationController
       end
 
     elsif @d.to_i==2
+      @name=@date
       @timeslots=TimeSlot.from_date(@date)
       @appointments=Appointment.group(:time_slot_id).count
 
@@ -80,26 +82,28 @@ class Staff::ViewTimeSlotsController < ApplicationController
     if @timeslot.update_attribute(:status,false)
       @timeslot.update_attribute(:staff_id, @staff.id)
       UserMailer.notify_cancel_doctor(@staff,@timeslot).deliver_now
-      @appointments=Appointment.joins(:time_slot, :patient)
-                        .select('appointments.id AS app_id, appointments.status AS status,appointments.registered AS registered, appointments.patient_id AS patient_id , patients.email AS email')
-                        .where('appointments.status' => 1)
-                        .where('time_slots.id' => params[:timeslot][:id])
+      @appointments=Appointment.joins(:time_slot, :patient).select('time_slot_id AS time_slot_id, appointments.id AS id, appointments.status AS status,patients.registered AS registered, appointments.patient_id AS patient_id').where('appointments.status' => 1).where('time_slots.id' => params[:timeslot][:id])
 
       #send email notifications
       @appointments.each do |app|
-          app.update_attribute(:status, false)
-          @user = Patient.joins(:user)
-                         .select('patients.id AS id, full_name AS full_name, first_name AS first_name,last_name AS last_name, users.email AS email,patients.registered AS registered')
-                         .where('id = ?',app.patient_id).first
-          if @user.registered
-            UserMailer.notify_cancel(@user,app.app_id).deliver_now
+          @a=app
+          @a.status=0
+          if @a.save
+            @patient=Patient.find(app.patient_id)
+            if @patient.registered
+              @user = Patient.joins(:user)
+                          .select('patients.id AS id, patients.registered AS registered, full_name AS full_name, first_name AS first_name,last_name AS last_name, users.email AS email,patients.registered AS registered')
+                          .where('patients.id = ?',app.patient_id).first
+
+              UserMailer.notify_cancel(@user,app.app_id).deliver_now
+              end
           end
       end
 
-      flash[:success] = "Time slot updated successfully"
+      flash[:success] = "Time slot cancelled successfully"
       redirect_to controller: '/staff/view_time_slots', action: 'show', :id => @staff.id
     else
-      flash[:notice] = "Error occurred in updating time slot. Please try again."
+      flash[:notice] = "Error occurred in cancelling time slot. Please try again."
       redirect_to controller: '/staff/view_time_slots', action: 'show', :id => @staff.id
     end
 

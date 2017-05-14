@@ -43,7 +43,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 #timepicker
-gem 'jquery-timepicker-rails'
+#gem 'jquery-timepicker-rails'
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'

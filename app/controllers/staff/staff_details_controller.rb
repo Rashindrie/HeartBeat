@@ -18,7 +18,6 @@ class Staff::StaffDetailsController < ApplicationController
       flash.now[:error] = "Update unsuccessful."
       @id = params[:id]
       render :action => '/staff/profile'
-      #render('/patient/profile/<%= @patient.id %>')  #to get a prepolutaed form
     end
   end
 

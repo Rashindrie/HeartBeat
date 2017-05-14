@@ -4,7 +4,7 @@
   <script type="text/javascript">
       $(document).ready(function() {
               $('select').material_select();
-              $('.tooltipped').tooltip();
+              $('.tooltipped').tooltip({delay: 0});
           });
       </script>
   <% flash.each do |key, value| %>
@@ -31,7 +31,7 @@
       <i class="medium material-icons">menu</i>
     </a>
     <ul>
-      <li><a class="btn-floating red darken-4 tooltipped" data-position="top" data-delay="50" data-tooltip="My Profile" href="/password_change/new"><i class="material-icons">settings</i></a></li>
+      <li><a class="btn-floating red darken-4 tooltipped" data-position="top" data-delay="0" data-tooltip="My Profile" href="/password_change/new"><i class="material-icons">settings</i></a></li>
       </ul>
   </div>
 </div>
