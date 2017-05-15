@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4de1614d-39ac-4acf-b0f2-b188251801c6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/doctor/organ_donor_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/doctor/organ_donor_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/doctor/organ_requester_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/doctor/organ_requester_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/doctor/view_appointments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/doctor/view_appointments_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/patient/search_patients_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/patient/search_patients_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/appointment/search_appointments/searchApp.html.erb" afterPath="$PROJECT_DIR$/app/views/appointment/search_appointments/searchApp.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/doctor/organ_donor/index.html.erb" afterPath="$PROJECT_DIR$/app/views/doctor/organ_donor/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/doctor/organ_requester/index.html.erb" afterPath="$PROJECT_DIR$/app/views/doctor/organ_requester/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/doctor/view_appointments/show.html.erb" afterPath="$PROJECT_DIR$/app/views/doctor/view_appointments/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/patient/organ_donor/new.html.erb" afterPath="$PROJECT_DIR$/app/views/patient/organ_donor/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/patient/search_patients/index.html.erb" afterPath="$PROJECT_DIR$/app/views/patient/search_patients/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -34,66 +24,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="organ_requester_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/doctor/organ_requester_controller.rb">
+      <file leaf-file-name="Gemfile" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="71" column="23" lean-forward="true" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="23" />
-              <folding>
-                <marker date="1494852984467" expanded="true" signature="38:2345" ph=" ... end" />
-                <marker date="1494852984467" expanded="true" signature="1723:2340" ph=" ... end" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="search_appointments_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/appointment/search_appointments_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="new.html.erb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/patient/organ_donor/new.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="229" column="38" lean-forward="false" selection-start-line="229" selection-start-column="38" selection-end-line="229" selection-end-column="38" />
-              <folding>
-                <marker date="1494855533923" expanded="true" signature="7000:7949" ph="if ... end" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/doctor/organ_requester/index.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="172" column="35" lean-forward="false" selection-start-line="172" selection-start-column="35" selection-end-line="172" selection-end-column="35" />
-              <folding>
-                <marker date="1494852888315" expanded="true" signature="7202:7879" ph="..." />
-                <marker date="1494852888315" expanded="true" signature="7260:7487" ph="..." />
-                <marker date="1494852888315" expanded="true" signature="7544:7844" ph="..." />
-                <marker date="1494852888315" expanded="true" signature="7952:8628" ph="..." />
-                <marker date="1494852888315" expanded="true" signature="8010:8237" ph="..." />
-                <marker date="1494852888315" expanded="true" signature="8294:8593" ph="..." />
-                <marker date="1494852888315" expanded="true" signature="8702:9401" ph="..." />
-                <marker date="1494852888315" expanded="true" signature="8760:9009" ph="..." />
-                <marker date="1494852888315" expanded="true" signature="9066:9366" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="63" column="64" lean-forward="false" selection-start-line="63" selection-start-column="64" selection-end-line="63" selection-end-column="64" />
+            <state relative-caret-position="198">
+              <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -145,7 +80,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/controllers/staff/staff_details_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/staff/add_patient_controller.rb" />
@@ -195,6 +129,7 @@
         <option value="$PROJECT_DIR$/app/controllers/doctor/organ_requester_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/appointment/search_appointments_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/patient/organ_donor/new.html.erb" />
+        <option value="$PROJECT_DIR$/Gemfile" />
       </list>
     </option>
   </component>
@@ -1041,12 +976,12 @@
       <workItem from="1494818554465" duration="5512000" />
       <workItem from="1494845726111" duration="5111000" />
       <workItem from="1494851445436" duration="313000" />
-      <workItem from="1494851840444" duration="3654000" />
+      <workItem from="1494851840444" duration="6772000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1205378000" />
+    <option name="totallyTimeSpent" value="1208496000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="647" extended-state="6" />
@@ -1105,13 +1040,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/vital/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="45" column="44" lean-forward="false" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/patient/home_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1480,6 +1408,14 @@
           <folding>
             <marker date="1494855533923" expanded="true" signature="7000:7949" ph="if ... end" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
