@@ -5,8 +5,8 @@ class Patient::SearchPatientsController < ApplicationController
   def index
     @doctor = Doctor.find(User.find(session[:user_id]).doctor_id)
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
-    @patients=Patient.where('registered = 1').pluck(:full_name, :id)
-    @patientsAll=Patient.where('registered = 1').order('full_name')
+    @patients=Patient.select('id AS id').select('full_name AS full_name').where('registered = 1').to_json
+
   end
 
   def show

@@ -1,30 +1,7 @@
 <%= render partial: 'doctor/sideNav'%>
 
 <main style="padding-left: 240px">
-  <% flash.each do |key, value| %>
-      <div id="toast-container"></div>
-      <% if key=="success" %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'green');
-              });
-          </script>
-      <% elsif key=="error"%>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 8000,'red');
-              });
-          </script>
-      <% else %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'amber');
-              });
-          </script>
 
-      <% end %>
-
-  <% end %>
   <div class="container " style="width: 85%">
 
     <div class="row">
@@ -51,6 +28,24 @@
       </form>
 
 
+</div>
+    <% flash.each do |key, value| %>
+
+          <% if key=="success" %>
+            <div id="toast-container">
+              <script>
+                  $(function() {
+                      Materialize.toast("<%= value %>", 15000,'green');
+                  });
+              </script>
+              </div>
+          <% elsif key=="error"%>
+              <div class="alert alert-<%= key %>"><%= value %></div>
+          <% else %>
+              <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
+
+    <% end %>
       <div>
         <% if defined? @appointments %>
             <% if @appointments.blank? == false %>
@@ -88,7 +83,7 @@
           </div>
         </div>
             <% else %>
-            <p>You have no appointments for <%= @date %> </p>
+
             <% end %>
         <% end %>
       </div>
@@ -103,7 +98,6 @@
         </div>
       </div>
     </div>
-  </div>
   <script type="text/javascript">
       $(document).ready(function() {
 

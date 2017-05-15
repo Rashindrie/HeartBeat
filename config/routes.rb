@@ -57,11 +57,11 @@ Rails.application.routes.draw do
   get '/doctor/profile/:id', to: 'doctor/doctor_details#edit'
   patch '/doctor/update/:id', to: 'doctor/doctor_details#update'
   get '/doctor/organ/donor/:id', to: 'doctor/organ_donor#index'
-  post '/doctor/donor/search/:id', to: 'doctor/organ_donor#search'
+  get '/doctor/donor/search/:id', to: 'doctor/organ_donor#search'
 
   get '/doctor/requester/donor/:id', to: 'doctor/organ_requester#index'
-  post '/doctor/requester/search/:id', to: 'doctor/organ_requester#search'
-  post '/organ/donor/update/:id', to: 'doctor/organ_requester#update'
+  get '/doctor/requester/search/:id', to: 'doctor/organ_requester#search'
+  post '/organ/donor/update/:doctor_id/:patient_id/:organ_id/:id', to: 'doctor/organ_requester#update'
 
 
   #doctor vitals routes

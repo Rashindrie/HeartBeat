@@ -38,34 +38,10 @@
 </script>
 
 <main style="padding-left: 240px">
-  <% flash.each do |key, value| %>
-      <div id="toast-container"></div>
-      <% if key=="success" %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'green');
-              });
-          </script>
-      <% elsif key=="error"%>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 8000,'red');
-              });
-          </script>
-      <% else %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'amber');
-              });
-          </script>
-
-      <% end %>
-
-  <% end %>
-  <div class="container">
+   <div class="container">
 
     <div class="row">
-      <form class="col s12 m12 l12" id="searchDB" action="/doctor/requester/search/<%= @doctor.id %>" method="post">
+      <form class="col s12 m12 l12" id="searchDB" action="/doctor/requester/search/<%= @doctor.id %>" method="get">
         <h4>Organ Requesters</h4>
 
 
@@ -79,7 +55,7 @@
             <div class="input-field inline">
 
               <div class="col s12 left aligned">
-                <input class="with-gap" name="app[d]" value="0" type="radio" id="allTypes" />
+                <input class="with-gap" name="app[d]" value="0" checked="checked" type="radio" id="allTypes" />
                 <label for="allTypes">All</label>
               </div>
               <div class="col s12 left aligned">
@@ -118,13 +94,31 @@
         <br/>
       </form>
 
+    </div>
+     <% flash.each do |key, value| %>
 
+         <% if key=="success" %>
+             <div id="toast-container">
+               <script>
+                   $(function() {
+                       Materialize.toast("<%= value %>", 15000,'green');
+                   });
+               </script>
+             </div>
+         <% elsif key=="error"%>
+             <div class="alert alert-<%= key %>"><%= value %></div>
+         <% else %>
+             <div class="alert alert-<%= key %>"><%= value %></div>
+         <% end %>
+
+     <% end %>
+     <div class="row">
 
       <% if defined? @searchResults %>
           <% if @searchResults.blank? == false %>
 
               <div class="row">
-                <form class="col s12 m12 l12" id="setStatus" action="/organ/donor/update/<%= @doctor.id %>" method="post">
+                <form class="col s12 m12 l12" id="setStatus" action="" method="post">
                   <div class="divider"></div>
                   <div class="col s12">
                     <table class="bordered highlight responsive-table">
@@ -144,9 +138,9 @@
                       <% @searchResults.each do |d| %>
                           <tr>
                             <td><%= d[0] %></td>
-                            <input name="status[record_id]" value="<%= d[7] %>" type="hidden"/>
+
                             <td><a href="/search/patients/<%= @doctor.id %>/<%= d[1] %>"><%= d[2].to_s+ " " + d[3].to_s %></a></td>
-                            <input name="status[patient_id]" value="<%= d[1] %>" type="hidden"/>
+
                             <% if d[4] == 0 %>
                                 <td><p><%= "Pending" %></p></td>
                             <% elsif d[4] == 1 %>
@@ -162,16 +156,50 @@
                             <% end %>
 
                             <% if d[4] == 0 %>
-                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accept request" id="submit2" value="1" name="commit" type="submit"><i class="material-icons prefix">add</i></button></td>
-                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reject request" id="submit2"  value="2" name="commit" type="submit"><i class="material-icons prefix">close</i></button></td>
+                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-target="confirm/<%= d[7] %>" data-delay="50" data-tooltip="Accept request" id="submit2" value="1" name="commit" type="submit"><i class="material-icons prefix">add</i></button></td>
+                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-target="reject/<%= d[7] %>" data-delay="50" data-tooltip="Reject request" id="submit2"  value="2" name="commit" type="submit"><i class="material-icons prefix">close</i></button></td>
                           <% elsif d[4] == 1 %>
-                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reject request" id="submit2" value="2" name="commit" type="submit"><i class="material-icons prefix">close</i></button></td>
-                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Clear status" id="submit2" value="0" name="commit" type="submit"><i class="material-icons prefix">remove</i></button></td>
+                                <td><button class="red darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-target="reject/<%= d[7] %>" data-delay="50" data-tooltip="Reject request" id="submit2" value="2" name="commit" type="submit"><i class="material-icons prefix">close</i></button></td>
+                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-target="pending/<%= d[7] %>" data-delay="50" data-tooltip="Clear status" id="submit2" value="0" name="commit" type="submit"><i class="material-icons prefix">remove</i></button></td>
                             <% elsif d[4] == 2 %>
-                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accept request" id="submit2" value="1" name="commit" type="submit"><i class="material-icons prefix">add</i></button></td>
-                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Clear status" id="submit2" value="0" name="commit" type="submit"><i class="material-icons prefix">remove</i></button></td>
+                                <td><button class="green darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-target="confirm/<%= d[7] %>" data-delay="50" data-tooltip="Accept request" id="submit2" value="1" name="commit" type="submit"><i class="material-icons prefix">add</i></button></td>
+                                <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-position="bottom" data-target="pending/<%= d[7] %>" data-delay="50" data-tooltip="Clear status" id="submit2" value="0" name="commit" type="submit"><i class="material-icons prefix">remove</i></button></td>
                             <% end %>
                           </tr>
+                            <div id="confirm/<%= d[7] %>" class="modal">
+                              <div class="modal-content">
+
+                                <h4>Update Organ Request</h4>
+                                <p>Are you sure you want to accept the organ request of <%= d[2].to_s+ " " + d[3].to_s %> </p>
+                              </div>
+                              <div class="modal-footer">
+                                <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" value="1" name="commit" formaction="/organ/donor/update/<%= @doctor.id %>/<%= d[1] %>/<%= d[7] %>/1"  id="submit2" type="submit2">Confirm</button>
+                              </div>
+                            </div>
+
+                            <div id="reject/<%= d[7] %>" class="modal">
+                              <div class="modal-content">
+
+                                <h4>Update Organ Request</h4>
+                                <p>Are you sure you want to reject the organ request of <%= d[2].to_s+ " " + d[3].to_s %> </p>
+                              </div>
+                              <div class="modal-footer">
+                                <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" value="2" name="commit" formaction="/organ/donor/update/<%= @doctor.id %>/<%= d[1] %>/<%= d[7] %>/2" id="submit2" type="submit2">Confirm</button>
+                              </div>
+                            </div>
+
+                            <div id="pending/<%= d[7] %>" class="modal">
+                              <div class="modal-content">
+
+                                <h4>Update Organ Request</h4>
+                                <p>Are you sure you want to set the status to pending of the organ request of <%= d[2].to_s+ " " + d[3].to_s %> </p>
+                              </div>
+                              <div class="modal-footer">
+                                <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" value="0" name="commit" formaction="/organ/donor/update/<%= @doctor.id %>/<%= d[1] %>/<%= d[7] %>/0"  id="submit2" type="submit2">Confirm</button>
+                              </div>
+                            </div>
+
+
 
                       <% end %>
 
@@ -184,7 +212,7 @@
 
           <% else %>
               <p>
-                <%= @searchResults.present? ? "There are no available time slots for " : " "  %></option>
+
 
               </p>
           <% end %>

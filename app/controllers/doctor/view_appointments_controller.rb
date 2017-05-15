@@ -20,20 +20,18 @@ class Doctor::ViewAppointmentsController < ApplicationController
     #entered searchApp parameters
     @date=params[:app][:date]
 
-    if @date.blank? == false
+
       @appointments=Appointment.joins(:time_slot, :patient)
                         .select('patient_id AS patient_id, patients.first_name AS first_name,patients.last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time, (patients.registered) AS registered')
                         .where('time_slots.doctor_id' => @doctor.id)
                         .where('appointments.status' => 1)
                         .where('app_date = ?', @date)
 
+    if @appointments.blank? == false
+
     else
-      @appointments=Appointment.joins(:time_slot, :patient)
-                        .select('patient_id AS patient_id, patients.first_name AS first_name,patients.last_name AS last_name, date(app_date) AS app_date, time(from_time) AS from_time, time(to_time) AS to_time, (patients.registered) AS registered')
-                        .where('time_slots.doctor_id' => @doctor.id)
-                        .where('appointments.status' => 1)
-                        .order('app_date DESC')
-      end
+      flash[:notice] = "You have no appointments for #{@date}"
+    end
     render('doctor/view_appointments/show')
   end
 

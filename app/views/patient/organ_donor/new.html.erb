@@ -76,8 +76,8 @@
     <div class="divider"></div>
     <div class="row">
       <br>
-      <div class="col s9" >
-
+      <div class="card col s9" >
+<div class="card-content">
         <form action="/organ/donor/register/<%= @patient.id %>" method="post" id="formRegister">
           <div class="row">
 
@@ -194,34 +194,50 @@
 
             </div>
 
-              <div id="calendar"></div>
+
 
 
             <div class="divider"></div><br>
-            <div class="row">
-              <div class="col s3">
+
+
                 <button class="btn waves-effect waves-light" type="button" data-toggle="modal" data-target="confirm">Register</button>
-              </div>
+
             </div>
           </div>
 
       </div>
-<div class="col s1"></div>
-      <div class="col s2">
+
+      <div class="card col s3">
           <ul id="task-card" class="collection with-header teal">
             <li class="collection-header teal darken-3" style="height: 75px;">
               <p class="task-card-title"><strong>Current Requests</strong></p>
             </li>
             <% if defined? @requested %>
                 <% if !@requested.blank? %>
-                    <% @requested.each do |key, array| %>
-                        <li>
-                          <p style="text-decoration: none;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= key  %> </span>
-                                <span class="task-cat green accent-4" style="border-radius: 2em; padding: 5px; "><%= array %></span>
 
-                          </p>
-                        </li>
-                    <% end %>
+<br/>
+
+                    <ul style="width:70%; float:left;">
+                      <% @requested.each do |key, array| %>
+
+                          <li style="text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= key  %>
+
+                          </li>
+                          <br/>
+                      <% end %>
+                    </ul>
+
+                    <ul style="width:30%; float:left;">
+                      <% @requested.each do |key, array| %>
+
+                          <li style="text-decoration: none;">
+                              <span class="task-cat green accent-4" style="border-radius: 2em; padding: 5px; "><%= array %></span>
+                          </li>
+                          <br/>
+                      <% end %>
+                    </ul>
+
+
                 <% else %>
                     <label class="white-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Organ Requests</label>
                 <% end %>

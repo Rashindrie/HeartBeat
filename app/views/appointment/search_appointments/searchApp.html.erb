@@ -106,13 +106,15 @@
         </div>
         <br/>
         <% flash.each do |key, value| %>
-            <div id="toast-container"></div>
+
             <% if key=="success" %>
+                <div id="toast-container">
                 <script>
                     $(function() {
                         Materialize.toast("<%= value %>", 15000,'green');
                     });
                 </script>
+                  </div>
             <% elsif key=="error"%>
                 <div class="alert alert-<%= key %>"><%= value %></div>
             <% else %>

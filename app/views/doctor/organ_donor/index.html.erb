@@ -2,34 +2,11 @@
 
 
 <main style="padding-left: 240px">
-  <% flash.each do |key, value| %>
-      <div id="toast-container"></div>
-      <% if key=="success" %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'green');
-              });
-          </script>
-      <% elsif key=="error"%>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 8000,'red');
-              });
-          </script>
-      <% else %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'amber');
-              });
-          </script>
 
-      <% end %>
-
-  <% end %>
   <div class="container">
 
     <div class="row">
-      <form class="col s12 m12 l12" action="/doctor/donor/search/<%= @doctor.id %>" method="post">
+      <form class="col s12 m12 l12" action="/doctor/donor/search/<%= @doctor.id %>" method="get">
         <h4>Organ Donor</h4>
 
 
@@ -43,7 +20,7 @@
             <div class="input-field inline">
 
               <div class="col s12 left aligned">
-                <input class="with-gap" name="app[d]" value="0" type="radio" id="allTypes" />
+                <input class="with-gap" name="app[d]" value="0" checked="checked" type="radio" id="allTypes" />
                 <label for="allTypes">All</label>
               </div>
               <div class="col s12 left aligned">
@@ -81,8 +58,25 @@
         </div>
         <br/>
       </form>
+    </div>
+      <div class="row">
+        <% flash.each do |key, value| %>
 
+            <% if key=="success" %>
+                <div id="toast-container">
+                  <script>
+                      $(function() {
+                          Materialize.toast("<%= value %>", 15000,'green');
+                      });
+                  </script>
+                </div>
+            <% elsif key=="error"%>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% else %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
 
+        <% end %>
 
       <% if defined? @searchResults %>
           <% if @searchResults.blank? == false %>

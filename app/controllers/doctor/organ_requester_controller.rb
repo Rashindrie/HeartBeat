@@ -34,12 +34,20 @@ class Doctor::OrganRequesterController < ApplicationController
                           .where('organ_id = ?', @o)
                           .pluck('organs.name','patients.id','patients.first_name', 'patients.last_name','(organs_requester_patients.status)','doctors.first_name', 'doctors.last_name','organs_requester_patients.organ_id')
 
+      if @searchResults.blank?
+        flash.now[:notice]="No registered organ requesters for #{Organ.find(@o).name}"
+      end
        render('doctor/organ_requester/index')
 
     elsif
     @searchResults = OrgansRequesterPatient
                          .includes(:organ, :patient, :doctor)
                          .pluck('organs.name','patients.id','patients.first_name', 'patients.last_name','(organs_requester_patients.status)','doctors.first_name', 'doctors.last_name','organs_requester_patients.organ_id')
+
+      if @searchResults.blank?
+        flash.now[:notice]="No registered organ requesters"
+      end
+
       render('doctor/organ_requester/index')
     end
 
@@ -47,56 +55,26 @@ class Doctor::OrganRequesterController < ApplicationController
 
 
   def update
-    @doctor = Doctor.find(params[:id])
+    @doctor = Doctor.find(params[:doctor_id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
     @organs=Organ.distinct.all
 
-    @organ_id=params[:status][:record_id]
-    @patient_id=params[:status][:patient_id]
+    @organ_id=params[:organ_id]
+    @patient_id=params[:patient_id]
 
     @op=Patient.find(@patient_id)
-    @organ=@op.requester_organs.find(@organ_id)
+    @organ= OrgansRequesterPatient.where('patient_id = ?', @patient_id ).where('organ_id = ?', @organ_id)
 
 
-    if params[:commit] == '0'
-      # Clear Status
-      @organ.update_all( :status => 0, :doctor_id => @doctor.id)
+    if @organ.update_all(:status => params[:id], :doctor_id => @doctor.id)
 
-      if @p.save!
-
-      else
-        flash[:error] = "Status Update unsuccessful. Please try again"
-        return redirect_to controller: '/doctor/organ_requester', action: 'index', :id => @doctor.id
-      end
-
-    elsif params[:commit] == '1'
-      # Accept
-      @organ.update_all( :status => 1, :doctor_id => @doctor.id)
-
-      if @p.save!
-
-      else
-        flash[:error] = "Status Update unsuccessful. Please try again"
-        return redirect_to controller: '/doctor/organ_requester', action: 'index', :id => @doctor.id
-      end
-
-    elsif params[:commit] == '2'
-      # Reject
-
-      @organ.update_all( :status => 2, :doctor_id => @doctor.id)
-
-      if @p.save!
-
-      else
-        flash[:error] = "Status Update unsuccessful. Please try again"
-        return redirect_to controller: '/doctor/organ_requester', action: 'index', :id => @doctor.id
-      end
-
+      flash[:success] = "Status Update Successful."
+      redirect_to :back
+    else
+      flash[:error] = "Status Update unsuccessful. Please try again"
+      redirect_to :back
     end
 
-
-    flash[:success] = "Status Update Successful."
-    return redirect_to controller:'/doctor/organ_requester', action: 'index', :id => @doctor.id
   end
 
 end

@@ -29,11 +29,17 @@ class Doctor::OrganDonorController < ApplicationController
       @searchResults = OrgansDonorPatient.includes(:organ, :patient).where('organ_id = ?', @o)
                            .pluck('organs.name','patients.first_name','patients.last_name','patients.id')
 
+      if @searchResults.blank?
+        flash.now[:notice]="No registered organ donors for organ type - #{Organ.find(@o).name}"
+      end
       render('doctor/organ_donor/index')
 
     elsif
       @searchResults = OrgansDonorPatient.includes(:organ, :patient)
                            .pluck('organs.name','patients.first_name','patients.last_name','patients.id')
+      if @searchResults.blank?
+        flash.now[:notice]="No registered organ donors"
+      end
       render('doctor/organ_donor/index')
     end
 

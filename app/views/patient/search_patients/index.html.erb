@@ -1,79 +1,46 @@
 <%= render partial: 'doctor/sideNav'%>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        var patients = <%== @patients %>;
-
-        var data = patients.map(function (a) {
-            return { label: a[0], id: a[1] };
-        });
-        var url="/search/patients/<%= @doctor.id %>/change";
+    $( document ).on('turbolinks:load', function() {
+        var data={};
+        var patients = <%= @patients.html_safe %>;
+        console.log(patients);
+        for (var i=0; i< patients.length; i++){
+            data[(patients[i]["full_name"])] = patients[i]["id"];
+        };
 
         $('input.autocomplete').autocomplete({
-            delay: 0,
-            source: data,
-            select: function(event, ui) {
-                $('#patient_id').val(ui.item.id);
-                //document.getElementById('#patient_id').value = ui.item.id;
-                $('#search').href="/search/patients/<%= @doctor.id %>/" + ui.item.id;
-            }
+            data: data,
+            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function(val) {
+                $('#patient_id').val(data[(val)]); //append the key here
+
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
-    } );
-</script>
-
-<script>
-    function pagination(){
-        var req_num_row=10;
-        var $tr=jQuery('tbody tr');
-        var total_num_row=$tr.length;
-        var num_pages=0;
-        if(total_num_row % req_num_row ==0){
-            num_pages=total_num_row / req_num_row;
-        }
-        if(total_num_row % req_num_row >=1){
-            num_pages=total_num_row / req_num_row;
-            num_pages++;
-            num_pages=Math.floor(num_pages++);
-        }
-        for(var i=1; i<=num_pages; i++){
-            jQuery('#pagination').append(" " + '<li class="waves-effect"><a href="#!">' + i + ' </a></li>'+ " ");
-        }
-        $tr.each(function(i){
-            jQuery(this).hide();
-            if(i+1 <= req_num_row){
-                $tr.eq(i).show();
-            }
-
-        });
-        jQuery('#pagination a').click(function(e){
-            e.preventDefault();
-            $tr.hide();
-            var page=jQuery(this).text();
-            var temp=page-1;
-            var start=temp*req_num_row;
-            //alert(start);
-
-            for(var i=0; i< req_num_row; i++){
-
-                $tr.eq(start+i).show();
-
-            }
-        });
-    }
-    jQuery('document').ready(function(){
-        pagination();
     });
-
 </script>
+<script>
+    function submitform() {
+        var x = document.getElementById("patient_id").value;
+        if(x !== ""){
+            document.getElementById("search").action = "search/patients/<%= @doctor.id %>/"+ x;
+        }
+        return true;
+    }
+</script>
+
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
-      <div id="toast-container"></div>
+
       <% if key=="success" %>
+          <div id="toast-container">
           <script>
               $(function() {
                   Materialize.toast("<%= value %>", 10000,'green');
               });
           </script>
+            </div>
       <% elsif key=="error"%>
           <div class="alert alert-<%= key %>"><%= value %></div>
       <% else %>
@@ -84,59 +51,29 @@
   <div class="container " style="width: 85%">
 
     <div class="row">
-      <form class="col s12 m12 l12" id="search" action="" method="get">
+      <form class="col s12 m12 l12" id="search" onsubmit="submitform()" method="get">
         <h4>Search Patients</h4>
 
         <div class="divider"></div><br>
 
         <div class="row">
-          <div class="col s9">
-            <div class="row">
-              <div class="input-field col s12">
-                <i class="material-icons prefix">textsms</i>
-                <label class="active" for="tags">Patient</label>
-                <input id="tags" class="autocomplete" required/>
-                <input id="patient_id" name="search[patient_id]" type="hidden" required/>
-              </div>
-            </div>
+          <div class="input-field col s8">
+            <i class="material-icons prefix">textsms</i>
+            <label class="active" for="tags">Patient</label>
+            <input id="tags" type="text" class="autocomplete" required/>
+            <input id="patient_id" name="search[patient_id]" type="hidden" required/>
           </div>
-
+        </div>
+        <br>
+        <div class="row">
           <div class="col s3">
-            <button class="btn waves-effect waves-light col s12" type="submit"  id="submit" >View Profile</button>
+            <button class="btn waves-effect waves-light" type="submit"  id="submit" >View Profile</button>
           </div>
         </div>
 
       </form>
 
-        <div class="row">
-          <div class="col s12">
-            <div id=" ">
-              <table class="bordered highlight responsive-table">
-              <thead>
-              <tr>
-                <th data-field="name">Name</th>
-                <th data-field="name">View Profile</th>
-                <th data-field="name">View Vitals</th>
-                <th data-field="name">View visits</th>
-              </tr>
-              </thead>
 
-              <tbody>
-              <% @patientsAll.each do |d| %>
-                  <tr>
-                    <td><%= d.full_name %></td>
-                    <td><a href="/search/patients/<%= @doctor.id %>/<%= d.id %>">Profile</a></td>
-                    <td><a href="/vital/<%= @doctor.id %>/<%= d.id %>">Vitals</a></td>
-                    <td><a href="/visit/<%= @doctor.id %>/<%= d.id %>">Recent Visits</a></td>
-                  </tr>
-              <% end %>
-              </tbody>
-            </table>
-<br/><br/>
-          </div>
-        </div>
-
-    </div>
   </div>
 
 </main>
