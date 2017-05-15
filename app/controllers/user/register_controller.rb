@@ -37,7 +37,7 @@ class User::RegisterController < ApplicationController
           redirect_to root_url
         end
       else
-        flash.now[:error] = "Signup Unsuccessfull"
+        #flash.now[:error] = "Signup Unsuccessfull"
         render 'user/register/registerPatient'
       end
 

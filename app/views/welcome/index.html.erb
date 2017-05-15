@@ -9,30 +9,11 @@
 </head>
 
 <body>
+
 <% flash.each do |key, value| %>
-    <div id="toast-container"></div>
-    <% if key=="success" %>
-        <script>
-            $(function() {
-                Materialize.toast("<%= value %>", 15000,'green');
-            });
-        </script>
-    <% elsif key=="error"%>
-        <script>
-            $(function() {
-                Materialize.toast("<%= value %>", 18000,'red');
-            });
-        </script>
-    <% else %>
-        <script>
-            $(function() {
-                Materialize.toast("<%= value %>", 15000, 'orange darken-1');
-            });
-        </script>
-
-    <% end %>
-
+    <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
+
 <div id="index-banner" class="parallax-container">
   <div class="section no-pad-bot">
     <div class="container">
