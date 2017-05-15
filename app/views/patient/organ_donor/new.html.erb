@@ -45,29 +45,20 @@
       <% if key=="success" %>
           <script>
               $(function() {
-                  Materialize.toast("<%= value %>", 5000,'green');
+                  Materialize.toast("<%= value %>", 10000,'green');
               });
           </script>
       <% elsif key=="error"%>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 8000,'red');
-              });
-          </script>
+          <div class="alert alert-<%= key %>"><%= value %></div>
       <% else %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'amber');
-              });
-          </script>
-
+          <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
 
   <% end %>
 
 
   <% if @p.present? && @p.errors.any? %>
-      <div class="error_explanation" style="padding-left: 50px">
+      <div class="error_explanation" style="border-radius: 0.5em; padding: 1px; padding-left: 50px">
         <p>
           <%= pluralize(@p.errors.count, "error") %> prohibited from updating vital details:
         </p>
@@ -85,7 +76,7 @@
     <div class="divider"></div>
     <div class="row">
       <br>
-      <div class="col s10" >
+      <div class="col s9" >
 
         <form action="/organ/donor/register/<%= @patient.id %>" method="post" id="formRegister">
           <div class="row">
@@ -215,7 +206,28 @@
           </div>
 
       </div>
+<div class="col s1"></div>
+      <div class="col s2">
+          <ul id="task-card" class="collection with-header teal">
+            <li class="collection-header teal darken-3" style="height: 75px;">
+              <p class="task-card-title"><strong>Current Requests</strong></p>
+            </li>
+            <% if defined? @requested %>
+                <% if !@requested.blank? %>
+                    <% @requested.each do |key, array| %>
+                        <li>
+                          <p style="text-decoration: none;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= key  %> </span>
+                                <span class="task-cat green accent-4" style="border-radius: 2em; padding: 5px; "><%= array %></span>
 
+                          </p>
+                        </li>
+                    <% end %>
+                <% else %>
+                    <label class="white-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Organ Requests</label>
+                <% end %>
+            <% end %>
+          </ul>
+      </div>
       <div id="confirm" class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-content">
           <h4>Add to Organ Donor List</h4>

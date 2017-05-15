@@ -21,7 +21,7 @@
             data: data,
             limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
             onAutocomplete: function(val) {
-                $('#doctor_id').val(getProperty(val)); //append the key here
+                $('#doctor_id').val(data[val]); //append the key here
 
             },
             minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
@@ -145,21 +145,3 @@
 
   </script>
 </main>
-<script type="text/javascript">
-    $(document).on('ready page:load', function() {
-        var doctors = <%== @doctors %>;
-
-        var data = doctors.map(function (a) {
-            return { label: a[0], id: a[1] };
-        });
-
-        $( "#tags" ).autocomplete({
-            delay: 0,
-            source: data,
-            select: function(event, ui) {
-                $('#doctor_id').val(ui.item.id);
-            }
-        });
-
-    });
-</script>

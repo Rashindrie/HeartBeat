@@ -9,13 +9,13 @@
           /* when the submit button in the modal is clicked, submit the form */
             $('#addAppointment').submit();
         });
-        )};
+        });
 </script>
 <main style="padding-left: 240px">
 
 
   <% if @app.present? && @app.errors.any? %>
-      <div class="error_explanation" style="padding-left: 50px">
+      <div class="error_explanation" style="border-radius: 0.5em; padding: 1px; padding-left: 50px">
         <p>
           <%= pluralize(@app.errors.count, "error") %> prohibited from updating vital details:
         </p>
@@ -106,7 +106,19 @@
         </div>
         <br/>
         <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
+            <div id="toast-container"></div>
+            <% if key=="success" %>
+                <script>
+                    $(function() {
+                        Materialize.toast("<%= value %>", 15000,'green');
+                    });
+                </script>
+            <% elsif key=="error"%>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% else %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
+
         <% end %>
       </form>
 
@@ -119,6 +131,8 @@
                 <form class="col s12 m12 l12" id="addAppointment" action="" method="post">
                   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
                   <div class="divider"></div>
+                  <br/>
+                  <p>Search Field: <%= @name.present? ? @name : nil %></p>
                   <div class="col s12">
                     <table class="bordered highlight responsive-table">
                       <thead>
@@ -265,6 +279,10 @@
 
 
 
+
+
+  </script>
+  <script>
 
 
   </script>

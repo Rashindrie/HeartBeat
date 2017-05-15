@@ -18,7 +18,16 @@ class VitalController < ApplicationController
                      .select('patients.id AS id,date_of_birth AS date_of_birth, full_name AS full_name, first_name AS first_name,last_name AS last_name, users.email AS email')
                      .where('patient_id = ?',params[:id]).first
       @age=age(@patient.date_of_birth)
-    end
+  end
+    #for vital summary chart
+    @data=Vital.where(:patient_id => @patient.id)
+    @bld_pr= @data.pluck(:bld_pressure)
+    @temp= @data.pluck(:temp)
+    @pulse= @data.pluck(:pulse)
+    @res_rate= @data.pluck(:res_rate)
+    @from_date= @data.order('created_at').pluck(:created_at).first
+    @to_date= @data.order('created_at DESC').pluck(:created_at).first
+    @array = @bld_pr.each_with_index.map { |x,i| [ i+1, x, @temp[i], @pulse[i], @res_rate[i]] }
 
     @vital = Vital.order("created_at DESC").find_by_patient_id(params[:id])
     @blood_groups= {"A+" => 0, "A-" => 1, "B+" => 2, "B-" => 3, "O+" => 4, "O-" => 5}

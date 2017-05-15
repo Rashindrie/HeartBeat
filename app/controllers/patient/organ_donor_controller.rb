@@ -21,6 +21,10 @@ class Patient::OrganDonorController < ApplicationController
     @patient_tissue_deceased=@patient.donor_organs.where('organs.category =?', 1).where('organs_donor_patients.category = ?', 0).pluck('organs.id')
 
 
+    #organ_requested
+    @requested = OrgansRequesterPatient.joins(:organ).group(:name).count
+
+
   end
 
   def create
@@ -105,14 +109,16 @@ class Patient::OrganDonorController < ApplicationController
     end
 
     #add living donations-blood
-    if params[:organ][:blood] == "On"
-      @p=OrgansDonorPatient.create(patient_id: @patient.id, organ_id: Organ.find_by_name('Blood').to_i, category: 1)
-        if @p.save!
+    if params[:organ].blank? == false && params[:organ][:blood].blank? == false
 
-        else
-          flash[:error] = "Registration unsuccessful. Please try again"
-          return redirect_to controller: '/patient/organ_donor', action: 'new', :id => @patient.id
-        end
+        @p=OrgansDonorPatient.create(patient_id: @patient.id, organ_id: Organ.find_by_name('Blood').id.to_i, category: 1)
+          if @p.save!
+
+          else
+            flash[:error] = "Registration unsuccessful. Please try again"
+            return redirect_to controller: '/patient/organ_donor', action: 'new', :id => @patient.id
+          end
+
     end
 
     flash[:success] = "Registration Successful."

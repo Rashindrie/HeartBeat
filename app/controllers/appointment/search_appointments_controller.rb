@@ -12,6 +12,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
                    .where('patient_id = ?',params[:id]).first
     @doctor_name=Doctor.select(:id, :full_name)
     @doctor_types=DoctorType.sorted
+    @d=-1;
   end
 
 
@@ -89,6 +90,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
     #search results
     if @d.to_i==-1
+      @name=Date.today.to_date
       @timeslots=TimeSlot.from_doctor(@doctor).where('app_date = ?', Date.today).where('status = ?',1)
                      .order('app_date DESC')
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
@@ -101,6 +103,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
       end
 
     elsif @d.to_i==0
+      @name=Doctor.find(@doctor).full_name
       @timeslots=TimeSlot.from_doctor(@doctor).where('app_date >= ?', Date.today).where('status = ?',1)
                      .order('app_date DESC')
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
@@ -113,7 +116,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
       end
 
     elsif @d.to_i==1
-
+      @name=DoctorType.find(@app_type).speciality
       @timeslots=TimeSlot.joins(doctor: :doctor_type)
                      .where('doctors.doctor_type_id' => @app_type)
                      .where('app_date >= ?', Date.today).where('status = ?',1)
@@ -127,6 +130,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
       end
 
     elsif @d.to_i==2
+      @name=@date
       @timeslots=TimeSlot.from_date(@date).where('status = ?',1)
       @appointments=Appointment.where('status = ?', 1).group(:time_slot_id).count
 

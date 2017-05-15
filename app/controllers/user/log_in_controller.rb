@@ -50,7 +50,7 @@ class User::LogInController < ApplicationController
   def logout
     if logged_in?
       session[:user_id] = nil
-      flash[:notice] = 'logged out'
+      flash[:notice] = 'Logged out'
     end
     redirect_to('/login')
   end

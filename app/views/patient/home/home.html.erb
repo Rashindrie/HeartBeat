@@ -10,22 +10,13 @@
       <% if key=="success" %>
           <script>
               $(function() {
-                  Materialize.toast("<%= value %>", 5000,'green');
+                  Materialize.toast("<%= value %>", 10000,'green');
               });
           </script>
       <% elsif key=="error"%>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 8000,'red');
-              });
-          </script>
+          <div class="alert alert-<%= key %>"><%= value %></div>
       <% else %>
-          <script>
-              $(function() {
-                  Materialize.toast("<%= value %>", 5000,'amber');
-              });
-          </script>
-
+          <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
 
   <% end %>
