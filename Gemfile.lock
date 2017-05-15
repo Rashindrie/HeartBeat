@@ -113,7 +113,6 @@ GEM
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     pdfkit (0.8.2)
-    pg (0.20.0)
     public_suffix (2.0.5)
     puma (3.7.0)
     rack (2.0.1)
@@ -246,7 +245,6 @@ DEPENDENCIES
   momentjs-rails
   mysql2 (>= 0.3.18, < 0.5)
   pdfkit
-  pg
   puma (~> 3.0)
   rails (~> 5.0.1)
   rails-perftest
