@@ -7,7 +7,11 @@
 <% elsif current_user && current_user.admin?  %>
     <%= render partial: 'admin/sideNav' %>
 <% end %>
-
+<script type="text/javascript">
+    $(document).on('turbolinks:load', function(){
+        $('select').material_select();
+    });
+</script>
 
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
