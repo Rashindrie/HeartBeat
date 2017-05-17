@@ -36,7 +36,6 @@
           <div class="col s12">
             <i class="material-icons prefix">search</i>Search
             <div class="input-field inline">
-              <input class="with-gap" name="app[d]" value="-1" type="hidden" id="#" />
               <div class="col s12 left aligned">
                 <input class="with-gap" name="app[d]" value="0" type="radio" id="doctor" />
                 <label for="doctor">Doctor</label>
@@ -57,7 +56,6 @@
           <div class="col s10">
             <div class="input-field" id="doctorSelect">
               <select name="app[doctor_id]">
-                <option value="" disabled selected>Choose Doctor</option>
                 <% @doctor_name.each do |d| %>
                     <option value="<%= d.id %>"><%= d.full_name %></option>
                 <% end %>
@@ -71,7 +69,6 @@
           <div class="col s10">
             <div class="input-field" id="appTypeSelect">
               <select name="app[app_type_id]">
-                <option value="" disabled selected>Choose Appointemnt Type</option>
                 <% @doctor_types.each do |d| %>
                     <option value="<%= d.id %>"><%= d.speciality %></option>
                 <% end %>
@@ -248,18 +245,22 @@
                   $('#doctorSelect').show();
                   $('#appTypeSelect').hide();
                   $('#dateSelect').hide();
+                  $('#from_date').removeAttr('required');
+
               }
               else{
                   if($(this).attr('id') == 'appType') {
                       $('#doctorSelect').hide();
                       $('#appTypeSelect').show();
                       $('#dateSelect').hide();
+                      $('#from_date').removeAttr('required');
                   }
                   else{
                       if($(this).attr('id') == 'appDate') {
                           $('#doctorSelect').hide();
                           $('#appTypeSelect').hide();
                           $('#dateSelect').show();
+                          $('#from_date').attr('required', true);
                       }
                   }
               }

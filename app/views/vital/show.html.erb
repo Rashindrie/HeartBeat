@@ -4,7 +4,11 @@
 <%= render partial: 'patient/sideNav' %>
 <% end %>
 
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        window.location.reload(true);
+    });
+</script>
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
       <div id="toast-container"></div>

@@ -42,8 +42,8 @@ class User::LogInController < ApplicationController
 
 
     else
-      flash.now[:notice] = "Invalid username/ password combination."
-      render 'user/log_in/login'
+      flash[:notice] = "Invalid username/ password combination."
+      redirect_to('/login')
     end
   end
 

@@ -10,6 +10,8 @@
 
 
         <div class="divider"></div><br>
+        <div class="card">
+          <div class="card-content">
         <div class="row">
         <% if defined? @appointments %>
             <% if @appointments.blank? == false %>
@@ -34,9 +36,9 @@
                             <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
                             <td><%= d.first_name + " " + d.last_name %></td>
                             <% if d.status == true %>
-                                <td><%= "Scheduled" %></td>
+                                <td> <span class="task-cat green accent-4" style="border-radius: 2em; padding: 5px; "><%= "Scheduled" %></span></td>
                             <% else %>
-                                <td><%= "Cancelled" %></td>
+                                <td> <span class="task-cat pink lighten-1" style="border-radius: 2em; padding: 5px; "><%= "Cancelled" %></span></td>
                             <% end %>
                             <td><a href="/appointment/<%= @patient.id %>/<%= d.app_id %>">Show</a></td>
                           </tr>
@@ -51,9 +53,8 @@
             <% end %>
         <% end %>
     </div>
-
-
-
+        </div>
+        </div>
       </form>
 
     </div>
@@ -83,7 +84,7 @@
 
 
   <script type="text/javascript">
-      $(document).ready(function(){
+      $(document).on('turbolinks:load', function(){
           $('#doctorSelect').hide();
           $('#appTypeSelect').hide();
           $('#dateSelect').hide();
@@ -113,18 +114,22 @@
                   $('#doctorSelect').show();
                   $('#appTypeSelect').hide();
                   $('#dateSelect').hide();
+                  $('#from_date').removeAttr('required');
+
               }
               else{
                   if($(this).attr('id') == 'appType') {
                       $('#doctorSelect').hide();
                       $('#appTypeSelect').show();
                       $('#dateSelect').hide();
+                      $('#from_date').removeAttr('required');
                   }
                   else{
                       if($(this).attr('id') == 'appDate') {
                           $('#doctorSelect').hide();
                           $('#appTypeSelect').hide();
                           $('#dateSelect').show();
+                          $('#from_date').attr('required', true);
                       }
                   }
               }

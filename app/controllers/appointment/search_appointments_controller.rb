@@ -12,7 +12,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
                    .where('patient_id = ?',params[:id]).first
     @doctor_name=Doctor.select(:id, :full_name)
     @doctor_types=DoctorType.sorted
-    @d=-1;
+
   end
 
 

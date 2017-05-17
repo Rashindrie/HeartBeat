@@ -58,9 +58,9 @@
                   <tr>
                     <th data-field="time">Status</th>
                     <% if d.status == true %>
-                        <td><%= "Scheduled" %></td>
+                        <td><span class="task-cat green accent-4" style="border-radius: 2em; padding: 5px; "><%= "Scheduled" %></span></td>
                     <% else %>
-                        <td><%= "Cancelled" %></td>
+                        <td><span class="task-cat pink lighten-1" style="border-radius: 2em; padding: 5px; "><%= "Cancelled" %></span></td>
                     <% end %>
                   </tr>
 

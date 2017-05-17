@@ -1,6 +1,6 @@
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).on('turbolinks:load', function(){
 
         $('select').material_select();
         $('select').material_select('update');
@@ -82,11 +82,11 @@
                     <tr>
                       <td><%= d[0] %></td>
                       <% if d[1] == 0 %>
-                          <td style="text-align:center"><p style=" "><%= "Pending" %></p></td>
+                          <td style="text-align:center"> <span class="task-cat amber" style="border-radius: 2em; padding: 5px; "><%= "Pending" %></span></td>
                       <% elsif d[1] == 1 %>
-                          <td style="text-align:center"><p style="color:green"> <%= "Accepted" %></p></td>
+                          <td style="text-align:center"> <span class="task-cat green" style="border-radius: 2em; padding: 5px; "><%= "Accepted" %></span></td>
                       <% elsif d[1] == 2 %>
-                          <td style="text-align:center"> <p style="color:red"><%= "Rejected" %></p></td>
+                          <td style="text-align:center">  <span class="task-cat pink lighten-1" style="border-radius: 2em; padding: 5px; "><%= "Rejected" %></span></td>
                       <% end %>
                       <% if d[2].blank? %>
                           <td style="text-align:center"><%= "     -     " %></td>
