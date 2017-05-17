@@ -21,6 +21,16 @@
     });
 </script>
 
+<script>
+    function submitform() {
+        var x = document.getElementById("doctor_id").value;
+        if(x !== ""){
+            document.getElementById("search").action = "/admin/search/<%= @admin.id %>/"+ x;
+        }
+        return true;
+    }
+</script>
+
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
       <div id="toast-container"></div>
@@ -37,43 +47,37 @@
       <% end %>
 
   <% end %>
+
   <div class="container " style="width: 85%">
 
     <div class="row">
       <form class="col s12 m12 l12" id="search" onsubmit="submitform()" method="get" >
-        <h4>Search Doctors</h4>
 
+        <h4>Search Doctors</h4>
         <div class="divider"></div><br>
 
         <div class="row">
-
-            <div class="row">
-              <div class="input-field col s12 m6">
-                <i class="material-icons prefix">textsms</i>
-                <label class="active" for="tags">Doctor</label>
-                <input id="tags" type="text" class="autocomplete" required/>
-                <input id="doctor_id" name="doctor_id" type="hidden" required/>
-              </div>
-            </div>
-
           <div class="row">
-            <div class="col s3">
-              <button class="btn waves-effect waves-light col s12" type="submit"  id="submit" >View Profile</button>
+            <div class="input-field col s12 m6">
+              <i class="material-icons prefix">textsms</i>
+              <label class="active" for="tags">Doctor</label>
+              <input id="tags" type="text" class="autocomplete" autocomplete="off" required/>
+              <input id="doctor_id" name="doctor_id" type="hidden" required/>
             </div>
           </div>
 
+          <div class="row">
+            <br/><br/>
+            <div class="row">
+              <div class="col s3">
+                <button class="btn waves-effect waves-light col s12" type="submit"  id="submit" >View Profile</button>
+              </div>
+            </div>
+          </div>
         </div>
 
       </form>
     </div>
   </div>
-<script>
-    function submitform() {
-        var x = document.getElementById("doctor_id").value;
-        if(x !== ""){
-            document.getElementById("search").action = "/admin/search/<%= @admin.id %>/"+ x;
-        }
-        return true;
-    }
-</script>
+
 </main>

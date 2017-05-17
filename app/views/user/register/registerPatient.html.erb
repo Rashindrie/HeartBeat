@@ -3,11 +3,6 @@
 <head>
   <script type="text/javascript">
       $( document ).on('turbolinks:load', function() {
-
-          $('.scrollspy').scrollSpy();
-
-          $('.modal').modal();
-
           $('.datepicker').pickadate(
               {
                   selectYears: 100,
@@ -21,8 +16,7 @@
                   }
               });
       });
-
-  </script>
+      </script>
 </head>
 <body >
 
@@ -41,7 +35,6 @@
       <% else %>
           <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
-
   <% end %>
 
   <% if (@patient.present? && @patient.errors.any?)  ||  (@user.present? && @user.errors.any?)%>
@@ -74,29 +67,24 @@
             <form class="card z-depth-4" action="/signup" method="post" style="top: 15px ">
 
               <div class="card-image col s3" style="width: 100%">
-
-                <%= image_tag("new_pink.png", :alt => "rss feed") %>
-
+                <%= image_tag("old Heart_Beat.png", :alt => "rss feed") %>
               </div>
+
               <div class="card-content">
                 <span class="card-title">Sign Up</span>
-
                 <input id="role" type="hidden" name= "session[role]" value="1">
                 <div class="section">
-
                   <div id="personal"  class="section scrollspy">
-                    <div class="row">
 
+                    <div class="row">
                       <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="full_name" type="text" name="session[full_name]" value="<%= params[:session].present? ? params[:session][:full_name] : nil %>" class="validate" required>
                         <label class="active" for="full_name" >Full Name</label>
                       </div>
+                    </div>
 
-
-                   </div>
                     <div class="row">
-
                       <div class="input-field col s12 m6 l4">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="first_name" type="text" value="<%= params[:session].present? ? params[:session][:first_name] : nil %>"  name="session[first_name]" class="validate" required>
@@ -112,10 +100,7 @@
                         <input id="last_name" type="text" name="session[last_name]" value="<%= params[:session].present? ? params[:session][:last_name] : nil %>"  class="validate" required>
                         <label class="active" for="last_name">Last Name</label>
                       </div>
-
                     </div>
-
-
 
                     <div class="row">
                       <div class="col s12">
@@ -135,42 +120,37 @@
 
                     <br>
 
-
                     <div class="row">
-
                       <div class="input-field col s12 l5">
                         <i class="material-icons prefix">today</i>
-
                         <input id="date_of_birth" value="" type="date" name="session[date_of_birth]" value="<%= params[:session].present? ? params[:session][:date_of_birth] : nil %>"  class="datepicker" >
                         <label class="active" for="date_of_birth">Date of Birth</label>
                       </div>
                     </div>
-
-
                   </div>
+
                   <div class="divider"></div>
-
-                    <div id="contact"  class="section scrollspy">
-                      <div class="row">
-                        <div class="input-field col s12 l5">
-                          <i class="material-icons prefix">phone</i>
-                          <input id="telephone" type="tel" name="session[telephone]" value="<%= params[:session].present? ? params[:session][:telephone] : nil %>"  class="validate" required>
-                          <label class="active" for="telephone">Telephone</label>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="input-field col s12 m5">
-                          <i class="material-icons prefix">email</i>
-                          <input id="email" type="email" name="session[email]" value="<%= params[:session].present? ? params[:session][:email] : nil %>"  class="validate" required>
-                          <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
-                        </div>
+                  <div id="contact"  class="section scrollspy">
+                    <div class="row">
+                      <div class="input-field col s12 l5">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="telephone" type="tel" name="session[telephone]" value="<%= params[:session].present? ? params[:session][:telephone] : "+94" %>" placeholder="+94xxxxxxxxx" class="validate" required>
+                        <label class="active" for="telephone">Telephone</label>
                       </div>
                     </div>
 
-                  <div class="divider"></div>
-                  <div class="row ">
+                    <div class="row">
+                      <div class="input-field col s12 m5">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" type="email" name="session[email]" value="<%= params[:session].present? ? params[:session][:email] : nil %>"  class="validate" required>
+                        <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="divider"></div>
+
+                  <div class="row ">
                     <div id="pwd" class="section scrollspy">
                       <div class="row">
                         <div class="input-field col s12 m5">
@@ -193,28 +173,19 @@
 
                     <div class="divider"></div>
 
-<br />
-                          <div class="col s12">
-                            <button class="btn waves-effect waves-light col s12" type="Submit" id="submit" >Sign Up</button>
-
-                          </div>
-
+                    <div class="col s12">
+                      <button class="btn waves-effect waves-light col s12" type="Submit" id="submit" >Sign Up</button>
+                    </div>
 
                   </div>
-
-
                 </div>
               </div>
-
             </form>
-
-
-
-
           </div>
-
-        </div></div>
-    </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 

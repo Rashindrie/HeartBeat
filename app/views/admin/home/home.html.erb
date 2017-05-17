@@ -1,12 +1,7 @@
 
 <%= render partial: 'admin/sideNav' %>
 <main style="padding-left: 240px">
-  <script type="text/javascript">
-      $(document).ready(function() {
-              $('select').material_select();
-              $('.tooltipped').tooltip({delay: 0});
-          });
-      </script>
+
   <% flash.each do |key, value| %>
       <div id="toast-container"></div>
       <% if key=="success" %>

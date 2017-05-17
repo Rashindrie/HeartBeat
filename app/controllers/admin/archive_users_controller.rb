@@ -5,7 +5,7 @@ class Admin::ArchiveUsersController < ApplicationController
 
   def show
     @admin = User.find(params[:id])
-    @administrators =User.where('role = ? ',0)
+    @administrators =User.where('role = ? ',0).where('id != ?', @admin.id)
   end
 
 

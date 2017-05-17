@@ -20,7 +20,7 @@ class Staff < ApplicationRecord
             format: { with: REGEX }
 
   validates_presence_of :telephone
-  validates_numericality_of :telephone
+  validates :telephone, numericality: { only_integer: true, message: "is invalid" }
   validates_length_of :telephone, :within => 10..15
 
 end

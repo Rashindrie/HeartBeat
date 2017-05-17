@@ -49,7 +49,7 @@ class Admin::ViewDoctorController < ApplicationController
     @user=User.find_by_doctor_id(@doctor.id)
 
 
-    if @user.update_attribute(:status, params[:action_id]) && @user.valid?
+    if @user.update_attribute(:status, params[:action_id])
       flash[:success]="Update Successfull"
       redirect_to (:back)
     else

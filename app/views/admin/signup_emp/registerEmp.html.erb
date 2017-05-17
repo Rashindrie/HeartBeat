@@ -1,6 +1,5 @@
-
-
 <%= render partial: 'admin/sideNav' %>
+
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
       <div id="toast-container"></div>
@@ -111,7 +110,7 @@
                 <div class="row ">
                   <div class="input-field col s12 l6">
                     <i class="material-icons prefix">phone</i>
-                    <input id="telephone" type="tel" name="session[telephone]" value="<%= params[:session].present? ? params[:session][:telephone] : nil %>" class="validate" required>
+                    <input id="telephone" type="tel" name="session[telephone]" placeholder="+94xxxxxxxx" value="<%= params[:session].present? ? params[:session][:telephone] : "+94" %>" class="validate" required>
                     <label class="active" for="telephone">Telephone</label>
                   </div>
 
@@ -153,26 +152,25 @@
                                 <option value="<%= d.id %>"><%= d.speciality %></option>
                             <% end %>
                           </select>
-
                           <label>Doctor Type</label>
                         </div>
                       </div>
                     </div>
+
                     <div class="col s12">
                       <div class="col s6 left aligned">
                         <input class="with-gap" name="session[role]" value="3" type="radio" onclick="show1();" id="staff" checked="checked" />
                         <label for="staff">Clinical Staff</label>
                       </div>
                     </div>
-                  </div>
 
+                  </div>
                 </div>
 
                 <div class="row ">
-
                   <div class="input-field col s6">
                     <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" name="session[password]" class="validate">
+                    <input id="password" type="password" name="session[password]" class="validate" required>
                     <label for="password">Password</label>
                   </div>
                 </div>
@@ -186,19 +184,11 @@
                 </div>
 
               </div>
-
             </form>
-
         </div>
-
-
-
-
-
-
       </div>
-
-    </div></div>
-  </div></div>
+    </div>
+  </div>
+  </div>
 </main>
 

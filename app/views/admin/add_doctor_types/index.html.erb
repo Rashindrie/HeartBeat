@@ -14,8 +14,8 @@
         $('.modal').modal();
         )};
 </script>
-<style>
 
+<style>
   .pagination a {
     border-radius: 5px;
   }
@@ -24,6 +24,7 @@
     border-radius: 5px;
   }
 </style>
+
 <script>
     function pagination(){
         var req_num_row=5;
@@ -83,12 +84,10 @@
       <% else %>
           <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
-
   <% end %>
 
   <% if(@d.present? && @d.errors.any?) %>
       <div class="error_explanation" style="border-radius: 0.5em; padding: 1px; padding-left: 50px">
-
         <ul>
           <% if (@d.present? && @d.errors.any?) %>
               <p>
@@ -109,9 +108,9 @@
     <div class="row">
       <form class="col s12 m12 l12" id="add" action="/admin/add/type/<%= @admin.id %>" method="post">
         <h5>Add New Doctor Type</h5>
+
         <div class="row">
           <div class="input-field col s12 m8">
-
             <input id="speciality" type="text" name="type[speciality]" value="<%= @name.present? ? @name : nil %>" class="validate" required>
             <label class="active" for="speciality">Speciality</label>
           </div>
@@ -122,14 +121,13 @@
             <button class="btn waves-effect waves-light col s12" type="submit" id="submit1" >Add Type</button>
           </div>
         </div>
+
       </form>
     </div>
 
     <div class="row">
       <form class="col s12 m12 l12" id="archive" method="post">
         <input type="hidden" name="_method" value="patch" />
-
-
         <% if defined? @doctor_types %>
             <% if @doctor_types.blank? == false %>
                 <br/><div class="divider"></div><br/>
@@ -143,8 +141,6 @@
                     <tr>
                       <th data-field="id">Name</th>
                       <th data-field="price">Action</th>
-
-
                     </tr>
                     </thead>
 
@@ -153,7 +149,7 @@
                         <tr>
 
                           <td><%= d.speciality %></td>
-                          <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="archive/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Archive admin" id="submit" type="button"><i class="material-icons prefix">remove</i></button></td>
+                          <td><button class="yellow darken-3 btn-floating waves-effect waves-light btn tooltipped" data-target="archive/<%= d.id %>" data-position="bottom" data-delay="50" data-tooltip="Archive Doctor Type" id="submit" type="button"><i class="material-icons prefix">remove</i></button></td>
 
                           </tr>
                         <div id="archive/<%= d.id %>" class="modal">
@@ -169,8 +165,8 @@
 
                     </tbody>
                   </table>
-                  <br/><br/>
-
+                  <br/>
+                  <br/>
                 </div>
                 </div>
                 </form>
@@ -186,14 +182,13 @@
 
 
         <% end %>
+        </div>
+  </div>
 
-        </div>
-        </div>
   <script type="text/javascript">
       $(document).ready(function(){
-
           $('.modal').modal();
-
       });
   </script>
+
 </main>

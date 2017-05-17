@@ -24,20 +24,23 @@
       <% end %>
       </div>
   <% end %>
-  <% if @user.errors.any? %>
+  <% if (@user.present? && @user.errors.any?) %>
       <div class="error_explanation" style="border-radius: 0.5em; padding: 1px; padding-left: 50px">
-        <p>
-          <%= pluralize(@user.errors.count, "error") %> prohibited
-          from updating user:
-        </p>
-        <ul>
-          <% @user.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-          <% end %>
-        </ul>
+        <% if (@user.present? && @user.errors.any?) %>
+            <p>
+              <%= pluralize((@user.errors.count), "error") %> prohibited
+              from registering as a valid user:
+            </p>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        <% end %>
+
       </div>
   <% end %>
+
   <div class="container " style="width: 85%">
+    <br/>
     <form class="col s12 m12 l12" id="updateDoc" method="post">
       <input type="hidden" name="_method" value="patch" />
     <div class="row">
@@ -78,12 +81,11 @@
             <% else %>
                 <p>Status: <span class="task-cat red darken-2" style="border-radius: 2em; padding: 5px; ">Inactive</span></p>
             <% end %>
+
             <br/><br/>
             <% if @user.status %>
-
-               <button class="red darken-2 btn waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Archive Doctor" id="submit" formaction="/admin/update/doctor/<%= 0 %>/<%= @admin.id %>/<%= @doctor.id %>" type="submit">Archive</button>
+                <button class="red darken-2 btn waves-effect waves-light btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Archive Doctor" id="submit" formaction="/admin/update/doctor/<%= 0 %>/<%= @admin.id %>/<%= @doctor.id %>" type="submit">Archive</button>
             <% else %>
-
                 <button class="green btn waves-effect waves-light btn tooltipped"  data-position="bottom" data-delay="50" data-tooltip="Unarchive Doctor" id="submit" formaction="/admin/update/doctor/<%= 1 %>/<%= @admin.id %>/<%= @doctor.id %>" type="submit">Unarchive</button>
             <% end %>
           </div>
@@ -91,14 +93,12 @@
       </div>
     </div>
 
-
-    <div class="divider"></div>
-    <br/>
-
-    <div class="row">
-      <div class="col s9">
-        <a class="btn waves-effect waves-light" href="/admin/search/<%= @admin.id %>">Back</a>
-      </div>
+      <div class="divider"></div>
+      <br/>
+      <div class="row">
+        <div class="col s9">
+          <a class="btn waves-effect waves-light" href="/admin/search/<%= @admin.id %>">Back</a>
+        </div>
     </div>
     </form>
   </div>

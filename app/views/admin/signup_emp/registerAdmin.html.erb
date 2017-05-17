@@ -14,25 +14,7 @@
                     }
                 }
             });
-
-
-        $('#doctorSelect').hide();
-
-
-        $('input[type="radio"]').click(function() {
-            if($(this).attr('id') == 'doctor') {
-                $('#doctorSelect').show();
-
-            }
-            else{
-                $('#doctorSelect').hide();
-
-
-            }
-        });
     });
-
-
 </script>
 
 
@@ -83,9 +65,8 @@
               <div class="card-content">
                 <span class="card-title"><h5>Register Admin</h5></span>
 
-               <div class="row ">
 
-
+                <div class="row ">
                   <div class="input-field col s12">
                     <i class="material-icons prefix">email</i>
                     <input id="email" type="email" name="session[email]" value="<%= params[:session].present? ? params[:session][:email] : nil %>" class="validate" required>
@@ -112,20 +93,11 @@
                 </div>
 
               </div>
-
             </form>
-
-
         </div>
-
-
-
-
-
-
       </div>
-
-    </div></div>
-  </div></div>
+    </div>
+  </div>
+  </div>
 </main>
 

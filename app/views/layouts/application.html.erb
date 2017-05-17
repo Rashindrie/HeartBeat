@@ -41,14 +41,16 @@
       nav ul a.active {
         background: rgba(0,0,0,0.2);
       }
+      nav{
+        background-color: #1d4c52;
+      }
+      /*1d4c52- blue , 481941-purple  */
     </style>
     <script type="text/javascript">
-
         $(document).on('turbolinks:load', function(){
             $('select').material_select();
             Materialize.updateTextFields();
-        });
-        $(document).ready(function() {
+
             $('.tooltipped').tooltip();
             $('.datepicker').pickadate({
 
@@ -59,8 +61,7 @@
                     }
                 }
             });
-        });
-        $(document).ready(function() {
+
             $('.button-collapse').sideNav({
                     menuWidth: 300, // Default is 300
                     edge: 'right', // Choose the horizontal origin
@@ -99,7 +100,7 @@
         <div class="nav-wrapper white-text" style="font-family: 'Tekton Pro Cond', Arial, serif">
           <ul class="left hide-on-med-and-down" style="height: 80px; width: 170px; padding-top: 5px">
             <img class="responsive-img"
-                 <%= image_tag("white_pink.png", :alt => "rss feed") %>
+                 <%= image_tag("white.png", :alt => "rss feed") %>
 
           </ul>
 

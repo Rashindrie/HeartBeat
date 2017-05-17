@@ -1,13 +1,3 @@
-
-  <script type="text/javascript">
-      $(document).ready(function(){
-
-          $('select').material_select();
-});
-
-
-  </script>
-
 <main>
   <% flash.each do |key, value| %>
       <div id="toast-container"></div>
@@ -33,6 +23,7 @@
       <% end %>
 
   <% end %>
+
   <div class=" " style="width:100%;height:100%;position: relative;">
     <div class="" style="width:100%;">
       <div class="container">
@@ -42,15 +33,12 @@
               <div class=row>
                 <div class="card-image col m6 l3" style="width: 100%">
                   <br>
-                  <%= image_tag("new_pink.png", :alt => "rss feed") %>
-
+                  <%= image_tag("old Heart_Beat.png", :alt => "rss feed") %>
                 </div>
               </div>
 
               <div class="card-content">
                 <span class="card-title">Sign In</span>
-
-
                 <div class="row margin">
                   <div class="input-field col s12">
                     <i class="material-icons prefix">email</i>
@@ -68,35 +56,24 @@
                   </div>
                 </div>
 
-
-
                 <div class="row">
                   <button class="btn waves-effect waves-light col s12" type="submit" id="submit" >Login</button>
-
                 </div>
+
                 <div class="divider"></div>
+
                 <div class="row">
                   <div class="input-field col s12">
                     <span> Not a user? </span> <br>
                     <p class="margin medium-small"><a href="/signup/patient">Register Now!</a></p>
                   </div>
-
                 </div>
-
-
-
-
               </div>
-
-
-
-
-
             </form>
-
           </div>
         </div>
-      </div></div>
+      </div>
+    </div>
   </div>
 </main>
 
