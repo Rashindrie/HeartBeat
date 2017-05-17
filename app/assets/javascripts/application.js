@@ -13,14 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require materialize-sprockets
+//= require_tree .
 //= require primary
 //= require moment
-// require fullcalendar
-// require fullcalendar/gcal
-// require jquery-ui
-
-// require rails_script
-// require js-routes
-// require jquery.timepicker.js
