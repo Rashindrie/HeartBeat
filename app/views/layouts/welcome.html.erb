@@ -122,7 +122,9 @@
         $('.parallax').parallax();
         $(".button-collapse").sideNav();
     });
-
+    $(document).on('turbolinks:load', function(){
+        Materialize.updateTextFields();
+    });
 </script>
 </body>
 </html>
