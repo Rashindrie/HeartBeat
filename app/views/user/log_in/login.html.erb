@@ -1,6 +1,6 @@
 <main>
   <% flash.each do |key, value| %>
-      <div id="toast-container"></div>
+      <div id="toast-container">
       <% if key=="success" %>
           <script>
               $(function() {
@@ -21,7 +21,7 @@
           </script>
 
       <% end %>
-
+      </div>
   <% end %>
 
   <div class=" " style="width:100%;height:100%;position: relative;">

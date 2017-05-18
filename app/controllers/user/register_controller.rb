@@ -1,10 +1,6 @@
 class User::RegisterController < ApplicationController
 
   layout 'application'
-  #before_action :require_user, only: [:logout, :show]
-  #before_action :require_user, only: [:show, :edit, :update, :destroy]
-
-  #before_action :require_editor, only: [:show, :edit]
 
   def new
     @user = User.new

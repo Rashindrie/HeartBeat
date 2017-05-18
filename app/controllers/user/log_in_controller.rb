@@ -3,7 +3,6 @@ class User::LogInController < ApplicationController
 
   def login
     # login form
-
   end
 
   def attempt_login

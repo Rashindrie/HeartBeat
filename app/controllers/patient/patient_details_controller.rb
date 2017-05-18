@@ -4,6 +4,8 @@ class Patient::PatientDetailsController < ApplicationController
   #before_action :require_doctor, only: [:updateVital, :editVital]
 
   protect_from_forgery
+  before_action :confirm_logged_in
+  before_action :require_patient
 
   #get edit patient details page
   def edit

@@ -1,6 +1,9 @@
 class Staff::ViewAppointmentController < ApplicationController
   layout 'application'
   protect_from_forgery unless: -> { request.format.html? }
+  before_action :confirm_logged_in
+  before_action :require_staff
+
   def index
     @staff = Staff.find(params[:id])
     @doctors = Doctor.all.select('id AS id').select('full_name AS full_name').to_json

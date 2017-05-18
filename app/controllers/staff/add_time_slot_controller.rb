@@ -1,6 +1,8 @@
 class Staff::AddTimeSlotController < ApplicationController
   layout 'application'
   protect_from_forgery unless: -> { request.format.html? }
+  before_action :confirm_logged_in
+  before_action :require_staff
 
   #render a form to add a new timeslot
   def new

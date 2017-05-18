@@ -1,8 +1,9 @@
 class Doctor::DoctorDetailsController < ApplicationController
   layout 'application'
-
-  #before_action :require_doctor, only: [:updateVital, :editVital]
   protect_from_forgery unless: -> { request.format.html? }
+
+  before_action :confirm_logged_in
+  before_action :require_doctor
 
   #render form to view/edit doctor details
   def edit

@@ -3,6 +3,8 @@ class PasswordChangeController < ApplicationController
 
   before_action :get_user, only: [:new, :update]
   before_action :validate_user, only: [:new, :update]
+  before_action :confirm_logged_in
+  before_action :require_user
 
   def new
     if @user.role == 1

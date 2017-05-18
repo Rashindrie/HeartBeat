@@ -1,6 +1,8 @@
 class Doctor::ViewAppointmentsController < ApplicationController
   layout 'application'
   protect_from_forgery unless: -> { request.format.html? }
+  before_action :confirm_logged_in
+  before_action :require_doctor
 
   def show
     @doctor = Doctor.find(params[:id])
