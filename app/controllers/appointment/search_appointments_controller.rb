@@ -1,7 +1,5 @@
 class Appointment::SearchAppointmentsController < ApplicationController
   layout 'application'
-  #before_filter :require_user
-  protect_from_forgery unless: -> { request.format.html? }
 
   before_action :confirm_logged_in
   before_action :require_patient

@@ -2,7 +2,6 @@ class VisitsController < ApplicationController
 
   layout 'application'
 
-  protect_from_forgery unless: -> { request.format.html? }
   before_action :confirm_logged_in
   before_action :require_user
 
