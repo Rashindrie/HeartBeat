@@ -24,7 +24,7 @@
     function submitform() {
         var x = document.getElementById("patient_id").value;
         if(x !== ""){
-            document.getElementById("search").action = "search/patients/<%= @doctor.id %>/"+ x;
+            document.getElementById("search").action = "/search/patients/<%= @doctor.id %>/"+ x;
         }
         return true;
     }
@@ -49,7 +49,8 @@
 
   <% end %>
   <div class="container " style="width: 85%">
-
+    <div class="card">
+      <div class="card-content">
     <div class="row">
       <form class="col s12 m12 l12" id="search" onsubmit="submitform()" method="get">
         <h4>Search Patients</h4>
@@ -60,7 +61,7 @@
           <div class="input-field col s8">
             <i class="material-icons prefix">textsms</i>
             <label class="active" for="tags">Patient</label>
-            <input id="tags" type="text" class="autocomplete" required/>
+            <input id="tags" type="text" class="autocomplete" autocomplete="off" required/>
             <input id="patient_id" name="search[patient_id]" type="hidden" required/>
           </div>
         </div>
@@ -75,5 +76,8 @@
 
 
   </div>
+
+    </div>
+    </div>
 
 </main>

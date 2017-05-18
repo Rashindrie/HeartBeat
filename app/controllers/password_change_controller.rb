@@ -6,7 +6,9 @@ class PasswordChangeController < ApplicationController
 
   def new
     if @user.role == 1
-      @patient=Patient.find(@user.patient_id)
+      @patient = Patient.joins(:user)
+                     .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
+                     .where('patient_id = ?',@user.patient_id).first
     elsif @user.role == 2
       @doctor=Doctor.find(@user.doctor_id)
       @doctor_type = DoctorType.find(@doctor.doctor_type_id)
@@ -20,7 +22,9 @@ class PasswordChangeController < ApplicationController
 
   def update
     if @user.role == 1
-      @patient=Patient.find(@user.patient_id)
+      @patient = Patient.joins(:user)
+                     .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
+                     .where('patient_id = ?',@user.patient_id).first
     elsif @user.role == 2
       @doctor=Doctor.find(@user.doctor_id)
       @doctor_type = DoctorType.find(@doctor.doctor_type_id)

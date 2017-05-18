@@ -279,11 +279,11 @@
           <div class="row">
             <br/>
             <div class="left-aligned col s5">
-              <a class="btn waves-effect waves-light" href="/search/patients/<%= @doctor.id %>">Back to Search</a>
+              <a class="btn waves-effect waves-light" href="/search/patients/<%= @doctor.id %>/<%= @patient.id %>">Back to Profile</a>
             </div>
 
             <div class="left-aligned col s4">
-              <a class="btn waves-effect waves-light" href="/visit/new/<%= @doctor.id %>/<%= @patient.id %>">Add New Visit</a>
+              <a class="btn waves-effect waves-light green" href="/visit/new/<%= @doctor.id %>/<%= @patient.id %>">Add New Visit</a>
             </div>
 
           </div>

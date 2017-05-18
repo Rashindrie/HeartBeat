@@ -38,7 +38,7 @@
       <a class="collapsible-header">Patient<i class="material-icons">arrow_drop_down</i></a>
        <div class="collapsible-body">
          <ul>
-           <li><a class="waves-effect waves-teal" href="/patient/new/<%= @staff.id %>">Add Patient</a></li>
+           <li><a class="waves-effect waves-teal" href="/patient/new/<%= @staff.id %>">Register Patient</a></li>
            <li><a class="waves-effect waves-teal" href="/staff/appointments/<%= @staff.id %>">Add Appointment</a></li>
          </ul>
        </div>
@@ -49,9 +49,9 @@
       <a class="collapsible-header">Doctor<i class="material-icons">arrow_drop_down</i></a>
       <div class="collapsible-body">
         <ul>
-          <li><a class="waves-effect waves-teal" href="/timeslot/new/<%= @staff.id %>">Add Availability</a></li>
-          <li><a class="waves-effect waves-teal" href="/timeslot/show/<%= @staff.id %>">View Availability</a></li>
-          <li><a class="waves-effect waves-teal" href="/view_appointment/<%= @staff.id %>">View Appointments</a></li>
+          <li><a class="waves-effect waves-teal" href="/timeslot/new/<%= @staff.id %>">Add Time Slot</a></li>
+          <li><a class="waves-effect waves-teal" href="/timeslot/show/<%= @staff.id %>">Time Slot Summary</a></li>
+          <li><a class="waves-effect waves-teal" href="/view_appointment/<%= @staff.id %>">Appointment Summary</a></li>
         </ul>
       </div>
     </li>

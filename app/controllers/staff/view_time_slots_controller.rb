@@ -3,7 +3,7 @@ class Staff::ViewTimeSlotsController < ApplicationController
   protect_from_forgery unless: -> { request.format.html? }
 
   def show
-    @staff = Staff.find((User.find(session[:user_id])).staff_id)
+    @staff = Staff.find(params[:id])
     @doctor_name=Doctor.select(:id, :full_name)
     @doctor_types=DoctorType.sorted
 

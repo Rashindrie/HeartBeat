@@ -29,6 +29,9 @@
   <div class="container">
 
     <div class="row">
+      <div class="card">
+        <div class="card-content">
+          <div class="row">
       <form class="col s12 m12 l12" id="searchApp" action="/appointment/search/<%= @patient.id %>" method="post">
         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
         <h4>Search Appointment</h4>
@@ -122,17 +125,23 @@
         <% end %>
       </form>
 
+          </div>
+        </div>
+      </div>
 
+      <br/>
+      <div class="divider"></div>
+      <br/>
 
       <% if defined? @timeslots %>
           <% if @timeslots.blank? == false %>
-
-              <div class="row">
+              <div class="card">
+                <div class="card-content">
+                  <div class="row">
                 <form class="col s12 m12 l12" id="addAppointment" action="" method="post">
                   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-                  <div class="divider"></div>
-                  <br/>
-                  <p>Search Field: <%= @name.present? ? @name : nil %></p>
+
+                  <p><strong>Search Field:</strong>  <%= @name.present? ? @name : nil %></p>
                   <div class="col s12">
                     <table class="bordered highlight responsive-table">
                       <thead>
@@ -208,7 +217,8 @@
                   </div>
                 </form>
               </div>
-
+                </div>
+              </div>
 
           <% else %>
               <p>

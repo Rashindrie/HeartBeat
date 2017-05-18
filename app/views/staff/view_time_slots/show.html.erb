@@ -24,6 +24,9 @@
   <div class="container">
 
     <div class="row">
+      <div class="card">
+        <div class="card-content">
+        <div class="row">
       <form class="col s12 m12 l12" action="/timeslot/search/<%= @staff.id %>" id="searchApp" method="get">
         <h4>Doctor Schedules</h4>
 
@@ -114,80 +117,85 @@
         <% end %>
       </form>
 
+        </div>
+      </div>
+      </div>
 
+      <div class="divider"></div>
+      <br>
 
       <% if defined? @timeslots %>
           <% if @timeslots.blank? == false %>
+              <div class="card">
+                <div class="card-content">
+                  <div class="row">
+                    <form class="col s12 m12 l12" action="/timeslot/cancel/<%= @staff.id %>" id="cancelAppoitnment" method="post">
+                      <input type="hidden" name="_method" value="patch" />
 
-              <div class="row">
-                <form class="col s12 m12 l12" action="/timeslot/cancel/<%= @staff.id %>" id="cancelAppoitnment" method="post">
-                  <input type="hidden" name="_method" value="patch" />
-
-                  <div class="divider"></div>
-                  <br>
-                  <p>Search Field: <%= @name.present? ? @name : nil %></p>
-                  <div class="col s12">
-                    <table class="bordered highlight responsive-table">
-                      <thead>
-                      <tr>
-                        <th data-field="id">Date</th>
-                        <th data-field="name">Time Block</th>
-                        <th data-field="price">Doctor</th>
-                        <th data-field="price">Speciality</th>
-                        <th>Scheduled Appointments</th>
-                        <th>Actions</th>
-
-                      </tr>
-                      </thead>
-
-                      <tbody>
-                      <% @timeslots.each do |d| %>
+                      <p><strong>Search Field:<strong>  <%= @name.present? ? @name : nil %></p>
+                      <div class="col s12">
+                        <table class="bordered highlight responsive-table">
+                          <thead>
                           <tr>
+                            <th data-field="id">Date</th>
+                            <th data-field="name">Time Block</th>
+                            <th data-field="price">Doctor</th>
+                            <th data-field="price">Speciality</th>
+                            <th>Scheduled Appointments</th>
+                            <th>Actions</th>
 
-                            <td><%= d.app_date %></td>
-                            <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
+                          </tr>
+                          </thead>
 
-                            <% @doctor_name.each do |n| %>
-                                <% if d.doctor_id == n.id %>
-                                    <td><%= "Dr. " + n.full_name %></td>
+                          <tbody>
+                          <% @timeslots.each do |d| %>
+                              <tr>
 
-                                    <% @doctor_types.each do |t| %>
-                                        <% if t.id == n.doctor_type_id %>
-                                            <td><%= t.speciality %></td>
+                                <td><%= d.app_date %></td>
+                                <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
+
+                                <% @doctor_name.each do |n| %>
+                                    <% if d.doctor_id == n.id %>
+                                        <td><%= "Dr. " + n.full_name %></td>
+
+                                        <% @doctor_types.each do |t| %>
+                                            <% if t.id == n.doctor_type_id %>
+                                                <td><%= t.speciality %></td>
+                                            <% end %>
                                         <% end %>
+
                                     <% end %>
-
                                 <% end %>
-                            <% end %>
-                            <td class="center"><%= (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %></td>
-                            <% if (d.app_date.past? == false) && (d.status == true) %>
-                                <input type="hidden" name="timeslot[id]" value="<%= d.id %>" />
-                                <td><button class="red btn-floating waves-effect waves-light btn tooltipped" data-target="confirmModal/<%= d.id %>"  data-position="bottom" data-delay="50" data-tooltip="Cancel TimeSlot" ><i class="material-icons prefix">close</i></button></td>
-                            <% elsif d.status == false %>
-                                <td>Cancelled</td>
-                            <% else %>
-                            <td>No action</td>
-                            <% end %>
-                                </tr>
-                          <div id="confirmModal/<%= d.id %>" class="modal">
-                            <div class="modal-content">
-                              <h4>Cancel Appointment</h4>
-                              <p>Are you sure you want to cancel the timeslot <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> on <%= d.app_date %> ?</p>
-                              <p></p>
-                              <p>This action cannot be reversed. Upon cancelling a time slot, you cannot re-activate the same.</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" id="submit2" type="submit" >Confirm</button>
-                            </div>
-                          </div>
-                      <% end %>
+                                <td class="center"><%= (@appointments[d.id].blank? ? 0 : @appointments[d.id]) %></td>
+                                <% if (d.app_date.past? == false) && (d.status == true) %>
+                                    <input type="hidden" name="timeslot[id]" value="<%= d.id %>" />
+                                    <td><button class="red btn-floating waves-effect waves-light btn tooltipped" data-target="confirmModal/<%= d.id %>"  data-position="bottom" data-delay="50" data-tooltip="Cancel TimeSlot" ><i class="material-icons prefix">close</i></button></td>
+                                <% elsif d.status == false %>
+                                    <td><span class="task-cat pink lighten-1" style="border-radius: 2em; padding: 5px; ">Cancelled</span></td>
+                                <% else %>
+                                    <td><span class="task-cat amber" style="border-radius: 2em; padding: 5px; ">No action</span></td>
+                                <% end %>
+                                    </tr>
+                              <div id="confirmModal/<%= d.id %>" class="modal">
+                                <div class="modal-content">
+                                  <h4>Cancel Appointment</h4>
+                                  <p>Are you sure you want to cancel the timeslot <%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %> on <%= d.app_date %> ?</p>
+                                  <p></p>
+                                  <p>This action cannot be reversed. Upon cancelling a time slot, you cannot re-activate the same.</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="modal-action modal-close darken-3 btn-flat waves-effect waves-light" id="submit2" type="submit" >Confirm</button>
+                                </div>
+                              </div>
+                          <% end %>
 
-                      </tbody>
-                    </table>
+                          </tbody>
+                        </table>
+                      </div>
+                    </form>
                   </div>
-                </form>
+                </div>
               </div>
-
 
           <% else %>
 

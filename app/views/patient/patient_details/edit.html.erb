@@ -1,8 +1,6 @@
 <%= render partial: 'patient/sideNav', :locals => { :patient_id => params[:id] } %>
 <script type="text/javascript">
     $(document).ready(function() {
-
-
         $('.datepicker').pickadate(
             {
                 selectYears: 100,
@@ -51,9 +49,8 @@
   <% end %>
 
     <div class="container">
-
-      <div class="row">
-
+      <div class="card">
+        <div class="card-content">
           <form  action="/patient/update/<%= @patient.id %>" method="post">
             <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
             <input type="hidden" name="_method" value="patch" />
@@ -62,7 +59,7 @@
               <h4>Edit Details</h4>
 
             <div class="divider"></div>
-            <br>
+            <br/><br/>
 
             <div class="row">
               <div class="col s1">
@@ -70,7 +67,7 @@
               </div>
               <div class="col s11">
                 <div class="input-field col s12">
-                  <input id="full_name" type="text" name="patient[full_name]" value="<%= @patient.full_name %>"  class="validate">
+                  <input id="full_name" type="text" name="patient[full_name]" value="<%= @patient.full_name %>"  class="validate" required>
                   <label class="active" for="full_name" >Full Name</label>
                 </div>
               </div>
@@ -83,7 +80,7 @@
               </div>
               <div class="col s11">
                 <div class="input-field col s12 m6 l4">
-                  <input id="first_name" type="text" name="patient[first_name]" value="<%= @patient.first_name %>" class="validate">
+                  <input id="first_name" type="text" name="patient[first_name]" value="<%= @patient.first_name %>" class="validate" required>
                   <label class="active" for="first_name">First Name</label>
                 </div>
 
@@ -93,7 +90,7 @@
                 </div>
 
                 <div class="input-field col s12 m6 l4">
-                  <input id="last_name" type="text" name="patient[last_name]" value="<%= @patient.last_name %>" class="validate">
+                  <input id="last_name" type="text" name="patient[last_name]" value="<%= @patient.last_name %>" class="validate" required>
                   <label class="active" for="last_name">Last Name</label>
                 </div>
               </div>
@@ -136,7 +133,7 @@
               </div>
               <div class="col s11">
                 <div class="input-field col s12 l6">
-                  <input id="date_of_birth" value="<%= @patient.date_of_birth %>" type="date" name="patient[date_of_birth]" class="datepicker">
+                  <input id="date_of_birth" value="<%= @patient.date_of_birth %>" type="date" name="patient[date_of_birth]" class="datepicker" required>
                   <label class="active" for="date_of_birth">Date of Birth</label>
                 </div>
               </div>
@@ -150,7 +147,7 @@
               </div>
               <div class="col s11">
                 <div class="input-field col s12 l6">
-                  <input id="telephone" type="tel" name="patient[telephone]" value="<%= @patient.telephone %>"  class="validate">
+                  <input id="telephone" type="tel" name="patient[telephone]" value="<%= @patient.telephone.present? ?  @patient.telephone : "+94" %>" placeholder="+94xxxxxxxxx" class="validate" required>
                   <label class="active" for="telephone">Telephone</label>
                 </div>
               </div>
@@ -160,12 +157,14 @@
             <div class="divider"></div><br>
 
             <div class="row">
-              <div class="col s6 m3">
-                <button class="btn waves-effect waves-light col s12" type="submit" id="submit" >Update</button>
+              <div class="col s6 m3 offset-m1">
+                <button class="btn waves-effect waves-light" type="submit" id="submit" >Update</button>
               </div>
             </div>
-      </div>
+
       </form>
+      </div>
+      </div>
     </div>
 
 

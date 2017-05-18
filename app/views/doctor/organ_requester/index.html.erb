@@ -39,7 +39,8 @@
 
 <main style="padding-left: 240px">
    <div class="container">
-
+     <div class="card">
+       <div class="card-content">
     <div class="row">
       <form class="col s12 m12 l12" id="searchDB" action="/doctor/requester/search/<%= @doctor.id %>" method="get">
         <h4>Organ Requesters</h4>
@@ -71,7 +72,6 @@
           <div class="col s10">
             <div class="input-field" id="organSelect">
               <select name="organ[organ_id]">
-                <option value="" disabled selected>Choose option</option>
                 <% @organs.each do |d| %>
                     <option value="<%= d.id %>"><%= d.name %></option>
                 <% end %>
@@ -142,11 +142,11 @@
                             <td><a href="/search/patients/<%= @doctor.id %>/<%= d[1] %>"><%= d[2].to_s+ " " + d[3].to_s %></a></td>
 
                             <% if d[4] == 0 %>
-                                <td><p><%= "Pending" %></p></td>
+                                <td><span class="task-cat amber lighten-1" style="border-radius: 2em; padding: 5px; "><%= "Pending" %></span></td>
                             <% elsif d[4] == 1 %>
-                                <td><p> <%= "Accepted" %></p></td>
+                                <td><span class="task-cat green lighten-1" style="border-radius: 2em; padding: 5px; "><%= "Accepted" %></span></td>
                             <% elsif d[4] == 2 %>
-                                <td><p><%= "Rejected" %></p></td>
+                                <td><span class="task-cat red lighten-1" style="border-radius: 2em; padding: 5px; "><%= "Rejected" %></span></td>
                             <% end %>
 
                             <% if d[5].blank? %>
@@ -225,7 +225,8 @@
 
 
     </div>
-
+       </div>
+     </div>
   </div>
 
 

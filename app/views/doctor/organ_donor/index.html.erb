@@ -4,7 +4,8 @@
 <main style="padding-left: 240px">
 
   <div class="container">
-
+<div class="card">
+  <div class="card-content">
     <div class="row">
       <form class="col s12 m12 l12" action="/doctor/donor/search/<%= @doctor.id %>" method="get">
         <h4>Organ Donor</h4>
@@ -36,7 +37,6 @@
           <div class="col s10">
             <div class="input-field" id="organSelect">
               <select name="organ[organ_id]">
-                <option value="" disabled selected>Choose option</option>
                 <% @organs.each do |d| %>
                     <option value="<%= d.id %>"><%= d.name %></option>
                 <% end %>
@@ -129,7 +129,7 @@
     </div>
 
   </div>
-
+</div></div>
   <script type="text/javascript">
       $(document).ready(function(){
 

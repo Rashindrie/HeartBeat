@@ -35,6 +35,9 @@
   <div class="container " style="width: 85%">
 
     <div class="row">
+      <div class="card">
+        <div class="card-content">
+          <div class="row">
       <form class="col s12 m12 l12" action="/search_appointment/<%= @staff.id %>" method="get">
         <h4>View Appointments</h4>
 
@@ -47,7 +50,7 @@
               <div class="input-field col s12 m6">
                 <i class="material-icons prefix">textsms</i>
                 <label class="active" for="tags">Doctor</label>
-                <input id="tags" type="text" value="<%= @name.present? ? @name : nil %>" class="autocomplete" required/>
+                <input id="tags" type="text" autocomplete="off" value="<%= @name.present? ? @name : nil %>" class="autocomplete" required/>
                 <input id="doctor_id" name="doctor_id" value="<%= @doctor.present? ? @doctor : nil %>" type="hidden" required/>
               </div>
             </div>
@@ -63,16 +66,21 @@
 
       </form>
 
-
+        </div>
+      </div>
+    </div>
       <div>
-
+        <br/>
+        <div class="divider"></div>
+        <br/>
         <% if defined? @appointments %>
             <% if @appointments.blank? == false %>
 
-                <div class="row">
+                <div class="card">
+                  <div class="card-content">
+                    <div class="row">
                   <div class="col s12">
-                    <div class="divider"></div>
-                    <br/>
+
                     <%= link_to '<button class="btn waves-effect waves-light float-left red" style="float: right;">Download PDF</button>'.html_safe,
                                 "/staff/doctor/summary/#{@staff.id}/#{@doctor}",
                                 target: "_blank" %>
@@ -96,9 +104,9 @@
                             <td><%= d.from_time.to_s(:time) + " - " + d.to_time.to_s(:time) %></td>
                             <td><%= d.first_name + " " + d.last_name %></a></td>
                             <% if d.registered == 1 %>
-                                <td><%= "Registered" %></td>
+                                <td><span class="task-cat green lighten-1" style="border-radius: 2em; padding: 5px; "><%= "Registered" %></span></td>
                             <% else %>
-                                <td><%= "Non Registered" %></td>
+                                <td><span class="task-cat amber lighten-1" style="border-radius: 2em; padding: 5px; "><%= "Non Registered" %></span></td>
                             <% end %>
                             <td><a href="/staff/appointments/summary/<%= @staff.id %>/<%= d.patient_id %>/<%= d.app_id %>">Summary</a></td>
                           </tr>
@@ -106,6 +114,8 @@
 
                       </tbody>
                     </table>
+                  </div>
+                </div>
                   </div>
                 </div>
             <% else %>

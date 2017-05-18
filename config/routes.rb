@@ -81,7 +81,7 @@ Rails.application.routes.draw do
 
   #doctor view appointments
   get '/view/appointments/:id', to: 'doctor/view_appointments#show'
-  post '/search/appointments/:id', to: 'doctor/view_appointments#searchApp'
+  get '/search/appointments/:id', to: 'doctor/view_appointments#searchApp'
 
   #staff routes
   get '/staff/home/:id', to: 'staff/home#home'

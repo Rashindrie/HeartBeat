@@ -3,6 +3,11 @@
 <head>
   <script type="text/javascript">
       $( document ).on('turbolinks:load', function() {
+
+          $('.scrollspy').scrollSpy();
+
+          $('.modal').modal();
+
           $('.datepicker').pickadate(
               {
                   selectYears: 100,
@@ -16,7 +21,8 @@
                   }
               });
       });
-      </script>
+
+  </script>
 </head>
 <body >
 
@@ -80,7 +86,7 @@
                       <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="full_name" type="text" name="session[full_name]" value="<%= params[:session].present? ? params[:session][:full_name] : nil %>" class="validate" required>
-                        <label class="active" for="full_name" >Full Name</label>
+                        <label for="full_name" >Full Name</label>
                       </div>
                     </div>
 
@@ -88,17 +94,17 @@
                       <div class="input-field col s12 m6 l4">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="first_name" type="text" value="<%= params[:session].present? ? params[:session][:first_name] : nil %>"  name="session[first_name]" class="validate" required>
-                        <label  class="active" for="first_name" >First Name</label>
+                        <label  for="first_name" >First Name</label>
                       </div>
 
                       <div class="input-field col s12 m6 l4">
                         <input id="middle_name" type="text" name="session[middle_name]" value="<%= params[:session].present? ? params[:session][:middle_name] : nil %>"  class="validate">
-                        <label  class="active" for="middle_name" >Middle Name</label>
+                        <label for="middle_name" >Middle Name</label>
                       </div>
 
                       <div class="input-field col s12 m6 l4">
                         <input id="last_name" type="text" name="session[last_name]" value="<%= params[:session].present? ? params[:session][:last_name] : nil %>"  class="validate" required>
-                        <label class="active" for="last_name">Last Name</label>
+                        <label for="last_name">Last Name</label>
                       </div>
                     </div>
 
@@ -124,7 +130,7 @@
                       <div class="input-field col s12 l5">
                         <i class="material-icons prefix">today</i>
                         <input id="date_of_birth" value="" type="date" name="session[date_of_birth]" value="<%= params[:session].present? ? params[:session][:date_of_birth] : nil %>"  class="datepicker" >
-                        <label class="active" for="date_of_birth">Date of Birth</label>
+                        <label for="date_of_birth">Date of Birth</label>
                       </div>
                     </div>
                   </div>
@@ -143,7 +149,7 @@
                       <div class="input-field col s12 m5">
                         <i class="material-icons prefix">email</i>
                         <input id="email" type="email" name="session[email]" value="<%= params[:session].present? ? params[:session][:email] : nil %>"  class="validate" required>
-                        <label class="active" for="email" data-error="wrong" data-success="right">Email</label>
+                        <label for="email" data-error="wrong" data-success="right">Email</label>
                       </div>
                     </div>
                   </div>

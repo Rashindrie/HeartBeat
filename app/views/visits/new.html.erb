@@ -45,7 +45,9 @@
       <div class="divider"></div>
 
       <div class="row">
+
         <div class="col s8">
+          <div class="card"><div class="card-content"><div class="row">
         <form action="/visit/add/<%= @doctor.id %>/<%= @patient.id %>" method="post" style="">
           <br/>
 
@@ -54,7 +56,7 @@
 
               <div class="input-field col s12">
 
-                <textarea id="problem" class="materialize-textarea" name="visit[problems_complaints]"></textarea>
+                <textarea id="problem" class="materialize-textarea" name="visit[problems_complaints]" required></textarea>
                 <label for="problem">Problems and Complaints</label>
 
               </div>
@@ -62,7 +64,7 @@
 
             <div class="row">
               <div class="input-field col s12">
-                <textarea id="diagnosis" class="materialize-textarea" name="visit[diagnosis]"></textarea>
+                <textarea id="diagnosis" class="materialize-textarea" name="visit[diagnosis]" required></textarea>
                 <label for="diagnosis">Diagnosis</label>
 
               </div>
@@ -70,7 +72,7 @@
 
             <div class="row">
               <div class="input-field col s12">
-                <textarea id="drug" class="materialize-textarea" name="visit[drugs]"></textarea>
+                <textarea id="drug" class="materialize-textarea" name="visit[drugs]" required></textarea>
                 <label for="drug">Prescribed Drugs</label>
 
               </div>
@@ -88,16 +90,18 @@
 
 
             <div class="row">
-              <div class="col s9">
-                <button class="btn waves-effect waves-light" type="Submit">Save</button>
+              <br/>
+              <div class="left-align col s9">
+                <a class="btn waves-effect waves-light" href="/search/patients/<%= @doctor.id %>/<%= @patient.id %>">Back to Profile</a>
               </div>
-              <div class="left-align col s3">
-                <a class="btn waves-effect waves-light" href="/visit/<%= @doctor.id %>/<%= @patient.id %>">Back</a>
+              <div class="col s3">
+                <button class="btn waves-effect waves-light red" type="Submit">Save</button>
               </div>
             </div>
 
         </form>
         </div>
+        </div></div></div>
         <div class="col s4">
 
 
@@ -133,6 +137,7 @@
 
 
     </div>
+
     <div id="save" class="modal">
       <div class="modal-content">
         <h4>Add Appointment</h4>

@@ -31,7 +31,7 @@
       </div>
   <% end %>
   <div class="container">
-
+<div class="card"><div class="card-content">
     <form  action="/staff/update/<%= @staff.id %>" method="post">
       <input type="hidden" name="_method" value="patch" />
 
@@ -45,7 +45,7 @@
         </div>
         <div class="col s11">
           <div class="input-field col s12">
-            <input id="full_name" type="text" name="staff[full_name]" value="<%= @staff.full_name %>"  class="validate">
+            <input id="full_name" type="text" name="staff[full_name]" value="<%= @staff.full_name %>"  class="validate" required>
             <label class="active" for="full_name" >Full Name</label>
           </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="col s11">
           <div class="input-field col s12 m6 l4">
 
-            <input id="first_name" type="text" name="staff[first_name]" value="<%= @staff.first_name %>" class="validate">
+            <input id="first_name" type="text" name="staff[first_name]" value="<%= @staff.first_name %>" class="validate" required>
             <label class="active" for="first_name">First Name</label>
           </div>
 
@@ -69,7 +69,7 @@
           </div>
 
           <div class="input-field col s12 m6 l4">
-            <input id="last_name" type="text" name="staff[last_name]" value="<%= @staff.last_name %>" class="validate">
+            <input id="last_name" type="text" name="staff[last_name]" value="<%= @staff.last_name %>" class="validate" required>
             <label class="active" for="last_name">Last Name</label>
           </div>
         </div>
@@ -113,7 +113,7 @@
         </div>
         <div class="col s11">
           <div class="input-field col s12 l6">
-            <input id="telephone" type="tel" name="staff[telephone]" value="<%= @staff.telephone %>" class="validate">
+            <input id="telephone" type="tel" name="staff[telephone]" value="<%= @staff.telephone %>" placeholder="+94xxxxxxxxx" class="validate" required>
             <label class="active" for="telephone">Telephone</label>
           </div>
         </div>
@@ -127,25 +127,7 @@
         </div>
       </div>
 
-
+    </form>
   </div>
-  <script type="text/javascript">
-      $(document).ready(function(){
-          $('select').material_select();
-          $('.datepicker').pickadate(
-              {
-                  selectYears: 100,
-                  selectMonths: true,
-                  max: new Date(),
-                  closeOnSelect: true,
-                  onSet: function (ele) {
-                      if (ele.select) {
-                          this.close();
-                      }
-                  }
-              });
-      });
-
-
-  </script>
-</main>
+</div></div>
+ </main>

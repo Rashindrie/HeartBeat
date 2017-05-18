@@ -30,7 +30,7 @@ class Doctor::ViewAppointmentsController < ApplicationController
     if @appointments.blank? == false
 
     else
-      flash[:notice] = "You have no appointments for #{@date}"
+      flash.now[:notice] = "You have no appointments for #{@date}"
     end
     render('doctor/view_appointments/show')
   end

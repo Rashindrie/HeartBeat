@@ -4,11 +4,6 @@
 <%= render partial: 'patient/sideNav' %>
 <% end %>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        window.location.reload(true);
-    });
-</script>
 <main style="padding-left: 240px">
   <% flash.each do |key, value| %>
       <div id="toast-container"></div>
@@ -256,17 +251,19 @@
 
 
        <div class="row">
+         <br/><br/>
           <% if current_user && current_user.doctor? %>
 
-             <div class="col s12 m7">
-               <a class="btn waves-effect waves-light teal"  href="/vital/edit/<%= @doctor.id %>/<%= @patient.id %>">Update Vitals</a>
-             </div>
 
-             <div class="col s12 m5">
+             <div class="col s12 m9">
                <a class="btn waves-effect waves-light" href="/search/patients/<%= @doctor.id %>/<%= @patient.id %>">Back to Profile</a>
              </div>
 
-          <% end %>
+             <div class="col s12 m3">
+               <a class="btn waves-effect waves-light teal green"  href="/vital/edit/<%= @doctor.id %>/<%= @patient.id %>">Update Vitals</a>
+             </div>
+
+       <% end %>
 
         </div>
 
