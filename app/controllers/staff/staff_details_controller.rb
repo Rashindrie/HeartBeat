@@ -1,13 +1,16 @@
 class Staff::StaffDetailsController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_staff
 
-
+  #render page t show details of staff
   def edit
     @staff = Staff.find(params[:id])
   end
 
+  #update staff details
   def update
     @staff = Staff.find(params[:id])
 

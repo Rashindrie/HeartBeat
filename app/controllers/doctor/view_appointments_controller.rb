@@ -1,8 +1,11 @@
 class Doctor::ViewAppointmentsController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_doctor
 
+  #render page to view appointments of a doctor
   def show
     @doctor = Doctor.find(params[:id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
@@ -14,6 +17,7 @@ class Doctor::ViewAppointmentsController < ApplicationController
   end
 
 
+  #search appoitnemtns for given date
   def searchApp
     @doctor = Doctor.find(params[:id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)

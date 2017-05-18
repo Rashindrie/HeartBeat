@@ -1,14 +1,18 @@
 class Staff::ViewAppointmentController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_staff
 
+  #render index page to show appointment of doctors
   def index
     @staff = Staff.find(params[:id])
     @doctors = Doctor.all.select('id AS id').select('full_name AS full_name').to_json
     @doctor_types=DoctorType.sorted
   end
 
+  #search for appointments
   def search
     #entered searchApp parameters
 

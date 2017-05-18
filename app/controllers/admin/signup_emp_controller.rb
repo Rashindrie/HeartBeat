@@ -1,18 +1,22 @@
 class Admin::SignupEmpController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_admin
 
+  #render page to add employee
   def registerEmp
     @doctor_types=DoctorType.all
     @admin = User.find(params[:id])
   end
 
-
+  #render page to add admin
   def registerAdmin
     @admin = User.find(params[:id])
   end
 
+  #add users
   def create
     @admin = User.find(params[:id])
     @user = User.new(user_params)
@@ -27,7 +31,7 @@ class Admin::SignupEmpController < ApplicationController
 
       else
         @doctor_types=DoctorType.all
-        #flash.now[:error] = "Admin Register Unsuccessfull"
+        #flash.now[:error] = "Admin Register Unsuccessfull" when update unsuccessful
         render 'admin/signup_emp/registerAdmin'
       end
 
@@ -83,7 +87,7 @@ class Admin::SignupEmpController < ApplicationController
   end
 
 
-
+ #private methods
   private
   def user_params
     params.require(:session).permit(:email, :password, :role)

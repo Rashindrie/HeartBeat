@@ -36,6 +36,7 @@ class Staff::AddTimeSlotController < ApplicationController
 
   end
 
+  #white listed parameters
   private
   def time_slot_params
     params.require(:time_slot).permit(:doctor_id, :app_date, :from_time,

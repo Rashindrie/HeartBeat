@@ -1,6 +1,7 @@
 class Patient::PatientDetailsController < ApplicationController
   layout 'application'
 
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_patient
 

@@ -1,12 +1,16 @@
 class Staff::AddPatientController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_staff
 
+  #render page to add new patient
   def new
     @staff = Staff.find(params[:id])
   end
 
+  #create new patient
   def create
     @staff = Staff.find(params[:id])
 

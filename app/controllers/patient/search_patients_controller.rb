@@ -1,9 +1,11 @@
 class Patient::SearchPatientsController < ApplicationController
   layout 'application'
 
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_doctor
 
+  #render page to search patients
   def index
     @doctor = Doctor.find(User.find(session[:user_id]).doctor_id)
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
@@ -11,6 +13,7 @@ class Patient::SearchPatientsController < ApplicationController
 
   end
 
+  #show patient profile
   def show
     @doctor = Doctor.find(params[:doctor_id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)

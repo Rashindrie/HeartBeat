@@ -1,8 +1,11 @@
 class Patient::OrganDonorController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_patient
 
+  #render page to view current donor list
   def new
     @patient = Patient.joins(:user)
                    .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
@@ -28,6 +31,7 @@ class Patient::OrganDonorController < ApplicationController
 
   end
 
+  #add new donor to list
   def create
     @patient = Patient.joins(:user)
                    .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')

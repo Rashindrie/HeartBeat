@@ -2,9 +2,11 @@ class VisitsController < ApplicationController
 
   layout 'application'
 
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_user
 
+  #add new vital record page
   def new
     @doctor =Doctor.find(params[:doctor_id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
@@ -16,6 +18,7 @@ class VisitsController < ApplicationController
     @visit=Visit.new
   end
 
+  #create new vital record
   def create
     @visit=Visit.new(visit_params)
     @visit.patient_id=params[:id]
@@ -67,7 +70,7 @@ class VisitsController < ApplicationController
 
 
 
-  #private method
+  #private method & white listed params
   private
   def visit_params
     params.require(:visit).permit(:problems_complaints, :diagnosis, :drugs, :remarks )

@@ -1,6 +1,8 @@
 class Staff::AddAppointmentController < ApplicationController
 
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_staff
 
@@ -78,6 +80,7 @@ class Staff::AddAppointmentController < ApplicationController
     end
   end
 
+  #show app summary
   def show
     @staff = Staff.find(params[:staff_id])
     @timeslot = TimeSlot.find(params[:id])
@@ -86,6 +89,7 @@ class Staff::AddAppointmentController < ApplicationController
     @patients = Patient.all.select('id AS id').select('full_name AS full_name').to_json
   end
 
+  #create appointment
   def create
     @staff = Staff.find(params[:id])
     @patients = Patient.all.select('id AS id').select('full_name AS full_name').to_json
@@ -116,6 +120,7 @@ class Staff::AddAppointmentController < ApplicationController
 
     end
 
+  #show aummary
   def summary
     @staff = Staff.find(params[:staff_id])
 
@@ -129,6 +134,7 @@ class Staff::AddAppointmentController < ApplicationController
     render('staff/add_appointment/summary')
   end
 
+  #print appointment report
   def print
     @staff = Staff.find(params[:staff_id])
     @patient = Patient.select('first_name AS first_name,last_name AS last_name')

@@ -2,9 +2,10 @@ class User::LogInController < ApplicationController
   layout 'application'
 
   def login
-    # login form
+    #render login form
   end
 
+  #attempt to login
   def attempt_login
     @user = User.find_by_email(params[:session][:email].downcase)
     if @user && @user.authenticate(params[:session][:password]) && @user.status

@@ -1,9 +1,11 @@
 class Patient::ViewAppointmentsController < ApplicationController
   layout 'application'
 
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_patient
 
+  #rende rpage to show appointment summary
   def index
     @patient = Patient.joins(:user)
                    .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')
@@ -16,10 +18,10 @@ class Patient::ViewAppointmentsController < ApplicationController
 
     if @appointments.blank?
       flash.now[:notice] = "No Schedueld Appointments"
-    end
-
+      end
   end
 
+  #show patient summary per appointment
   def show
     @patient = Patient.joins(:user)
                    .select('patients.id AS id, first_name AS first_name,last_name AS last_name, users.email AS email')

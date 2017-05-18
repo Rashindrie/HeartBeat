@@ -2,6 +2,7 @@ class User::RegisterController < ApplicationController
 
   layout 'application'
 
+
   def new
     @user = User.new
   end

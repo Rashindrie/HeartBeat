@@ -1,6 +1,8 @@
 class Patient::OrganRequesterController < ApplicationController
 
   layout 'application'
+
+
   before_action :confirm_logged_in
   before_action :require_patient
 

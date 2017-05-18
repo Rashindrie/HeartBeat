@@ -1,8 +1,11 @@
 class Staff::ViewTimeSlotsController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_staff
 
+  #render page to view time slots
   def show
     @staff = Staff.find(params[:id])
     @doctor_name=Doctor.select(:id, :full_name)

@@ -1,15 +1,18 @@
 class Admin::ViewDoctorController < ApplicationController
 
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_admin
 
+  #render page to search for doctors
   def index
     @admin = User.find(params[:id])
-    #@doctors=Doctor.all.pluck(:full_name, :id)
     @doctors = Doctor.all.select('id AS id').select('full_name AS full_name').to_json
   end
 
+  #show doctors profile
   def show
     @admin = User.find(params[:admin_id])
     @doctor=Doctor.find(params[:id])
@@ -42,11 +45,11 @@ class Admin::ViewDoctorController < ApplicationController
 
   end
 
+  #update doctor status to active or inactive
   def update
 
     @admin = User.find(params[:admin_id])
     @doctor=Doctor.find(params[:id])
-
     @user=User.find_by_doctor_id(@doctor.id)
 
 

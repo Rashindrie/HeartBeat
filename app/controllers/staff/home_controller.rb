@@ -1,9 +1,11 @@
 class Staff::HomeController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_staff
 
-
+  #render hom page
   def home
     @staff = Staff.find(params[:id])
     @new_users=User.where('created_at >= ?', Date.today.to_date- 90).count

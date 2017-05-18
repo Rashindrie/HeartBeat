@@ -1,14 +1,18 @@
 class Doctor::OrganRequesterController < ApplicationController
   layout 'application'
+
+  #validate authorized user
   before_action :confirm_logged_in
   before_action :require_doctor
 
+  #render page to view organ requesters
   def index
     @doctor = Doctor.find(params[:id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
     @organs=Organ.distinct.all
   end
 
+  #search for organ requesters
   def search
     @doctor = Doctor.find(params[:id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)
@@ -55,6 +59,7 @@ class Doctor::OrganRequesterController < ApplicationController
   end
 
 
+  #update request status
   def update
     @doctor = Doctor.find(params[:doctor_id])
     @doctor_type = DoctorType.find(@doctor.doctor_type_id)

@@ -1,11 +1,13 @@
 class PasswordChangeController < ApplicationController
   layout 'application'
 
+  #validate authorized user
   before_action :get_user, only: [:new, :update]
   before_action :validate_user, only: [:new, :update]
   before_action :confirm_logged_in
   before_action :require_user
 
+  #render page to create new requests
   def new
     if @user.role == 1
       @patient = Patient.joins(:user)
@@ -21,7 +23,7 @@ class PasswordChangeController < ApplicationController
     end
   end
 
-
+  #update requests
   def update
     if @user.role == 1
       @patient = Patient.joins(:user)
