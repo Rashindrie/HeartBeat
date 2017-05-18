@@ -6,7 +6,7 @@ class Appointment::SearchAppointmentsController < ApplicationController
 
 
   #get appointment timeslots searchApp page
-  # def searchApp
+  def searchApp
     @patient = Patient.joins(:user)
                    .select('patients.id AS id, date_of_birth AS date_of_birth, first_name AS first_name,last_name AS last_name, users.email AS email')
                    .where('patient_id = ?',params[:id]).first

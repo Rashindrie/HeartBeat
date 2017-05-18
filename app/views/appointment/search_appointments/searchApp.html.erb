@@ -65,7 +65,7 @@
           <div class="col s10">
             <div class="input-field" id="doctorSelect">
               <select name="app[doctor_id]" id="doc_select">
-                
+
                 <% @doctor_name.each do |d| %>
                     <option value="<%= d.id %>"><%= d.full_name %></option>
                 <% end %>
@@ -95,7 +95,7 @@
             <input id="from_date" type="date" name="app[from_date]"  class="datepicker">
           </div>
 
-         
+
         </div>
 
 
