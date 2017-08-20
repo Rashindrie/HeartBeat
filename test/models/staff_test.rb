@@ -34,12 +34,118 @@ class StaffTest < ActiveSupport::TestCase
 	  staff_wrong = Staff.new
 	  assert_not staff_wrong.save
 	end
-	test "should not save staff without first_name" do
+	test "1" do
 		  staff_wrong = Staff.new
 		  assert_not staff_wrong.save
 		end
-	test "should not save staff without last_name" do
+	test "2e" do
 		  staff_wrong = Staff.new
 		  assert_not staff_wrong.save
-		end
+	end
+
+
+	test "3" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "4" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "5" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "6" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "7" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "8" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+	test "9" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "10" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "11" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "12" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "13" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "14" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "15" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "16" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "17" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "18" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "19" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+	test "20" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+
+	test "21" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+	test "22" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+	test "23" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
+	test "24" do
+		staff_wrong = Staff.new
+		assert_not staff_wrong.save
+	end
 end
